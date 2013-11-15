@@ -1,19 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour {
-
+	
 	public GameObject camera;
+	public Dictionary<MenuStates, IState> states;
+	public IState currentState;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+		states = new Dictionary<MenuStates, IState>();
+
 		camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-		camera.transform.position = Vector3.MoveTowards(camera.transform.position, new Vector3(10, 10, 10), Time.deltaTime * 10);
+		states.Add(MenuStates.SplashState, new SplashState());
+		states.Add(MenuStates.ArmoryState, new ArmoryState());
+
+		currentState = states[MenuStates.SplashState];
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
+		if(Input.GetKey(KeyCode.A)) {
+			changeState(MenuStates.ArmoryState);
+		}
+		currentState.onInput();
+	}
+
+	public void changeState(MenuStates state)
+	{
+		currentState = states[state];
+		//camera move
 	}
 }
