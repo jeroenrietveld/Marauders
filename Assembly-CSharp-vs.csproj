@@ -49,8 +49,20 @@
      <Compile Include="Assets\7. Scripts\Dynamics\CameraMovement.cs" />
      <Compile Include="Assets\7. Scripts\Dynamics\CameraTracking.cs" />
      <Compile Include="Assets\7. Scripts\Dynamics\StartGame.cs" />
+     <Compile Include="Assets\7. Scripts\Events\Event.cs" />
+     <Compile Include="Assets\7. Scripts\Misc\Decoratable.cs" />
+     <Compile Include="Assets\7. Scripts\Misc\InputWrapper.cs" />
      <Compile Include="Assets\7. Scripts\Misc\Tags.cs" />
      <Compile Include="Assets\7. Scripts\TestStartGame.cs" />
+     <Compile Include="Assets\Scripts\Menu\ArmoryState.cs" />
+     <Compile Include="Assets\Scripts\Menu\IState.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuStates.cs" />
+     <Compile Include="Assets\Scripts\Menu\SplashState.cs" />
+     <Compile Include="Assets\Scripts\Test\TestDecoratable.cs" />
+     <Compile Include="Assets\Scripts\Test\TestFilter1.cs" />
+     <Compile Include="Assets\Scripts\Test\TestFilter2.cs" />
+     <Compile Include="Assets\Scripts\Test\TestFilter3.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
