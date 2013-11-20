@@ -48,7 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\7. Scripts\Dynamics\CameraMovement.cs" />
      <Compile Include="Assets\7. Scripts\Dynamics\CameraTracking.cs" />
+     <Compile Include="Assets\7. Scripts\Dynamics\StartGame.cs" />
      <Compile Include="Assets\7. Scripts\Misc\Tags.cs" />
+     <Compile Include="Assets\7. Scripts\TestStartGame.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
