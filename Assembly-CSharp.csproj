@@ -51,6 +51,7 @@
      <Compile Include="Assets\7. Scripts\Dynamics\StartGame.cs" />
      <Compile Include="Assets\7. Scripts\Events\Event.cs" />
      <Compile Include="Assets\7. Scripts\Misc\Decoratable.cs" />
+     <Compile Include="Assets\7. Scripts\Misc\InputWrapper.cs" />
      <Compile Include="Assets\7. Scripts\Misc\Tags.cs" />
      <Compile Include="Assets\7. Scripts\TestStartGame.cs" />
      <Compile Include="Assets\Scripts\Menu\ArmoryState.cs" />
