@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class CameraMovement : MonoBehaviour
 {
-	private IList<GameObject> trackableObjects = new List<GameObject>();
-	private IList<Vector3> projectedPositions = new List<Vector3>();
-	private IList<GameObject> occluders = new List<GameObject>();
+	private IList<GameObject> _trackableObjects = new List<GameObject>();
+	private IList<Vector3> _projectedPositions = new List<Vector3>();
+	private IList<GameObject> _occluders = new List<GameObject>();
 	public float maxPlayerAngle = 30f;
 	public const float degToRad = 1 / (360 / Mathf.PI);
 	
@@ -32,7 +32,7 @@ public class CameraMovement : MonoBehaviour
 		
 		occluders.Clear();
 		
-		foreach (GameObject obj in trackableObjects)
+		foreach (GameObject obj in _trackableObjects)
 		{
 			Vector3 rayDirection = obj.transform.position - transform.position;
 			RaycastHit[] hits = Physics.RaycastAll(transform.position, rayDirection.normalized, rayDirection.magnitude);
@@ -42,12 +42,12 @@ public class CameraMovement : MonoBehaviour
 				GameObject hitObj = hit.collider.gameObject;
 				if (hitObj != obj && !occluders.Contains(hitObj) && !trackableObjects.Contains(hitObj))
 				{
-					occluders.Add(hitObj);
+					_occluders.Add(hitObj);
 				}
 			}
 		}
 		
-		foreach (GameObject obj in occluders)
+		foreach (GameObject obj in _occluders)
 		{
 			Color color = obj.renderer.material.color;
 			color.a = 0.5f;
@@ -78,10 +78,10 @@ public class CameraMovement : MonoBehaviour
 		
 		Vector3 viewDirection = this.transform.forward;
 		
-		projectedPositions.Clear();
-		foreach (GameObject player in trackableObjects)
+		_projectedPositions.Clear();
+		foreach (GameObject player in _trackableObjects)
 		{
-			projectedPositions.Add(Project(playerCenter, -viewDirection, player.transform.position));
+			_projectedPositions.Add(Project(playerCenter, -viewDirection, player.transform.position));
 		}
 		
 		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
@@ -113,11 +113,11 @@ public class CameraMovement : MonoBehaviour
 	
 	public void AddTrackableObject(GameObject obj)
 	{
-		trackableObjects.Add(obj);
+		_trackableObjects.Add(obj);
 	}
 	
 	public void RemoveTrackableObject(GameObject obj)
 	{
-		trackableObjects.Remove(obj);
+		_trackableObjects.Remove(obj);
 	}
 }
