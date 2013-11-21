@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Keeps track of the game.
+/// </summary>
 public class GameManager : ScriptableObject {
 
-	private static GameManager _Instance;
+	/// <summary>
+	/// Instance of the game manager (singleton)
+	/// </summary>
+	private static GameManager _instance;
 
 	private struct MatchSettings
 	{
@@ -12,9 +18,10 @@ public class GameManager : ScriptableObject {
 		public string GameMode;
 	}
 
-	private List<MatchSettings> Matches;
-
-	//private List
+	/// <summary>
+	/// Playlist of matches. (level, game mode combination)
+	/// </summary>
+	private static List<MatchSettings> matches;
 
 	/// <summary>
 	/// Gets the instance.
@@ -24,15 +31,18 @@ public class GameManager : ScriptableObject {
 	{
 		get
 		{
-			if(_Instance == null)
+			if(_instance == null)
 			{
-				_Instance = GameManager.CreateInstance<GameManager>();
+				_instance = GameManager.CreateInstance<GameManager>();
 				matches = new List<MatchSettings>();
 			}
-			return _Instance;
+			return _instance;
 		}
 	}
 
+	/// <summary>
+	/// Loads the next scene.
+	/// </summary>
 	private void NextLevel()
 	{
 		//TODO implementation
