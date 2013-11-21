@@ -1,14 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TeamColor
+/// <summary>
+/// The team that this object belongs to and can interact with
+/// </summary>
+public enum TeamColor
 {
-	public enum TeamColors
-	{
-		Red,
-		Blue,
-		Green,
-		Yellow,
-		Neutral
-	}
+	/// <summary>
+	/// The red team
+	/// </summary>
+	Red,
+	/// <summary>
+	/// The blue team
+	/// </summary>
+	Blue,
+	/// <summary>
+	/// The green team
+	/// </summary>
+	Green,
+	/// <summary>
+	/// The yellow team
+	/// </summary>
+	Yellow,
+	/// <summary>
+	/// No team / Neutral
+	/// </summary>
+	Neutral
 }
+
