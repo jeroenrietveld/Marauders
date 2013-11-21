@@ -56,9 +56,9 @@ public static class Event {
 	{
 		var type = typeof(T);
 
-		if(listeners.ContainsKey(type))
+		if(_listeners.ContainsKey(type))
 		{
-			_listeners[type] = System.Delegate.Combine(listeners[type], listener);
+			_listeners[type] = System.Delegate.Combine(_listeners[type], listener);
 		}
 		else
 		{
