@@ -1,8 +1,5 @@
 fileFormatVersion: 2
 guid: 1a3eb6cffbd53e143a63e45bb1f0e354
-labels:
-- Terrain
-- Weapon
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
