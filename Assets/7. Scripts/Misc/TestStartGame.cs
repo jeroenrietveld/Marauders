@@ -10,11 +10,11 @@ using System.Collections;
 /// </summary>
 public class TestStartGame : MonoBehaviour 
 {
-	private StartGame startGame;
+	private StartGame _startGame;
 
 	void Awake()
 	{
-		//startGame = new StartGame(1);
+		//_startGame = new StartGame(1);
 		Application.LoadLevel("Bridge.unity");
 	}
 }

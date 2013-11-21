@@ -45,7 +45,7 @@ public static class Event {
 	/// <summary>
 	/// Contains Event listeners indexed by Event type
 	/// </summary>
-	private static Dictionary<System.Type, System.Delegate> listeners = new Dictionary<System.Type, System.Delegate>();
+	private static Dictionary<System.Type, System.Delegate> _listeners = new Dictionary<System.Type, System.Delegate>();
 
 	/// <summary>
 	/// Register the specified listener. The listener will be called on all events of type T.
@@ -58,11 +58,11 @@ public static class Event {
 
 		if(listeners.ContainsKey(type))
 		{
-			listeners[type] = System.Delegate.Combine(listeners[type], listener);
+			_listeners[type] = System.Delegate.Combine(listeners[type], listener);
 		}
 		else
 		{
-			listeners.Add(type, listener);
+			_listeners.Add(type, listener);
 		}
 	}
 
@@ -74,17 +74,17 @@ public static class Event {
 	{
 		var type = typeof(T);
 
-		if(listeners.ContainsKey(type))
+		if(_listeners.ContainsKey(type))
 		{
-			var newListeners = System.Delegate.Remove(listeners[type], listener);
+			var newListeners = System.Delegate.Remove(_listeners[type], listener);
 
 			if(newListeners == null)
 			{
-				listeners.Remove(type);
+				_listeners.Remove(type);
 			}
 			else
 			{
-				listeners[type] = newListeners;
+				_listeners[type] = newListeners;
 			}
 		}
 	}
@@ -97,9 +97,9 @@ public static class Event {
 	{
 		var type = typeof(T);
 
-		if(listeners.ContainsKey(type))
+		if(_listeners.ContainsKey(type))
 		{
-			listeners[type].DynamicInvoke(evt);
+			_listeners[type].DynamicInvoke(evt);
 		}
 	}
 }
