@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-[System.Flags]
+[Flags]
 public enum GameModeID
 {
 	CaptureTheFlag	= (1 <<  0),
@@ -22,7 +23,7 @@ public abstract class GameMode
 		//Disable all game mode objects that are not relevant to the game mode
 		foreach(var description in MonoBehaviour.FindObjectsOfType<GameModeDescription>())
 		{
-			bool active = (description.gameModes | id) == id;
+			bool active = (description.gameModes & id) == id;
 			description.gameObject.SetActive(active);
 		}
 	}
