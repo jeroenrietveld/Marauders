@@ -2,15 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Lets players join the characterscreen selection so they can select a character.
+/// </summary>
 public class JoinGame : MonoBehaviour 
 {
     public List<Material> heroes;
 
-    private int countOne = 0;
-    private int countTwo = 0;
-    private int countThree = 0;
-    private int countFour = 0;
+    private int _countOne = 0;
+    private int _countTwo = 0;
+    private int _countThree = 0;
+    private int _countFour = 0;
 
+    /// <summary>
+    ///  Check every frame if a players wants to join the game. If they press their "A" button
+    ///  the first hero will be shown. The List heroes has all the materials for the characters so
+    ///  we can switch between them.
+    /// </summary>
     void Update()
     {
         if (InputWrapper.Instance.GetController(1) != null) 
@@ -23,12 +31,12 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl1").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
-                hero.renderer.material = heroes[countOne];
-                countOne++;
+                hero.renderer.material = heroes[_countOne];
+                _countOne++;
 
-                if (countOne >= heroes.Count)
+                if (_countOne >= heroes.Count)
                 {
-                    countOne = 0;
+                    _countOne = 0;
                 }
             }
         }
@@ -42,12 +50,12 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl2").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
-                hero.renderer.material = heroes[countTwo];
-                countTwo++;
+                hero.renderer.material = heroes[_countTwo];
+                _countTwo++;
 
-                if (countTwo >= heroes.Count)
+                if (_countTwo >= heroes.Count)
                 {
-                    countTwo = 0;
+                    _countTwo = 0;
                 }
             }
         }
@@ -62,11 +70,11 @@ public class JoinGame : MonoBehaviour
 
                 hero.renderer.enabled = true;
                 hero.renderer.material = heroes[countTwo];
-                countThree++;
+                _countThree++;
 
-                if (countThree >= heroes.Count)
+                if (_countThree >= heroes.Count)
                 {
-                    countThree = 0;
+                    _countThree = 0;
                 }
             }
         }
@@ -80,12 +88,12 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl4").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
-                hero.renderer.material = heroes[countTwo];
-                countFour++;
+                hero.renderer.material = heroes[_countTwo];
+                _countFour++;
 
-                if (countFour >= heroes.Count)
+                if (_countFour >= heroes.Count)
                 {
-                    countFour = 0;
+                    _countFour = 0;
                 }
             }
         }
