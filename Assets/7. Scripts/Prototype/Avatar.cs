@@ -34,12 +34,12 @@ public class Avatar : MonoBehaviour {
 	public float armorFactor = 0.1f;
 
 	private float _health = 1f;
-	private Heartbeat heartbeat;
+	private Heartbeat _heartbeat;
 
 	// Use this for initialization
 	void Start () {
-		heartbeat = GetComponent<Heartbeat>();
-		heartbeat.heartbeatSpeed.filters += ModulateHeartbeat;
+		_heartbeat = GetComponent<Heartbeat>();
+		_heartbeat.heartbeatSpeed.filters += ModulateHeartbeat;
 	}
 	
 	// Update is called once per frame
@@ -57,7 +57,7 @@ public class Avatar : MonoBehaviour {
 
 	void ApplyDamage(Vector3 direction, float amount)
 	{
-		float dot = Vector3.Dot(direction, heartbeat.transform.forward);
+		float dot = Vector3.Dot(direction, _heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 
 		if(armorHit) amount *= armorFactor;

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Player 
 {
-	private int ControllerID;
-	private ControllerMapping Controller;
-	private string Name;
-	private string PrimaryWeapon;
-	private string SecondaryWeapon;
+	private int _controllerID;
+	private ControllerMapping _controller;
+	private string _name;
+	private string _primaryWeapon;
+	private string _secondaryWeapon;
 
 	public Player()
 	{

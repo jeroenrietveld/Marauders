@@ -8,6 +8,9 @@ public enum GameModeID
 	DeathMatch		= (1 <<  1)
 }
 
+/// <summary>
+/// Game mode abstract class
+/// </summary>
 public abstract class GameMode
 {
 	public readonly GameModeID id;
@@ -16,6 +19,7 @@ public abstract class GameMode
 	{
 		this.id = id;
 
+		//Disable all game mode objects that are not relevant to the game mode
 		foreach(var description in MonoBehaviour.FindObjectsOfType<GameModeDescription>())
 		{
 			bool active = (description.gameModes | id) == id;

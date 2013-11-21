@@ -9,9 +9,9 @@ using System;
 /// </summary>
 public class InputWrapper : ScriptableObject {
 
-	private static InputWrapper instance;
+	private static InputWrapper _instance;
 
-	private static Dictionary<int, ControllerMapping> controllerMappings;
+	private static Dictionary<int, ControllerMapping> _controllerMappings;
 
     /// <summary>
     /// Get the InputWrapper singleton instance.
@@ -20,12 +20,12 @@ public class InputWrapper : ScriptableObject {
 	{
 		get
         {
-			if(instance == null)
+			if(_instance == null)
 			{
-				instance = InputWrapper.CreateInstance<InputWrapper>();
-				controllerMappings = new Dictionary<int, ControllerMapping>();
+				_instance = InputWrapper.CreateInstance<InputWrapper>();
+				_controllerMappings = new Dictionary<int, ControllerMapping>();
 			}
-			return instance;
+			return _instance;
 		}
 	}
 
@@ -41,13 +41,13 @@ public class InputWrapper : ScriptableObject {
 			throw new ArgumentOutOfRangeException("Invalid argument.");
 		}
 
-		if(!controllerMappings.ContainsKey(controllerId))
+		if(!_controllerMappings.ContainsKey(controllerId))
 		{
 			ControllerMapping controller = new ControllerMapping(controllerId);
-			controllerMappings[controllerId] = controller;
+			_controllerMappings[controllerId] = controller;
 		}
 
-		return controllerMappings[controllerId];
+		return _controllerMappings[controllerId];
 	}
 }
 
@@ -62,52 +62,52 @@ public class InputWrapper : ScriptableObject {
 /// </summary>
 public class ControllerMapping
 {
-	private int controllerId;
-	private string rightHorizontal;
-	private string rightVertical;
-	private string leftHorizontal;
-	private string leftVertical;
-	private string numHorizontal;
-	private string numVertical;
-	private string buttonLeftStick;
-	private string buttonRightStick;
-	private string buttonStart;
-	private string buttonBack;
-	private string buttonA;
-	private string buttonB;
-	private string buttonX;
-	private string buttonY;
-	private string buttonLeftBumper;
-	private string buttonRightBumper;
-	private string rightTrigger;
-	private string leftTrigger;
+	private int _controllerId;
+	private string _rightHorizontal;
+	private string _rightVertical;
+	private string _leftHorizontal;
+	private string _leftVertical;
+	private string _numHorizontal;
+	private string _numVertical;
+	private string _buttonLeftStick;
+	private string _buttonRightStick;
+	private string _buttonStart;
+	private string _buttonBack;
+	private string _buttonA;
+	private string _buttonB;
+	private string _buttonX;
+	private string _buttonY;
+	private string _buttonLeftBumper;
+	private string _buttonRightBumper;
+	private string _rightTrigger;
+	private string _leftTrigger;
 	
     /// <summary>
     /// The constructor which creates all of the strings needed to get the input.
     /// </summary>
-    /// <param name="_controllerId">The controlllerId corresponds with player one, two, three and four. 
+    /// <param name="ControllerId">The controlllerId corresponds with player one, two, three and four. 
     /// In order to get the correct input from all of the controllers.</param>
-	public ControllerMapping(int _controllerId)
+	public ControllerMapping(int controllerId)
 	{
-		this.controllerId = _controllerId;
-		this.rightHorizontal = "360_pl" + _controllerId +"_HorizontalRight";
-		this.rightVertical = "360_pl" + _controllerId +"_VerticalRight";
-		this.leftHorizontal = "360_pl" + _controllerId +"_HorizontalLeft";
-		this.leftVertical = "360_pl" + _controllerId +"_VerticalLeft";
-		this.buttonA = "360_pl" + _controllerId + "_A";
-		this.buttonB = "360_pl" + _controllerId + "_B";
-		this.buttonX = "360_pl" + _controllerId + "_X";
-		this.buttonY = "360_pl" + _controllerId + "_Y";
-		this.buttonStart = "360_pl" + _controllerId + "_Start";
-		this.buttonBack = "360_pl" + _controllerId + "_Back";
-		this.numHorizontal = "360_pl" + _controllerId +"_NumHorizontal";
-		this.numVertical = "360_pl" + _controllerId + "_NumVertical";
-		this.buttonLeftBumper = "360_pl" + _controllerId + "_LeftBumper";
-		this.buttonRightBumper = "360_pl" + _controllerId + "_RightBumper";
-		this.buttonLeftStick = "360_pl" + _controllerId + "_LeftStick";
-		this.buttonRightStick = "360_pl" + _controllerId + "_RightStick";
-		this.rightTrigger = "360_pl" + _controllerId + "_RightTrigger";
-		this.leftTrigger = "360_pl" + _controllerId + "_LeftTrigger";
+		this._controllerId = controllerId;
+		this._rightHorizontal = "360_pl" + controllerId +"_HorizontalRight";
+		this._rightVertical = "360_pl" + controllerId +"_VerticalRight";
+		this._leftHorizontal = "360_pl" + controllerId +"_HorizontalLeft";
+		this._leftVertical = "360_pl" + controllerId +"_VerticalLeft";
+		this._buttonA = "360_pl" + controllerId + "_A";
+		this._buttonB = "360_pl" + controllerId + "_B";
+		this._buttonX = "360_pl" + controllerId + "_X";
+		this._buttonY = "360_pl" + controllerId + "_Y";
+		this._buttonStart = "360_pl" + controllerId + "_Start";
+		this._buttonBack = "360_pl" + controllerId + "_Back";
+		this._numHorizontal = "360_pl" + controllerId +"_NumHorizontal";
+		this._numVertical = "360_pl" + controllerId + "_NumVertical";
+		this._buttonLeftBumper = "360_pl" + controllerId + "_LeftBumper";
+		this._buttonRightBumper = "360_pl" + controllerId + "_RightBumper";
+		this._buttonLeftStick = "360_pl" + controllerId + "_LeftStick";
+		this._buttonRightStick = "360_pl" + controllerId + "_RightStick";
+		this._rightTrigger = "360_pl" + controllerId + "_RightTrigger";
+		this._leftTrigger = "360_pl" + controllerId + "_LeftTrigger";
 	}
 	
     /// <summary>
@@ -116,7 +116,7 @@ public class ControllerMapping
     /// <returns>Float value of the right trigger axis. Range: 0 - 1.</returns>
 	public float GetRightTrigger()
 	{
-		return Input.GetAxis(rightTrigger);
+		return Input.GetAxis(_rightTrigger);
 	}
 
     /// <summary>
@@ -125,7 +125,7 @@ public class ControllerMapping
     /// <returns>Float value of the left trigger axis. Range: -1 - 0.</returns>
 	public float GetLeftTrigger()
 	{
-		return Input.GetAxis(leftTrigger);
+		return Input.GetAxis(_leftTrigger);
 	}
 
     /// <summary>
@@ -134,7 +134,7 @@ public class ControllerMapping
     /// <returns>Returns the horizontal float value of the numpad.</returns>
 	public float GetNumHorizontal()
 	{
-		return Input.GetAxis(numHorizontal);
+		return Input.GetAxis(_numHorizontal);
 	}
 
     /// <summary>
@@ -143,7 +143,7 @@ public class ControllerMapping
     /// <returns>Returns the vertical float value of the numpad.</returns>
 	public float GetNumVertical()
 	{
-		return Input.GetAxis(numVertical);
+		return Input.GetAxis(_numVertical);
 	}
 
     /// <summary>
@@ -152,7 +152,7 @@ public class ControllerMapping
     /// <returns>Returns the right thumbstick horizontal float value.</returns>
 	public float GetRightHorizontal()
 	{
-		return Input.GetAxis(rightHorizontal);
+		return Input.GetAxis(_rightHorizontal);
 	}
 
     /// <summary>
@@ -161,7 +161,7 @@ public class ControllerMapping
     /// <returns>Returns the right thumbstick vertical float value.</returns>
 	public float GetRightVertical()
 	{
-		return Input.GetAxis(rightVertical);
+		return Input.GetAxis(_rightVertical);
 	}
 
     /// <summary>
@@ -170,7 +170,7 @@ public class ControllerMapping
     /// <returns>Returns the left thumbstick horizontal float value.</returns>
 	public float GetLeftHorizontal()
 	{
-		return Input.GetAxis(leftHorizontal);
+		return Input.GetAxis(_leftHorizontal);
 	}
 
     /// <summary>
@@ -179,7 +179,7 @@ public class ControllerMapping
     /// <returns>Returns the left thumbstick vertical float value.</returns>
 	public float GetLeftVertical()
 	{
-		return Input.GetAxis(leftVertical);
+		return Input.GetAxis(_leftVertical);
 	}	
 	
     /// <summary>
@@ -188,7 +188,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonA is released.</returns>
 	public bool GetButtonAUp()
 	{
-		return Input.GetButtonUp(buttonA);
+		return Input.GetButtonUp(_buttonA);
 	}
 
     /// <summary>
@@ -197,7 +197,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonA is pressed.</returns>
 	public bool GetButtonADown()
 	{
-		return Input.GetButtonDown(buttonA);
+		return Input.GetButtonDown(_buttonA);
 	}
 
     /// <summary>
@@ -206,7 +206,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonA is pressed or held down.</returns>
 	public bool GetButtonA()
 	{
-		return Input.GetButton(buttonA);
+		return Input.GetButton(_buttonA);
 	}
 
     /// <summary>
@@ -215,7 +215,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonB is released.</returns>
 	public bool GetButtonBUp()
 	{
-		return Input.GetButtonUp(buttonB);
+		return Input.GetButtonUp(_buttonB);
 	}
 
     /// <summary>
@@ -224,7 +224,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonB is pressed.</returns>
 	public bool GetButtonBDown()
 	{
-		return Input.GetButtonDown(buttonB);
+		return Input.GetButtonDown(_buttonB);
 	}
 
     /// <summary>
@@ -233,7 +233,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonB is pressed or held down.</returns>
 	public bool GetButtonB()
 	{
-		return Input.GetButton(buttonB);
+		return Input.GetButton(_buttonB);
 	}
 
     /// <summary>
@@ -242,7 +242,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonX is released.</returns>
 	public bool GetButtonXUp()
 	{
-		return Input.GetButtonUp(buttonX);
+		return Input.GetButtonUp(_buttonX);
 	}
 
     /// <summary>
@@ -251,7 +251,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonX is pressed.</returns>
 	public bool GetButtonXDown()
 	{
-		return Input.GetButtonDown(buttonX);
+		return Input.GetButtonDown(_buttonX);
 	}
 
     /// <summary>
@@ -260,7 +260,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonX is pressed or held down.</returns>
 	public bool GetButtonX()
 	{
-		return Input.GetButton(buttonX);
+		return Input.GetButton(_buttonX);
 	}
 
     /// <summary>
@@ -269,7 +269,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonY is released.</returns>
 	public bool GetButtonYUp()
 	{
-		return Input.GetButtonUp(buttonY);
+		return Input.GetButtonUp(_buttonY);
 	}
 
     /// <summary>
@@ -278,7 +278,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonY is pressed.</returns>
 	public bool GetButtonYDown()
 	{
-		return Input.GetButtonDown(buttonY);
+		return Input.GetButtonDown(_buttonY);
 	}
 
     /// <summary>
@@ -287,7 +287,7 @@ public class ControllerMapping
     /// <returns>Boolean when ButtonY is pressed or held down.</returns>
 	public bool GetButtonY()
 	{
-		return Input.GetButton(buttonY);
+		return Input.GetButton(_buttonY);
 	}
 
     /// <summary>
@@ -296,7 +296,7 @@ public class ControllerMapping
     /// <returns>Boolean when start start button is released.</returns>
 	public bool GetButtonStartUp()
 	{
-		return Input.GetButtonUp(buttonStart);
+		return Input.GetButtonUp(_buttonStart);
 	}
 
     /// <summary>
@@ -305,7 +305,7 @@ public class ControllerMapping
     /// <returns>Boolean when start button is pressed.</returns>
 	public bool GetButtonStartDown()
 	{
-		return Input.GetButtonDown(buttonStart);
+		return Input.GetButtonDown(_buttonStart);
 	}
 
     /// <summary>
@@ -314,7 +314,7 @@ public class ControllerMapping
     /// <returns>Boolean when the start button is pressed or held down.</returns>
 	public bool GetButtonStart()
 	{
-		return Input.GetButton(buttonStart);
+		return Input.GetButton(_buttonStart);
 	}
 
     /// <summary>
@@ -323,7 +323,7 @@ public class ControllerMapping
     /// <returns>Boolean when the back button is released.</returns>
 	public bool GetButtonBackUp()
 	{
-		return Input.GetButtonUp(buttonBack);
+		return Input.GetButtonUp(_buttonBack);
 	}
 
     /// <summary>
@@ -332,7 +332,7 @@ public class ControllerMapping
     /// <returns>Boolean when back button is pressed.</returns>
 	public bool GetButtonBackDown()
 	{
-		return Input.GetButtonDown(buttonBack);
+		return Input.GetButtonDown(_buttonBack);
 	}
 
     /// <summary>
@@ -341,7 +341,7 @@ public class ControllerMapping
     /// <returns>Boolean when back button is pressed or held down.</returns>
 	public bool GetButtonBack()
 	{
-		return Input.GetButton(buttonBack);
+		return Input.GetButton(_buttonBack);
 	}
 
     /// <summary>
@@ -350,7 +350,7 @@ public class ControllerMapping
     /// <returns>Boolean when the left bumper button is released.</returns>
 	public bool GetButtonLeftBumperUp()
 	{
-		return Input.GetButtonUp(buttonLeftBumper);
+		return Input.GetButtonUp(_buttonLeftBumper);
 	}
 
     /// <summary>
@@ -359,7 +359,7 @@ public class ControllerMapping
     /// <returns>Boolean when the left bumper button is pressed.</returns>
 	public bool GetButtonLeftBumperDown()
 	{
-		return Input.GetButtonDown(buttonLeftBumper);
+		return Input.GetButtonDown(_buttonLeftBumper);
 	}
 
     /// <summary>
@@ -368,7 +368,7 @@ public class ControllerMapping
     /// <returns>Boolean when the left bumper is pressed or held down.</returns>
 	public bool GetButtonLeftBumper()
 	{
-		return Input.GetButton(buttonLeftBumper);
+		return Input.GetButton(_buttonLeftBumper);
 	}
 
     /// <summary>
@@ -377,7 +377,7 @@ public class ControllerMapping
     /// <returns>Boolean when the right bumper button is released.</returns>
 	public bool GetButtonRightBumperUp()
 	{
-		return Input.GetButtonUp(buttonRightBumper);
+		return Input.GetButtonUp(_buttonRightBumper);
 	}
 
     /// <summary>
@@ -386,7 +386,7 @@ public class ControllerMapping
     /// <returns>Boolean when the right bumper button is pressed.</returns>
 	public bool GetButtonRightBumperDown()
 	{
-		return Input.GetButtonDown(buttonRightBumper);
+		return Input.GetButtonDown(_buttonRightBumper);
 	}
 
     /// <summary>
@@ -395,7 +395,7 @@ public class ControllerMapping
     /// <returns>Boolean when the right bumper is pressed or held down.</returns>
 	public bool GetButtonRightBumper()
 	{
-		return Input.GetButton(buttonRightBumper);
+		return Input.GetButton(_buttonRightBumper);
 	}
 
     /// <summary>
@@ -404,7 +404,7 @@ public class ControllerMapping
     /// <returns>Boolean when left thumbstick is released.</returns>
 	public bool GetButtonLeftStickUp()
 	{
-		return Input.GetButtonUp(buttonLeftStick);
+		return Input.GetButtonUp(_buttonLeftStick);
 	}
 
     /// <summary>
@@ -413,7 +413,7 @@ public class ControllerMapping
     /// <returns>Boolean when the left thumbstick is pressed.</returns>
 	public bool GetButtonLeftStickDown()
 	{
-		return Input.GetButtonDown(buttonLeftStick);
+		return Input.GetButtonDown(_buttonLeftStick);
 	}
 
     /// <summary>
@@ -422,7 +422,7 @@ public class ControllerMapping
     /// <returns>Boolean when the left thumb stick is pressed or held down.</returns>
 	public bool GetButtonLeftStick()
 	{
-		return Input.GetButton(buttonLeftStick);
+		return Input.GetButton(_buttonLeftStick);
 	}
 
     /// <summary>
@@ -431,7 +431,7 @@ public class ControllerMapping
     /// <returns>Boolean when the right thumbstick is released.</returns>
 	public bool GetButtonRightStickUp()
 	{
-		return Input.GetButtonUp(buttonRightStick);
+		return Input.GetButtonUp(_buttonRightStick);
 	}
 
     /// <summary>
@@ -440,7 +440,7 @@ public class ControllerMapping
     /// <returns>Boolean when the right thumbstick is pressed.</returns>
 	public bool GetButtonRightStickDown()
 	{
-		return Input.GetButtonDown(buttonRightStick);
+		return Input.GetButtonDown(_buttonRightStick);
 	}
 
     /// <summary>
@@ -449,6 +449,6 @@ public class ControllerMapping
     /// <returns>Boolean when the right thumb stick is pressed or held down.</returns>
 	public bool GetButtonRightStick()
 	{
-		return Input.GetButton(buttonRightStick);
+		return Input.GetButton(_buttonRightStick);
 	}	
 }
