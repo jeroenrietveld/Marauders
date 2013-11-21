@@ -11,10 +11,7 @@ public class InputWrapper : ScriptableObject {
 
 	private static InputWrapper instance;
 
-    private static ControllerMapping controllerOne = null;
-    private static ControllerMapping controllerTwo = null;
-    private static ControllerMapping controllerThree = null;
-    private static ControllerMapping controllerFour = null;
+	private static Dictionary<int, ControllerMapping> controllerMappings;
 
     /// <summary>
     /// Get the InputWrapper singleton instance.
@@ -26,52 +23,32 @@ public class InputWrapper : ScriptableObject {
 			if(instance == null)
 			{
 				instance = InputWrapper.CreateInstance<InputWrapper>();
+				controllerMappings = new Dictionary<int, ControllerMapping>();
 			}
 			return instance;
 		}
 	}
 
-    /// <summary>
-    /// Returns the controller for player one.
-    /// </summary>
-    /// <returns>The ControllerMapping object which holds all the methods for controller input.</returns>
-    public ControllerMapping GetControllerOne()
-    {
-        if (controllerOne == null) return (controllerOne = new ControllerMapping(1));
-        else return controllerOne;
-    }
+	/// <summary>
+	/// Gets the controller.
+	/// </summary>
+	/// <returns>The controller.</returns>
+	/// <param name="controllerId">Controller identifier. (1-4)</param>
+	public ControllerMapping GetController(int controllerId)
+	{
+		if(controllerId < 1 || controllerId > 4)
+		{
+			throw new ArgumentOutOfRangeException("Invalid argument.");
+		}
 
-    /// <summary>
-    /// Returns the controller for player two.
-    /// </summary>
-    /// <returns>The ControllerMapping object which holds all the methods for controller input.</returns>
-    public ControllerMapping GetControllerTwo()
-    {
-        if (controllerTwo == null) return (controllerTwo = new ControllerMapping(2));
-        else return controllerTwo;
-    }
+		if(!controllerMappings.ContainsKey(controllerId))
+		{
+			ControllerMapping controller = new ControllerMapping(controllerId);
+			controllerMappings[controllerId] = controller;
+		}
 
-    /// <summary>
-    /// Returns the controller for player three.
-    /// </summary>
-    /// <returns>The ControllerMapping object which holds all the methods for controller input.</returns>
-    public ControllerMapping GetControllerThree()
-    {
-        if (controllerThree == null) return (controllerThree = new ControllerMapping(3));
-        else return controllerThree;
-    }
-
-    /// <summary>
-    /// Returns the controller for player four.
-    /// </summary>
-    /// <returns>The ControllerMapping object which holds all the methods for controller input.</returns>
-    public ControllerMapping GetControllerFour()
-    {
-        if (controllerFour == null) return (controllerFour = new ControllerMapping(4));
-        else return controllerFour;
-    }
-
-
+		return controllerMappings[controllerId];
+	}
 }
 
 /// <summary>
