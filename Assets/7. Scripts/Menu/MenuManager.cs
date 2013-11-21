@@ -8,7 +8,13 @@ public class MenuManager : MonoBehaviour {
 	public Dictionary<MenuStates, IState> states;
 	public IState currentState;
 
-	// Use this for initialization
+    public static int cameraMenuSpeed = 60;
+    public static int distanceFromMenu = 30;
+    public static bool isIntroMoving = true;
+
+    public bool isCameraMoving { get; set; }
+	
+    // Use this for initialization
 	void Start ()
 	{
 		states = new Dictionary<MenuStates, IState>();
@@ -17,22 +23,44 @@ public class MenuManager : MonoBehaviour {
 
 		states.Add(MenuStates.SplashState, new SplashState());
 		states.Add(MenuStates.ArmoryState, new ArmoryState());
+        states.Add(MenuStates.LevelState, new LevelState());
 
 		currentState = states[MenuStates.SplashState];
+        isCameraMoving = true;
 	}
 	
+    void FixedUpdate()
+    {
+        if(isCameraMoving)
+        {
+            isCameraMoving = !currentState.CenterCamera();
+        }
+    }
+
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKey(KeyCode.A)) {
-			changeState(MenuStates.ArmoryState);
-		}
-		currentState.onInput();
+        if(!isIntroMoving)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                changeState(currentState.GetNextState());
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                changeState(currentState.GetPreviousState());
+            }
+
+            currentState.onInput();
+        }
 	}
 
 	public void changeState(MenuStates state)
 	{
-		currentState = states[state];
-		//camera move
+        if (currentState != states[state])
+        {
+            currentState = states[state];
+            isCameraMoving = true;
+        }
 	}
 }
