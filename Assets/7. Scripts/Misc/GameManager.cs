@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Keeps track of the game.
 /// </summary>
-public class GameManager : ScriptableObject {
+public class GameManager {
 
 	/// <summary>
 	/// Instance of the game manager (singleton)
@@ -21,7 +21,7 @@ public class GameManager : ScriptableObject {
 	/// <summary>
 	/// Playlist of matches. (level, game mode combination)
 	/// </summary>
-	private static List<MatchSettings> matches;
+	private List<MatchSettings> matches;
 
 	/// <summary>
 	/// Gets the instance.
@@ -33,11 +33,15 @@ public class GameManager : ScriptableObject {
 		{
 			if(_instance == null)
 			{
-				_instance = GameManager.CreateInstance<GameManager>();
-				matches = new List<MatchSettings>();
+				_instance = new GameManager();
 			}
 			return _instance;
 		}
+	}
+
+	private GameManager()
+	{
+		matches = new List<MatchSettings>();
 	}
 
 	/// <summary>
