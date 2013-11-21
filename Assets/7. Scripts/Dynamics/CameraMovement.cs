@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
 	
 	void UpdateOccluderTransparency()
 	{
-		foreach (GameObject obj in occluders)
+		foreach (GameObject obj in _occluders)
 		{
 			Color color = obj.renderer.material.color;
 			color.a = 1.0f;
@@ -30,7 +30,7 @@ public class CameraMovement : MonoBehaviour
 			obj.renderer.material.color = color;
 		}
 		
-		occluders.Clear();
+		_occluders.Clear();
 		
 		foreach (GameObject obj in _trackableObjects)
 		{
@@ -40,7 +40,7 @@ public class CameraMovement : MonoBehaviour
 			foreach (RaycastHit hit in hits)
 			{
 				GameObject hitObj = hit.collider.gameObject;
-				if (hitObj != obj && !occluders.Contains(hitObj) && !trackableObjects.Contains(hitObj))
+				if (hitObj != obj && !_occluders.Contains(hitObj) && !_trackableObjects.Contains(hitObj))
 				{
 					_occluders.Add(hitObj);
 				}
@@ -60,18 +60,18 @@ public class CameraMovement : MonoBehaviour
 	{
 		Vector3 minPosition, maxPosition;
 		
-		minPosition = trackableObjects[0].transform.position;
-		maxPosition = trackableObjects[0].transform.position;
+		minPosition = _trackableObjects[0].transform.position;
+		maxPosition = _trackableObjects[0].transform.position;
 		
-		for (int i = 1; i < trackableObjects.Count; i++)
+		for (int i = 1; i < _trackableObjects.Count; i++)
 		{
-			minPosition.x = Mathf.Min(minPosition.x, trackableObjects[i].transform.position.x);
-			minPosition.y = Mathf.Min(minPosition.y, trackableObjects[i].transform.position.y);
-			minPosition.z = Mathf.Min(minPosition.z, trackableObjects[i].transform.position.z);
+			minPosition.x = Mathf.Min(minPosition.x, _trackableObjects[i].transform.position.x);
+			minPosition.y = Mathf.Min(minPosition.y, _trackableObjects[i].transform.position.y);
+			minPosition.z = Mathf.Min(minPosition.z, _trackableObjects[i].transform.position.z);
 			
-			maxPosition.x = Mathf.Max(maxPosition.x, trackableObjects[i].transform.position.x);
-			maxPosition.y = Mathf.Max(maxPosition.y, trackableObjects[i].transform.position.y);
-			maxPosition.z = Mathf.Max(maxPosition.z, trackableObjects[i].transform.position.z);
+			maxPosition.x = Mathf.Max(maxPosition.x, _trackableObjects[i].transform.position.x);
+			maxPosition.y = Mathf.Max(maxPosition.y, _trackableObjects[i].transform.position.y);
+			maxPosition.z = Mathf.Max(maxPosition.z, _trackableObjects[i].transform.position.z);
 		}
 		
 		Vector3 playerCenter = (minPosition + maxPosition) / 2;
@@ -88,12 +88,12 @@ public class CameraMovement : MonoBehaviour
 		
 		float maxDistance = float.NegativeInfinity;
 		
-		for (int i = 0; i < trackableObjects.Count; i++)
+		for (int i = 0; i < _trackableObjects.Count; i++)
 		{
-			float distance = Vector3.Distance(trackableObjects[i].transform.position, projectedPositions[i]);
+			float distance = Vector3.Distance(_trackableObjects[i].transform.position, _projectedPositions[i]);
 			
 			float cameraDistance = Vector3.Distance(
-									projectedPositions[i] - (distance * distanceScale) * viewDirection,
+									_projectedPositions[i] - (distance * distanceScale) * viewDirection,
 									playerCenter);
 			
 			maxDistance = Mathf.Max(maxDistance, cameraDistance);

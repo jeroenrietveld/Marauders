@@ -57,7 +57,7 @@ public class Avatar : MonoBehaviour {
 
 	void ApplyDamage(Vector3 direction, float amount)
 	{
-		float dot = Vector3.Dot(direction, heartbeat.transform.forward);
+		float dot = Vector3.Dot(direction, _heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 
 		if(armorHit) amount *= armorFactor;
