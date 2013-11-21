@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour {
 	
-	public GameObject camera;
+	public GameObject mainCamera;
 	public Dictionary<MenuStates, IState> states;
 	public IState currentState;
 
@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour {
 	{
 		states = new Dictionary<MenuStates, IState>();
 
-		camera = GameObject.FindGameObjectWithTag("MainCamera");
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
 		states.Add(MenuStates.SplashState, new SplashState());
 		states.Add(MenuStates.ArmoryState, new ArmoryState());

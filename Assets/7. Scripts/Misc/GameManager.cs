@@ -15,7 +15,7 @@ public class GameManager {
 	private struct MatchSettings
 	{
 		public string level;
-		public string gameMode;
+		public GameMode gameMode;
 	}
 
 	/// <summary>

@@ -78,12 +78,13 @@ public struct Decoratable<T> where T : struct
 	/// Gets or sets the raw value. Setting rawValue is the same as setting value, getting the raw value
 	/// bypasses the Filter stack.
 	/// </summary>
-	public T rawValue { get; set; }
+    public T rawValue;
 
 
 	public Decoratable(T v)
 	{
-		value = v;
+        filters = null;
+		rawValue = v;
 	}
 
 	/// <summary>
