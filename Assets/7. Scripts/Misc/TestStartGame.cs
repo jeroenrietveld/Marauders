@@ -14,6 +14,7 @@ public class TestStartGame : MonoBehaviour
 
 	void Awake()
 	{
-		startGame = new StartGame(1);
+		//startGame = new StartGame(1);
+		Application.LoadLevel("Bridge.unity");
 	}
 }
