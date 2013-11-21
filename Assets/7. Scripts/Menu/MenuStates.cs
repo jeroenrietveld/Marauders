@@ -4,5 +4,6 @@ using System.Collections;
 public enum MenuStates
 {
 	SplashState,
-	ArmoryState
+	ArmoryState,
+    LevelState
 }
