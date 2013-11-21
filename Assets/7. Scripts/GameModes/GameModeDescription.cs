@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Defines the game mode(s) and team an object belongs to
+/// </summary>
 public class GameModeDescription : MonoBehaviour {
 	public static readonly GameModeID DEFAULT_GAME_MODES =
 			GameModeID.CaptureTheFlag |
