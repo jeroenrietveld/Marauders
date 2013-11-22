@@ -4,63 +4,43 @@ using System.Collections.Generic;
 
 public class MenuManager : MonoBehaviour {
 	
-	public GameObject mainCamera;
-	public Dictionary<MenuStates, IState> states;
-	public IState currentState;
-
-    public static int cameraMenuSpeed = 60;
-    public static int distanceFromMenu = 30;
+	public MenuCameraMovement cameraMovement;
+	public Dictionary<MenuStates, MenuStateBase> states;
+	public MenuStateBase currentState;
+	
+    public static float distanceFromMenu = -30f;
     public static bool isIntroMoving = true;
 
-    public bool isCameraMoving { get; set; }
-	
     // Use this for initialization
 	void Start ()
 	{
-		states = new Dictionary<MenuStates, IState>();
+		states = new Dictionary<MenuStates, MenuStateBase>();
 
-		mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+		cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
 
 		states.Add(MenuStates.SplashState, new SplashState());
 		states.Add(MenuStates.ArmoryState, new ArmoryState());
         states.Add(MenuStates.LevelState, new LevelState());
 
-		currentState = states[MenuStates.SplashState];
-        isCameraMoving = true;
+		ChangeState(MenuStates.SplashState);
 	}
 	
     void FixedUpdate()
     {
-        if(isCameraMoving)
-        {
-            isCameraMoving = !currentState.CenterCamera();
-        }
     }
 
 	// Update is called once per frame
 	void Update ()
 	{
-        if(!isIntroMoving)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                changeState(currentState.GetNextState());
-            }
-            else if (Input.GetKeyDown(KeyCode.B))
-            {
-                changeState(currentState.GetPreviousState());
-            }
-
-            currentState.onInput();
-        }
+		if(!cameraMovement.isMoving)
+		{
+			currentState.Update(this);
+		}
 	}
 
-	public void changeState(MenuStates state)
+	public void ChangeState(MenuStates state)
 	{
-        if (currentState != states[state])
-        {
-            currentState = states[state];
-            isCameraMoving = true;
-        }
+    	currentState = states[state];
+		cameraMovement.targetPosition = currentState.center + new Vector3(0, 0, distanceFromMenu);
 	}
 }
