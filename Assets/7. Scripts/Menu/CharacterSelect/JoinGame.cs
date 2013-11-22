@@ -6,6 +6,7 @@ public class JoinGame : MonoBehaviour
 
     void Update()
     {
+        
         if (InputWrapper.Instance.GetController(1) != null) 
         {
             if (InputWrapper.Instance.GetController(1).GetButtonADown())
