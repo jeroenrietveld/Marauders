@@ -21,6 +21,7 @@ public class JoinGame : MonoBehaviour
     /// </summary>
     void Update()
     {
+        
         if (InputWrapper.Instance.GetController(1) != null) 
         {
 			if (InputWrapper.Instance.GetController(1).GetButtonDown(XboxButton.A))
@@ -69,8 +70,12 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl3").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
+<<<<<<< HEAD
+                hero.renderer.material = heroes[_countThree];
+=======
                 hero.renderer.material = heroes[_countTwo];
 
+>>>>>>> 1fbcb5e01c399f1b4e6c6c98c64b14c4c140caf1
                 _countThree++;
 
                 if (_countThree >= heroes.Count)
@@ -89,7 +94,7 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl4").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
-                hero.renderer.material = heroes[_countTwo];
+                hero.renderer.material = heroes[_countFour];
                 _countFour++;
 
                 if (_countFour >= heroes.Count)
