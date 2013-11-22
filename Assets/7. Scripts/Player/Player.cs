@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player 
+/// <summary>
+/// The player.
+/// </summary>
+public partial class Player : MonoBehaviour
 {
 	private int _controllerID;
 	private ControllerMapping _controller;
