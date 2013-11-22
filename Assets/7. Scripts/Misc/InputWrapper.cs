@@ -180,7 +180,8 @@ public class ControllerMapping
 	public float GetLeftVertical()
 	{
 		return Input.GetAxis(_leftVertical);
-	}	
+	}
+
 	
     /// <summary>
     /// Returns a boolean whether ButtonA is released.
