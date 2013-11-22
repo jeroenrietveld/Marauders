@@ -24,7 +24,7 @@ public class JoinGame : MonoBehaviour
         
         if (InputWrapper.Instance.GetController(1) != null) 
         {
-            if (InputWrapper.Instance.GetController(1).GetButtonADown())
+			if (InputWrapper.Instance.GetController(1).GetButtonDown(XboxButton.A))
             {
                 GameObject aButton = GameObject.Find("a_button_pl1");
                 Destroy(aButton);
@@ -43,7 +43,7 @@ public class JoinGame : MonoBehaviour
         }
         if (InputWrapper.Instance.GetController(2) != null) 
         {
-            if (InputWrapper.Instance.GetController(2).GetButtonADown())
+            if (InputWrapper.Instance.GetController(2).GetButtonDown(XboxButton.A))
             {
                 GameObject aButton = GameObject.Find("a_button_pl2");
                 Destroy(aButton);
@@ -62,7 +62,7 @@ public class JoinGame : MonoBehaviour
         }
         if (InputWrapper.Instance.GetController(3) != null) 
         {
-            if (InputWrapper.Instance.GetController(3).GetButtonADown())
+            if (InputWrapper.Instance.GetController(3).GetButtonDown(XboxButton.A))
             {
                 GameObject aButton = GameObject.Find("a_button_pl3");
                 Destroy(aButton);
@@ -70,7 +70,12 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl3").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
+<<<<<<< HEAD
                 hero.renderer.material = heroes[_countThree];
+=======
+                hero.renderer.material = heroes[_countTwo];
+
+>>>>>>> 1fbcb5e01c399f1b4e6c6c98c64b14c4c140caf1
                 _countThree++;
 
                 if (_countThree >= heroes.Count)
@@ -81,7 +86,7 @@ public class JoinGame : MonoBehaviour
         }
         if (InputWrapper.Instance.GetController(4) != null) 
         {
-            if (InputWrapper.Instance.GetController(4).GetButtonADown())
+			if (InputWrapper.Instance.GetController(4).GetButtonDown(XboxButton.A))
             {
                 GameObject aButton = GameObject.Find("a_button_pl4");
                 Destroy(aButton);
