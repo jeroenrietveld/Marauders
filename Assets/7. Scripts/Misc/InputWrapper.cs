@@ -114,7 +114,7 @@ public class ControllerMapping
 	{
 		foreach (XboxButton button in Enum.GetValues(typeof(XboxButton)))
 		{
-			if ((button != XboxButton.NumVertical) && (button != XboxButton.NumVertical))
+			if ((button != XboxButton.NumHorizontal) && (button != XboxButton.NumVertical))
 			{
 				Texture2D resource = (Texture2D)Resources.Load(button.ToString());
 
