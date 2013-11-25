@@ -32,85 +32,6 @@ public class JoinGame : MonoBehaviour
     /// </summary>
     void Update()
     {
-<<<<<<< HEAD
-        
-        if (InputWrapper.Instance.GetController(1) != null) 
-        {
-			if (InputWrapper.Instance.GetController(1).GetButtonDown(XboxButton.A))
-            {
-                GameObject aButton = GameObject.Find("a_button_pl1");
-                Destroy(aButton);
-
-                GameObject hero = GameObject.Find("hero_select_pl1").transform.GetChild(0).gameObject;
-
-                hero.renderer.enabled = true;
-                hero.renderer.material = heroes[_countOne];
-                _countOne++;
-
-                if (_countOne >= heroes.Count)
-                {
-                    _countOne = 0;
-                }
-            }
-        }
-        if (InputWrapper.Instance.GetController(2) != null) 
-        {
-            if (InputWrapper.Instance.GetController(2).GetButtonDown(XboxButton.A))
-            {
-                GameObject aButton = GameObject.Find("a_button_pl2");
-                Destroy(aButton);
-
-                GameObject hero = GameObject.Find("hero_select_pl2").transform.GetChild(0).gameObject;
-
-                hero.renderer.enabled = true;
-                hero.renderer.material = heroes[_countTwo];
-                _countTwo++;
-
-                if (_countTwo >= heroes.Count)
-                {
-                    _countTwo = 0;
-                }
-            }
-        }
-        if (InputWrapper.Instance.GetController(3) != null) 
-        {
-            if (InputWrapper.Instance.GetController(3).GetButtonDown(XboxButton.A))
-            {
-                GameObject aButton = GameObject.Find("a_button_pl3");
-                Destroy(aButton);
-
-                GameObject hero = GameObject.Find("hero_select_pl3").transform.GetChild(0).gameObject;
-
-                hero.renderer.enabled = true;
-                hero.renderer.material = heroes[_countThree];
-                _countThree++;
-
-                if (_countThree >= heroes.Count)
-                {
-                    _countThree = 0;
-                }
-            }
-        }
-        if (InputWrapper.Instance.GetController(4) != null) 
-        {
-			if (InputWrapper.Instance.GetController(4).GetButtonDown(XboxButton.A))
-            {
-                GameObject aButton = GameObject.Find("a_button_pl4");
-                Destroy(aButton);
-
-                GameObject hero = GameObject.Find("hero_select_pl4").transform.GetChild(0).gameObject;
-
-                hero.renderer.enabled = true;
-                hero.renderer.material = heroes[_countFour];
-                _countFour++;
-
-                if (_countFour >= heroes.Count)
-                {
-                    _countFour = 0;
-                }
-            }
-        }
-=======
         foreach(KeyValuePair<ControllerMapping, string> pair in controllers)
 		{
 			if(pair.Key.GetButtonDown(XboxButton.A))
@@ -126,6 +47,5 @@ public class JoinGame : MonoBehaviour
 				}
 			}
 		}
->>>>>>> 6a6438543cd03a58db1897c4084519b4f2ab8e99
     }
 }
