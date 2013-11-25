@@ -34,7 +34,7 @@ public partial class Player : MonoBehaviour
 	/// </summary>
 	/// <param name="weapon">The weapon that's beeing picked up</param>
 	/// <param name="gametypeSpecificObj">If true, moves primary to secondary, else; drops primary weapon</param>
-	void PickUpWeapon(Weapon weapon, boolean gametypeSpecificObj)
+	void PickUpWeapon(Weapon weapon, bool gametypeSpecificObj)
 	{
 
 	}
