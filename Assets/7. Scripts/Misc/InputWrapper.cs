@@ -89,6 +89,20 @@ public enum XboxAxis
 /// </summary>
 public class ControllerMapping
 {
+	/// <summary>
+	/// The default button for picking up a weapon
+	/// </summary>
+	public XboxButton PickupWeapon = XboxButton.X;
+
+	/// <summary>
+	/// The default button for picking up a powerup
+	/// </summary>
+	public XboxButton PickupPowerup = XboxButton.X;
+
+	/// <summary>
+	/// The default button for picking up a gametype object.
+	/// </summary>
+	public XboxButton PickupGametypeObject = XboxButton.X;
 
 	/// <summary>
 	/// The index of the controller (1,2,3,4)
