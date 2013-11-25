@@ -70,12 +70,7 @@ public class JoinGame : MonoBehaviour
                 GameObject hero = GameObject.Find("hero_select_pl3").transform.GetChild(0).gameObject;
 
                 hero.renderer.enabled = true;
-<<<<<<< HEAD
                 hero.renderer.material = heroes[_countThree];
-=======
-                hero.renderer.material = heroes[_countTwo];
-
->>>>>>> 1fbcb5e01c399f1b4e6c6c98c64b14c4c140caf1
                 _countThree++;
 
                 if (_countThree >= heroes.Count)

@@ -13,12 +13,13 @@ static class LevelSelectionManager
     public static LevelSelectionState currentState;
 
     /// <summary>
-    /// The constructor.
+    /// The initializer.
     /// </summary>
     public static void Initialize()
     {
         levels = new List<Level>();
         currentState = LevelSelectionState.LevelSelection;
+
         //Get all the files with an extension .json from the Levels map.
         string[] files = Directory.GetFiles("../Levels/", "*.json");
 

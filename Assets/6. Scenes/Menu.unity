@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27f0a20a7a16421c9214fb02c9ce352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
+  cameraMovement: {fileID: 0}
 --- !u!4 &247304412
 Transform:
   m_ObjectHideFlags: 0
@@ -2453,10 +2453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92447b2740c9e9845acb2af3c07bae9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroes:
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
+  heroes: []
 --- !u!4 &1607602093
 Transform:
   m_ObjectHideFlags: 0
