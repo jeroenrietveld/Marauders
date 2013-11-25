@@ -1,5 +1,6 @@
-[ { 
-    "Name": "Bridge",
-    "GameModes": [ "CaptureTheFlag", "DeathMatch" ] 
-  }
-]
+{
+	"levelname":"Bridge",
+	"gamemodes":["CaptureTheFlag","DeathMatch"],
+	"previewImagePath":"BridgePreview",
+	"levelinfo":"An epic battleground."
+}
