@@ -3,22 +3,32 @@ using System.Collections;
 
 public partial class Player : MonoBehaviour
 {
-	private ControllerMapping input;
+	/// <summary>
+	/// 
+	/// </summary>
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
-	
+
+	/// <summary>
+	/// The height of the jump.
+	/// </summary>
 	public float jumpHeight;
 	
 	private Animator anim;
 	private HashIDs hash;
 	
 	private Camera _camera;
-	
+
+	/// <summary>
+	/// The move speed, 5 is default
+	/// </summary>
+	public Decoratable<float> movementSpeed = new Decoratable<float>(2);
+
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
-		input = InputWrapper.Instance.GetController(1);
+		controller = InputWrapper.Instance.GetController(1);
 		_camera = Camera.main;
 	}
 	
@@ -33,10 +43,16 @@ public partial class Player : MonoBehaviour
 		Vector3 camRight = _camera.transform.right;
 		camDirection.y = 0;
 		camDirection.Normalize();
+
+		//Xbox Controls:
+		float h = controller.GetAxis(XboxAxis.HorizontalLeft);
+		float v = controller.GetAxis(XboxAxis.VerticalLeft);
+		bool jump = controller.GetButton(XboxButton.A);
 		
-		float h = input.GetAxis(XboxAxis.HorizontalLeft);
-		float v = input.GetAxis(XboxAxis.VerticalLeft);
-		bool jump = input.GetButton(XboxButton.A);
+		//PC Controls:
+		/*float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis ("Vertical");
+		bool jump = Input.GetKeyDown("space");*/
 		
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 		
@@ -57,7 +73,7 @@ public partial class Player : MonoBehaviour
 		if (moveSpeed.sqrMagnitude > 0)
 		{
 			Rotating(moveSpeed);
-			anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * 5, speedDampTime, Time.deltaTime);
+			anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * this.movementSpeed, speedDampTime, Time.deltaTime);
 		}
 		else
 		{

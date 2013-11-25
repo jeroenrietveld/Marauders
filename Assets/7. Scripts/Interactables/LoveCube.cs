@@ -3,21 +3,39 @@ using System.Collections;
 
 public class LoveCube : Interactable
 {
-	private string message = "Pickup LoveCube" ;
+	private string message = "Get speed boost!" ;
 	private bool showMessage = false;
 	private Vector2 messageLocation;
-	
+	private Player player;
 
 	public override void OnInteractEnter(Player player)
 	{
-
 		//Lets show this message
 		this.showMessage = true;
+		this.player = player;
 	}
 
 	public override void OnInteractLeave(Player player)
 	{
 		this.showMessage = false;
+		this.player = null;
+	}
+
+	public void Update()
+	{
+		//showMea
+		if (showMessage)
+		{
+			if (player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
+			{
+				//Applying speedboost
+				Speedboost speedboost = player.gameObject.AddComponent<Speedboost>();
+				speedboost.factor = 5f;
+				speedboost.duration = 2f;
+
+				Destroy(this.gameObject);
+			}
+		}
 	}
 
 	public void OnGUI()
@@ -30,4 +48,6 @@ public class LoveCube : Interactable
 			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), message);
 		}
 	}
+
+
 }
