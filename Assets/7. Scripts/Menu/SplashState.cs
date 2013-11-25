@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XInputDotNetPure;
 using System.Collections;
 
 public class SplashState : MenuStateBase
@@ -10,9 +11,9 @@ public class SplashState : MenuStateBase
 
 	public override void Update(MenuManager manager)
 	{
-		if(Input.GetKey(KeyCode.A))
-		{
-			manager.ChangeState(MenuStates.ArmoryState);
-		}
+        if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
+        {
+            manager.ChangeState(MenuStates.ArmoryState);
+        }
 	}
 }
