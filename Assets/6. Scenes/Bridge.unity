@@ -982,7 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSmoothing: 15
   speedDampTime: .100000001
-  jumpHeight: 0
+  jumpHeight: 10000
 --- !u!114 &198296636
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class LoveCube : Interactable
 		//showMea
 		if (showMessage)
 		{
-			if (player.controller.GetButtonDown (XboxButton.X))
+			if (player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
 			{
 				//Applying speedboost
 				Speedboost speedboost = player.gameObject.AddComponent<Speedboost>();

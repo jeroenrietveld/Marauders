@@ -3,10 +3,15 @@ using System.Collections;
 
 public partial class Player : MonoBehaviour
 {
-	public ControllerMapping controller;
+	/// <summary>
+	/// 
+	/// </summary>
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
-	
+
+	/// <summary>
+	/// The height of the jump.
+	/// </summary>
 	public float jumpHeight;
 	
 	private Animator anim;
@@ -17,7 +22,7 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// The move speed, 5 is default
 	/// </summary>
-	public Decoratable<float> movementSpeed = new Decoratable<float>(1);
+	public Decoratable<float> movementSpeed = new Decoratable<float>(2);
 
 	void Awake()
 	{
@@ -38,10 +43,16 @@ public partial class Player : MonoBehaviour
 		Vector3 camRight = _camera.transform.right;
 		camDirection.y = 0;
 		camDirection.Normalize();
-		
+
+		//Xbox Controls:
 		float h = controller.GetAxis(XboxAxis.HorizontalLeft);
 		float v = controller.GetAxis(XboxAxis.VerticalLeft);
 		bool jump = controller.GetButton(XboxButton.A);
+		
+		//PC Controls:
+		/*float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis ("Vertical");
+		bool jump = Input.GetKeyDown("space");*/
 		
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 		
