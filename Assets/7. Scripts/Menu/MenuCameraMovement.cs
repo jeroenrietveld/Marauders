@@ -4,7 +4,7 @@ using System.Collections;
 public class MenuCameraMovement : MonoBehaviour {
 
 	public Vector3 targetPosition { set; private get; }
-	public float cameraSpeed = 20f;
+	public float cameraSpeed = 40f;
 	public bool isMoving 
 	{
 		get 
