@@ -11,7 +11,7 @@ public class nl : Locale {
 	
 	public override string GetLanguageCode ()
 	{
-		return "en";
+		return "nl";
 	}
 	
 	

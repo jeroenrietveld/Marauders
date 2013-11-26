@@ -48,6 +48,4 @@ public class LoveCube : Interactable
 			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
 		}
 	}
-
-
 }
