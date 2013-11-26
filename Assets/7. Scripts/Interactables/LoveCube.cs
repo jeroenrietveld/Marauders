@@ -44,8 +44,8 @@ public class LoveCube : Interactable
 		{
 			//Getting the cube's location on screen and storing it		 
 			Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
-			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[XboxButton.X]);
-			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), message);
+			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[player.controller.PickupPowerup]);
+			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
 		}
 	}
 

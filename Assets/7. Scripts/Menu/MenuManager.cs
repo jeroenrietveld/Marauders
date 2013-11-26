@@ -9,7 +9,6 @@ public class MenuManager : MonoBehaviour {
 	public MenuStateBase currentState;
 	
     public static float distanceFromMenu = -30f;
-    public static bool isIntroMoving = true;
 
     // Use this for initialization
 	void Start ()
