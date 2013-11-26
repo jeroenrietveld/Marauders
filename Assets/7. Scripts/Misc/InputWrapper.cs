@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using XInputDotNetPure;
 
 /// <summary>
 /// InputWrapper is a singleton which holds the 4 controllers. The controllers use lazy loading.
 /// </summary>
+[Obsolete("This class is obsolete. Use the XInputDotNetPure library for input.", false)]
 public class InputWrapper : ScriptableObject {
 
 	private static InputWrapper _instance;
@@ -54,8 +56,6 @@ public class InputWrapper : ScriptableObject {
 
 public enum XboxButton
 {
-	NumHorizontal,
-	NumVertical,
 	A,
 	B,
 	X,
@@ -70,12 +70,14 @@ public enum XboxButton
 
 public enum XboxAxis
 {
+    NumHorizontal,
+    NumVertical,
 	HorizontalRight,
 	VerticalRight,
 	HorizontalLeft,
 	VerticalLeft,
 	LeftTrigger,
-	RightTrigger,
+	RightTrigger
 }
 
 /// <summary>
@@ -128,14 +130,11 @@ public class ControllerMapping
 	{
 		foreach (XboxButton button in Enum.GetValues(typeof(XboxButton)))
 		{
-			if ((button != XboxButton.NumHorizontal) && (button != XboxButton.NumVertical))
-			{
-				Texture2D resource = (Texture2D)Resources.Load(button.ToString());
+			Texture2D resource = (Texture2D)Resources.Load(button.ToString());
 
-				if (resource != null)
-				{
-					ButtonImages.Add (button, resource);
-				}
+			if (resource != null)
+			{
+				ButtonImages.Add (button, resource);
 			}
 		}
 	}

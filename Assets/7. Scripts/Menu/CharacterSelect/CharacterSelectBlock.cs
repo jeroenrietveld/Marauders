@@ -1,29 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using XInputDotNetPure;
+using System;
+using System.Collections.Generic;
 
-/// <summary>
-/// Lets players join the characterscreen selection so they can select a character.
-/// </summary>
-public class JoinGame : MonoBehaviour 
-{
+
+public class CharacterSelectBlock : MonoBehaviour {
+
+	public PlayerIndex index;
     public List<Material> heroes;
 
     private IList<string> _heroSelects;
-    public int _playerId;
-	private int _count = 0;
+    private int _count = 0;
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
     private float deadZone = -0.7f;
     private GamePadState _state;
     private GameObject _hero;
 
-	// <summary>
-	// Place all the controllers with selection box in the controllers Dictionary.
-	// This code needs to change a bit when the new input is done.
-	// </summary>
-	void Awake()
+	// Use this for initialization
+	void Start () 
 	{
         _heroSelects = new List<string>();
         _heroSelects.Add("hero_select_pl1");
@@ -31,31 +27,24 @@ public class JoinGame : MonoBehaviour
         _heroSelects.Add("hero_select_pl3");
         _heroSelects.Add("hero_select_pl4");
 
-        _hero = GameObject.Find(_heroSelects[_playerId - 1]).transform.GetChild(0).gameObject;
-        setGamePad();
-        if(_state.IsConnected)
+        _hero = GameObject.Find(_heroSelects[(int)index]).transform.GetChild(0).gameObject;
+        
+        if (_state.IsConnected)
         {
             _hero.renderer.enabled = true;
             _hero.renderer.material = heroes[_count];
         }
 	}
 
-    private void setGamePad()
-    {
-        if (_playerId == 1) _state = GamePad.GetState(PlayerIndex.One);
-        else if (_playerId == 2) _state = GamePad.GetState(PlayerIndex.Two);
-        else if (_playerId == 3) _state = GamePad.GetState(PlayerIndex.Three);
-        else if (_playerId == 4) _state = GamePad.GetState(PlayerIndex.Four);
-    }
-
     /// <summary>
     ///  Check every frame if a players wants to join the game. If they press their "A" button
     ///  the first hero will be shown. The List heroes has all the materials for the characters so
     ///  we can switch between them.
     /// </summary>
-    void Update()
-    {
-        setGamePad();
+	void Update () 
+	{
+		GamePadState _state = GamePad.GetState (index);
+
         float x = _state.ThumbSticks.Left.X;
         if ((x < deadZone || x > Mathf.Abs(deadZone)) && GetTimer())
         {
@@ -63,11 +52,11 @@ public class JoinGame : MonoBehaviour
             {
                 _count++;
             }
-            else if(x < deadZone)
+            else if (x < deadZone)
             {
                 _count--;
             }
-            
+
             if (_count >= heroes.Count)
             {
                 _count = 0;
@@ -78,7 +67,7 @@ public class JoinGame : MonoBehaviour
             }
             _hero.renderer.material = heroes[_count];
         }
-    }
+	}
 
     /// <summary>
     /// Runs a timer and returns true wether the user can select the next character.
