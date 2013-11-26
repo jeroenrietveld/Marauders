@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using XInputDotNetPure;
 
 public class MenuManager : MonoBehaviour {
 	
@@ -23,10 +25,6 @@ public class MenuManager : MonoBehaviour {
 
 		ChangeState(MenuStates.SplashState);
 	}
-	
-    void FixedUpdate()
-    {
-    }
 
 	// Update is called once per frame
 	void Update ()
@@ -34,12 +32,34 @@ public class MenuManager : MonoBehaviour {
 		if(!cameraMovement.isMoving)
 		{
 			currentState.Update(this);
+
+            if (currentState == states[MenuStates.ArmoryState])
+            {
+                EnableArmoryStateText();
+            }
 		}
-	}
+	}	
+
+    private void EnableArmoryStateText()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
+
+        foreach (GameObject go in gameObjects)
+        {
+            go.renderer.enabled = true;
+        }
+    }
 
 	public void ChangeState(MenuStates state)
 	{
+		if (currentState != null) 
+		{
+			currentState.OnInactive();
+		}
+
     	currentState = states[state];
 		cameraMovement.targetPosition = currentState.center + new Vector3(0, 0, distanceFromMenu);
+
+		currentState.OnActive();
 	}
 }

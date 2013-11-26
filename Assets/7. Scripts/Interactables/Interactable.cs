@@ -9,17 +9,6 @@ public abstract class Interactable : MonoBehaviour {
 	/// <value><c>true</c> if is interactable; can be used by a player<c>false</c>.</value>
 	public bool isInteractable = true;
 
-
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnTriggerEnter (Collider collider) {
 		//Looking if the one colliding with us is a player
 		Player player = collider.gameObject.GetComponent<Player>();

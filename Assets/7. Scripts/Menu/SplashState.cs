@@ -11,8 +11,7 @@ public class SplashState : MenuStateBase
 
 	public override void Update(MenuManager manager)
 	{
-        if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
-        {
+if(Input.GetKey(KeyCode.A))        {
             manager.ChangeState(MenuStates.ArmoryState);
         }
 	}
