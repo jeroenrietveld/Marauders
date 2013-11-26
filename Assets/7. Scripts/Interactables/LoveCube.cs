@@ -3,36 +3,38 @@ using System.Collections;
 
 public class LoveCube : Interactable
 {
-	private string message = "Get speed boost!" ;
-	private bool showMessage = false;
-	private Vector2 messageLocation;
-	private Player player;
+	private string _message = "Get speed boost!" ;
+	private bool _showMessage = false;
+	private Vector2 _messageLocation;
+	private Player _player;
 
 	public override void OnInteractEnter(Player player)
 	{
 		//Lets show this message
-		this.showMessage = true;
-		this.player = player;
+		this._showMessage = true;
+		this._player = player;
 	}
 
 	public override void OnInteractLeave(Player player)
 	{
-		this.showMessage = false;
-		this.player = null;
+		this._showMessage = false;
+		this._player = null;
 	}
 
 	public void Update()
 	{
 		//showMea
-		if (showMessage)
+		if (_showMessage)
 		{
-			if (player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
+			//TODO update controller input
+			if (_player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
 			{
 				//Applying speedboost
-				Speedboost speedboost = player.gameObject.AddComponent<Speedboost>();
+				Speedboost speedboost = _player.gameObject.AddComponent<Speedboost>();
 				speedboost.factor = 5f;
 				speedboost.duration = 2f;
 
+				//Destroy after pickup
 				Destroy(this.gameObject);
 			}
 		}
@@ -40,12 +42,12 @@ public class LoveCube : Interactable
 
 	public void OnGUI()
 	{
-		if (showMessage)
+		if (_showMessage)
 		{
 			//Getting the cube's location on screen and storing it		 
 			Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
-			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[player.controller.PickupPowerup]);
-			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
+			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[_player.controller.PickupPowerup]);
+			GUI.Label(new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
 		}
 	}
 }
