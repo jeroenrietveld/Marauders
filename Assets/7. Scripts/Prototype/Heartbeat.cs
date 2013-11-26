@@ -5,7 +5,7 @@ using System.Collections;
 /// Prototype for the heart beat, this indicates the player health.
 /// </summary>
 public class Heartbeat : MonoBehaviour {
-	public Decoratable<float> heartbeatSpeed = new Decoratable<float>(90);
+	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 
 	private Avatar avatar;
 

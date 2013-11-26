@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// The move speed, 5 is default
 	/// </summary>
-	public Decoratable<float> movementSpeed = new Decoratable<float>(10);
+	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
 
 	void Awake()
 	{
