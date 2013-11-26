@@ -9,30 +9,30 @@ public class CharacterSelectBlock : MonoBehaviour {
 
 	public PlayerIndex index;
     public List<Material> heroes;
-
-    private IList<string> _heroSelects;
+    private int playerIndex;
     private int _count = 0;
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
-    private float deadZone = -0.7f;
-    private GamePadState _state;
-    private GameObject _hero;
+
+    private GameObject _bigCharacterSelectPlane;
+    private GameObject _smallCharacterSelectPlane;
+    private GameObject _skillSelectPlane;
+
+    private string _bigCharSelect = "BigCharacterSelect";
+    private string _skillSelect = "SkillSelect";
+    private string _smallCharSelect = "SmallCharacterSelect";
 
 	// Use this for initialization
 	void Start () 
 	{
-        _heroSelects = new List<string>();
-        _heroSelects.Add("hero_select_pl1");
-        _heroSelects.Add("hero_select_pl2");
-        _heroSelects.Add("hero_select_pl3");
-        _heroSelects.Add("hero_select_pl4");
-
-        _hero = GameObject.Find(_heroSelects[(int)index]).transform.GetChild(0).gameObject;
-        
-        if (_state.IsConnected)
+        playerIndex = (int)index + 1;
+        if(GamePad.GetState(index).IsConnected)
         {
-            _hero.renderer.enabled = true;
-            _hero.renderer.material = heroes[_count];
+            _skillSelectPlane = transform.FindChild(_skillSelect + playerIndex).gameObject;
+            _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect + playerIndex).gameObject;
+            _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect + playerIndex).gameObject;
+            _bigCharacterSelectPlane.renderer.enabled = true;
+            _bigCharacterSelectPlane.renderer.material = heroes[_count];
         }
 	}
 
@@ -43,29 +43,24 @@ public class CharacterSelectBlock : MonoBehaviour {
     /// </summary>
 	void Update () 
 	{
-		GamePadState _state = GamePad.GetState (index);
+		GamePadState _state = GamePad.GetState (index, GamePadDeadZone.IndependentAxes);
 
         float x = _state.ThumbSticks.Left.X;
-        if ((x < deadZone || x > Mathf.Abs(deadZone)) && GetTimer())
+
+        if (x != 0 && GetTimer())
         {
-            if (x > Mathf.Abs(deadZone))
+            if (x > 0)
             {
                 _count++;
             }
-            else if (x < deadZone)
+            else if (x < 0)
             {
                 _count--;
             }
 
-            if (_count >= heroes.Count)
-            {
-                _count = 0;
-            }
-            else if (_count < 0)
-            {
-                _count = heroes.Count - 1;
-            }
-            _hero.renderer.material = heroes[_count];
+            _count = (_count + heroes.Count) % heroes.Count;
+
+            _bigCharacterSelectPlane.renderer.material = heroes[_count];
         }
 	}
 
