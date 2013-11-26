@@ -9,7 +9,7 @@ public class ArmoryState : MenuStateBase
 	public ArmoryState()
 	{
 		center = GameObject.Find("ArmoryScreen").renderer.bounds.center;
-
+        
 		foreach(GameObject characterSelectBox in GameObject.FindGameObjectsWithTag("CharacterSelect"))
 		{
 			//characterSelectBoxes.Add(CharacterSelectBlock);
