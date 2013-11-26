@@ -28,6 +28,7 @@ public partial class Player : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
+		//TODO update for new controller
 		controller = InputWrapper.Instance.GetController(1);
 		_camera = Camera.main;
 	}
@@ -64,8 +65,6 @@ public partial class Player : MonoBehaviour
 		}
 		
 		MovementManagement(moveSpeed, jump);
-		
-		
 	}
 	
 	void MovementManagement (Vector3 moveSpeed, bool jump)
