@@ -11,7 +11,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 102: {fileID: 10200000}
   m_Layer: 0
-  m_Name: text_select
+  m_Name: text_connect
   m_TagString: MenuText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.32631743, y: 15.0552616, z: -19.6054058}
+  m_LocalPosition: {x: 22.7457409, y: 15.4395199, z: -19.6054058}
   m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -34,7 +34,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -56,7 +56,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Text: Press A to select
+  m_Text: Connect Controller
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
