@@ -3,7 +3,6 @@ using System.Collections;
 
 public class LoveCube : Interactable
 {
-	private string message = "Get speed boost!" ;
 	private bool showMessage = false;
 	private Vector2 messageLocation;
 	private Player player;
