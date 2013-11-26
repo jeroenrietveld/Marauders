@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &198296631
 Transform:
   m_ObjectHideFlags: 0
@@ -995,6 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedFloat: 0
+  jumpBool: 0
   locomotionState: 0
 --- !u!114 &198296637
 MonoBehaviour:
@@ -5387,16 +5388,16 @@ GameObject:
   - 95: {fileID: 938237755}
   - 54: {fileID: 938237760}
   - 136: {fileID: 938237759}
-  - 114: {fileID: 938237758}
   - 114: {fileID: 938237757}
   - 114: {fileID: 938237756}
+  - 114: {fileID: 938237758}
   m_Layer: 0
   m_Name: Marauders_Character_Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &938237754
 Transform:
   m_ObjectHideFlags: 0
@@ -5404,8 +5405,8 @@ Transform:
   m_PrefabInternal: {fileID: 1859623866}
   m_GameObject: {fileID: 938237753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.0833106, z: -3.95966887}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.09474158, y: 3.67090774, z: -.100323796}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 675150648}
   - {fileID: 1066942958}
@@ -5432,7 +5433,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
   m_Controller: {fileID: 9100000, guid: 4abd5fde675b622499fefac2128b96c6, type: 2}
   m_CullingMode: 1
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!114 &938237756
@@ -5458,6 +5459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedFloat: 0
+  jumpBool: 0
   locomotionState: 0
 --- !u!114 &938237758
 MonoBehaviour:
@@ -5467,9 +5469,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 938237753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452397286192ce042a8e14c5eed4b3ef, type: 3}
+  m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSmoothing: 15
+  speedDampTime: .100000001
+  jumpHeight: 30000
 --- !u!136 &938237759
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5490,7 +5495,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 938237753}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 75
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -8886,7 +8891,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 35e934a7378e28642b338a648816cc69, type: 2}
     - target: {fileID: 100088, guid: 3b059b06d05c0e04ba42674f84feac25, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400088, guid: 3b059b06d05c0e04ba42674f84feac25, type: 3}
       propertyPath: m_LocalScale.x
@@ -10128,15 +10133,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.09474158
       objectReference: {fileID: 0}
     - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0833106
+      value: 3.67090774
       objectReference: {fileID: 0}
     - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.95966887
+      value: -.100323796
       objectReference: {fileID: 0}
     - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
       propertyPath: m_LocalRotation.x
@@ -10160,7 +10165,27 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 4abd5fde675b622499fefac2128b96c6, type: 2}
     - target: {fileID: 100330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
+      propertyPath: m_AnimatePhysics
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400330, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a3eb6cffbd53e143a63e45bb1f0e354, type: 3}
