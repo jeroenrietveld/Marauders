@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 2
+  heroes: []
 --- !u!23 &14337684
 Renderer:
   m_ObjectHideFlags: 0
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
+  heroes: []
 --- !u!23 &148201968
 Renderer:
   m_ObjectHideFlags: 0
@@ -481,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 3
+  heroes: []
 --- !u!23 &1008828246
 Renderer:
   m_ObjectHideFlags: 0
@@ -788,6 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  heroes: []
 --- !u!23 &1745423074
 Renderer:
   m_ObjectHideFlags: 0
