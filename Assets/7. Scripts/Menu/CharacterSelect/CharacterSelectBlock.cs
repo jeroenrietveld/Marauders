@@ -45,6 +45,11 @@ public class CharacterSelectBlock : MonoBehaviour {
 	{
 		GamePadState _state = GamePad.GetState (index, GamePadDeadZone.IndependentAxes);
 
+        if (_state.IsConnected)
+        {
+            // get child text component and change text from "Connect Controller" to "Press A to join"
+        }
+
         float x = _state.ThumbSticks.Left.X;
 
         if (x != 0 && GetTimer())
