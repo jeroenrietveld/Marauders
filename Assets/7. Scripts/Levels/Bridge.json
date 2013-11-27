@@ -1,6 +1,6 @@
 {
 	"levelname":"Bridge",
 	"gamemodes":["CaptureTheFlag","DeathMatch"],
-	"previewImagePath":"BridgePreview",
+	"previewImagePath":"Bridge",
 	"levelinfo":"An epic battleground."
 }

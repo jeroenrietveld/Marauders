@@ -52,4 +52,9 @@ public class GameManager {
 		//TODO implementation
 		//Application.LoadLevel();
 	}
+
+	private void StartLevel(int unitySceneId)
+	{
+		Application.LoadLevel(unitySceneId);
+	}
 }

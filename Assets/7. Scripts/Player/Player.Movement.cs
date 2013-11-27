@@ -22,12 +22,13 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// The move speed, 5 is default
 	/// </summary>
-	public Decoratable<float> movementSpeed = new Decoratable<float>(10);
+	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
 
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
+		//TODO update for new controller
 		controller = InputWrapper.Instance.GetController(1);
 		_camera = Camera.main;
 	}
@@ -65,8 +66,6 @@ public partial class Player : MonoBehaviour
 		}
 		
 		MovementManagement(moveSpeed, jump);
-		
-
 	}
 	
 	void MovementManagement (Vector3 moveSpeed, bool jump)

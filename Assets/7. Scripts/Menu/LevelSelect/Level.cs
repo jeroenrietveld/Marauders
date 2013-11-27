@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SimpleJSON;
 using System.IO;
+using UnityEngine;
 
 /// <summary>
 /// This class holds information about levels.
@@ -12,7 +13,7 @@ class Level
  {
      public string levelName;
      public string[] gameModes;
-     public string previewImagePath;
+     public Texture2D previewImage;
      public string levelInfo;
 
     /// <summary>
@@ -22,11 +23,11 @@ class Level
     /// <param name="gameModes">All the possible game modes.</param>
     /// <param name="previewImagePath">The path to the previewImage.</param>
     /// <param name="levelInfo">The info of the level.</param>
-     public Level(string levelName, string[] gameModes, string previewImagePath, string levelInfo)
+     public Level(string levelName, string[] gameModes, Texture2D previewImage, string levelInfo)
      {
          this.levelName = levelName;
          this.gameModes = gameModes;
-         this.previewImagePath = previewImagePath;
+         this.previewImage = previewImage;
          this.levelInfo = levelInfo;
      }
 

@@ -19,7 +19,7 @@ static class LevelSelectionManager
 	static LevelSelectionManager()
     {
         levels = new List<Level>();
-        currentState = LevelSelectionState.LevelSelection;	
+        currentState = LevelSelectionState.NotSelecting;	
 
         //Check if the directory exists
 		if(Directory.Exists("./Assets/7. Scripts/Levels/"))
@@ -44,9 +44,10 @@ static class LevelSelectionManager
             	{
                 	actualGameModes[i] = node["gamemodes"][i];
             	}
+                Texture2D previewImage = (Texture2D) Resources.Load(previewImagePath);
 
             	//Finally, add the level with its info to the level list.
-            	levels.Add(new Level(levelName, actualGameModes, previewImagePath, levelInfo));
+            	levels.Add(new Level(levelName, actualGameModes, previewImage , levelInfo));
         	}
 		} else 
 		{
