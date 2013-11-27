@@ -29,7 +29,6 @@ public class ArmoryState : MenuStateBase
 	{
         _characterText = true;
         ArmoryStateText();
-        ArmoryArrows();
 
 		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
 		{
@@ -41,23 +40,12 @@ public class ArmoryState : MenuStateBase
 	{
         _characterText = false;
         ArmoryStateText();
-        ArmoryArrows();
 
 		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
 		{
 			block.enabled = false;
 		}
 	}
-
-    private void ArmoryArrows()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuArrows");
-
-        foreach (GameObject go in gameObjects)
-        {
-            go.renderer.enabled = _characterText;
-        }
-    }
 
     private void ArmoryStateText()
     {

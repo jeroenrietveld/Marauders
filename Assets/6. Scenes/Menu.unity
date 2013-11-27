@@ -2457,6 +2457,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b4c86d392b76a9749b045dbd66beb9e4, type: 2}
+      propertyPath: m_TagString
+      value: MenuArrows
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4c86d392b76a9749b045dbd66beb9e4, type: 2}
   m_RootGameObject: {fileID: 1749066055}
