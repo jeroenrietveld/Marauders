@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public partial class Player : MonoBehaviour
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public int controllerId;
+	public PlayerIndex playerIndex;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
@@ -29,7 +30,6 @@ public partial class Player : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
-		controller = InputWrapper.Instance.GetController(controllerId);
 		_camera = Camera.main;
 	}
 	
@@ -47,9 +47,9 @@ public partial class Player : MonoBehaviour
 		camDirection.Normalize();
 
 		//Xbox Controls:
-		float h = controller.GetAxis(XboxAxis.HorizontalLeft);
-		float v = controller.GetAxis(XboxAxis.VerticalLeft);
-		bool jump = controller.GetButton(XboxButton.A);
+		float h = GamePad.GetState(playerIndex).ThumbSticks.Left.X;
+		float v = GamePad.GetState(playerIndex).ThumbSticks.Left.Y;
+		bool jump = GamePad.GetState(playerIndex).Buttons.A == ButtonState.Pressed;
 		
 		//PC Controls:
 		/*float h = Input.GetAxis("Horizontal");

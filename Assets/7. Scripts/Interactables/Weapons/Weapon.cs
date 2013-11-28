@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using XInputDotNetPure;
 
 /// <summary>
 /// A weapon that can interact with the player
@@ -88,7 +89,7 @@ public abstract class Weapon : Interactable
 		{
 			foreach (Player player in pickupPlayers)
 			{
-				if (player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
+				if (GamePad.GetState(Owner.playerIndex).Buttons.X == ButtonState.Pressed || Input.GetKeyDown("f"))
 				{
 					//Pick up weapon
 					player.PickUpWeapon(this, this.gametypeObject);
@@ -104,7 +105,7 @@ public abstract class Weapon : Interactable
 		{
 			//Getting the cube's location on screen and storing it		 
 			Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
-			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[pickupPlayers[0].controller.PickupGametypeObject]);
+			//GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[pickupPlayers[0].controller.PickupGametypeObject]);
 			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["weapon_pickup"] + " " + GetWeaponName());
 		}
 	}

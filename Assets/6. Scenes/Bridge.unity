@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerId: 0
+  playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 10000
@@ -8007,7 +8007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerId: 2
+  playerIndex: 1
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000
@@ -9192,7 +9192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerId: 0
+  playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000
@@ -10180,7 +10180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerId: 1
+  playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000

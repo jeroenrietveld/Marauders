@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class LoveCube : Interactable
 {
@@ -26,7 +27,7 @@ public class LoveCube : Interactable
 		if (_showMessage)
 		{
 			//TODO update controller input
-			if (_player.controller.GetButtonDown (XboxButton.X) || Input.GetKeyDown("f"))
+			if (GamePad.GetState(_player.playerIndex).Buttons.X == ButtonState.Pressed || Input.GetKeyDown("f"))
 			{
 				//Applying speedboost
 				Speedboost speedboost = _player.gameObject.AddComponent<Speedboost>();
@@ -45,7 +46,7 @@ public class LoveCube : Interactable
 		{
 			//Getting the cube's location on screen and storing it		 
 			Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
-			GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[_player.controller.PickupPowerup]);
+			//GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[_player.controller.PickupPowerup]);
 			GUI.Label(new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
 		}
 	}
