@@ -14,6 +14,7 @@ public class CharacterSelectBlock : MonoBehaviour {
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
     private bool isConnected = false;
+    private bool selectedCharacter = false;
 
     private GameObject _bigCharacterSelectPlane;
     private GameObject _smallCharacterSelectPlane;
@@ -48,6 +49,8 @@ public class CharacterSelectBlock : MonoBehaviour {
             _bigCharacterSelectPlane.renderer.enabled = true;
             _bigCharacterSelectPlane.renderer.material = heroes[_count];
             _textJoin.GetComponent<TextMesh>().text = "Press A to select";
+
+            selectedCharacter = true;
         }
         else if (isConnected && !_state.IsConnected)
         {
@@ -69,7 +72,6 @@ public class CharacterSelectBlock : MonoBehaviour {
                 }
 
                 _count = (_count + heroes.Count) % heroes.Count;
-
                 _bigCharacterSelectPlane.renderer.material = heroes[_count];
             }
         }
@@ -86,9 +88,9 @@ public class CharacterSelectBlock : MonoBehaviour {
     private void OnControllerConnect()
     {
         isConnected = true;
-        _skillSelectPlane = transform.FindChild(_skillSelect + playerIndex).gameObject;
-        _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect + playerIndex).gameObject;
-        _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect + playerIndex).gameObject;
+        _skillSelectPlane = transform.FindChild(_skillSelect).gameObject;
+        _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect).gameObject;
+        _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect).gameObject;
         _textJoin = transform.FindChild("text_select").gameObject;
         _textJoin.GetComponent<TextMesh>().text = "Press A to join";
     }
