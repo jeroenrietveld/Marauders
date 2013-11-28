@@ -18,7 +18,7 @@
 
 		void surf (Input IN, inout SurfaceOutput o) {
 			half4 c = tex2D (_MainTex, IN.uv_MainTex);
-			o.Albedo = c.rgb;
+			o.Albedo = float3(1,0,0);
 			o.Alpha = step(max(health, 0.001), c.a);
 		}
 		ENDCG

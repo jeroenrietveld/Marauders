@@ -3,6 +3,8 @@ using System.Collections;
 
 public partial class Player : MonoBehaviour
 {
+	public int controllerId;
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -29,7 +31,7 @@ public partial class Player : MonoBehaviour
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
 		//TODO update for new controller
-		controller = InputWrapper.Instance.GetController(1);
+		controller = InputWrapper.Instance.GetController(controllerId);
 		_camera = Camera.main;
 	}
 	

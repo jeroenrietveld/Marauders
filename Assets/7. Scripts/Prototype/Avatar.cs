@@ -33,13 +33,13 @@ public class Avatar : MonoBehaviour {
 
 	public float armorFactor = 0.1f;
 
-	private float _health = 1f;
+	private float _health = .75f;
 	private Heartbeat _heartbeat;
 
 	// Use this for initialization
 	void Start () {
 		_heartbeat = GetComponent<Heartbeat>();
-		_heartbeat.heartbeatSpeed.filters += ModulateHeartbeat;
+		//_heartbeat.heartbeatSpeed.filters += ModulateHeartbeat;
 	}
 	
 	// Update is called once per frame

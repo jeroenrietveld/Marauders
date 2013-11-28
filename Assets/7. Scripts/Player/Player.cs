@@ -6,6 +6,8 @@ using System.Collections;
 /// </summary>
 public partial class Player : MonoBehaviour
 {
+	public Vector3 pos;
+
 	/// <summary>
 	/// The xbox controller used by the player
 	/// </summary>
@@ -26,7 +28,7 @@ public partial class Player : MonoBehaviour
 	/// </summary>
 	public Player()
 	{
-	
+		pos = transform.position;
 	}
 
 	/// <summary>
@@ -73,6 +75,11 @@ public partial class Player : MonoBehaviour
 		{
 			//Dropping weapon
 			DropPrimaryWeapon();
+		}
+
+		if (transform.position.y < 0)
+		{
+			transform.position = new Vector3(4, 9, -1);
 		}
 	}
 }
