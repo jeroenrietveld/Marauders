@@ -1903,6 +1903,18 @@ Prefab:
       propertyPath: m_Name
       value: box_pl1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300006, guid: 0ed1d33c98e89044e94f431a18a29132, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300004, guid: 0ed1d33c98e89044e94f431a18a29132, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 0ed1d33c98e89044e94f431a18a29132, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ed1d33c98e89044e94f431a18a29132, type: 2}
   m_RootGameObject: {fileID: 859412743}

@@ -13,10 +13,12 @@ public class CharacterSelectBlock : MonoBehaviour {
     private int _count = 0;
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
+    private bool isConnected = false;
 
     private GameObject _bigCharacterSelectPlane;
     private GameObject _smallCharacterSelectPlane;
     private GameObject _skillSelectPlane;
+    private GameObject _textJoin;
 
     private string _bigCharSelect = "BigCharacterSelect";
     private string _skillSelect = "SkillSelect";
@@ -26,14 +28,6 @@ public class CharacterSelectBlock : MonoBehaviour {
 	void Start () 
 	{
         playerIndex = (int)index + 1;
-        if(GamePad.GetState(index).IsConnected)
-        {
-            _skillSelectPlane = transform.FindChild(_skillSelect + playerIndex).gameObject;
-            _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect + playerIndex).gameObject;
-            _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect + playerIndex).gameObject;
-            _bigCharacterSelectPlane.renderer.enabled = true;
-            _bigCharacterSelectPlane.renderer.material = heroes[_count];
-        }
 	}
 
     /// <summary>
@@ -45,29 +39,59 @@ public class CharacterSelectBlock : MonoBehaviour {
 	{
 		GamePadState _state = GamePad.GetState (index, GamePadDeadZone.IndependentAxes);
 
-        if (_state.IsConnected)
+        if(!isConnected && _state.IsConnected)
         {
-            // get child text component and change text from "Connect Controller" to "Press A to join"
+            OnControllerConnect();
         }
-
-        float x = _state.ThumbSticks.Left.X;
-
-        if (x != 0 && GetTimer())
+        else if(isConnected && _state.IsConnected && _state.Buttons.A == ButtonState.Pressed)
         {
-            if (x > 0)
-            {
-                _count++;
-            }
-            else if (x < 0)
-            {
-                _count--;
-            }
-
-            _count = (_count + heroes.Count) % heroes.Count;
-
+            _bigCharacterSelectPlane.renderer.enabled = true;
             _bigCharacterSelectPlane.renderer.material = heroes[_count];
+            _textJoin.GetComponent<TextMesh>().text = "Press A to select";
+        }
+        else if (isConnected && !_state.IsConnected)
+        {
+            OnControllerDisConnect();
+        }
+        else
+        {
+            float x = _state.ThumbSticks.Left.X;
+
+            if (x != 0 && GetTimer())
+            {
+                if (x > 0)
+                {
+                    _count++;
+                }
+                else if (x < 0)
+                {
+                    _count--;
+                }
+
+                _count = (_count + heroes.Count) % heroes.Count;
+
+                _bigCharacterSelectPlane.renderer.material = heroes[_count];
+            }
         }
 	}
+
+    private void OnControllerDisConnect()
+    {
+        isConnected = false;
+        _textJoin.GetComponent<TextMesh>().text = "Connect Controller";
+        _bigCharacterSelectPlane.renderer.enabled = false;
+        _count = 0;
+    }
+
+    private void OnControllerConnect()
+    {
+        isConnected = true;
+        _skillSelectPlane = transform.FindChild(_skillSelect + playerIndex).gameObject;
+        _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect + playerIndex).gameObject;
+        _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect + playerIndex).gameObject;
+        _textJoin = transform.FindChild("text_select").gameObject;
+        _textJoin.GetComponent<TextMesh>().text = "Press A to join";
+    }
 
     /// <summary>
     /// Runs a timer and returns true wether the user can select the next character.
