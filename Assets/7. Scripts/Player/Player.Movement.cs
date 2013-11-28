@@ -6,6 +6,7 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// 
 	/// </summary>
+	public int controllerId;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
@@ -28,8 +29,7 @@ public partial class Player : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
-		//TODO update for new controller
-		controller = InputWrapper.Instance.GetController(1);
+		controller = InputWrapper.Instance.GetController(controllerId);
 		_camera = Camera.main;
 	}
 	
