@@ -33,7 +33,7 @@ public class Avatar : MonoBehaviour {
 
 	public float armorFactor = 0.1f;
 
-	private float _health = .75f;
+	public float _health = .75f;
 	private Heartbeat _heartbeat;
 
 	// Use this for initialization
