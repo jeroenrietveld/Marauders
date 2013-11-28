@@ -10,13 +10,9 @@ public class LevelState : MenuStateBase
 
 	public override void Update(MenuManager manager)
 	{
-        if (LevelSelectionManager.currentState == LevelSelectionState.LevelSelection
-            || LevelSelectionManager.currentState == LevelSelectionState.NotSelecting)
-        {
-            if (Input.GetKey(KeyCode.B))
-            {
-                manager.ChangeState(MenuStates.ArmoryState);
-            }
-        }
+	    if (Input.GetKey(KeyCode.B))
+	    {
+	        manager.ChangeState(MenuStates.ArmoryState);
+	    }
 	}
 }
