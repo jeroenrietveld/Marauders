@@ -27,7 +27,7 @@ public class LoveCube : Interactable
 		if (_showMessage)
 		{
 			//TODO update controller input
-			if (GamePad.GetState(_player.playerIndex).Buttons.X == ButtonState.Pressed || Input.GetKeyDown("f"))
+			if (_player.controller.Pressed(Button.X) || Input.GetKeyDown("f"))
 			{
 				//Applying speedboost
 				Speedboost speedboost = _player.gameObject.AddComponent<Speedboost>();

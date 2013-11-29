@@ -4,34 +4,27 @@ using XInputDotNetPure;
 
 public partial class Player : MonoBehaviour
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	public PlayerIndex playerIndex;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
-	/// <summary>
-	/// The height of the jump.
-	/// </summary>
 	public float jumpHeight;
+	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
+
+	public GamePad controller { get { return _controller; } }
 	
 	private Animator anim;
 	private HashIDs hash;
 	
 	private Camera _camera;
-
-	/// <summary>
-	/// The move speed, 5 is default
-	/// </summary>
-	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
+	private GamePad _controller;
 
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
-		Debug.Log(movementSpeed.value);
+		_controller = ControllerInput.GetController (playerIndex);
 	}
 	
 	void FixedUpdate()
@@ -47,9 +40,9 @@ public partial class Player : MonoBehaviour
 		camDirection.Normalize();
 
 		//Xbox Controls:
-		float h = GamePad.GetState(playerIndex).ThumbSticks.Left.X;
-		float v = GamePad.GetState(playerIndex).ThumbSticks.Left.Y;
-		bool jump = GamePad.GetState(playerIndex).Buttons.A == ButtonState.Pressed;
+		float h = _controller.Axis (Axis.LeftHorizantal);
+		float v = _controller.Axis (Axis.LeftVertical);
+		bool jump = _controller.Pressed (Button.A);
 		
 		//PC Controls:
 		/*float h = Input.GetAxis("Horizontal");
