@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using XInputDotNetPure;
 using System.Collections;
 

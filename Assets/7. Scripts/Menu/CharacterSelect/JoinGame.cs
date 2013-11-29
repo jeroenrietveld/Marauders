@@ -16,7 +16,7 @@ public class JoinGame : MonoBehaviour
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
     private float deadZone = -0.7f;
-    private GamePadState _state;
+    //private GamePadState _state;
     private GameObject _hero;
 
 	// <summary>

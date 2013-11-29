@@ -89,11 +89,11 @@ public abstract class Weapon : Interactable
 		{
 			foreach (Player player in pickupPlayers)
 			{
-				if (GamePad.GetState(Owner.playerIndex).Buttons.X == ButtonState.Pressed || Input.GetKeyDown("f"))
+				/*if (GamePad.GetState(Owner.playerIndex).Buttons.X == ButtonState.Pressed || Input.GetKeyDown("f"))
 				{
 					//Pick up weapon
 					player.PickUpWeapon(this, this.gametypeObject);
-				}
+				}*/
 			}
 		}
 

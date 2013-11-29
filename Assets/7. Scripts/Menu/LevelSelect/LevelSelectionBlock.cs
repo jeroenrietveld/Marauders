@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,18 +30,14 @@ class LevelSelectionBlock : LevelSelectionBlockBase
 	public override void Update()
 	{
 		int index = _currentIndex;
-		SetAlpha(_levelSelectUp, .75f);
-		SetAlpha(_levelSelectDown, .75f);
 
 		if(Input.GetKeyDown(KeyCode.I))
 		{
 			_currentIndex++;
-			SetAlpha(_levelSelectUp, 1f);
 		}
 		if(Input.GetKeyDown(KeyCode.J))
 		{
 			_currentIndex--;
-			SetAlpha(_levelSelectDown, 1f);
 		}
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -71,13 +67,6 @@ class LevelSelectionBlock : LevelSelectionBlockBase
 
 		current = LevelSelectionManager.levels [_currentIndex];
 		_levelPreview.renderer.material.mainTexture = current.previewImage;
-	}
-
-	public void SetAlpha(GameObject gameObject, float alpha)
-	{
-		Color color = gameObject.renderer.material.color;
-		color.a = alpha;
-		gameObject.renderer.material.color = color;
 	}
 }
 
