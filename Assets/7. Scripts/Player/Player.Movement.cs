@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public partial class Player : MonoBehaviour
 {
 	/// <summary>
 	/// 
 	/// </summary>
+	public PlayerIndex playerIndex;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
@@ -28,16 +30,13 @@ public partial class Player : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
-		//TODO update for new controller
-		controller = InputWrapper.Instance.GetController(1);
 		_camera = Camera.main;
 	}
 	
 	void FixedUpdate()
 	{
 		//Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
-		//Debug.DrawRay(transform.position, Vector3.forward * 11f, Color.red);
-		
+
 		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
 		camDirection.y = 0;
 		camDirection.Normalize();
@@ -47,9 +46,9 @@ public partial class Player : MonoBehaviour
 		camDirection.Normalize();
 
 		//Xbox Controls:
-		float h = controller.GetAxis(XboxAxis.HorizontalLeft);
-		float v = controller.GetAxis(XboxAxis.VerticalLeft);
-		bool jump = controller.GetButton(XboxButton.A);
+		float h = GamePad.GetState(playerIndex).ThumbSticks.Left.X;
+		float v = GamePad.GetState(playerIndex).ThumbSticks.Left.Y;
+		bool jump = GamePad.GetState(playerIndex).Buttons.A == ButtonState.Pressed;
 		
 		//PC Controls:
 		/*float h = Input.GetAxis("Horizontal");
@@ -64,7 +63,8 @@ public partial class Player : MonoBehaviour
 			anim.SetFloat (hash.speedFloat, 0, speedDampTime, Time.deltaTime);
 			jump = false;
 		}
-		
+
+		//Debug.DrawRay(transform.position, moveSpeed * 1f, Color.red);
 		MovementManagement(moveSpeed, jump);
 	}
 	
@@ -85,8 +85,11 @@ public partial class Player : MonoBehaviour
 		
 		if (jump)
 		{
-			Jump(jumpHeight);
-			anim.SetBool(hash.jumpBool, true);
+			if (!AgainstWall(moveSpeed))
+			{
+				Jump(jumpHeight);
+				anim.SetBool(hash.jumpBool, true);
+			}
 		}
 		else
 		{
@@ -126,20 +129,23 @@ public partial class Player : MonoBehaviour
 		return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
 	}
 
-	//bool AgainstWall()
-	//{
-		//return Physics.Raycast(transform.position, Vector3.forward, out hit, 10f);
+	/// <summary>
+	/// Returns true if the player walks against an object with a "Wall" tag.
+	/// </summary>
+	/// <returns><c>true</c>, if player walks against an object with "Wall" tag, <c>false</c> otherwise.</returns>
+	/// <param name="direction">Direction.</param>
+	bool AgainstWall(Vector3 direction)
+	{
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, direction, out hit, 3f))
+		{
+			// a tag is case sensitive
+			if (hit.transform.tag == "Wall")
+			{
+				return true;
+			}
+		}
 
-		//RaycastHit hit;
-		//if (Physics.Raycast(transform.position, Vector3.forward, out hit))
-		//{
-			//Debug.Log("Hit");
-			//if (hit.transform.tag == "wall")
-			//{
-				//return true;
-			//}
-		//}
-
-		//return false;
-	//}
+		return false;
+	}
 }

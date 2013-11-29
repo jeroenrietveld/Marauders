@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 /// <summary>
 /// The player.
 /// </summary>
 public partial class Player : MonoBehaviour
 {
-	/// <summary>
-	/// The xbox controller used by the player
-	/// </summary>
-	public ControllerMapping controller;
-
 	/// <summary>
 	/// This player's primary weapon
 	/// </summary>
@@ -69,7 +65,7 @@ public partial class Player : MonoBehaviour
 
 	public void Update()
 	{
-		if (controller.GetButtonDown (XboxButton.Y))
+		if (GamePad.GetState(playerIndex).Buttons.Y == ButtonState.Pressed)
 		{
 			//Dropping weapon
 			DropPrimaryWeapon();
