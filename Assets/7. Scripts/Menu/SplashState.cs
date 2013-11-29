@@ -12,7 +12,7 @@ public class SplashState : MenuStateBase
 
 	public override void Update(MenuManager manager)
 	{
-		if(manager.primaryController.Pressed(Button.A))
+		if(manager.primaryController.Pressed(Button.A) || Input.GetKeyDown(KeyCode.A))
 		{
             manager.ChangeState(MenuStates.ArmoryState);
         }
