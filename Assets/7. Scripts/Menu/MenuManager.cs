@@ -32,23 +32,8 @@ public class MenuManager : MonoBehaviour {
 		if(!cameraMovement.isMoving)
 		{
 			currentState.Update(this);
-
-            if (currentState == states[MenuStates.ArmoryState])
-            {
-                EnableArmoryStateText();
-            }
 		}
-	}	
-
-    private void EnableArmoryStateText()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
-
-        foreach (GameObject go in gameObjects)
-        {
-            go.renderer.enabled = true;
-        }
-    }
+	}
 
 	public void ChangeState(MenuStates state)
 	{

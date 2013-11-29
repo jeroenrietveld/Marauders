@@ -14,7 +14,8 @@ Library/
 *.csproj
 *.pidb
 *.suo
-*.sln
+Marauders.sln
+Marauders-csharp.sln
 *.user
 *.unityproj
 *.booproj

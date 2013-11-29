@@ -10,6 +10,5 @@ using UnityEngine;
 public enum LevelSelectionState
 {
     LevelSelection,
-    SettingSelection,
-	NotSelecting
+    SettingSelection
 }

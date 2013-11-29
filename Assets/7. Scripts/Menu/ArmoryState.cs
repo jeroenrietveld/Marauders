@@ -21,15 +21,22 @@ public class ArmoryState : MenuStateBase
 		if(Input.GetKey(KeyCode.A))
 		{
 			manager.ChangeState(MenuStates.LevelState);
-            LevelSelectionManager.currentState = LevelSelectionState.LevelSelection;
 		}
 		if (Input.GetKey(KeyCode.B))
 		{
 			manager.ChangeState(MenuStates.SplashState);
 		}
-		if (Input.GetKey(KeyCode.G))
-		{
 
+		EnableArmoryStateText();
+	}
+	
+	private void EnableArmoryStateText()
+	{
+		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
+		
+		foreach (GameObject go in gameObjects)
+		{
+			go.renderer.enabled = true;
 		}
 	}
 

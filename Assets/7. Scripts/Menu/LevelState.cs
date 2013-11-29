@@ -14,5 +14,10 @@ public class LevelState : MenuStateBase
 	    {
 	        manager.ChangeState(MenuStates.ArmoryState);
 	    }
+
+		if(LevelSelectionManager.currentState != null)
+		{
+			LevelSelectionManager.currentState.Update();
+		}
 	}
 }

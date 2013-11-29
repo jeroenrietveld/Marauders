@@ -7,68 +7,35 @@ using UnityEngine;
 /// <summary>
 /// This class will make the changing of settings possible.
 /// </summary>
-class SettingsBlock : MonoBehaviour
+class SettingsBlock : LevelSelectionBlockBase
 {
     private int _currentLives;
 	private bool _reloadPending;
 
-    /// <summary>
-    /// The constructor.
-    /// </summary>
-   public void Awake()
-    {
-        _currentLives = 3;
+	public SettingsBlock()
+	{
+		_currentLives = 3;
 		_reloadPending = false;
-    }
+	}
 
-    /// <summary>
-    /// This method will be called every frame.
-    /// </summary>
-    public void Update()
-    {
-		//Only proceed if we are in the right state
-		if (LevelSelectionManager.currentState == LevelSelectionState.SettingSelection)
+	public override void Update()
+	{
+		if(Input.GetKey(KeyCode.A))
 		{
-				//Check for the input
-			//if LEFT
-			if(Input.GetKey(KeyCode.A))
-			{
-				_currentLives--;
-				_reloadPending = true;
-			}
-			
-			//if RIGHT
-			else if(Input.GetKey(KeyCode.D))
-			{
-				_currentLives++;
-				_reloadPending = true;
-			}
-
-			//if A
-			//Load the scene with the level
-			else if(Input.GetKey(KeyCode.Space))
-			{
-				//LevelSelectionManager.currentState = LevelSelectionState.NotSelecting;
-				//Application.LoadLevel(LevelSelectionBlock.current);
-			}
-			
-			//if B
-			//TODO
-			//Set the visual focus back to levelselectionblock       
-			else if(Input.GetKey(KeyCode.B))
-			{
-				LevelSelectionManager.currentState = LevelSelectionState.LevelSelection;
-			}
-
-			//We should only update if a change occured,
-			//therefore;
-			if(_reloadPending)
-			{        	
-	            //show amount of lives using _currentLives
-
-				_reloadPending = false;
-	        }
+			_currentLives--;
 		}
-    }
+		if(Input.GetKey(KeyCode.B))
+		{
+			_currentLives++;
+		}
+		if(Input.GetKey (KeyCode.Escape))
+		{
+			LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
+		}
+		if(Input.GetKey(KeyCode.Space))
+		{
+			//TODO load scene
+		}
+	}
 }
 
