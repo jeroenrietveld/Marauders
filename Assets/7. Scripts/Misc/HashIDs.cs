@@ -5,6 +5,7 @@ public class HashIDs : MonoBehaviour
 {
 	public int speedFloat;
 	public int jumpBool;
+	public int fallBool;
 	public int locomotionState;
 	
 	void Awake()

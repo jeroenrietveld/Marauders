@@ -4,6 +4,7 @@
 TagManager:
   tags:
   - CharacterSelect
+  - Wall
   - MenuText
   - 
   Builtin Layer 0: Default

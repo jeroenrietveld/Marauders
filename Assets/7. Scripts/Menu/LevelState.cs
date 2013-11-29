@@ -5,7 +5,7 @@ public class LevelState : MenuStateBase
 {
 	public LevelState()
 	{
-		center = GameObject.Find("LevelScreen").renderer.bounds.center;
+		center = GameObject.Find("LevelScreen").transform.position;
 	}
 
 	public override void Update(MenuManager manager)

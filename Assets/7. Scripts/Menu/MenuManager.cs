@@ -55,6 +55,7 @@ public class MenuManager : MonoBehaviour {
 		if (currentState != null) 
 		{
 			currentState.OnInactive();
+			cameraMovement.cameraSpeed = currentState.cameraSpeed;
 		}
 
     	currentState = states[state];

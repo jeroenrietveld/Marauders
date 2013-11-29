@@ -8,7 +8,7 @@ public class ArmoryState : MenuStateBase
 
 	public ArmoryState()
 	{
-		center = GameObject.Find("ArmoryScreen").renderer.bounds.center;
+		center = GameObject.Find ("ArmoryScreen").transform.position;
         
 		foreach(GameObject characterSelectBox in GameObject.FindGameObjectsWithTag("CharacterSelect"))
 		{
@@ -23,13 +23,20 @@ public class ArmoryState : MenuStateBase
 			manager.ChangeState(MenuStates.LevelState);
             LevelSelectionManager.currentState = LevelSelectionState.LevelSelection;
 		}
+		if (Input.GetKey(KeyCode.B))
+		{
+			manager.ChangeState(MenuStates.SplashState);
+		}
+		if (Input.GetKey(KeyCode.G))
+		{
+
+		}
 	}
 
 	public override void OnActive()
 	{
-        _characterText = true;
+        //_characterText = true;
         ArmoryStateText();
-        ArmoryArrows();
 
 		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
 		{
@@ -39,9 +46,8 @@ public class ArmoryState : MenuStateBase
 
 	public override void OnInactive()
 	{
-        _characterText = false;
+        //_characterText = false;
         ArmoryStateText();
-        ArmoryArrows();
 
 		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
 		{
@@ -49,23 +55,13 @@ public class ArmoryState : MenuStateBase
 		}
 	}
 
-    private void ArmoryArrows()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuArrows");
-
-        foreach (GameObject go in gameObjects)
-        {
-            go.renderer.enabled = _characterText;
-        }
-    }
-
     private void ArmoryStateText()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
 
         foreach (GameObject go in gameObjects)
         {
-            go.renderer.enabled = _characterText;
+            //go.renderer.enabled = _characterText;
         }
     }
 }

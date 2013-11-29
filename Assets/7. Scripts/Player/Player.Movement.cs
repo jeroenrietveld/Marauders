@@ -35,7 +35,8 @@ public partial class Player : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-		Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
+		//Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
+		//Debug.DrawRay(transform.position, Vector3.forward * 11f, Color.red);
 		
 		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
 		camDirection.y = 0;
@@ -124,4 +125,21 @@ public partial class Player : MonoBehaviour
 	{
 		return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
 	}
+
+	//bool AgainstWall()
+	//{
+		//return Physics.Raycast(transform.position, Vector3.forward, out hit, 10f);
+
+		//RaycastHit hit;
+		//if (Physics.Raycast(transform.position, Vector3.forward, out hit))
+		//{
+			//Debug.Log("Hit");
+			//if (hit.transform.tag == "wall")
+			//{
+				//return true;
+			//}
+		//}
+
+		//return false;
+	//}
 }

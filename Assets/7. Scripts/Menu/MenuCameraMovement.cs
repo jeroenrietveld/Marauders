@@ -4,7 +4,15 @@ using System.Collections;
 public class MenuCameraMovement : MonoBehaviour {
 
 	public Vector3 targetPosition { set; private get; }
-	public float cameraSpeed;
+	private float _cameraSpeed;
+	public float cameraSpeed
+	{
+		set
+		{
+			_cameraSpeed = value;
+		}
+	}
+
 	public bool isMoving 
 	{
 		get 
@@ -15,6 +23,6 @@ public class MenuCameraMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.MoveTowards(transform.position, targetPosition, cameraSpeed * Time.deltaTime);
+		transform.position = Vector3.MoveTowards(transform.position, targetPosition, _cameraSpeed * Time.deltaTime);
 	}
 }

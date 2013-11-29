@@ -14,7 +14,7 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// This player's primary weapon
 	/// </summary>
-	public Weapon srimaryWeapon;
+	public Weapon primaryWeapon;
 
 	/// <summary>
 	/// This player's secondary weapon ( Only used for buffering )
@@ -34,8 +34,45 @@ public partial class Player : MonoBehaviour
 	/// </summary>
 	/// <param name="weapon">The weapon that's beeing picked up</param>
 	/// <param name="gametypeSpecificObj">If true, moves primary to secondary, else; drops primary weapon</param>
-	void PickUpWeapon(Weapon weapon, bool gametypeSpecificObj)
+	public void PickUpWeapon(Weapon weapon, bool gametypeSpecificObj)
 	{
+		if (gametypeSpecificObj)
+		{
+			secondaryWeapon = primaryWeapon;
+		}
 
+		//Setting our primary weapon
+		primaryWeapon = weapon;
+
+		//Hiding the weapon
+		weapon.gameObject.SetActive(false);
+
+		//We're the owner
+		weapon.Owner = this;
+	}
+
+	public void DropPrimaryWeapon()
+	{
+		//Dropping at our current location
+		primaryWeapon.gameObject.SetActive(true);
+		primaryWeapon.transform.position = transform.position;
+		//Rigidbody FlagClone  = (Rigidbody)Inistantiate (Flag, transform.position, transform.rotation);
+
+		primaryWeapon.Owner = null;
+
+		//Moving secondary to primary
+		primaryWeapon = secondaryWeapon;
+
+		//Secondary is definately null now
+		secondaryWeapon = null;
+	}
+
+	public void Update()
+	{
+		if (controller.GetButtonDown (XboxButton.Y))
+		{
+			//Dropping weapon
+			DropPrimaryWeapon();
+		}
 	}
 }

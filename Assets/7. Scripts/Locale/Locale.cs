@@ -28,8 +28,8 @@ public abstract class Locale {
 		}
 
 		//Nasty way of loading default languages, but w/e
-		_Current = AvailableLocals["en"];
-		_Default = AvailableLocals["en"];
+		_Current = _AvailableLocals["en"];
+		_Default = _AvailableLocals["en"];
 
 	}
 
