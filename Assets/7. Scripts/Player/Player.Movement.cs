@@ -31,6 +31,7 @@ public partial class Player : MonoBehaviour
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
+		Debug.Log(movementSpeed.value);
 	}
 	
 	void FixedUpdate()
@@ -74,9 +75,9 @@ public partial class Player : MonoBehaviour
 		{
 			Rotating(moveSpeed);
 
-			anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * this.movementSpeed, speedDampTime, Time.deltaTime);
+			anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * movementSpeed, speedDampTime, Time.deltaTime);
 
-			rigidbody.MovePosition(rigidbody.position + moveSpeed * (this.movementSpeed / 2f) * Time.deltaTime);
+			rigidbody.MovePosition(rigidbody.position + moveSpeed * movementSpeed * Time.deltaTime);
 		}
 		else
 		{
