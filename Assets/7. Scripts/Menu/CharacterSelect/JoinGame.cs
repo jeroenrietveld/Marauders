@@ -33,19 +33,19 @@ public class JoinGame : MonoBehaviour
 
         _hero = GameObject.Find(_heroSelects[_playerId - 1]).transform.GetChild(0).gameObject;
         setGamePad();
-        if(_state.IsConnected)
+		/*if(_state.IsConnected)
         {
             _hero.renderer.enabled = true;
             _hero.renderer.material = heroes[_count];
-        }
+        }*/
 	}
 
     private void setGamePad()
     {
-        if (_playerId == 1) _state = GamePad.GetState(PlayerIndex.One);
-        else if (_playerId == 2) _state = GamePad.GetState(PlayerIndex.Two);
-        else if (_playerId == 3) _state = GamePad.GetState(PlayerIndex.Three);
-        else if (_playerId == 4) _state = GamePad.GetState(PlayerIndex.Four);
+        //if (_playerId == 1) _state = GamePad.GetState(PlayerIndex.One);
+        //else if (_playerId == 2) _state = GamePad.GetState(PlayerIndex.Two);
+        //else if (_playerId == 3) _state = GamePad.GetState(PlayerIndex.Three);
+        //else if (_playerId == 4) _state = GamePad.GetState(PlayerIndex.Four);
     }
 
     /// <summary>
@@ -56,8 +56,8 @@ public class JoinGame : MonoBehaviour
     void Update()
     {
         setGamePad();
-        float x = _state.ThumbSticks.Left.X;
-        if ((x < deadZone || x > Mathf.Abs(deadZone)) && GetTimer())
+        //float x = _state.ThumbSticks.Left.X;
+		/*if ((x < deadZone || x > Mathf.Abs(deadZone)) && GetTimer())
         {
             if (x > Mathf.Abs(deadZone))
             {
@@ -77,7 +77,7 @@ public class JoinGame : MonoBehaviour
                 _count = heroes.Count - 1;
             }
             _hero.renderer.material = heroes[_count];
-        }
+        }*/
     }
 
     /// <summary>

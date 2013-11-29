@@ -12,10 +12,13 @@ public class MenuManager : MonoBehaviour {
 	
     public static float distanceFromMenu = -30f;
 
+	public GamePad primaryController { get; private set; }
+
     // Use this for initialization
 	void Start ()
 	{
 		states = new Dictionary<MenuStates, MenuStateBase>();
+		primaryController = ControllerInput.GetController (PlayerIndex.One);
 
 		cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
 

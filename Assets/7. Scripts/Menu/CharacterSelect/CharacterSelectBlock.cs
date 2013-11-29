@@ -4,12 +4,10 @@ using XInputDotNetPure;
 using System;
 using System.Collections.Generic;
 
-
 public class CharacterSelectBlock : MonoBehaviour {
 
 	public PlayerIndex index;
     public List<Material> heroes;
-    private int playerIndex;
     private int _count = 0;
     private float _defaultTimeValue = 0.15f;
     private float _timer = 0;
@@ -25,10 +23,12 @@ public class CharacterSelectBlock : MonoBehaviour {
     private string _skillSelect = "SkillSelect";
     private string _smallCharSelect = "SmallCharacterSelect";
 
+	private GamePad _controller;
+
 	// Use this for initialization
 	void Start () 
 	{
-        playerIndex = (int)index + 1;
+		_controller = ControllerInput.GetController (index);
 	}
 
     /// <summary>
@@ -38,13 +38,11 @@ public class CharacterSelectBlock : MonoBehaviour {
     /// </summary>
 	void Update () 
 	{
-		GamePadState _state = GamePad.GetState (index, GamePadDeadZone.IndependentAxes);
-
-        if(!isConnected && _state.IsConnected)
+		if(!isConnected && _controller.connected)
         {
             OnControllerConnect();
         }
-        else if(isConnected && _state.IsConnected && _state.Buttons.A == ButtonState.Pressed)
+		else if(isConnected && _controller.connected && _controller.Pressed(Button.A))
         {
             _bigCharacterSelectPlane.renderer.enabled = true;
             _bigCharacterSelectPlane.renderer.material = heroes[_count];
@@ -52,13 +50,13 @@ public class CharacterSelectBlock : MonoBehaviour {
 
             selectedCharacter = true;
         }
-        else if (isConnected && !_state.IsConnected)
+		else if (isConnected && !_controller.connected)
         {
             OnControllerDisConnect();
         }
         else
         {
-            float x = _state.ThumbSticks.Left.X;
+			float x = _controller.Axis(Axis.LeftHorizantal);
 
             if (x != 0 && GetTimer())
             {
