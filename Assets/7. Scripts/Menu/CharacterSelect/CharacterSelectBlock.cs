@@ -14,20 +14,14 @@ public enum CharacterSelectBlockStates
 public class CharacterSelectBlock : MonoBehaviour {
 
     /*
-     * to-do list voor character select:
-         * prefabs integreren in nieuwe menu.unity scene
-         * In ArmoryState staan nog code voor de text in de armory. Dit had jij volgens mij gedaan. Kan je nalopen of deze nog nodig zijn? En in de OnActive() methode
-             * heb ik de code gezet om de splashstate te activeren. Hadden we eerst in de SplashState staan. Is netter hier. Maar er stond daar al een soort gelijke methode. Kan je kijken 
-             * of beide werken en mocht nodig zijn 1 weg halen.
-         * beter uitlijnen in unity
-         * skills inladen en selecteren (misschien moet dat via de json bestanden.)
-         * nieuwe input gebruiken
-         * gegevens (gekozen char en skills per speler) opslaan in gamemanager of o.i.d.
-         * alle gameobjects in variable zetten die nodig zijn. Zie hieronder (alleen de 3 textboxes volgens mij.)
-         * Refactoren en opschonen van code.
-     * 
-     * mocht het nodig zijn (denk niet) characterselectblock class integreren in ArmoryState.cs 
-     */
+    * to-do list voor character select:
+    * skills inladen en selecteren (misschien moet dat via de json bestanden.)
+    * nieuwe input gebruiken (controller.connected geeft alleen false terug?, Maandag even vragen aan Rene / Jeroen).
+    * gegevens (gekozen char en skills per speler) opslaan in gamemanager of o.i.d.
+    * alle gameobjects in variable zetten die nodig zijn. Zie hieronder (alleen de 3 textboxes volgens mij.)
+    * Refactoren en opschonen van code.
+    * mocht het nodig zijn (denk niet) characterselectblock class integreren in ArmoryState.cs 
+    */
 
     public GameObject _bigCharacterSelectPlane;
     public GameObject _textJoin;

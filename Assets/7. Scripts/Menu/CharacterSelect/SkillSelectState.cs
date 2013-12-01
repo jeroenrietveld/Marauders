@@ -21,7 +21,7 @@ public class SkillSelectState : CharacterSelectBase
     {
         block._skillSelectPlane.SetActive(true);
         block._smallCharacterSelectPlane.SetActive(true);
-        // veranderen naar het gameobject wat in gamemanager staat
+        // use the hero that is saved in the gameManager and set the smallCharacterPlane to this hero.
         block._smallCharacterSelectPlane.renderer.material = block.heroes[block._count];
         block._textJoin.SetActive(false);
     }
