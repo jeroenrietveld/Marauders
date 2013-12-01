@@ -183,6 +183,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .0649999976
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
   m_RootGameObject: {fileID: 577542053}
@@ -1168,7 +1172,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2106334623}
   m_GameObject: {fileID: 432208445}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
@@ -1340,7 +1344,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1457558450}
   m_GameObject: {fileID: 447082249}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
@@ -2058,7 +2062,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 33272291}
   m_GameObject: {fileID: 577542053}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
@@ -3201,6 +3205,10 @@ Prefab:
     - target: {fileID: 400028, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
       propertyPath: m_LocalScale.z
       value: .0649999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
@@ -4956,6 +4964,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .0649999976
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
   m_RootGameObject: {fileID: 447082249}
@@ -5912,7 +5924,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1025887024}
   m_GameObject: {fileID: 1836983459}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
@@ -6193,6 +6205,18 @@ Prefab:
     - target: {fileID: 400028, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
       propertyPath: m_LocalScale.z
       value: .0649999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300028, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}
+      propertyPath: m_ReceiveShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cb3fba827f509c4f8e7e0f4efdd1365, type: 2}

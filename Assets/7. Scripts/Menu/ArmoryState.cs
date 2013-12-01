@@ -9,11 +9,6 @@ public class ArmoryState : MenuStateBase
 	public ArmoryState()
 	{
 		center = GameObject.Find ("ArmoryScreen").transform.position;
-        
-		foreach(GameObject characterSelectBox in GameObject.FindGameObjectsWithTag("CharacterSelect"))
-		{
-
-        }
 	}
     
 	public override void Update(MenuManager manager)
@@ -42,39 +37,19 @@ public class ArmoryState : MenuStateBase
 
 	public override void OnActive()
 	{
-        //_characterText = true;
-        ArmoryStateText();
-
         GameObject[] charSelectObjects = GameObject.FindGameObjectsWithTag("CharacterSelect");
+
         foreach (GameObject item in charSelectObjects)
         {
             item.GetComponent<CharacterSelectBlock>().gameObject.SetActive(true);
         }
-
-		//foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
-		//{
-		//	block.enabled = true;
-	    //}
 	}
 
 	public override void OnInactive()
 	{
-        //_characterText = false;
-        ArmoryStateText();
-
 		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
 		{
 			block.enabled = false;
 		}
 	}
-
-    private void ArmoryStateText()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
-
-        foreach (GameObject go in gameObjects)
-        {
-            //go.renderer.enabled = _characterText;
-        }
-    }
 }
