@@ -68,8 +68,6 @@ public class CharacterSelectBlock : MonoBehaviour {
         GamePad controller = ControllerInput.GetController(index);
 
         Debug.Log(controller.connected);
-        Debug.Log(controller.deadZone);
-        
 
         if (!isConnected && controller.connected)
         {

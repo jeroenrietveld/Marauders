@@ -24,7 +24,7 @@ public class CharSelectState : CharacterSelectBase
 
         if(controller.JustPressed(Button.A))
         {
-            // in gamemanager opslaan.
+            // Save hero in gameManager
             block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }
         else if (controller.JustPressed(Button.B))
