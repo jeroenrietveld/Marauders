@@ -12,8 +12,6 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
     public static bool isPaused = false;
-    public static bool resumeTimer = false;
-    public static float _timeResume = 3f;
     public static GameObject guiResumeText;
 
 	private struct MatchSettings
@@ -53,8 +51,8 @@ public class GameManager {
 	/// </summary>
 	private void NextLevel()
 	{
-		//TODO implementation
-		//Application.LoadLevel();
+		// TODO implementation
+		// Application.LoadLevel();
 	}
 
 	private void StartLevel(int unitySceneId)
@@ -64,8 +62,7 @@ public class GameManager {
 
     /// <summary>
     /// Pause the game by setting the timeScale to 0f.
-    /// Set the text ro paused. isPaused is set to true
-    /// and the resumeTimer t0 false.
+    /// Set the text to paused. isPaused is set to true
     /// </summary>
     public static void PauseGame()
     {
@@ -73,55 +70,16 @@ public class GameManager {
         guiResumeText.guiText.text = "Paused";
 
         isPaused = true;
-        resumeTimer = false;
         Time.timeScale = 0f;
     }
 
     /// <summary>
-    /// Resume  the game. Set isPaused to false and resumeTimer to true;
-    /// By setting the resumeTimer to true the timer will start to
-    /// countdown from 3 seconds to -1. At 0 players can fight, at -1 the text
-    /// 'Fight!' will dissapear.
+    /// Resume  the game by settint timeScale to 1f. Set text to nothing and isPaused = false.
     /// </summary>
     public static void ResumeGame()
     {
+        guiResumeText.guiText.text = "";
         isPaused = false;
-        resumeTimer = true;
-    }
-
-    /// <summary>
-    /// Start the timer at 3 seconds. Every update call it
-    /// changes _timeResume minus 0.01f because when the timeScale
-    /// is set to zero we cannot use Time.Deltatime etc. After three seconds
-    /// the game restarts and the timeScale will be reset to
-    /// 3 seconds. When the timer hits -1f the text 'fight' will dissapear.
-    /// </summary>
-    public static void Timer()
-    {
-        GameManager._timeResume -= 0.01f;
-
-        if (GameManager._timeResume <= 3f)
-        {
-            guiResumeText.guiText.text = "3";
-        }
-        if (GameManager._timeResume <= 2f)
-        {
-            guiResumeText.guiText.text = "2";
-        }
-        if (GameManager._timeResume <= 1f)
-        {
-            guiResumeText.guiText.text = "1";
-        } 
-        if (GameManager._timeResume <= 0f)
-        {
-            guiResumeText.guiText.text = "Fight!";
-            Time.timeScale = 1f;
-        }
-        if (GameManager._timeResume <= -1f)
-        {
-            guiResumeText.guiText.text = "";
-            _timeResume = 3f;
-            resumeTimer = false;
-        }
+        Time.timeScale = 1f;
     }
 }
