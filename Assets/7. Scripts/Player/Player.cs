@@ -2,24 +2,12 @@
 using System.Collections;
 using XInputDotNetPure;
 
-/// <summary>
-/// The player.
-/// </summary>
 public partial class Player : MonoBehaviour
 {
-	/// <summary>
-	/// This player's primary weapon
-	/// </summary>
 	public Weapon primaryWeapon;
 
-	/// <summary>
-	/// This player's secondary weapon ( Only used for buffering )
-	/// </summary>
 	public Weapon secondaryWeapon;
 
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Player"/> class.
-	/// </summary>
 	public Player()
 	{
 	
@@ -65,10 +53,5 @@ public partial class Player : MonoBehaviour
 
 	public void Update()
 	{
-		if (GamePad.GetState(playerIndex).Buttons.Y == ButtonState.Pressed)
-		{
-			//Dropping weapon
-			DropPrimaryWeapon();
-		}
 	}
 }

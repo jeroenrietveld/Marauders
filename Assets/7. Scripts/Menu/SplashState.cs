@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using XInputDotNetPure;
 using System.Collections;
 
@@ -12,7 +12,7 @@ public class SplashState : MenuStateBase
 
 	public override void Update(MenuManager manager)
 	{
-		if(Input.GetKey(KeyCode.A))
+		if(manager.primaryController.Pressed(Button.A) || Input.GetKeyDown(KeyCode.A))
 		{
             manager.ChangeState(MenuStates.ArmoryState);
         }

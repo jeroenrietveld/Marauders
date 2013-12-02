@@ -4,75 +4,84 @@ using XInputDotNetPure;
 using System;
 using System.Collections.Generic;
 
+public enum CharacterSelectBlockStates
+{
+    CharSelectState,
+    CharConfirmState,
+    SkillSelectState
+}
 
 public class CharacterSelectBlock : MonoBehaviour {
 
-	public PlayerIndex index;
+    /*
+    * to-do list voor character select:
+    * skills inladen en selecteren (misschien moet dat via de json bestanden.)
+    * nieuwe input gebruiken (controller.connected geeft alleen false terug?, Maandag even vragen aan Rene / Jeroen).
+    * gegevens (gekozen char en skills per speler) opslaan in gamemanager of o.i.d.
+    * alle gameobjects in variable zetten die nodig zijn. Zie hieronder (alleen de 3 textboxes volgens mij.)
+    * Refactoren en opschonen van code.
+    * mocht het nodig zijn (denk niet) characterselectblock class integreren in ArmoryState.cs 
+    */
+
+    public GameObject _bigCharacterSelectPlane;
+    public GameObject _textJoin;
+    public GameObject _skillSelectPlane;
+    public GameObject _smallCharacterSelectPlane;
+	
+    public PlayerIndex index;
     public List<Material> heroes;
-    private int playerIndex;
-    private int _count = 0;
-    private float _defaultTimeValue = 0.15f;
-    private float _timer = 0;
-    private bool isConnected = false;
-    private bool selectedCharacter = false;
+    public int _count { get; set; }
+    public bool isConnected { get; set; }
+    private bool isJoined = false;
 
-    private GameObject _bigCharacterSelectPlane;
-    private GameObject _smallCharacterSelectPlane;
-    private GameObject _skillSelectPlane;
-    private GameObject _textJoin;
+    private CharacterSelectBase _currentState;
+    private IDictionary<CharacterSelectBlockStates, CharacterSelectBase> list;
 
-    private string _bigCharSelect = "BigCharacterSelect";
-    private string _skillSelect = "SkillSelect";
-    private string _smallCharSelect = "SmallCharacterSelect";
+    void Start()
+    {
+        _count = 0;
+        list = new Dictionary<CharacterSelectBlockStates, CharacterSelectBase>();
+        list.Add(CharacterSelectBlockStates.CharSelectState, new CharSelectState(this));
+        list.Add(CharacterSelectBlockStates.SkillSelectState, new SkillSelectState(this));
+    }
 
-	// Use this for initialization
-	void Start () 
-	{
-        playerIndex = (int)index + 1;
-	}
+    public void ChangeState(CharacterSelectBlockStates state)
+    {
+        if(_currentState != null) _currentState.OnInActive();
+        _currentState = list[state];
+        _currentState.OnActive();
+    }
 
     /// <summary>
     ///  Check every frame if a players wants to join the game. If they press their "A" button
     ///  the first hero will be shown. The List heroes has all the materials for the characters so
     ///  we can switch between them.
-    /// </summary>
+    /// </summary> 
 	void Update () 
 	{
-		GamePadState _state = GamePad.GetState (index, GamePadDeadZone.IndependentAxes);
+        GamePad controller = ControllerInput.GetController(index);
 
-        if(!isConnected && _state.IsConnected)
+        Debug.Log(controller.connected);
+
+        if (!isConnected && controller.connected)
         {
             OnControllerConnect();
         }
-        else if(isConnected && _state.IsConnected && _state.Buttons.A == ButtonState.Pressed)
-        {
-            _bigCharacterSelectPlane.renderer.enabled = true;
-            _bigCharacterSelectPlane.renderer.material = heroes[_count];
-            _textJoin.GetComponent<TextMesh>().text = "Press A to select";
-
-            selectedCharacter = true;
-        }
-        else if (isConnected && !_state.IsConnected)
+        else if (isConnected && !controller.connected)
         {
             OnControllerDisConnect();
         }
-        else
+
+        if (isConnected && controller.connected)
         {
-            float x = _state.ThumbSticks.Left.X;
-
-            if (x != 0 && GetTimer())
+            if(isJoined)
             {
-                if (x > 0)
-                {
-                    _count++;
-                }
-                else if (x < 0)
-                {
-                    _count--;
-                }
-
-                _count = (_count + heroes.Count) % heroes.Count;
-                _bigCharacterSelectPlane.renderer.material = heroes[_count];
+                _currentState.OnUpdate(controller);
+            }
+            else if (controller.JustPressed(Button.A))
+            {
+                isJoined = true;
+                ChangeState(CharacterSelectBlockStates.CharSelectState);
             }
         }
 	}
@@ -80,34 +89,26 @@ public class CharacterSelectBlock : MonoBehaviour {
     private void OnControllerDisConnect()
     {
         isConnected = false;
-        _textJoin.GetComponent<TextMesh>().text = "Connect Controller";
-        _bigCharacterSelectPlane.renderer.enabled = false;
-        _count = 0;
+        OnLeave("Connect Controller");
     }
 
     private void OnControllerConnect()
     {
         isConnected = true;
-        _skillSelectPlane = transform.FindChild(_skillSelect).gameObject;
-        _smallCharacterSelectPlane = transform.FindChild(_smallCharSelect).gameObject;
-        _bigCharacterSelectPlane = transform.FindChild(_bigCharSelect).gameObject;
-        _textJoin = transform.FindChild("text_select").gameObject;
-        _textJoin.GetComponent<TextMesh>().text = "Press A to join";
+
+        _bigCharacterSelectPlane = transform.FindChild("BigCharacterSelect").gameObject;
+        _textJoin = _bigCharacterSelectPlane.transform.FindChild("text_select").gameObject;
+        _skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
+        _smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
+
+        _textJoin.GetComponent<TextMesh>().text = "Press Start to join";
     }
 
-    /// <summary>
-    /// Runs a timer and returns true wether the user can select the next character.
-    /// </summary>
-    /// <returns></returns>
-    private bool GetTimer()
+    public void OnLeave(string s)
     {
-        _timer -= Time.deltaTime;
-
-        if (_timer <= 0f)
-        {
-            _timer = _defaultTimeValue;
-            return true;
-        }
-        return false;
+        _textJoin.GetComponent<TextMesh>().text = s;
+        _bigCharacterSelectPlane.renderer.enabled = false;
+        isJoined = false;
+        _count = 0;
     }
 }

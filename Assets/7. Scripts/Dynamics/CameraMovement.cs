@@ -24,10 +24,13 @@ public class CameraMovement : MonoBehaviour
 	{
 		foreach (GameObject obj in _occluders)
 		{
-			Color color = obj.renderer.material.color;
-			color.a = 1.0f;
-			
-			obj.renderer.material.color = color;
+			if(obj != null)
+			{
+				Color color = obj.renderer.material.color;
+				color.a = 1.0f;
+				
+				obj.renderer.material.color = color;
+			}
 		}
 		
 		_occluders.Clear();
@@ -40,7 +43,7 @@ public class CameraMovement : MonoBehaviour
 			foreach (RaycastHit hit in hits)
 			{
 				GameObject hitObj = hit.collider.gameObject;
-				if (hitObj != obj && !_occluders.Contains(hitObj) && !_trackableObjects.Contains(hitObj))
+				if (hitObj != obj && !_occluders.Contains(hitObj) && !_trackableObjects.Contains(hitObj) && hitObj.renderer != null)
 				{
 					_occluders.Add(hitObj);
 				}
