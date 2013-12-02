@@ -51,7 +51,7 @@ public partial class Player : MonoBehaviour
 	}
 
     /// <summary>
-    /// Check is game is paused or not and sets the timeScale in the GameManager
+    /// Check is game is paused or not and sets the timeScale in the GameManager.
     /// </summary>
 	public void Update()
 	{
@@ -62,6 +62,11 @@ public partial class Player : MonoBehaviour
         else if (controller.JustPressed(Button.Start) && GameManager.isPaused)
         {
             GameManager.ResumeGame();
+        }
+
+        if (!GameManager.isPaused && GameManager.resumeTimer)
+        {
+            GameManager.Timer();
         }
 	}
 }

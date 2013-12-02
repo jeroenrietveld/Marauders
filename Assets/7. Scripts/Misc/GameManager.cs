@@ -12,6 +12,8 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
     public static bool isPaused = false;
+    public static float _timeResume = 3f;
+    public static bool resumeTimer = false;
 
 	private struct MatchSettings
 	{
@@ -64,16 +66,34 @@ public class GameManager {
     /// </summary>
     public static void PauseGame()
     {
-        GameManager.isPaused = true;
+        isPaused = true;
+        resumeTimer = false;
         Time.timeScale = 0f;
     }
 
     /// <summary>
-    /// Resume  the game by setting the timeScale to 1f
+    /// Resume  the game. Set isPaused to false and resumeTimer to true;
     /// </summary>
     public static void ResumeGame()
     {
-        GameManager.isPaused = false;
-        Time.timeScale = 1f;
+        isPaused = false;
+        resumeTimer = true;
+    }
+
+    /// <summary>
+    /// Start the timer at 3 seconds. Every update call it
+    /// changes _timeResume minus 0.01f. After three seconds
+    /// the game restarts and the timeScale will be reset to
+    /// 3 seconds.
+    /// </summary>
+    public static void Timer()
+    {
+        GameManager._timeResume -= 0.01f;
+
+        if (GameManager._timeResume <= 0f)
+        {
+            Time.timeScale = 1f;
+            GameManager._timeResume = 3f;
+        }
     }
 }
