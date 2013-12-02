@@ -11,6 +11,7 @@ public class GameManager {
 	/// Instance of the game manager (singleton)
 	/// </summary>
 	private static GameManager _instance;
+    public static bool isPaused = false;
 
 	private struct MatchSettings
 	{
@@ -63,6 +64,7 @@ public class GameManager {
     /// </summary>
     public static void PauseGame()
     {
+        GameManager.isPaused = true;
         Time.timeScale = 0f;
     }
 
@@ -71,6 +73,7 @@ public class GameManager {
     /// </summary>
     public static void ResumeGame()
     {
+        GameManager.isPaused = false;
         Time.timeScale = 1f;
     }
 }

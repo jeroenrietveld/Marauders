@@ -6,7 +6,6 @@ public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
-    private bool isPaused = false;
 
 	public Player()
 	{
@@ -51,17 +50,18 @@ public partial class Player : MonoBehaviour
 		secondaryWeapon = null;
 	}
 
+    /// <summary>
+    /// Check is game is paused or not and sets the timeScale in the GameManager
+    /// </summary>
 	public void Update()
 	{
-        if (controller.JustPressed(Button.Start) && !isPaused)
+        if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
         {
             GameManager.PauseGame();
-            isPaused = true;
         }
-        else if (controller.JustPressed(Button.Start) && isPaused)
+        else if (controller.JustPressed(Button.Start) && GameManager.isPaused)
         {
             GameManager.ResumeGame();
-            isPaused = false;
         }
 	}
 }
