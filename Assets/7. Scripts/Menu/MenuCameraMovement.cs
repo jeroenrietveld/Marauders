@@ -3,26 +3,43 @@ using System.Collections;
 
 public class MenuCameraMovement : MonoBehaviour {
 
-	public Vector3 targetPosition { set; private get; }
-	private float _cameraSpeed = 20f;
-	public float cameraSpeed
+	// Position of the camera at the start of the animation
+	private Vector3 _startPosition;
+	private Vector3 _targetPosition;
+
+	// Absolute time at the start of the animation
+	private float _startTime;
+	// Time it takes to move from start position to target position
+	private float _moveTime = 1f;
+
+	public void SetTarget(Vector3 position, float time)
 	{
-		set
-		{
-			_cameraSpeed = value;
-		}
+		_startPosition = transform.position;
+		_targetPosition = position;
+		_moveTime = time;
+		_startTime = Time.time;
 	}
 
 	public bool isMoving 
 	{
 		get 
 		{
-			return (targetPosition != transform.position);
+			return (_targetPosition != transform.position);
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.MoveTowards(transform.position, targetPosition, _cameraSpeed * Time.deltaTime);
+		float phase = (Time.time - _startTime) / _moveTime;
+
+		if(phase >= 1f) // Ensure no floating point roundoff errors happen
+		{
+			transform.position = _targetPosition;
+		}
+		else
+		{
+			float lerpFactor = Mathf.Cos(phase * Mathf.PI) * .5f + .5f;
+			transform.position = Vector3.Lerp(_targetPosition, _startPosition, lerpFactor);
+		}
 	}
 }

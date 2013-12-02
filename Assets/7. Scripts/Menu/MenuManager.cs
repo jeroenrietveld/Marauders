@@ -40,14 +40,18 @@ public class MenuManager : MonoBehaviour {
 
 	public void ChangeState(MenuStates state)
 	{
-		if (currentState != null) 
+		var previousState = currentState;
+
+		if (previousState != null) 
 		{
-			currentState.OnInactive();
-			cameraMovement.cameraSpeed = currentState.cameraSpeed;
+			previousState.OnInactive();
 		}
 
     	currentState = states[state];
-		cameraMovement.targetPosition = currentState.center + new Vector3(0, 0, distanceFromMenu);
+
+		cameraMovement.SetTarget(
+			currentState.center + new Vector3(0, 0, distanceFromMenu),
+			previousState != null ? previousState.cameraMoveTime : float.Epsilon);
 
 		currentState.OnActive();
 	}

@@ -5,7 +5,7 @@ public abstract class MenuStateBase
 {
 	public Vector3 center { protected set; get; }
 
-	public float cameraSpeed = 50f;
+	public float cameraMoveTime = .5f;
 
 	public abstract void Update(MenuManager manager);
 
