@@ -38,7 +38,7 @@ public class CharacterSelectBlock : MonoBehaviour {
     private IDictionary<CharacterSelectBlockStates, CharacterSelectBase> list;
 
     void Start()
-    {
+	{
         _count = 0;
         list = new Dictionary<CharacterSelectBlockStates, CharacterSelectBase>();
         list.Add(CharacterSelectBlockStates.CharSelectState, new CharSelectState(this));

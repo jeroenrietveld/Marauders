@@ -37,12 +37,10 @@ public class ArmoryState : MenuStateBase
 
 	public override void OnActive()
 	{
-        GameObject[] charSelectObjects = GameObject.FindGameObjectsWithTag("CharacterSelect");
-
-        foreach (GameObject item in charSelectObjects)
-        {
-            item.GetComponent<CharacterSelectBlock>().gameObject.SetActive(true);
-        }
+		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
+		{
+			block.enabled = true;
+		}
 	}
 
 	public override void OnInactive()
