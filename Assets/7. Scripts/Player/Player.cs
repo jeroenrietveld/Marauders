@@ -5,8 +5,8 @@ using XInputDotNetPure;
 public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
-
 	public Weapon secondaryWeapon;
+    private bool isPaused = false;
 
 	public Player()
 	{
@@ -53,5 +53,15 @@ public partial class Player : MonoBehaviour
 
 	public void Update()
 	{
+        if (controller.JustPressed(Button.Start) && !isPaused)
+        {
+            GameManager.PauseGame();
+            isPaused = true;
+        }
+        else if (controller.JustPressed(Button.Start) && isPaused)
+        {
+            GameManager.ResumeGame();
+            isPaused = false;
+        }
 	}
 }

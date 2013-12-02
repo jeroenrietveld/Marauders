@@ -57,4 +57,20 @@ public class GameManager {
 	{
 		Application.LoadLevel(unitySceneId);
 	}
+
+    /// <summary>
+    /// Pause the game by setting the timeScale to 0f
+    /// </summary>
+    public static void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    /// <summary>
+    /// Resume  the game by setting the timeScale to 1f
+    /// </summary>
+    public static void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
 }
