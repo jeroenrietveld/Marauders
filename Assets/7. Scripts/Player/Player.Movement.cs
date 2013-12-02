@@ -24,14 +24,13 @@ public partial class Player : MonoBehaviour
 	/// <summary>
 	/// The move speed, 5 is default
 	/// </summary>
-	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
+	public DecoratableFloat movementSpeed;
 
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
-		Debug.Log(movementSpeed.value);
 	}
 	
 	void FixedUpdate()
@@ -113,7 +112,7 @@ public partial class Player : MonoBehaviour
 	
 	void Jump(float height)
 	{
-		//Not working
+		// This solves the high jumping when the player is on a lovecube
 		var velocity = rigidbody.velocity;
 		velocity.y = 0;
 		rigidbody.velocity = velocity;

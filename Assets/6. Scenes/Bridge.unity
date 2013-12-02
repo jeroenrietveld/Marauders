@@ -8504,7 +8504,7 @@ MonoBehaviour:
   speedDampTime: .100000001
   jumpHeight: 30000
   movementSpeed:
-    rawValue: 10
+    rawValue: 5
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
 --- !u!114 &852331845
@@ -10759,7 +10759,7 @@ MonoBehaviour:
   speedDampTime: .100000001
   jumpHeight: 30000
   movementSpeed:
-    rawValue: 10
+    rawValue: 5
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
 --- !u!114 &1035284351
