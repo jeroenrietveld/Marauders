@@ -61,8 +61,6 @@ public class CharacterSelectBlock : MonoBehaviour {
 	{
         GamePad controller = ControllerInput.GetController(index);
 
-        Debug.Log(controller.connected);
-
         if (!isConnected && controller.connected)
         {
             OnControllerConnect();
@@ -101,7 +99,7 @@ public class CharacterSelectBlock : MonoBehaviour {
         _skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
         _smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
 
-        _textJoin.GetComponent<TextMesh>().text = "Press Start to join";
+        _textJoin.GetComponent<TextMesh>().text = "Press A to join";
     }
 
     public void OnLeave(string s)
