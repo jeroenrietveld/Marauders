@@ -9,7 +9,6 @@ public partial class Player : MonoBehaviour
 	public float speedDampTime = 0.1f;
 
 	public float jumpHeight;
-	public DecoratableFloat movementSpeed = new DecoratableFloat(10);
 
 	public GamePad controller { get { return _controller; } }
 	
