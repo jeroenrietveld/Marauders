@@ -553,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &212074197
 Transform:
   m_ObjectHideFlags: 0
@@ -1967,15 +1967,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bigCharacterSelectPlane: {fileID: 0}
-  _textJoin: {fileID: 0}
-  _skillSelectPlane: {fileID: 0}
-  _smallCharacterSelectPlane: {fileID: 0}
-  index: 3
-  heroes:
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
+  bigCharacterSelectPlane: {fileID: 0}
+  textHolder: {fileID: 0}
+  skillSelectPlane: {fileID: 0}
+  smallCharacterSelectPlane: {fileID: 0}
+  player: 3
+  marauders: []
 --- !u!23 &681219490
 Renderer:
   m_ObjectHideFlags: 0
@@ -2199,15 +2196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bigCharacterSelectPlane: {fileID: 0}
-  _textJoin: {fileID: 0}
-  _skillSelectPlane: {fileID: 0}
-  _smallCharacterSelectPlane: {fileID: 0}
-  index: 0
-  heroes:
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
+  bigCharacterSelectPlane: {fileID: 0}
+  textHolder: {fileID: 0}
+  skillSelectPlane: {fileID: 0}
+  smallCharacterSelectPlane: {fileID: 0}
+  player: 0
+  marauders: []
 --- !u!23 &786314526
 Renderer:
   m_ObjectHideFlags: 0
@@ -4003,6 +3997,10 @@ Prefab:
       propertyPath: index
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
+      propertyPath: player
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
   m_RootGameObject: {fileID: 681219486}
@@ -4693,15 +4691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bigCharacterSelectPlane: {fileID: 0}
-  _textJoin: {fileID: 0}
-  _skillSelectPlane: {fileID: 0}
-  _smallCharacterSelectPlane: {fileID: 0}
-  index: 1
-  heroes:
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
+  bigCharacterSelectPlane: {fileID: 0}
+  textHolder: {fileID: 0}
+  skillSelectPlane: {fileID: 0}
+  smallCharacterSelectPlane: {fileID: 0}
+  player: 1
+  marauders: []
 --- !u!23 &1841534676
 Renderer:
   m_ObjectHideFlags: 0
@@ -4791,15 +4786,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bigCharacterSelectPlane: {fileID: 0}
-  _textJoin: {fileID: 0}
-  _skillSelectPlane: {fileID: 0}
-  _smallCharacterSelectPlane: {fileID: 0}
-  index: 2
-  heroes:
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
+  bigCharacterSelectPlane: {fileID: 0}
+  textHolder: {fileID: 0}
+  skillSelectPlane: {fileID: 0}
+  smallCharacterSelectPlane: {fileID: 0}
+  player: 2
+  marauders: []
 --- !u!23 &1842144321
 Renderer:
   m_ObjectHideFlags: 0
@@ -5723,6 +5715,10 @@ Prefab:
       propertyPath: index
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
+      propertyPath: player
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
   m_RootGameObject: {fileID: 1842144317}
@@ -6166,6 +6162,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
       propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
+      propertyPath: player
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
