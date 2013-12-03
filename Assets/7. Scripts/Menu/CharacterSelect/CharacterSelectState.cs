@@ -45,7 +45,7 @@ public class CharacterSelectState : SelectionBase
         block.textHolder.gameObject.SetActive(true);
         block.bigCharacterSelectPlane.renderer.enabled = true;
         block.bigCharacterSelectPlane.renderer.material = block.marauders[block.marauderIndex];
-        block.textHolder.text = "Press A to select";
+        block.textHolder.text = Locale.Current["press_select"];
     }
 
     public override void OnInActive()

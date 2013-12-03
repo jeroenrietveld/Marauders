@@ -9,6 +9,15 @@ public class en : Locale {
 		//General
 		Translations["weapon_pickup"] = "Pickup";
 
+		//CharacterSelect
+        Translations["press_join"] = "Press A to join";
+        Translations["connect_controller"] = "Connect Controller";
+        Translations["press_select"] = "Press A to select";
+        Translations["press_reselect"] = "Press B to reselect";
+        Translations["text_defense"] = "Defense";
+        Translations["text_offense"] = "Offense";
+        Translations["text_utility"] = "Utility";
+		
 		//CTF gametype
 		Translations["flag"] = "flag";
 

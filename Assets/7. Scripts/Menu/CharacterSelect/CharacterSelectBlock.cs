@@ -43,6 +43,12 @@ public class CharacterSelectBlock : MonoBehaviour {
 		textHolder = bigCharacterSelectPlane.transform.FindChild("text_select").gameObject.GetComponent<TextMesh>();
         skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
         smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
+		
+		// Change the text of all text properties to the current locale.
+        skillSelectPlane.transform.FindChild("text_defense").GetComponent<TextMesh>().text = Locale.Current["text_defense"];
+        skillSelectPlane.transform.FindChild("text_offense").GetComponent<TextMesh>().text = Locale.Current["text_offense"];
+        skillSelectPlane.transform.FindChild("text_utility").GetComponent<TextMesh>().text = Locale.Current["text_utility"];
+        smallCharacterSelectPlane.transform.FindChild("text_select_small").GetComponent<TextMesh>().text = Locale.Current["press_reselect"];
     }
 
     public void ChangeState(CharacterSelectBlockStates state)
@@ -89,21 +95,18 @@ public class CharacterSelectBlock : MonoBehaviour {
     private void OnControllerDisConnect()
     {
         isConnected = false;
-        OnLeave("Connect Controller");
+        OnLeave(Locale.Current["connect_controller"]);
     }
 
     private void OnControllerConnect()
     {
         isConnected = true;
-		
-		//TODO: Translate string
-        textHolder.text = "Press A to join";
+        textHolder.text = Locale.Current["press_join"];
     }
 
     public void OnLeave(string s)
     {
         _currentState = null;
-		//TODO: Translate string
         textHolder.text = s;
         bigCharacterSelectPlane.renderer.enabled = false;
         //TODO: Why is the index reset?
