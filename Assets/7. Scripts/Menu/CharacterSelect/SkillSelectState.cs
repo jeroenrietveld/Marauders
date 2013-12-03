@@ -23,13 +23,11 @@ public class SkillSelectState : SelectionBase
         block.smallCharacterSelectPlane.SetActive(true);
 		//Show the selected Marauder
         block.smallCharacterSelectPlane.renderer.material = block.marauders[block.marauderIndex];
-		block.textHolder = null;
     }
 
     public override void OnInActive()
     {
         block.skillSelectPlane.SetActive(false);
         block.smallCharacterSelectPlane.SetActive(false);
-        block.smallCharacterSelectPlane.renderer.enabled = true;
     }
 }
