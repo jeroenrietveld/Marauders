@@ -39,14 +39,14 @@ public class CharacterSelectBlock : MonoBehaviour {
 	private GamePad _controller;
 
     private SelectionBase _currentState;
-    private IDictionary<CharacterSelectBlockStates, SelectionBase> list;
+    private IDictionary<CharacterSelectBlockStates, SelectionBase> _list;
 
     void Start()
 	{
         marauderIndex = 0;
-        list = new Dictionary<CharacterSelectBlockStates, SelectionBase>();
-        list.Add(CharacterSelectBlockStates.CharSelectState, new CharacterSelectState(this));
-        list.Add(CharacterSelectBlockStates.SkillSelectState, new SkillSelectState(this));
+        _list = new Dictionary<CharacterSelectBlockStates, SelectionBase>();
+        _list.Add(CharacterSelectBlockStates.CharSelectState, new CharacterSelectState(this));
+        _list.Add(CharacterSelectBlockStates.SkillSelectState, new SkillSelectState(this));
 
 		_currentState = null;
 		_controller = ControllerInput.GetController (player);
@@ -64,7 +64,7 @@ public class CharacterSelectBlock : MonoBehaviour {
 			_currentState.OnInActive();
 		}
 
-        _currentState = list[state];
+        _currentState = _list[state];
         _currentState.OnActive();
     }
 
