@@ -33,8 +33,6 @@ public partial class Player : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-		//Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
-
 		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
 		camDirection.y = 0;
 		camDirection.Normalize();
@@ -49,9 +47,9 @@ public partial class Player : MonoBehaviour
 		bool jump = _controller.Pressed (Button.A);
 		
 		//PC Controls:
-		/*float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis ("Vertical");
-		bool jump = Input.GetKeyDown("space");*/
+		//float h = Input.GetAxis("Horizontal");
+		//float v = Input.GetAxis ("Vertical");
+		//bool jump = Input.GetKeyDown("space");
 		
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 		
@@ -62,11 +60,15 @@ public partial class Player : MonoBehaviour
 			jump = false;
 		}
 
+		//Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
 		//Debug.DrawRay(transform.position, moveSpeed * 1f, Color.red);
-		MovementManagement(moveSpeed, jump);
+
+		MovementManagement(moveSpeed);
+
+		JumpManagement(moveSpeed, jump);
 	}
 	
-	void MovementManagement (Vector3 moveSpeed, bool jump)
+	void MovementManagement (Vector3 moveSpeed)
 	{
 		if (moveSpeed.sqrMagnitude > 0)
 		{
@@ -80,14 +82,14 @@ public partial class Player : MonoBehaviour
 		{
 			anim.SetFloat(hash.speedFloat, 0f);
 		}
-		
-		if (jump)
+	}
+
+	void JumpManagement(Vector3 direction, bool jump)
+	{
+		if (jump && !AgainstWall(direction))
 		{
-			if (!AgainstWall(moveSpeed))
-			{
-				Jump(jumpHeight);
-				anim.SetBool(hash.jumpBool, true);
-			}
+			Jump(jumpHeight);
+			anim.SetBool(hash.jumpBool, true);
 		}
 		else
 		{

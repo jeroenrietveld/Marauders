@@ -12,7 +12,7 @@ public abstract class Locale {
 
 		//Getting all the types
 		Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-		List<Type> localeTypes = new List<Type>();
+		//List<Type> localeTypes = new List<Type>();
 		
 		//Looping each type we can find
 		foreach (Type type in allTypes)

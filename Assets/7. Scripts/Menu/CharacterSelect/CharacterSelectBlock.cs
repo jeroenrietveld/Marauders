@@ -23,18 +23,7 @@ public class CharacterSelectBlock : MonoBehaviour {
 	
     public PlayerIndex player;
     public List<Material> marauders;
-    public int marauderIndex 
-	{ 
-		get
-		{
-			return marauderIndex;
-		}
-		set
-		{
-			marauderIndex = value;
-			bigCharacterSelectPlane.renderer.material = marauders[marauderIndex];
-		}
-	}
+	public int marauderIndex { get; set; }
 	public bool isConnected { get; set; }
 	private GamePad _controller;
 
@@ -120,4 +109,10 @@ public class CharacterSelectBlock : MonoBehaviour {
         //TODO: Why is the index reset?
 		marauderIndex = 0;
     }
+
+	public void changeMarauder(int index)
+	{
+		marauderIndex = index;
+		bigCharacterSelectPlane.renderer.material = marauders[marauderIndex];
+	}
 }
