@@ -2029,16 +2029,11 @@ MonoBehaviour:
   textHolder: {fileID: 0}
   skillSelectPlane: {fileID: 0}
   smallCharacterSelectPlane: {fileID: 0}
-<<<<<<< HEAD
-  player: 0
-  marauders: []
-=======
   player: 3
   marauders:
   - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
   - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
   - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
->>>>>>> eb2bcc7e752d9e4c99fd07e057ee4ed01507a28e
 --- !u!23 &681219490
 Renderer:
   m_ObjectHideFlags: 0

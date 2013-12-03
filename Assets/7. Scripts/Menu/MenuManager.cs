@@ -43,6 +43,6 @@ public class MenuManager : MonoBehaviour {
 	public void ChangeState(MenuStates state)
 	{
     	currentState = states[state];
-		cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu), 20);
+		cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu), 1f);
 	}
 }

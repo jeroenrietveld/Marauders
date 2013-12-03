@@ -19,6 +19,8 @@ class SettingsBlock : LevelSelectionBlockBase
 
 	public SettingsBlock()
 	{
+        _gameMode = _levelDescription.transform.FindChild("GameModeSelection_Text").GetComponent<TextMesh>();
+        _amountOfLives = _levelDescription.transform.FindChild("AmountOfLives_Text").GetComponent<TextMesh>();
 		_settings = new List<TextMesh>();
 		_settings.Add(_gameMode);
 		_settings.Add(_amountOfLives);
