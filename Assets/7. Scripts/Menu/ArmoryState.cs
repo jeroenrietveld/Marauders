@@ -24,7 +24,7 @@ public class ArmoryState : MenuStateBase
 
 		EnableArmoryStateText();
 	}
-	
+
 	private void EnableArmoryStateText()
 	{
 		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");

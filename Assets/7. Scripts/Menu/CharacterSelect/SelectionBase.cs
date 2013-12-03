@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using XInputDotNetPure;
 
-public abstract class CharacterSelectBase
+public abstract class SelectionBase
 {
     private float _defaultTimeValue = 0.2f;
     private float _timer = 0;
@@ -14,28 +14,30 @@ public abstract class CharacterSelectBase
     public abstract void OnUpdate(GamePad controller);
     public abstract void OnActive();
     public abstract void OnInActive();
-    public abstract void OnControllerConnect();
-    public abstract void OnControllerDisconnect();
-
-    public int GetID(int _count, float x, int total)
+    
+    public int GetMarauderIndex(int currentIndex, float direction, int marauderCount)
     {
-        if (x != 0 && GetTimer())
+        if (direction != 0 && GetTimer())
         {
-            if (x > 0)
+            if (direction > 0)
             {
-                _count++;
+                currentIndex++;
             }
-            else if (x < 0)
+            else if (direction < 0)
             {
-                _count--;
+                currentIndex--;
             }
 
-            _count = (_count + total) % total;
-            return _count;
+			//Use modulo so the value will be inside the range of the array (math magic)
+            currentIndex = (currentIndex + marauderCount) % marauderCount;
+            return currentIndex;
         }
-        return _count;
+        return currentIndex;
     }
 
+	/// <summary>
+	/// makes sure you don't switch a character each frame when pressing a thumbstick
+	/// </summary>
     public bool GetTimer()
     {
         _timer -= Time.deltaTime;

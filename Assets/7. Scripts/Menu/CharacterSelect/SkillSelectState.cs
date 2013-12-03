@@ -1,45 +1,35 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 
-public class SkillSelectState : CharacterSelectBase
+public class SkillSelectState : SelectionBase
 {
-    public SkillSelectState(CharacterSelectBlock _block)
+    public SkillSelectState(CharacterSelectBlock block)
     {
-        this.block = _block;
+        this.block = block;
     }
 
     public override void OnUpdate(GamePad controller)
     {
         if (controller.JustPressed(Button.B))
         {
-            block.ChangeState(CharacterSelectBlockStates.CharSelectState);
+			block.ChangeState(CharacterSelectBlockStates.CharSelectState);
         }
     }
 
     public override void OnActive()
     {
-        block._skillSelectPlane.SetActive(true);
-        block._smallCharacterSelectPlane.SetActive(true);
-        // use the hero that is saved in the gameManager and set the smallCharacterPlane to this hero.
-        block._smallCharacterSelectPlane.renderer.material = block.heroes[block._count];
-        block._textJoin.SetActive(false);
+        block.skillSelectPlane.SetActive(true);
+        block.smallCharacterSelectPlane.SetActive(true);
+		//Show the selected Marauder
+        block.smallCharacterSelectPlane.renderer.material = block.marauders[block.marauderIndex];
+		block.textHolder = null;
     }
 
     public override void OnInActive()
     {
-        block._skillSelectPlane.SetActive(false);
-        block._smallCharacterSelectPlane.SetActive(false);
-        block._smallCharacterSelectPlane.renderer.enabled = true;
-    }
-
-    public override void OnControllerConnect()
-    {
-        
-    }
-
-    public override void OnControllerDisconnect()
-    {
-        
+        block.skillSelectPlane.SetActive(false);
+        block.smallCharacterSelectPlane.SetActive(false);
+        block.smallCharacterSelectPlane.renderer.enabled = true;
     }
 }

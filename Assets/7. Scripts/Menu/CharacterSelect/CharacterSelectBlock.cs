@@ -4,13 +4,6 @@ using XInputDotNetPure;
 using System;
 using System.Collections.Generic;
 
-public enum CharacterSelectBlockStates
-{
-    CharSelectState,
-    CharConfirmState,
-    SkillSelectState
-}
-
 public class CharacterSelectBlock : MonoBehaviour {
 
     /*
@@ -23,62 +16,83 @@ public class CharacterSelectBlock : MonoBehaviour {
     * mocht het nodig zijn (denk niet) characterselectblock class integreren in ArmoryState.cs 
     */
 
-    public GameObject _bigCharacterSelectPlane;
-    public GameObject _textJoin;
-    public GameObject _skillSelectPlane;
-    public GameObject _smallCharacterSelectPlane;
+    public GameObject bigCharacterSelectPlane;
+	public TextMesh textHolder;
+    public GameObject skillSelectPlane;
+    public GameObject smallCharacterSelectPlane;
 	
-    public PlayerIndex index;
-    public List<Material> heroes;
-    public int _count { get; set; }
-    public bool isConnected { get; set; }
-    private bool isJoined = false;
+    public PlayerIndex player;
+    public List<Material> marauders;
+    public int marauderIndex 
+	{ 
+		get
+		{
+			return marauderIndex;
+		}
+		set
+		{
+			marauderIndex = value;
+			bigCharacterSelectPlane.renderer.material = marauders[marauderIndex];
+		}
+	}
+	public bool isConnected { get; set; }
+	private GamePad _controller;
 
-    private CharacterSelectBase _currentState;
-    private IDictionary<CharacterSelectBlockStates, CharacterSelectBase> list;
+    private SelectionBase _currentState;
+    private IDictionary<CharacterSelectBlockStates, SelectionBase> list;
 
     void Start()
 	{
-        _count = 0;
-        list = new Dictionary<CharacterSelectBlockStates, CharacterSelectBase>();
-        list.Add(CharacterSelectBlockStates.CharSelectState, new CharSelectState(this));
+        marauderIndex = 0;
+        list = new Dictionary<CharacterSelectBlockStates, SelectionBase>();
+        list.Add(CharacterSelectBlockStates.CharSelectState, new CharacterSelectState(this));
         list.Add(CharacterSelectBlockStates.SkillSelectState, new SkillSelectState(this));
+
+		_currentState = null;
+		_controller = ControllerInput.GetController (player);
+
+        bigCharacterSelectPlane = transform.FindChild("BigCharacterSelect").gameObject;
+		textHolder = bigCharacterSelectPlane.transform.FindChild("text_select").gameObject.GetComponent<TextMesh>();
+        skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
+        smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
     }
 
     public void ChangeState(CharacterSelectBlockStates state)
     {
-        if(_currentState != null) _currentState.OnInActive();
+        if(_currentState != null) 
+		{
+			_currentState.OnInActive();
+		}
+
         _currentState = list[state];
         _currentState.OnActive();
     }
 
     /// <summary>
     ///  Check every frame if a players wants to join the game. If they press their "A" button
-    ///  the first hero will be shown. The List heroes has all the materials for the characters so
+    ///  the first marauder will be shown. The List marauders has all the materials for the characters so
     ///  we can switch between them.
     /// </summary> 
 	void Update () 
 	{
-        GamePad controller = ControllerInput.GetController(index);
-
-        if (!isConnected && controller.connected)
+        if (!isConnected && _controller.connected)
         {
+			//when a controller was not previously connected, but it is now, call a controller connect function
             OnControllerConnect();
         }
-        else if (isConnected && !controller.connected)
+        else if (isConnected && !_controller.connected)
         {
             OnControllerDisConnect();
         }
 
-        if (isConnected && controller.connected)
+        if (isConnected && _controller.connected)
         {
-            if(isJoined)
+            if(_currentState != null)
             {
-                _currentState.OnUpdate(controller);
+                _currentState.OnUpdate(_controller);
             }
-            else if (controller.JustPressed(Button.A))
+            else if (_controller.JustPressed(Button.A))
             {
-                isJoined = true;
                 ChangeState(CharacterSelectBlockStates.CharSelectState);
             }
         }
@@ -93,20 +107,17 @@ public class CharacterSelectBlock : MonoBehaviour {
     private void OnControllerConnect()
     {
         isConnected = true;
-
-        _bigCharacterSelectPlane = transform.FindChild("BigCharacterSelect").gameObject;
-        _textJoin = _bigCharacterSelectPlane.transform.FindChild("text_select").gameObject;
-        _skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
-        _smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
-
-        _textJoin.GetComponent<TextMesh>().text = "Press A to join";
+		
+		//TODO: Translate string
+        textHolder.text = "Press Start to join";
     }
 
     public void OnLeave(string s)
     {
-        _textJoin.GetComponent<TextMesh>().text = s;
-        _bigCharacterSelectPlane.renderer.enabled = false;
-        isJoined = false;
-        _count = 0;
+		//TODO: Translate string
+        textHolder.text = s;
+        bigCharacterSelectPlane.renderer.enabled = false;
+        //TODO: Why is the index reset?
+		marauderIndex = 0;
     }
 }

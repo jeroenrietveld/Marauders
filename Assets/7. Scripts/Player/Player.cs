@@ -63,10 +63,5 @@ public partial class Player : MonoBehaviour
         {
             GameManager.ResumeGame();
         }
-
-        if (!GameManager.isPaused && GameManager.resumeTimer)
-        {
-            GameManager.Timer();
-        }
 	}
 }
