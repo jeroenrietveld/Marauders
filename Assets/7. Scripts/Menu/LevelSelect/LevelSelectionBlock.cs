@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,22 +7,24 @@ using UnityEngine;
 /// <summary>
 /// This class will create a block containing level selection methods.
 /// </summary>
-class LevelSelectionBlock : LevelSelectionBlockBase
+public class LevelSelectionBlock : LevelSelectionBlockBase
 {
-    public Level current;
+    public static Level current;
     private int _currentIndex;
-	private bool _reloadPending;
 	private GameObject _levelPreview;
 	private GameObject _levelSelectUp;
 	private GameObject _levelSelectDown;
+	private GameObject _levelDescription;
+	private TextMesh _levelInfoText;
 
 	public LevelSelectionBlock()
 	{
 		_currentIndex = 0;
-		_reloadPending = false;
 		_levelPreview = GameObject.Find ("LevelPreview");
 		_levelSelectUp = GameObject.Find ("LevelSelectUp");
 		_levelSelectDown = GameObject.Find ("LevelSelectDown");
+		_levelDescription = GameObject.Find ("LevelDescription");
+		_levelInfoText = _levelDescription.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
 
 		SetLevel (_currentIndex);
 	}
@@ -71,6 +73,7 @@ class LevelSelectionBlock : LevelSelectionBlockBase
 
 		current = LevelSelectionManager.levels [_currentIndex];
 		_levelPreview.renderer.material.mainTexture = current.previewImage;
+		_levelInfoText.text = current.levelInfo;
 	}
 
 	public void SetAlpha(GameObject gameObject, float alpha)

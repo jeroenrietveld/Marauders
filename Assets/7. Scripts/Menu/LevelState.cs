@@ -1,23 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LevelState : MenuStateBase
 {
 	public LevelState()
 	{
-		center = GameObject.Find("LevelScreen").transform.position;
+		center = GameObject.Find("LevelScreen").renderer.bounds.center;
+		LevelSelectionManager.currentState = LevelSelectionState.LevelSelection;
 	}
 
 	public override void Update(MenuManager manager)
 	{
-	    if (Input.GetKey(KeyCode.B))
-	    {
-	        manager.ChangeState(MenuStates.ArmoryState);
-	    }
-
-		if(LevelSelectionManager.currentState != null)
-		{
-			LevelSelectionManager.currentState.Update();
-		}
 	}
 }
