@@ -26,7 +26,7 @@ public class CharacterSelectState : SelectionBase
 			}
 
 			//Selecting new marauder
-            block.marauderIndex = GetMarauderIndex(block.marauderIndex, direction, block.marauders.Count);
+			block.changeMarauder(GetMarauderIndex(block.marauderIndex, direction, block.marauders.Count));
         }
 
         if(controller.JustPressed(Button.A))
