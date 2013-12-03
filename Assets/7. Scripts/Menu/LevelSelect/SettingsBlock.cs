@@ -15,6 +15,8 @@ class SettingsBlock : LevelSelectionBlockBase
 	private TextMesh _gameMode;
 	private TextMesh _amountOfLives;
 	private List<TextMesh> _settings;
+    private int _gameModeIndex;
+    private int _amountOfLivesIndex;
 	private int _settingsIndex;
 	private Level _level;
         
@@ -34,37 +36,77 @@ class SettingsBlock : LevelSelectionBlockBase
 	public override void Update()
 	{
 		int index = _currentIndex;
-		if(Input.GetKey(KeyCode.I))
+		if(Input.GetKeyDown(KeyCode.I))
 		{
 			_currentIndex--;
 		}
-		if(Input.GetKey(KeyCode.J))
+		if(Input.GetKeyDown(KeyCode.J))
 		{
 			_currentIndex++;
 		}
-		if(Input.GetKey(KeyCode.A))
-		{
-			//_settingsIndex++;			
+		if(Input.GetKeyDown(KeyCode.A))
+		{          
+            if (_settingsIndex != _settings.Count-1)
+            {
+               _settingsIndex++;
+               _currentIndex = _amountOfLivesIndex;
+            }
+            else
+            {
+                //Do nothing... yet...
+            }	
 		}
-		if(Input.GetKey(KeyCode.B))
+		if(Input.GetKeyDown(KeyCode.B))
 		{
-			//_settingsIndex--;
-		}
-		if(Input.GetKey (KeyCode.Escape))
-		{
-			LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
-		}
-		if(Input.GetKey(KeyCode.Space))
-		{
-			//TODO load scene
+            if (_settingsIndex != 0)
+            {
+                _settingsIndex--;
+                _currentIndex = _gameModeIndex;
+            }
+            else
+            {
+                LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
+            }
 		}
 		if(index != _currentIndex)
 		{
 			if(_settings[_settingsIndex].Equals(_gameMode))
 			{
-				_gameMode.text = _level.gameModes[_currentIndex];
+                SetGameMode(_currentIndex);
 			}
+            if(_settings[_settingsIndex].Equals(_amountOfLives))
+            {
+                SetAmountOfLives(_currentIndex);
+            }
 		}
 	}
+
+    private void SetGameMode(int index)
+    {
+        if(index < 0)
+        {
+            _currentIndex = _level.gameModes.Count() - 1;
+        }
+        if (index > _level.gameModes.Count() - 1)
+        {
+            _currentIndex = 0;
+        }
+        _gameMode.text = _level.gameModes[_currentIndex];
+        _gameModeIndex = _currentIndex;
+    }
+
+    private void SetAmountOfLives(int index)
+    {
+        if(index < 0)
+        {
+            _currentIndex = 5;
+        } 
+        if(index > 5)
+        {
+            _currentIndex = 0;
+        }
+        _amountOfLives.text = Convert.ToString(_currentIndex);
+        _amountOfLivesIndex = _currentIndex;
+    }
 	
 }

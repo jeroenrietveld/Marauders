@@ -45,14 +45,14 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);
 		}
-		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			//TODO return to character select
-		}
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.A))
 		{
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            LevelSelectionManager.ChangeState(LevelSelectionState.NotSelecting);
+        }
 
 		if(_currentIndex != index)
 		{

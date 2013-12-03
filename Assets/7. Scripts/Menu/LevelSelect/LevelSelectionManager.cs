@@ -51,6 +51,7 @@ public class LevelSelectionManager : MonoBehaviour {
 		
 		selectionBlocks.Add (LevelSelectionState.LevelSelection, new LevelSelectionBlock ());
 		selectionBlocks.Add (LevelSelectionState.SettingSelection, new SettingsBlock ());
+        selectionBlocks.Add (LevelSelectionState.NotSelecting, null);
         currentState = selectionBlocks[LevelSelectionState.LevelSelection];
 	}
 	
