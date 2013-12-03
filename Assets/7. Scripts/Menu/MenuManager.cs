@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using XInputDotNetPure;
 
 public class MenuManager : MonoBehaviour {
@@ -12,13 +11,12 @@ public class MenuManager : MonoBehaviour {
 	
     public static float distanceFromMenu = -30f;
 
-	public GamePad primaryController { get; private set; }
-
+    public GamePad primaryController { get; private set; }
+    
     // Use this for initialization
 	void Start ()
 	{
 		states = new Dictionary<MenuStates, MenuStateBase>();
-		primaryController = ControllerInput.GetController (PlayerIndex.One);
 
 		cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
 
@@ -28,6 +26,10 @@ public class MenuManager : MonoBehaviour {
 
 		ChangeState(MenuStates.SplashState);
 	}
+	
+    void FixedUpdate()
+    {
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -40,19 +42,7 @@ public class MenuManager : MonoBehaviour {
 
 	public void ChangeState(MenuStates state)
 	{
-		var previousState = currentState;
-
-		if (previousState != null) 
-		{
-			previousState.OnInactive();
-		}
-
     	currentState = states[state];
-
-		cameraMovement.SetTarget(
-			currentState.center + new Vector3(0, 0, distanceFromMenu),
-			previousState != null ? previousState.cameraMoveTime : float.Epsilon);
-
-		currentState.OnActive();
+		cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu), 1f);
 	}
 }

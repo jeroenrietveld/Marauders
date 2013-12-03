@@ -15,18 +15,11 @@ public abstract class SelectionBase
     public abstract void OnActive();
     public abstract void OnInActive();
     
-    public int GetMarauderIndex(int currentIndex, float direction, int marauderCount)
+    public int GetMarauderIndex(int currentIndex, int direction, int marauderCount, bool useTimer)
     {
-        if (direction != 0 && GetTimer())
+        if (direction != 0 && (useTimer && GetTimer()) || !useTimer)
         {
-            if (direction > 0)
-            {
-                currentIndex++;
-            }
-            else if (direction < 0)
-            {
-                currentIndex--;
-            }
+            currentIndex += direction;
 
 			//Use modulo so the value will be inside the range of the array (math magic)
             currentIndex = (currentIndex + marauderCount) % marauderCount;

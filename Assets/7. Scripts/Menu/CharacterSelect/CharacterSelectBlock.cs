@@ -9,9 +9,7 @@ public class CharacterSelectBlock : MonoBehaviour {
     /*
     * to-do list voor character select:
     * skills inladen en selecteren (misschien moet dat via de json bestanden.)
-    * nieuwe input gebruiken (controller.connected geeft alleen false terug?, Maandag even vragen aan Rene / Jeroen).
     * gegevens (gekozen char en skills per speler) opslaan in gamemanager of o.i.d.
-    * alle gameobjects in variable zetten die nodig zijn. Zie hieronder (alleen de 3 textboxes volgens mij.)
     * Refactoren en opschonen van code.
     * mocht het nodig zijn (denk niet) characterselectblock class integreren in ArmoryState.cs 
     */
@@ -39,6 +37,7 @@ public class CharacterSelectBlock : MonoBehaviour {
 
 		_currentState = null;
 		_controller = ControllerInput.GetController (player);
+        _controller.deadZone = GamePadDeadZone.IndependentAxes;
 
         bigCharacterSelectPlane = transform.FindChild("BigCharacterSelect").gameObject;
 		textHolder = bigCharacterSelectPlane.transform.FindChild("text_select").gameObject.GetComponent<TextMesh>();
@@ -48,7 +47,7 @@ public class CharacterSelectBlock : MonoBehaviour {
 
     public void ChangeState(CharacterSelectBlockStates state)
     {
-        if(_currentState != null) 
+        if(_currentState != null && _currentState != _list[state]) 
 		{
 			_currentState.OnInActive();
 		}
@@ -98,11 +97,12 @@ public class CharacterSelectBlock : MonoBehaviour {
         isConnected = true;
 		
 		//TODO: Translate string
-        textHolder.text = "Press Start to join";
+        textHolder.text = "Press A to join";
     }
 
     public void OnLeave(string s)
     {
+        _currentState = null;
 		//TODO: Translate string
         textHolder.text = s;
         bigCharacterSelectPlane.renderer.enabled = false;
