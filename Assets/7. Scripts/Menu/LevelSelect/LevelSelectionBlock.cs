@@ -11,7 +11,6 @@ class LevelSelectionBlock : LevelSelectionBlockBase
 {
     public Level current;
     private int _currentIndex;
-	private bool _reloadPending;
 	private GameObject _levelPreview;
 	private GameObject _levelSelectUp;
 	private GameObject _levelSelectDown;
@@ -19,7 +18,6 @@ class LevelSelectionBlock : LevelSelectionBlockBase
 	public LevelSelectionBlock()
 	{
 		_currentIndex = 0;
-		_reloadPending = false;
 		_levelPreview = GameObject.Find ("LevelPreview");
 		_levelSelectUp = GameObject.Find ("LevelSelectUp");
 		_levelSelectDown = GameObject.Find ("LevelSelectDown");

@@ -10,12 +10,10 @@ using UnityEngine;
 class SettingsBlock : LevelSelectionBlockBase
 {
     private int _currentLives;
-	private bool _reloadPending;
 
 	public SettingsBlock()
 	{
 		_currentLives = 3;
-		_reloadPending = false;
 	}
 
 	public override void Update()

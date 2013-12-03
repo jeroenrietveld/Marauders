@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class ArmoryState : MenuStateBase
 {
-    private bool _characterText = false;
-
 	public ArmoryState()
 	{
 		center = GameObject.Find ("ArmoryScreen").transform.position;

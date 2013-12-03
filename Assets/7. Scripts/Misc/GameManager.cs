@@ -23,7 +23,7 @@ public class GameManager {
 	/// <summary>
 	/// Playlist of matches. (level, game mode combination)
 	/// </summary>
-	private List<MatchSettings> _matches;
+	//private List<MatchSettings> _matches;
 
 	/// <summary>
 	/// Gets the instance.
@@ -43,7 +43,7 @@ public class GameManager {
 
 	private GameManager()
 	{
-		_matches = new List<MatchSettings>();
+		//_matches = new List<MatchSettings>();
 	}
 
 	/// <summary>
