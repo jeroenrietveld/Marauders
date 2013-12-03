@@ -24,13 +24,18 @@ public partial class Player : MonoBehaviour
 			secondaryWeapon = primaryWeapon;
 		}
 
-		//Setting our primary weapon
+		SetWeapon (weapon);
+	}
+
+	private void SetWeapon(Weapon weapon)
+	{
 		primaryWeapon = weapon;
 
-		//Hiding the weapon
-		weapon.gameObject.SetActive(false);
+		Transform mainHand = transform.FindChild("Character1_Reference/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightArm/Character1_RightForeArm/Character1_RightHand/MainHand");
 
-		//We're the owner
+		weapon.transform.rotation = mainHand.rotation;
+		weapon.transform.parent = mainHand;
+		weapon.transform.position = mainHand.position;
 		weapon.Owner = this;
 	}
 
