@@ -12,7 +12,6 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
     public static bool isPaused = false;
-    public static GameObject guiResumeText;
 
 	private struct MatchSettings
 	{
@@ -62,23 +61,18 @@ public class GameManager {
 
     /// <summary>
     /// Pause the game by setting the timeScale to 0f.
-    /// Set the text to paused. isPaused is set to true
     /// </summary>
-    public static void PauseGame()
+    public void PauseGame()
     {
-        guiResumeText = GameObject.Find("ResumeTimer");
-        guiResumeText.guiText.text = "Paused";
-
         isPaused = true;
         Time.timeScale = 0f;
     }
 
     /// <summary>
-    /// Resume  the game by settint timeScale to 1f. Set text to nothing and isPaused = false.
+    /// Resume  the game by setting timeScale to 1f.
     /// </summary>
-    public static void ResumeGame()
+    public void ResumeGame()
     {
-        guiResumeText.guiText.text = "";
         isPaused = false;
         Time.timeScale = 1f;
     }

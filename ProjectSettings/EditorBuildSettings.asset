@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/TestSCene.unity
   - enabled: 1
     path: Assets/6. Scenes/Bridge.unity
+  - enabled: 1
+    path: Assets/6. Scenes/Menu.unity

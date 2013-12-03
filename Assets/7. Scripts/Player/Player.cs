@@ -6,6 +6,7 @@ public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
+    public GameObject prefabMenu;
 
 	public Player()
 	{
@@ -56,17 +57,15 @@ public partial class Player : MonoBehaviour
 	}
 
     /// <summary>
-    /// Check is game is paused or not and sets the timeScale in the GameManager.
+    /// Check is game is paused and sets the timeScale in the GameManager.
+    /// Create the menu from the prefabMenu.
     /// </summary>
-	public void Update()
-	{
+    public void Update()
+    {
         if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
         {
-            GameManager.PauseGame();
+            GameManager.Instance.PauseGame();
+            Instantiate(prefabMenu);
         }
-        else if (controller.JustPressed(Button.Start) && GameManager.isPaused)
-        {
-            GameManager.ResumeGame();
-        }
-	}
+    }
 }
