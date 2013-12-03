@@ -2105,6 +2105,9 @@ MonoBehaviour:
   speedFloat: 0
   jumpBool: 0
   fallBool: 0
+  attack1Bool: 0
+  attack2Bool: 0
+  attack3Bool: 0
   locomotionState: 0
 --- !u!114 &198296637
 MonoBehaviour:
@@ -6622,6 +6625,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100350, guid: 39f006316c514934497229b5f53fffbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f006316c514934497229b5f53fffbe, type: 3}
   m_RootGameObject: {fileID: 1236811982}
@@ -11130,6 +11137,9 @@ MonoBehaviour:
   speedFloat: 0
   jumpBool: 0
   fallBool: 0
+  attack1Bool: 0
+  attack2Bool: 0
+  attack3Bool: 0
   locomotionState: 0
 --- !u!114 &938237758
 MonoBehaviour:
@@ -12543,6 +12553,9 @@ MonoBehaviour:
   speedFloat: 0
   jumpBool: 0
   fallBool: 0
+  attack1Bool: 0
+  attack2Bool: 0
+  attack3Bool: 0
   locomotionState: 0
 --- !u!136 &1035284352
 CapsuleCollider:
@@ -12564,7 +12577,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1035284347}
   serializedVersion: 2
-  m_Mass: 75
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -14821,7 +14834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1236811983
 Transform:
   m_ObjectHideFlags: 0
@@ -14918,6 +14931,9 @@ MonoBehaviour:
   speedFloat: 0
   jumpBool: 0
   fallBool: 0
+  attack1Bool: 0
+  attack2Bool: 0
+  attack3Bool: 0
   locomotionState: 0
 --- !u!136 &1236811988
 CapsuleCollider:
@@ -14939,7 +14955,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1236811982}
   serializedVersion: 2
-  m_Mass: 75
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1

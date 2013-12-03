@@ -45,11 +45,19 @@ public partial class Player : MonoBehaviour
 		float h = _controller.Axis (Axis.LeftHorizantal);
 		float v = _controller.Axis (Axis.LeftVertical);
 		bool jump = _controller.Pressed (Button.A);
+		bool[] attacks = new bool[3];
+		attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
+		attacks[1] = Input.GetKeyDown(KeyCode.LeftShift);
+		attacks[2] = _controller.Axis(Axis.RightTrigger) != 0;
 		
 		//PC Controls:
 		//float h = Input.GetAxis("Horizontal");
 		//float v = Input.GetAxis ("Vertical");
 		//bool jump = Input.GetKeyDown("space");
+		//bool[] attacks = new bool[3];
+		//attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
+		//attacks[1] = Input.GetKeyDown(KeyCode.LeftShift);
+		//attacks[2] = Input.GetKeyDown(KeyCode.Z);
 		
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 		
@@ -66,6 +74,8 @@ public partial class Player : MonoBehaviour
 		MovementManagement(moveSpeed);
 
 		JumpManagement(moveSpeed, jump);
+
+		AttackManagement(attacks);
 	}
 	
 	void MovementManagement (Vector3 moveSpeed)
@@ -96,6 +106,28 @@ public partial class Player : MonoBehaviour
 			anim.SetBool(hash.jumpBool, false);
 		}
 	}
+
+	void AttackManagement(bool[] attacks)
+	{
+		if (attacks[0])
+		{
+			anim.SetBool(hash.attack1Bool, true);
+		}
+		else if (attacks[1])
+		{
+			anim.SetBool(hash.attack2Bool, true);
+		}
+		else if (attacks[2])
+		{
+			anim.SetBool(hash.attack3Bool, true);
+		}
+		else
+		{
+			anim.SetBool(hash.attack1Bool, false);
+			anim.SetBool(hash.attack2Bool, false);
+			anim.SetBool(hash.attack3Bool, false);
+		}
+	}
 	
 	void Rotating (Vector3 moveSpeed)
 	{
@@ -116,7 +148,7 @@ public partial class Player : MonoBehaviour
 		var velocity = rigidbody.velocity;
 		velocity.y = 0;
 		rigidbody.velocity = velocity;
-		
+
 		rigidbody.AddForce(Vector3.up * height);
 	}
 	
