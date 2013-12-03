@@ -17,16 +17,16 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private GameObject _levelDescription;
 	private TextMesh _levelInfoText;
 
+
 	public LevelSelectionBlock()
 	{
-		_currentIndex = 0;
-		_levelPreview = GameObject.Find ("LevelPreview");
-		_levelSelectUp = GameObject.Find ("LevelSelectUp");
-		_levelSelectDown = GameObject.Find ("LevelSelectDown");
-		_levelDescription = GameObject.Find ("LevelDescription");
-		_levelInfoText = _levelDescription.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
-
-		SetLevel (_currentIndex);
+        _currentIndex = 0;
+        _levelPreview = GameObject.Find("LevelPreview");
+        _levelSelectUp = GameObject.Find("LevelSelectUp");
+        _levelSelectDown = GameObject.Find("LevelSelectDown");
+        _levelDescription = GameObject.Find("LevelDescription");
+        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo/LevelInfo_Text").gameObject.GetComponent<TextMesh>();
+        SetLevel(_currentIndex);		
 	}
 
 	public override void Update()

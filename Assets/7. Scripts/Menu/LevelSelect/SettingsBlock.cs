@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// This class will make the changing of settings possible.
@@ -16,17 +17,18 @@ class SettingsBlock : LevelSelectionBlockBase
 	private List<TextMesh> _settings;
 	private int _settingsIndex;
 	private Level _level;
-
+        
 	public SettingsBlock()
-	{
-        _gameMode = _levelDescription.transform.FindChild("GameModeSelection_Text").GetComponent<TextMesh>();
-        _amountOfLives = _levelDescription.transform.FindChild("AmountOfLives_Text").GetComponent<TextMesh>();
-		_settings = new List<TextMesh>();
-		_settings.Add(_gameMode);
-		_settings.Add(_amountOfLives);
-		_currentIndex = 0;
-		_settingsIndex = 0;
-		_level = LevelSelectionBlock.current;
+	{    
+        _levelDescription = GameObject.Find("LevelDescription");
+        _gameMode = _levelDescription.transform.FindChild("GameModeSelection_TextBox/GameModeSelection_Text").GetComponent<TextMesh>();
+        _amountOfLives = _levelDescription.transform.FindChild("AmountOfLives_TextBox/AmountOfLives_Text").GetComponent<TextMesh>();
+        _settings = new List<TextMesh>();
+        _settings.Add(_gameMode);
+        _settings.Add(_amountOfLives);
+        _currentIndex = 0;
+        _settingsIndex = 0;
+        _level = LevelSelectionBlock.current;
 	}
 
 	public override void Update()

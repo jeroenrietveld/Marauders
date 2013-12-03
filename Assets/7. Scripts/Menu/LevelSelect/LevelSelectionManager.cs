@@ -12,7 +12,7 @@ public class LevelSelectionManager : MonoBehaviour {
 	public static LevelSelectionBlockBase currentState;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		levels = new List<Level>();
 		selectionBlocks = new Dictionary<LevelSelectionState, LevelSelectionBlockBase> ();
 
@@ -51,7 +51,7 @@ public class LevelSelectionManager : MonoBehaviour {
 		
 		selectionBlocks.Add (LevelSelectionState.LevelSelection, new LevelSelectionBlock ());
 		selectionBlocks.Add (LevelSelectionState.SettingSelection, new SettingsBlock ());
-		currentState = selectionBlocks [LevelSelectionState.LevelSelection];
+        currentState = selectionBlocks[LevelSelectionState.LevelSelection];
 	}
 	
 	public static void ChangeState(LevelSelectionState state)
