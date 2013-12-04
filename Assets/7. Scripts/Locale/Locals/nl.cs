@@ -14,7 +14,7 @@ public class nl : Locale {
         Translations["text_offense"] = "Offensief";
         Translations["text_utility"] = "Utility";
 		
-		Translations["speedboost_pickup"] = "Pap speedboost op";
+		Translations["speedboost_pickup"] = "Pak speedboost op";
 	}
 	
 	public override string GetLanguageCode ()
