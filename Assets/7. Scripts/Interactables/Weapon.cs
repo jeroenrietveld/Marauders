@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
 
 	public string name;
 
+	public AttackAction attackAction;
+
 	/// <summary>
 	/// The amount of Bullets left in the magazine
 	/// </summary>
@@ -44,17 +46,31 @@ public class Weapon : MonoBehaviour
 	/// <summary>
 	/// A pointer to the player that holds this weapon
 	/// </summary>
-	public Player Owner
+	public Player owner
 	{
 		get;
 		set;
 	}
 
-	/// <summary>
-	/// Reloads the weapon
-	/// </summary>
 	public void Reload()
 	{
 		throw new System.NotImplementedException();
+	}
+
+	public void AttackStart()
+	{
+		attackAction.enabled = true;
+	}
+
+	public void AttackEnd()
+	{
+		attackAction.enabled = false;
+	}
+
+	public void ApplyDamage(Player player)
+	{
+		Vector3 attackDirection = player.transform.position - owner.transform.position;
+
+		player.ApplyDamage(-attackDirection, 0.1f);
 	}
 }

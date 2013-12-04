@@ -29,6 +29,7 @@ public partial class Player : MonoBehaviour
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
+		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 	}
 	
 	void FixedUpdate()
@@ -46,9 +47,10 @@ public partial class Player : MonoBehaviour
 		float v = _controller.Axis (Axis.LeftVertical);
 		bool jump = _controller.Pressed (Button.A);
 		bool[] attacks = new bool[3];
-		attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
+		//attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
+		attacks [0] = _controller.Axis (Axis.RightTrigger) > 0.1;
 		attacks[1] = Input.GetKeyDown(KeyCode.LeftShift);
-		attacks[2] = _controller.Axis(Axis.RightTrigger) != 0;
+		attacks[2] = _controller.Axis(Axis.LeftTrigger) != 0;
 		
 		//PC Controls:
 		//float h = Input.GetAxis("Horizontal");

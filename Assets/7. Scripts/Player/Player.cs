@@ -7,10 +7,30 @@ public partial class Player : MonoBehaviour
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
     public GameObject prefabMenu;
+	public float health
+	{
+		get {
+			return _health;
+		}
+		
+		set {
+			_health = Mathf.Clamp01(value);
+			
+			//Event.dispatch(new PlayerHitEvent());
+			
+			if(_health == 0f)
+			{
+				//Event.dispatch(new PlayerDeathEvent());
+			}
+		}
+	}
+	public float armorFactor = 0.5f;
+	private float _health = 1f;
+	private Heartbeat _heartbeat;
 
 	public Player()
 	{
-	
+		
 	}
 
 	/// <summary>
@@ -37,7 +57,7 @@ public partial class Player : MonoBehaviour
 		weapon.transform.rotation = mainHand.rotation;
 		weapon.transform.parent = mainHand;
 		weapon.transform.position = mainHand.position;
-		weapon.Owner = this;
+		weapon.owner = this;
 	}
 
 	public void DropPrimaryWeapon()
@@ -47,7 +67,7 @@ public partial class Player : MonoBehaviour
 		primaryWeapon.transform.position = transform.position;
 		//Rigidbody FlagClone  = (Rigidbody)Inistantiate (Flag, transform.position, transform.rotation);
 
-		primaryWeapon.Owner = null;
+		primaryWeapon.owner = null;
 
 		//Moving secondary to primary
 		primaryWeapon = secondaryWeapon;
@@ -65,7 +85,33 @@ public partial class Player : MonoBehaviour
         if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
         {
             GameManager.Instance.PauseGame();
-            Instantiate(prefabMenu);
+            //Instantiate(prefabMenu);
         }
     }
+
+	public void AttackStart()
+	{
+		if(primaryWeapon)
+		{
+			primaryWeapon.AttackStart ();
+		}
+	}
+
+	public void AttackEnd()
+	{
+		if(primaryWeapon)
+		{
+			primaryWeapon.AttackEnd ();
+		}
+	}
+
+	public void ApplyDamage(Vector3 direction, float amount)
+	{
+		float dot = Vector3.Dot(direction, _heartbeat.transform.forward);
+		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+
+		if(armorHit) amount *= armorFactor;
+		
+		health = health - amount;
+	}
 }
