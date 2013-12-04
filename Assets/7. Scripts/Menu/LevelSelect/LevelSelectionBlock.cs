@@ -25,7 +25,7 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _levelSelectUp = GameObject.Find("LevelSelectUp");
         _levelSelectDown = GameObject.Find("LevelSelectDown");
         _levelDescription = GameObject.Find("LevelDescription");
-        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
+        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo/LevelInfo_Text").gameObject.GetComponent<TextMesh>();
         SetLevel(_currentIndex);		
 	}
 
