@@ -7,7 +7,7 @@ public abstract class Interactable : MonoBehaviour {
 	/// <para>Gets or sets a value indicating whether this <see cref="Interactable"/> is interactable.</para><para>Can be disabled if ( for example ) a weapon is picked up</para>
 	/// </summary>
 	/// <value><c>true</c> if is interactable; can be used by a player<c>false</c>.</value>
-	public bool isInteractable = true;
+	public bool isInteractable = false;
 
 	void OnTriggerEnter (Collider collider) {
 		//Looking if the one colliding with us is a player

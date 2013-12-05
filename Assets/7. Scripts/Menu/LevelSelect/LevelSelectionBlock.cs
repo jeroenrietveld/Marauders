@@ -17,16 +17,16 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private GameObject _levelDescription;
 	private TextMesh _levelInfoText;
 
+
 	public LevelSelectionBlock()
 	{
-		_currentIndex = 0;
-		_levelPreview = GameObject.Find ("LevelPreview");
-		_levelSelectUp = GameObject.Find ("LevelSelectUp");
-		_levelSelectDown = GameObject.Find ("LevelSelectDown");
-		_levelDescription = GameObject.Find ("LevelDescription");
-		_levelInfoText = _levelDescription.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
-
-		SetLevel (_currentIndex);
+        _currentIndex = 0;
+        _levelPreview = GameObject.Find("LevelPreview");
+        _levelSelectUp = GameObject.Find("LevelSelectUp");
+        _levelSelectDown = GameObject.Find("LevelSelectDown");
+        _levelDescription = GameObject.Find("LevelDescription");
+        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo/LevelInfo_Text").gameObject.GetComponent<TextMesh>();
+        SetLevel(_currentIndex);		
 	}
 
 	public override void Update()
@@ -45,14 +45,14 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);
 		}
-		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			//TODO return to character select
-		}
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.A))
 		{
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            LevelSelectionManager.ChangeState(LevelSelectionState.NotSelecting);
+        }
 
 		if(_currentIndex != index)
 		{

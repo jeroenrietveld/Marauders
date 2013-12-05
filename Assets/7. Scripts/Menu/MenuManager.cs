@@ -25,24 +25,35 @@ public class MenuManager : MonoBehaviour {
         states.Add(MenuStates.LevelState, new LevelState());
 
 		ChangeState(MenuStates.SplashState);
+
+        primaryController = ControllerInput.GetController(PlayerIndex.One);
 	}
-	
-    void FixedUpdate()
-    {
-    }
 
 	// Update is called once per frame
 	void Update ()
 	{
 		if(!cameraMovement.isMoving)
 		{
-			currentState.Update(this);
+            if (currentState != null)
+            {
+                currentState.Update(this);
+            }
 		}
 	}
 
 	public void ChangeState(MenuStates state)
 	{
+        var previousState = currentState;
+
+		if (previousState != null) 
+		{
+			previousState.OnInactive();
+		}
+
     	currentState = states[state];
-		cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu), 1f);
+        cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu),
+                                    previousState != null ? previousState.cameraMoveTime : float.Epsilon);     
+  
+        currentState.OnActive();
 	}
 }

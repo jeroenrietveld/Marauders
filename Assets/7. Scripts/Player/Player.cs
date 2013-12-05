@@ -6,10 +6,31 @@ public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
+    public GameObject prefabMenu;
+	public float health
+	{
+		get {
+			return _health;
+		}
+		
+		set {
+			_health = Mathf.Clamp01(value);
+			
+			//Event.dispatch(new PlayerHitEvent());
+			
+			if(_health == 0f)
+			{
+				//Event.dispatch(new PlayerDeathEvent());
+			}
+		}
+	}
+	public float armorFactor = 0.5f;
+	private float _health = 1f;
+	private Heartbeat _heartbeat;
 
 	public Player()
 	{
-	
+		
 	}
 
 	/// <summary>
@@ -24,14 +45,19 @@ public partial class Player : MonoBehaviour
 			secondaryWeapon = primaryWeapon;
 		}
 
-		//Setting our primary weapon
+		SetWeapon (weapon);
+	}
+
+	private void SetWeapon(Weapon weapon)
+	{
 		primaryWeapon = weapon;
 
-		//Hiding the weapon
-		weapon.gameObject.SetActive(false);
+		Transform mainHand = transform.FindChild("Character1_Reference/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightArm/Character1_RightForeArm/Character1_RightHand/MainHand");
 
-		//We're the owner
-		weapon.Owner = this;
+		weapon.transform.rotation = mainHand.rotation;
+		weapon.transform.parent = mainHand;
+		weapon.transform.position = mainHand.position;
+		weapon.owner = this;
 	}
 
 	public void DropPrimaryWeapon()
@@ -41,7 +67,7 @@ public partial class Player : MonoBehaviour
 		primaryWeapon.transform.position = transform.position;
 		//Rigidbody FlagClone  = (Rigidbody)Inistantiate (Flag, transform.position, transform.rotation);
 
-		primaryWeapon.Owner = null;
+		primaryWeapon.owner = null;
 
 		//Moving secondary to primary
 		primaryWeapon = secondaryWeapon;
@@ -51,17 +77,41 @@ public partial class Player : MonoBehaviour
 	}
 
     /// <summary>
-    /// Check is game is paused or not and sets the timeScale in the GameManager.
+    /// Check is game is paused and sets the timeScale in the GameManager.
+    /// Create the menu from the prefabMenu.
     /// </summary>
-	public void Update()
-	{
+    public void Update()
+    {
         if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
         {
-            GameManager.PauseGame();
+            GameManager.Instance.PauseGame();
+            //Instantiate(prefabMenu);
         }
-        else if (controller.JustPressed(Button.Start) && GameManager.isPaused)
-        {
-            GameManager.ResumeGame();
-        }
+    }
+
+	public void AttackStart()
+	{
+		if(primaryWeapon)
+		{
+			primaryWeapon.AttackStart ();
+		}
+	}
+
+	public void AttackEnd()
+	{
+		if(primaryWeapon)
+		{
+			primaryWeapon.AttackEnd ();
+		}
+	}
+
+	public void ApplyDamage(Vector3 direction, float amount)
+	{
+		float dot = Vector3.Dot(direction, _heartbeat.transform.forward);
+		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+
+		if(armorHit) amount *= armorFactor;
+		
+		health = health - amount;
 	}
 }

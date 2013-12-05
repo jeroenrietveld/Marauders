@@ -14,6 +14,7 @@ public class ArmoryState : MenuStateBase
 		if(Input.GetKey(KeyCode.A))
 		{
 			manager.ChangeState(MenuStates.LevelState);
+            LevelSelectionManager.currentState = LevelSelectionManager.selectionBlocks[LevelSelectionState.LevelSelection];
 		}
 		if (Input.GetKey(KeyCode.B))
 		{

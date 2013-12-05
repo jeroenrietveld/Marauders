@@ -1058,6 +1058,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 322723261}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &323531048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 323531049}
+  m_Layer: 0
+  m_Name: LevelInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &323531049
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 323531048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .449999988, y: 0, z: 8}
+  m_LocalScale: {x: .360000014, y: .25, z: .476190507}
+  m_Children:
+  - {fileID: 2064748412}
+  m_Father: {fileID: 2002272880}
 --- !u!1 &355214810
 GameObject:
   m_ObjectHideFlags: 0
@@ -4333,6 +4360,10 @@ Prefab:
       propertyPath: index
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
+      propertyPath: player
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
   m_RootGameObject: {fileID: 681219486}
@@ -6006,9 +6037,9 @@ Transform:
   m_LocalPosition: {x: 14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 2.0999999}
   m_Children:
-  - {fileID: 2064748412}
   - {fileID: 763543579}
   - {fileID: 1115362063}
+  - {fileID: 323531049}
   m_Father: {fileID: 1247313495}
 --- !u!23 &2002272881
 Renderer:
@@ -6262,11 +6293,11 @@ Transform:
   m_PrefabParentObject: {fileID: 400036, guid: 247c18840e2879049b8b0053af959d3c, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2064748411}
-  m_LocalRotation: {x: .707106829, y: -1.63070963e-15, z: -1.04869296e-15, w: .707106829}
-  m_LocalPosition: {x: -4, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 2.0999999}
+  m_LocalRotation: {x: 0, y: -1.8946236e-15, z: 4.11547898e-16, w: 1}
+  m_LocalPosition: {x: -8.00000095, y: 1.75645816, z: -7.99999714}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
-  m_Father: {fileID: 2002272880}
+  m_Father: {fileID: 323531049}
 --- !u!102 &2064748413
 TextMesh:
   serializedVersion: 3
@@ -6277,12 +6308,12 @@ TextMesh:
   m_GameObject: {fileID: 2064748411}
   m_Text: Info
   m_OffsetZ: 0
-  m_CharacterSize: .5
-  m_LineSpacing: .5
+  m_CharacterSize: 1
+  m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 8
+  m_FontSize: 17
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
