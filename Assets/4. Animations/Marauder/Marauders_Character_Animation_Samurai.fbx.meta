@@ -2197,8 +2197,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack1
       takeName: Take 001
-      firstFrame: 300
-      lastFrame: 325
+      firstFrame: 306
+      lastFrame: 322
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2217,14 +2217,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: .114832535
         functionName: AttackStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .923444986
+      - time: .755980849
         functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -3148,7 +3148,7 @@ ModelImporter:
       name: Attack4
       takeName: Take 001
       firstFrame: 360
-      lastFrame: 375
+      lastFrame: 365
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

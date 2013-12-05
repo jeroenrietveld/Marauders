@@ -19,7 +19,7 @@ public partial class Player : MonoBehaviour
 		
 		set {
 			_health = Mathf.Clamp01(value);
-			
+
 			//Event.dispatch(new PlayerHitEvent());
 			
 			if(_health == 0f)
@@ -34,7 +34,6 @@ public partial class Player : MonoBehaviour
 	
 	public Player()
 	{
-		
 	}
 	
 	/// <summary>
@@ -66,26 +65,25 @@ public partial class Player : MonoBehaviour
 	
 	public void DropPrimaryWeapon()
 	{
-		//Dropping at our current location
-		primaryWeapon.gameObject.SetActive(true);
-		primaryWeapon.transform.position = transform.position;
-		//Rigidbody FlagClone  = (Rigidbody)Inistantiate (Flag, transform.position, transform.rotation);
-		
-		primaryWeapon.owner = null;
-		
 		//Moving secondary to primary
-		primaryWeapon = secondaryWeapon;
-		
+		//primaryWeapon = secondaryWeapon;
+
 		//Secondary is definately null now
-		secondaryWeapon = null;
+		//secondaryWeapon = null;
+
+		//Manually set the position a little higher so it wont fall through the ground
+		Vector3 position = transform.position;
+		position.y += 2;
+		PickupSpawner.SpawnWeapon (primaryWeapon.gameObject, primaryWeapon.transform.position);
+		primaryWeapon.owner = null;
 	}
-	
-	/// <summary>
-	/// Check is game is paused and sets the timeScale in the GameManager.
-	/// Create the menu from the prefabMenu.
-	/// </summary>
-	public void Update()
-	{
+
+    /// <summary>
+    /// Check is game is paused and sets the timeScale in the GameManager.
+    /// Create the menu from the prefabMenu.
+    /// </summary>
+    public void Update()
+    {
 		if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
 		{
 			GameManager.Instance.PauseGame();
@@ -98,8 +96,13 @@ public partial class Player : MonoBehaviour
 		{
 			xSkill.performAction(this);
 		}
-	}
-	
+
+		if(controller.JustPressed(Button.Y))
+		{
+			DropPrimaryWeapon();
+		}
+    }
+
 	public void AttackStart()
 	{
 		if(primaryWeapon)

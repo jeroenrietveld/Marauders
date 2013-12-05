@@ -3079,10 +3079,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d79f8ef4dd84e04bafe69b1fb75b2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerAngle: 50
+  maxPlayerAngle: 60
   cameraSmoothing: 5
   minCameraDistance: 5
-  maxCameraDistance: 100
+  maxCameraDistance: 80
 --- !u!114 &449251694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6012,6 +6012,7 @@ GameObject:
   - 114: {fileID: 979252199}
   - 114: {fileID: 979252198}
   - 114: {fileID: 979252197}
+  - 136: {fileID: 979252204}
   m_Layer: 0
   m_Name: Marauder_Samurai
   m_TagString: Untagged
@@ -6046,7 +6047,7 @@ MonoBehaviour:
   playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
-  jumpHeight: 30000
+  jumpHeight: 22500
   movementSpeed:
     rawValue: 5
   primaryWeapon: {fileID: 0}
@@ -6135,6 +6136,19 @@ Transform:
   - {fileID: 2106234009}
   - {fileID: 554969321}
   m_Father: {fileID: 0}
+--- !u!136 &979252204
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979252196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: .25
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: .300000012, z: .300000012}
 --- !u!1 &979697554
 GameObject:
   m_ObjectHideFlags: 0

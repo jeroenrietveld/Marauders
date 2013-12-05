@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
-	public float jumpHeight;
+	public float jumpHeight = 22500;
 
 	public GamePad controller { get { return _controller; } }
 	

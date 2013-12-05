@@ -45,7 +45,7 @@ public class WeaponInteractable : Interactable {
 			if (player.controller.JustPressed(Button.X) || Input.GetKeyDown("f"))
 			{
 				player.PickUpWeapon(weapon, weapon.isGameModeObject);
-				Destroy(this);
+				Destroy(gameObject);
 			}
 		}
 	}
