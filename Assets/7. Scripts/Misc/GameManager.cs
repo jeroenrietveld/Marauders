@@ -12,8 +12,9 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
     public static bool isPaused = false;
+    public MatchSettings matchSettings;
 
-	private struct MatchSettings
+	public struct MatchSettings
 	{
 		public string level;
 		public GameMode gameMode;
@@ -43,6 +44,7 @@ public class GameManager {
 	private GameManager()
 	{
 		//_matches = new List<MatchSettings>();
+        matchSettings = new MatchSettings();
 	}
 
 	/// <summary>
@@ -54,9 +56,12 @@ public class GameManager {
 		// Application.LoadLevel();
 	}
 
-	private void StartLevel(int unitySceneId)
+	public void Start()
 	{
-		Application.LoadLevel(unitySceneId);
+        if (matchSettings.level != null)
+        {
+            Application.LoadLevel(matchSettings.level);
+        }
 	}
 
     /// <summary>
