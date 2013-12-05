@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
+using System;
 
 public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
-    public GameObject prefabMenu;
+
+    public SkillBase bSkill { get; set; }
+    public SkillBase xSkill { get; set; }
+    public SkillBase ySkill { get; set; }
 	public float health
 	{
 		get {
@@ -87,6 +91,10 @@ public partial class Player : MonoBehaviour
             GameManager.Instance.PauseGame();
             //Instantiate(prefabMenu);
         }
+        if (controller.JustPressed(Button.X))
+        {
+            xSkill.performAction(this);
+        }
     }
 
 	public void AttackStart()
@@ -114,4 +122,12 @@ public partial class Player : MonoBehaviour
 		
 		health = health - amount;
 	}
+
+    public void AddModel(PlayerModel model)
+    {
+        this.xSkill = (SkillBase)Activator.CreateInstance(null, model.xAction).Unwrap();
+        this.bSkill = (SkillBase)Activator.CreateInstance(null, model.bAction).Unwrap();
+        this.ySkill = (SkillBase)Activator.CreateInstance(null, model.yAction).Unwrap();
+        this.playerIndex = model.index;
+    }
 }

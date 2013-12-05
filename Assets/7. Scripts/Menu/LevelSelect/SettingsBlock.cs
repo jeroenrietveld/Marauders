@@ -54,25 +54,12 @@ class SettingsBlock : LevelSelectionBlockBase
             else
             {
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
-                string gameModeID = LevelSelectionBlock.current.gameModes[_gameModeIndex];
+                string gameModeID = LevelSelectionBlock.current.gameModes[_gameModeIndex];           
 
-                /*
-                var gameModes = typeof(GameMode).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(GameMode)));
-
-                foreach(Type gameMode in gameModes)
-                {
-                    GameMode selectedGameMode = (GameMode)gameMode.GetConstructor(Type.EmptyTypes).Invoke(null);
-                    GameModeID id = selectedGameMode.id;
-                    if(id == (GameModeID)Enum.Parse(typeof(GameModeID), gameModeID))
-                    {
-                        GameManager.Instance.matchSettings.gameMode = selectedGameMode;
-                        break;
-                    }
-                }  
-                 */
-
+                //Get the selected game mode class by using the Activator
                 var selectedGameMode = Activator.CreateInstance(null, gameModeID);
-                GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();       
+                GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();    
+
                 GameManager.Instance.Start();
             }	
 		}
@@ -128,5 +115,7 @@ class SettingsBlock : LevelSelectionBlockBase
         _amountOfLives.text = Convert.ToString(_currentIndex);
         _amountOfLivesIndex = _currentIndex;
     }
+
+   
 	
 }

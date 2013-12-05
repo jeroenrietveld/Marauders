@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets._7._Scripts.Player
+public struct PlayerModel
 {
-    class PlayerModel
-    {
-    }
+    public string bAction { get; set; }
+
+    public string yAction { get; set; }
+
+    public string xAction { get; set; }
+
+    public PlayerIndex index { get; set; }
+
+    public string character { get; set; }
+
 }
+

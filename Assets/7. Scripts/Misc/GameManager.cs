@@ -14,6 +14,8 @@ public class GameManager {
     public static bool isPaused = false;
     public MatchSettings matchSettings;
 
+    public List<PlayerModel> players;
+
 	public struct MatchSettings
 	{
 		public string level;
@@ -45,6 +47,7 @@ public class GameManager {
 	{
 		//_matches = new List<MatchSettings>();
         matchSettings = new MatchSettings();
+        players = new List<PlayerModel>();
 	}
 
 	/// <summary>
@@ -57,10 +60,17 @@ public class GameManager {
 	}
 
 	public void Start()
-	{
+	{   
         if (matchSettings.level != null)
         {
-            Application.LoadLevel(matchSettings.level);
+            Debug.Log(Application.loadedLevelName);
+            Application.LoadLevel(matchSettings.level);  
+            foreach (PlayerModel model in players)
+            {
+                GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + model.character)) as GameObject;
+                prefab.AddComponent("Player");
+                prefab.GetComponent<Player>().AddModel(model);
+            }
         }
 	}
 

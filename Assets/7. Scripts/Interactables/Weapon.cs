@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 {
 	public bool isGameModeObject = false;
 
-	public string name;
+	//public string name;
 
 	public AttackAction attackAction;
 
