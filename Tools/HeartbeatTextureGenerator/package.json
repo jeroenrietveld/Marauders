@@ -1,0 +1,10 @@
+{
+	"name": "HeartbeatTextureGenerator",
+	"authors": [
+		"René Zwanenburg"
+	],
+	"dependencies": {
+		"derelict:devil": "~master",
+		"gl3n":	"~master"
+	}
+}

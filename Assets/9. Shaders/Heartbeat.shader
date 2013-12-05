@@ -1,6 +1,7 @@
 ﻿Shader "Custom/Heartbeat" {
 	Properties {
 		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white" {}
+		playerColor ("Player Color", Color) = (1, 1, 1, 1)
 	}
 	SubShader {
 		Tags { "Queue"="Transparent" "RenderType"="Opaque" }
@@ -10,6 +11,7 @@
 		#pragma surface surf Lambert
 
 		sampler2D _MainTex;
+		half3 playerColor;
 		float health;
 
 		struct Input {
@@ -18,8 +20,8 @@
 
 		void surf (Input IN, inout SurfaceOutput o) {
 			half4 c = tex2D (_MainTex, IN.uv_MainTex);
-			o.Albedo = float3(1, 0, 0);
-			if(step(max(health, 0.001), c.a) == 0) discard;
+			o.Emission = c.rgb * playerColor;
+			if(step(max(health, 0.0001), c.a) == 0) discard;
 		}
 		ENDCG
 	} 
