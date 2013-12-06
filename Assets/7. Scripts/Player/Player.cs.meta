@@ -2,10 +2,7 @@ fileFormatVersion: 2
 guid: b0bbd77bf37a0d14cbf48dc1682f4035
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - primaryWeapon: {instanceID: 0}
-  - secondaryWeapon: {instanceID: 0}
-  - prefabMenu: {fileID: 100012, guid: 6c5302ef4e923f345bfd476b6a6af467, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

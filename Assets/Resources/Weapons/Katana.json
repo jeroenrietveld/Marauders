@@ -1,4 +1,6 @@
 {
 	"name":"Katana",
-	"prefab":"Katana"
+	"prefab":"Katana",
+	"range":1,
+	"animations":["Katana1", "Katana2", "Katana3"]
 }

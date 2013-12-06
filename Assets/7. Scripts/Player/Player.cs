@@ -29,7 +29,7 @@ public partial class Player : MonoBehaviour
 		}
 	}
 	public float armorFactor = 0.5f;
-	private float _health = 1f;
+	private float _health = 0.6f;
 	private Heartbeat _heartbeat;
 	
 	public Player()
@@ -94,7 +94,7 @@ public partial class Player : MonoBehaviour
 		
 		if (controller.JustPressed(Button.X))
 		{
-			xSkill.performAction(this);
+			//xSkill.performAction(this);
 		}
 
 		if(controller.JustPressed(Button.Y))
@@ -103,19 +103,14 @@ public partial class Player : MonoBehaviour
 		}
     }
 
-	public void AttackStart()
+	/// <summary>
+	/// This method is called by the attack animation
+	/// </summary>
+	public void Attack()
 	{
 		if(primaryWeapon)
 		{
-			primaryWeapon.AttackStart ();
-		}
-	}
-	
-	public void AttackEnd()
-	{
-		if(primaryWeapon)
-		{
-			primaryWeapon.AttackEnd ();
+			primaryWeapon.Attack ();
 		}
 	}
 	

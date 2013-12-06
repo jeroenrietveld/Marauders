@@ -29,7 +29,7 @@ public partial class Player : MonoBehaviour
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
-		//_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 	}
 	
 	void FixedUpdate()
