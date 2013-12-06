@@ -37,7 +37,7 @@ public class CameraMovement : MonoBehaviour
 		
 		foreach (GameObject obj in _trackableObjects)
 		{
-			Vector3 rayDirection = obj.transform.position - transform.position;
+			Vector3 rayDirection = obj.transform.position + new Vector3(0, 0.1f, 0) - transform.position;
 			RaycastHit[] hits = Physics.RaycastAll(transform.position, rayDirection.normalized, rayDirection.magnitude);
 			
 			foreach (RaycastHit hit in hits)

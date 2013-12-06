@@ -5,6 +5,7 @@ using XInputDotNetPure;
 public partial class Player : MonoBehaviour
 {
 	public PlayerIndex playerIndex;
+	private Animator anim;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
@@ -12,7 +13,7 @@ public partial class Player : MonoBehaviour
 
 	public GamePad controller { get { return _controller; } }
 	
-	private Animator anim;
+	//private Animator anim;
 	private HashIDs hash;
 	
 	private Camera _camera;
@@ -25,8 +26,6 @@ public partial class Player : MonoBehaviour
 
 	void Awake()
 	{
-		anim = GetComponent<Animator>();
-		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
@@ -66,12 +65,9 @@ public partial class Player : MonoBehaviour
 		//Disabling walk animation
 		if (!IsGrounded())
 		{
-			anim.SetFloat (hash.speedFloat, 0, speedDampTime, Time.deltaTime);
 			jump = false;
 		}
 
-		//Debug.DrawRay(transform.position, -Vector3.up * 0.1f, Color.blue);
-		//Debug.DrawRay(transform.position, moveSpeed * 1f, Color.red);
 
 		MovementManagement(moveSpeed);
 
@@ -85,15 +81,17 @@ public partial class Player : MonoBehaviour
 		if (moveSpeed.sqrMagnitude > 0)
 		{
 			Rotating(moveSpeed);
-
-			anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * movementSpeed, speedDampTime, Time.deltaTime);
-
+			//anim.SetFloat(hash.speedFloat, moveSpeed.magnitude * movementSpeed, speedDampTime, Time.deltaTime);
+		
+		
 			rigidbody.MovePosition(rigidbody.position + moveSpeed * movementSpeed * Time.deltaTime);
 		}
 		else
 		{
-			anim.SetFloat(hash.speedFloat, 0f);
+			//anim.SetFloat(hash.speedFloat, 0f);
 		}
+
+		AnimationMovement(moveSpeed.magnitude * movementSpeed);
 	}
 
 	void JumpManagement(Vector3 direction, bool jump)
@@ -101,34 +99,12 @@ public partial class Player : MonoBehaviour
 		if (jump && !AgainstWall(direction))
 		{
 			Jump(jumpHeight);
-			anim.SetBool(hash.jumpBool, true);
-		}
-		else
-		{
-			anim.SetBool(hash.jumpBool, false);
 		}
 	}
 
 	void AttackManagement(bool[] attacks)
 	{
-		if (attacks[0])
-		{
-			anim.SetBool(hash.attack1Bool, true);
-		}
-		else if (attacks[1])
-		{
-			anim.SetBool(hash.attack2Bool, true);
-		}
-		else if (attacks[2])
-		{
-			anim.SetBool(hash.attack3Bool, true);
-		}
-		else
-		{
-			anim.SetBool(hash.attack1Bool, false);
-			anim.SetBool(hash.attack2Bool, false);
-			anim.SetBool(hash.attack3Bool, false);
-		}
+
 	}
 	
 	void Rotating (Vector3 moveSpeed)
@@ -150,8 +126,10 @@ public partial class Player : MonoBehaviour
 		var velocity = rigidbody.velocity;
 		velocity.y = 0;
 		rigidbody.velocity = velocity;
-
 		rigidbody.AddForce(Vector3.up * height);
+
+		//Playing the jump
+		AnimationJump();
 	}
 	
 	/// <summary>
