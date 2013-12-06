@@ -31,7 +31,19 @@ public partial class Player : MonoBehaviour
 	public float armorFactor = 0.5f;
 	private float _health = 0.6f;
 	private Heartbeat _heartbeat;
-	
+
+
+	void Awake()
+	{
+		anim = GetComponent<Animator>();
+		hash = GetComponent<HashIDs>();
+		_camera = Camera.main;
+		_controller = ControllerInput.GetController (playerIndex);
+		//_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+
+		InitializeAnimations();
+	}
+
 	public Player()
 	{
 	}
@@ -100,6 +112,17 @@ public partial class Player : MonoBehaviour
 		if(controller.JustPressed(Button.Y))
 		{
 			DropPrimaryWeapon();
+		}
+
+        if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
+        {
+            GameManager.Instance.PauseGame();
+            //Instantiate(prefabMenu);
+        }
+
+		if (controller.JustPressed(Button.B))
+		{
+			AttackStart();
 		}
     }
 

@@ -624,6 +624,7 @@ ModelImporter:
     7400012: Attack1
     7400014: Attack2
     9500000: //RootNode
+    11100000: //RootNode
     13700000: polySurface8
   materials:
     importMaterials: 1
@@ -5659,5 +5660,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   userData: 
