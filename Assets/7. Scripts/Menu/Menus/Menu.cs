@@ -17,7 +17,7 @@ public class Menu: MonoBehaviour
 	/// Gets or sets a value indicating whether this <see cref="Menu"/> is showing.
 	/// </summary>
 	/// <value><c>true</c> if showing; otherwise, <c>false</c>.</value>
-	public bool visible {get;set;}
+	public bool visible { get;set; }
 
 	/// <summary>
 	/// Sets the <see cref="Menu"/> with the specified i.
@@ -174,48 +174,53 @@ public class Menu: MonoBehaviour
 
 	private void Update()
 	{
-		if (visible)
-		{
-			if (controllers != null)
-			{
-				//Keeping track of the controllers
-				if (canPress == null) { canPress = new Dictionary<GamePad, bool>(); }
+        if (visible)
+        {
+            if (controllers != null)
+            {
+                //Keeping track of the controllers
+                if (canPress == null) { canPress = new Dictionary<GamePad, bool>(); }
 
-				//Looping each controller
-				foreach(GamePad controller in controllers)
-				{
-				
-					if ((controller.Axis(Axis.LeftVertical) <= -axisThreshhold) || controller.Pressed(Button.DPadDown))
-					{
-						if (canPress[controller])
-						{
-							canPress[controller] = false;
-							NextItem();
-						}
+                //Looping each controller
+                foreach (GamePad controller in controllers)
+                {
 
-						return;	
-					}
+                    if ((controller.Axis(Axis.LeftVertical) <= -axisThreshhold) || controller.Pressed(Button.DPadDown))
+                    {
+                        if (canPress[controller])
+                        {
+                            canPress[controller] = false;
+                            NextItem();
+                        }
 
-					if ((controller.Axis(Axis.LeftVertical) >= axisThreshhold) || controller.Pressed(Button.DPadUp))
-					{
-						if (canPress[controller])
-						{
-							canPress[controller] = false;
-							PreviousItem();
-						}
+                        return;
+                    }
 
-						return;
-					}
+                    if ((controller.Axis(Axis.LeftVertical) >= axisThreshhold) || controller.Pressed(Button.DPadUp))
+                    {
+                        if (canPress[controller])
+                        {
+                            canPress[controller] = false;
+                            PreviousItem();
+                        }
 
-					canPress[controller] = true;
+                        return;
+                    }
 
-					if (focusedItem != null)
-					{
-						focusedItem.HandleInput(controller);
-					}
-				}
-			}
-		}
+                    canPress[controller] = true;
+
+                    if (focusedItem != null)
+                    {
+                        focusedItem.HandleInput(controller);
+                    }
+                }
+            }
+        }
+        else 
+        {
+            Destroy(GameObject.Find("Menubackground"));
+            Destroy(this);
+        }
 	}
 	
 	public void OnGUI()

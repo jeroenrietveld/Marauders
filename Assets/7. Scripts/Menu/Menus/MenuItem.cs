@@ -16,15 +16,6 @@ public abstract class MenuItem
 		}
 	}
 
-	public MenuItem()
-	{
-		this.normalStyle = new GUIStyle();
-		this.focusedStyle = new GUIStyle();
-
-		this.normalStyle.normal.textColor = Color.black;
-		this.focusedStyle.normal.textColor = Color.white;
-	}
-
     /// <summary>
     /// Location of the MenuItem
     /// </summary>
@@ -44,12 +35,57 @@ public abstract class MenuItem
     }
 
     /// <summary>
-    /// The GUIStyle that is beeing used when not selected
+    /// Sets a texture for this menu item when not focused
+    /// </summary>
+    public Texture normalTexture
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Sets a texture for this menu item when focused
+    /// </summary>
+    public Texture focusedTexture
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Sets a normalGUITexture for this menu item when not focused
+    /// </summary>
+    public GUITexture normalGUITexture
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Sets a focusedGUITexture for this menu item when focused
+    /// </summary>
+    public GUITexture focusedGUITexture
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// The GUIStyle that is beeing used when not focused
     /// </summary>
     public GUIStyle normalStyle
     {
 		get;
 		set;
+    }
+
+    /// <summary>
+    /// The GUIStyle that is beeing used when focused
+    /// </summary>
+    public GUIStyle focusedStyle
+    {
+        get;
+        set;
     }
 
     /// <summary>
@@ -86,15 +122,6 @@ public abstract class MenuItem
     }
 
     /// <summary>
-    /// The GUIStyle that is beeing used when selected
-    /// </summary>
-    public GUIStyle focusedStyle
-    {
-		get;
-		set;
-    }
-
-    /// <summary>
     /// Can we be selected
     /// </summary>
     public bool isEnabled
@@ -106,6 +133,5 @@ public abstract class MenuItem
 	public abstract void Draw(int locationY);
 
 	public abstract void HandleInput(GamePad controller);
-	
 }
 
