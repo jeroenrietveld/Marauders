@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ScoreboardModel
+namespace Assets._7._Scripts.Misc.Score.Cells
 {
-    public string[][] scoreboard;
-
+    class Cell
+    {
+    }
 }
