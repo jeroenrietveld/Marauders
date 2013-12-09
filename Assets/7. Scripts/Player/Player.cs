@@ -137,7 +137,6 @@ public partial class Player : MonoBehaviour
 	{
 		if(primaryWeapon)
 		{
-			Debug.Log("Swinging weapon");
 			primaryWeapon.Attack ();
 		}
 	}

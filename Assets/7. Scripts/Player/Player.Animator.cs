@@ -5,17 +5,13 @@ using System;
 public partial class Player : MonoBehaviour
 {
 	private Transform LowerBody;
-	private Transform UpperBody;// = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2");
-	private Transform LeftLeg;// = transform.Find("Character1_Reference/Character1_Hips/Character1_LeftUpLeg");
-	private Transform RightLeg;// = transform.Find("Character1_Reference/Character1_Hips/Character1_RightUpLeg");
-	
-	private string PreviousMovementAnimation;
+	private Transform UpperBody;
 
 	private float crossFadeDuration = 0.3f;
 
 	private bool inAir = false;
 
-	private bool attackUpperBody = false;
+	private bool attackLowerBody = false;
 
 	private int attackAnimationIndex = 0;
 	private DateTime attackAnimationStart;
@@ -53,10 +49,10 @@ public partial class Player : MonoBehaviour
 	protected void AnimationIdle()
 	{
 		//We want the FULL attack animation when standing still
-		if ((attackAnimationName!="") && (attackUpperBody == false))
+		if ((attackAnimationName != "") && (attackLowerBody == false))
 		{
 			animation[attackAnimationName].AddMixingTransform(LowerBody);
-			attackUpperBody = true;
+			attackLowerBody = true;
 		}
 		animation.CrossFade("Idle", crossFadeDuration, PlayMode.StopSameLayer);
 	}
@@ -71,13 +67,10 @@ public partial class Player : MonoBehaviour
 	{
 		if (this.IsGrounded())
 		{
-
-
 			//Should play land animation
 			if(inAir)
 			{
 				animation.Play ("Jump Land");
-
 				inAir = false;
 			}
 
@@ -89,9 +82,9 @@ public partial class Player : MonoBehaviour
 			}
 
 			//Removing lower body attack animation, cause we're walking!
-			if ((attackAnimationName!= "") && (attackUpperBody))
+			if ((attackAnimationName != "") && (attackLowerBody))
 			{
-				attackUpperBody = false;
+				attackLowerBody = false;
 				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
 			} 
 
@@ -112,6 +105,13 @@ public partial class Player : MonoBehaviour
 			return;
 		} else
 		{
+			//Removing lower body attack animation, cause we're walking!
+			if ((attackAnimationName != "") && (attackLowerBody))
+			{
+				attackLowerBody = false;
+				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
+			} 
+
 			inAir = true;
 		}
 	}
@@ -142,28 +142,26 @@ public partial class Player : MonoBehaviour
 		//Upping the animation index
 		attackAnimationIndex = (attackAnimationIndex + 1) % primaryWeapon.animations.Count;
 
-		//Setting the attack name
-		attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
+
 
 		//Can not attack 2x at the same time
 		if (!animation.IsPlaying(attackAnimationName))
 		{
 			//Playing the attack animation
+			//Setting the attack name
+			attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
 			animation[attackAnimationName].AddMixingTransform(UpperBody);
 			animation[attackAnimationName].AddMixingTransform(LowerBody);
 			animation[attackAnimationName].speed = 1.0f;
 			animation[attackAnimationName].wrapMode = WrapMode.Once;
 			animation[attackAnimationName].layer = 2;
-			attackUpperBody = true;
+			attackLowerBody = true;
 
-			//Setting the animation
+			//Setting the event
 			AnimationEvent e = new AnimationEvent();
 			e.time = 0.2f;
 			e.functionName = "Attack";
-
 			animation[attackAnimationName].clip.AddEvent(e);
-
-
 
 			//Resseting the start time
 			attackAnimationStart = DateTime.Now;
@@ -171,10 +169,5 @@ public partial class Player : MonoBehaviour
 			//animation.Play (attackAnimationName, PlayMode.StopSameLayer);
 			animation.Play(attackAnimationName, PlayMode.StopSameLayer);
 		}
-	}
-
-	private void WeaponEvent()
-	{
-		Debug.Log("Weapon event");
 	}
 }
