@@ -14,6 +14,12 @@ public class Weapon : MonoBehaviour
 	public float range;
 	public List<String> animations;
 
+	public float damage
+	{
+		get;
+		set;
+	}
+
 	/// <summary>
 	/// The amount of Bullets left in the magazine
 	/// </summary>
@@ -80,7 +86,7 @@ public class Weapon : MonoBehaviour
 	{
 		Vector3 attackDirection = player.transform.position - owner.transform.position;
 
-		player.ApplyDamage(-attackDirection, 0.1f);
+		player.ApplyDamage(-attackDirection, owner.primaryWeapon.damage);
 	}
 
 	public void AddAnimation(string animation)

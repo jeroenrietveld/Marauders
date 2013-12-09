@@ -75,7 +75,7 @@ public partial class Player : MonoBehaviour
 			}
 
 			//Idling
-			if (speed < 1f)
+			if (speed < 0.2f)
 			{
 				AnimationIdle();
 				return;
@@ -89,10 +89,10 @@ public partial class Player : MonoBehaviour
 			} 
 
 			//Walking
-			if (speed < 4f)
+			if (speed < 3f)
 			{
 				animation.CrossFade("Walk", crossFadeDuration, PlayMode.StopSameLayer);
-				animation["Walk"].speed = speed * 0.45f;
+				animation["Walk"].speed = speed * 0.7f;
 
 				return;
 			}

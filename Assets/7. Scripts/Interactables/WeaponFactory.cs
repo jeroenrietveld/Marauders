@@ -29,6 +29,7 @@ public static class WeaponFactory
 			Weapon weapon = grip.AddComponent<Weapon>();
 			weapon.name = node["name"].Value;
 			weapon.range = node["range"].AsFloat;
+			weapon.damage = node["damage"].AsFloat;
 			for(int i = 0; i < node["animations"].AsArray.Count; i++)
 			{
 				weapon.AddAnimation(node["animations"][i]);

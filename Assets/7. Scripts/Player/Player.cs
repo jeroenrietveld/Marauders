@@ -39,7 +39,7 @@ public partial class Player : MonoBehaviour
 		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
-		//_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 
 
 		InitializeAnimations();
@@ -146,7 +146,10 @@ public partial class Player : MonoBehaviour
 		float dot = Vector3.Dot(direction.normalized, _heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 		
-		if(armorHit) amount *= armorFactor;
+		if(armorHit)
+		{
+			amount = amount * armorFactor;
+		}
 		
 		health = health - amount;
 	}
