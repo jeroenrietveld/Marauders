@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerSpawner : MonoBehaviour {
 
 	public GameObject player;
-	public float spawnDelay = 1f;
+	public float spawnDelay = 1;
 	public Vector3 exitForce = Vector3.zero;
 
 	// Use this for initialization
@@ -22,6 +22,9 @@ public class PlayerSpawner : MonoBehaviour {
 			player.SetActive(true);
 			player.rigidbody.velocity = Vector3.zero;
 			player.rigidbody.AddForce(exitForce, ForceMode.Impulse);
+
+			Event.dispatch(new TimeBubbleEnterEvent());
+
 			Destroy(gameObject);
 		}
 	}
