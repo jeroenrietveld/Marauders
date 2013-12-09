@@ -1,6 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public struct TimeBubbleEnterEvent
+{
+}
+
+public struct TimeBubbleExitEvent
+{
+
+}
+
 public class TimeBubble : MonoBehaviour {
 
 	public float exitForce = 10000;
@@ -26,5 +35,8 @@ public class TimeBubble : MonoBehaviour {
 		var playerSpawner = new GameObject("PlayerSpawner").AddComponent<PlayerSpawner>();
 		playerSpawner.player = collider.gameObject;
 		playerSpawner.exitForce = exitDirection.normalized * exitForce;
+		playerSpawner.spawnDelay = 3f;
+
+		Event.dispatch (new TimeBubbleExitEvent ());
 	}
 }
