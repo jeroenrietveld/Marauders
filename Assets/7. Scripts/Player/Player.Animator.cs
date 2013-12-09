@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public partial class Player : MonoBehaviour
 {
+	private Transform LowerBody;
 	private Transform UpperBody;// = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2");
 	private Transform LeftLeg;// = transform.Find("Character1_Reference/Character1_Hips/Character1_LeftUpLeg");
 	private Transform RightLeg;// = transform.Find("Character1_Reference/Character1_Hips/Character1_RightUpLeg");
@@ -13,27 +15,50 @@ public partial class Player : MonoBehaviour
 
 	private bool inAir = false;
 
+	private bool attackUpperBody = false;
+
+	private int attackAnimationIndex = 0;
+	private DateTime attackAnimationStart;
+	private string attackAnimationName = "";
+
 	protected void InitializeAnimations()
 	{
-		UpperBody = transform.Find("Character1_Reference/Character1_Hips/");
-		LeftLeg = transform.Find("Character1_Reference/Character1_Hips/Character1_LeftUpLeg");
-		RightLeg = transform.Find("Character1_Reference/Character1_Hips/Character1_RightUpLeg");
+		UpperBody = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine");
+		LowerBody = transform.Find("Character1_Reference/Character1_Hips/");
 
-		//Starting with idle
+		//Starting with idle, need to start like this
 		animation.Play ("Idle");
 		animation["Idle"].wrapMode = WrapMode.Once;
+		animation["Idle"].layer = 1;
+		animation["Idle"].AddMixingTransform(LowerBody);
+
 		animation["Walk"].wrapMode = WrapMode.Once;
+		animation["Walk"].layer = 1;
+		animation["Walk"].AddMixingTransform(LowerBody);
+
 		animation["Run"].wrapMode = WrapMode.Once;
+		animation["Run"].layer = 1;
+		animation["Run"].AddMixingTransform(LowerBody);
+
 		animation["Jump"].wrapMode = WrapMode.ClampForever;
+		animation["Jump"].layer = 1;
+		animation["Jump"].AddMixingTransform(LowerBody);
+
 		animation["Jump Land"].wrapMode = WrapMode.Once;
+		animation["Jump Land"].layer = 1;
+		animation["Jump Land"].AddMixingTransform(LowerBody);
+	
 	}
 
 	protected void AnimationIdle()
 	{
-		animation["Idle"].AddMixingTransform(UpperBody);
-		animation["Idle"].AddMixingTransform(LeftLeg);
-		animation["Idle"].AddMixingTransform(RightLeg);
-		animation.CrossFade("Idle", crossFadeDuration, PlayMode.StopAll);
+		//We want the FULL attack animation when standing still
+		if ((attackAnimationName!="") && (attackUpperBody == false))
+		{
+			animation[attackAnimationName].AddMixingTransform(LowerBody);
+			attackUpperBody = true;
+		}
+		animation.CrossFade("Idle", crossFadeDuration, PlayMode.StopSameLayer);
 	}
 
 	protected void AnimationJump()
@@ -46,10 +71,13 @@ public partial class Player : MonoBehaviour
 	{
 		if (this.IsGrounded())
 		{
+
+
 			//Should play land animation
 			if(inAir)
 			{
 				animation.Play ("Jump Land");
+
 				inAir = false;
 			}
 
@@ -60,24 +88,26 @@ public partial class Player : MonoBehaviour
 				return;
 			}
 
+			//Removing lower body attack animation, cause we're walking!
+			if ((attackAnimationName!= "") && (attackUpperBody))
+			{
+				attackUpperBody = false;
+				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
+			} 
+
 			//Walking
 			if (speed < 4f)
 			{
-				animation["Walk"].AddMixingTransform(UpperBody);
-				animation["Walk"].AddMixingTransform(LeftLeg);
-				animation["Walk"].AddMixingTransform(RightLeg);
+				animation.CrossFade("Walk", crossFadeDuration, PlayMode.StopSameLayer);
 				animation["Walk"].speed = speed * 0.45f;
-				animation.CrossFade("Walk", crossFadeDuration, PlayMode.StopAll);
 
 				return;
 			}
 
-			//Running 
-			animation["Run"].AddMixingTransform(UpperBody);
-			animation["Run"].AddMixingTransform(LeftLeg);
-			animation["Run"].AddMixingTransform(RightLeg);
+
+			animation.CrossFade("Run", crossFadeDuration, PlayMode.StopSameLayer);
 			animation["Run"].speed = speed * 0.2f;
-			animation.CrossFade("Run", crossFadeDuration, PlayMode.StopAll);
+
 
 			return;
 		} else
@@ -86,14 +116,65 @@ public partial class Player : MonoBehaviour
 		}
 	}
 
-	protected void AnimationAttack(int index)
+	protected void AnimationAttack()
 	{
-		//animation["Attack1"].AddMixingTransform(Transform);
-		//animation.Play("Attack1");
+		//Security checks
+		if (primaryWeapon == null) { return ; }
+		if (primaryWeapon.animations.Count == 0 ) { return ; }
+		
+		//Can be null
+		if (attackAnimationStart == null)
+		{
+			attackAnimationStart = DateTime.Now;
+			attackAnimationIndex = -1;
+		}
+
+		//Calculating the amount the time that has passed since last accak
+		TimeSpan span = DateTime.Now.Subtract(attackAnimationStart);
+
+		//checking which attack animation should be played
+		if (span.TotalSeconds > 2)
+		{
+			//ressetting it to -1, will get updated to 0 later on
+			attackAnimationIndex = -1;
+		} 
+
+		//Upping the animation index
+		attackAnimationIndex = (attackAnimationIndex + 1) % primaryWeapon.animations.Count;
+
+		//Setting the attack name
+		attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
+
+		//Can not attack 2x at the same time
+		if (!animation.IsPlaying(attackAnimationName))
+		{
+			//Playing the attack animation
+			animation[attackAnimationName].AddMixingTransform(UpperBody);
+			animation[attackAnimationName].AddMixingTransform(LowerBody);
+			animation[attackAnimationName].speed = 1.0f;
+			animation[attackAnimationName].wrapMode = WrapMode.Once;
+			animation[attackAnimationName].layer = 2;
+			attackUpperBody = true;
+
+			//Setting the animation
+			AnimationEvent e = new AnimationEvent();
+			e.time = 0.2f;
+			e.functionName = "Attack";
+
+			animation[attackAnimationName].clip.AddEvent(e);
+
+
+
+			//Resseting the start time
+			attackAnimationStart = DateTime.Now;
+
+			//animation.Play (attackAnimationName, PlayMode.StopSameLayer);
+			animation.Play(attackAnimationName, PlayMode.StopSameLayer);
+		}
 	}
 
-	protected void AnimationLand()
+	private void WeaponEvent()
 	{
-		
+		Debug.Log("Weapon event");
 	}
 }

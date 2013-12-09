@@ -6,15 +6,6 @@ public delegate void XboxPressedEventHandler(MenuItem sender, Button button);
 
 public abstract class MenuItem
 {
-	public event XboxPressedEventHandler XboxPressed;
-
-	protected virtual void OnXboxPressed(Button button) 
-	{
-		if (XboxPressed != null)
-		{
-			XboxPressed(this, button);
-		}
-	}
 
     /// <summary>
     /// Location of the MenuItem

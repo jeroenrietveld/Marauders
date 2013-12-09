@@ -63,7 +63,7 @@ public class MenuItemLabel:MenuItem
 	{
 		if (controller.Pressed(Button.A))
 		{
-			this.OnXboxPressed(Button.A);
+			this.XboxPressed(this, Button.A);
 		}
 	}
 }

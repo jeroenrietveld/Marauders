@@ -123,7 +123,7 @@ public partial class Player : MonoBehaviour
 
 		if (controller.JustPressed(Button.B))
 		{
-			Attack();
+			AnimationAttack();
 		}
     }
 
@@ -134,6 +134,7 @@ public partial class Player : MonoBehaviour
 	{
 		if(primaryWeapon)
 		{
+			Debug.Log("Swinging weapon");
 			primaryWeapon.Attack ();
 		}
 	}
