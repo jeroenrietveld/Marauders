@@ -28,11 +28,11 @@ public static class WeaponFactory
 
 			Weapon weapon = grip.AddComponent<Weapon>();
 			weapon.name = node["name"].Value;
-
-			AttackAction action = prefab.AddComponent<AttackAction>();
-			action.enabled = false;
-			action.weapon = weapon;
-			weapon.attackAction = action;
+			weapon.range = node["range"].AsFloat;
+			for(int i = 0; i < node["animations"].AsArray.Count; i++)
+			{
+				weapon.AddAnimation(node["animations"][i]);
+			}
 
 			//Add a rigidbody to the weapon, this makes sures collision events are always fired
 			Rigidbody rigidbody = prefab.AddComponent<Rigidbody>();

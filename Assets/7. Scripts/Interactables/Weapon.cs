@@ -11,10 +11,8 @@ using XInputDotNetPure;
 public class Weapon : MonoBehaviour
 {
 	public bool isGameModeObject = false;
-
-	//public string name;
-
-	public AttackAction attackAction;
+	public float range;
+	public List<String> animations;
 
 	/// <summary>
 	/// The amount of Bullets left in the magazine
@@ -57,14 +55,25 @@ public class Weapon : MonoBehaviour
 		throw new System.NotImplementedException();
 	}
 
-	public void AttackStart()
+	public void Attack()
 	{
-		attackAction.enabled = true;
-	}
+		CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
 
-	public void AttackEnd()
-	{
-		attackAction.enabled = false;
+		RaycastHit[] hits = Physics.CapsuleCastAll (
+			owner.transform.TransformPoint(coll.center + new Vector3(0, coll.height/2, 0)),
+		    owner.transform.TransformPoint(coll.center + new Vector3(0, -coll.height/2, 0)),
+		    coll.radius,
+			owner.transform.forward,
+			range);
+
+		foreach(var hit in hits)
+		{
+			Player player = hit.collider.gameObject.GetComponent<Player>();
+			if(player)
+			{
+				ApplyDamage(player);
+			}
+		}
 	}
 
 	public void ApplyDamage(Player player)
@@ -72,5 +81,15 @@ public class Weapon : MonoBehaviour
 		Vector3 attackDirection = player.transform.position - owner.transform.position;
 
 		player.ApplyDamage(-attackDirection, 0.1f);
+	}
+
+	public void AddAnimation(string animation)
+	{
+		if(animations == null)
+		{
+			animations = new List<String>();
+		}
+
+		animations.Add (animation);
 	}
 }

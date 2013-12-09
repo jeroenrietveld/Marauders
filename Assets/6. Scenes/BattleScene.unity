@@ -3079,10 +3079,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d79f8ef4dd84e04bafe69b1fb75b2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerAngle: 50
+  maxPlayerAngle: 60
   cameraSmoothing: 5
   minCameraDistance: 5
-  maxCameraDistance: 100
+  maxCameraDistance: 80
 --- !u!114 &449251694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3482,6 +3482,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 02c340f29c3815346b42593eed2a1975, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fcdb910cd3f72c9468cfc2294a736b08, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02c340f29c3815346b42593eed2a1975, type: 2}
   m_RootGameObject: {fileID: 597109041}
@@ -4121,7 +4125,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6dba7d8878db28e4781ff78f205c8bee, type: 2}
+  - {fileID: 2100000, guid: fcdb910cd3f72c9468cfc2294a736b08, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -6046,12 +6050,11 @@ MonoBehaviour:
   playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
-  jumpHeight: 30000
+  jumpHeight: 22500
   movementSpeed:
     rawValue: 5
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
-  prefabMenu: {fileID: 0}
   armorFactor: .5
 --- !u!114 &979252199
 MonoBehaviour:
@@ -7084,7 +7087,6 @@ MonoBehaviour:
     rawValue: 5
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
-  prefabMenu: {fileID: 0}
   armorFactor: .100000001
 --- !u!114 &1124367765
 MonoBehaviour:
@@ -12743,7 +12745,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6dba7d8878db28e4781ff78f205c8bee, type: 2}
+  - {fileID: 2100000, guid: fcdb910cd3f72c9468cfc2294a736b08, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

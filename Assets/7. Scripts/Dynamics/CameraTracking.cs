@@ -5,7 +5,7 @@ public class CameraTracking : MonoBehaviour
 {
 	private CameraMovement _camera;
 	
-	void Awake()
+	void OnEnable()
 	{
 		_camera = GameObject.FindGameObjectWithTag(Tags.MAINCAMERA).GetComponent<CameraMovement>();
 		_camera.AddTrackableObject(this.gameObject);
