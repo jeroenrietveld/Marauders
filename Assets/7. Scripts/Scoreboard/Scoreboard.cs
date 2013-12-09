@@ -5,16 +5,16 @@ using System.Text;
 
 public class Scoreboard
 {
-	/*private List<List<Cell>> _cells;
+	private List<List<Cell>> _cells;
 
     public Scoreboard()
 	{
 		_cells = new List<List<Cell>> ();
 	}
 
-	public void AddCell(Cell cell)
+	public void AddCellList(List<Cell> list)
 	{
-		_cells.Add (cell);
-	}*/
+		_cells.Add (list);
+	}
 }
 
