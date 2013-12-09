@@ -181,15 +181,41 @@ public class Menu: MonoBehaviour
                         return;
                     }
 
-                    readInput[controller] = true;
+					if ((controller.Axis(Axis.LeftHorizantal) >= axisThreshhold) || controller.Pressed(Button.DPadRight))
+					{
+						if (readInput[controller])
+						{
+							readInput[controller] = false;
 
-                    if (focusedItem != null)
-                    {
-                        focusedItem.HandleInput(controller);
-                    }
-                }
-            }
-        }
+							
+
+							this.focusedItem.text = SkillMenu.attackSkills[1];
+						}
+						
+						return;
+					}
+
+					if ((controller.Axis(Axis.LeftHorizantal) <= -axisThreshhold) || controller.Pressed(Button.DPadLeft))
+					{
+						if (readInput[controller])
+						{
+							readInput[controller] = false;
+							this.focusedItem.text = "left";
+						}
+						
+						return;
+					}
+				
+					
+					readInput[controller] = true;
+					
+					if (focusedItem != null)
+					{
+						focusedItem.HandleInput(controller);
+					}
+				}
+			}
+		}
 	}
 
 	public void Remove()

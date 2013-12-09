@@ -1,13 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
+using System.Collections.Generic;
 
 public class SkillMenu
 {
+	public static List<string> utilitySkills;
+	public static List<string> defenseSkills;
+	public static List<string> attackSkills;
+
     public static Menu Attach(GameObject gameObject)
     {
         if (menu == null)
         {
+			// creating the dictionary with the texts in the skillmenu
+			utilitySkills = new List<string>();
+			defenseSkills = new List<string>();
+			attackSkills = new List<string>();
+
+			utilitySkills.Add ("utility1");
+			utilitySkills.Add ("utility2");
+			utilitySkills.Add ("utility3");
+
+			defenseSkills.Add ("defense1");
+			defenseSkills.Add ("defense2");
+			defenseSkills.Add ("defense3");
+
+			attackSkills.Add ("attack1");
+			attackSkills.Add ("attack2");
+			attackSkills.Add ("attack3");
+
             // Making menu
             menu = (Menu)gameObject.AddComponent("Menu");
             menu.region = new Rect(Screen.width / 2 - 100, Screen.height / 2, 250, 100);
@@ -51,7 +73,7 @@ public class SkillMenu
             menu.Add(item);
 
             item = new MenuItemLabel();
-            item.text = "Slide";
+			item.text = attackSkills[0];
             item.height = -525;
             item.normalStyle = normal;
             item.focusedStyle = focused;
@@ -67,7 +89,7 @@ public class SkillMenu
             menu.Add(item);
 
             item = new MenuItemLabel();
-            item.text = "Slide";
+			item.text = defenseSkills[0];
             item.height = -550;
             item.normalStyle = normal;
             item.focusedStyle = focused;
@@ -83,7 +105,7 @@ public class SkillMenu
             menu.Add(item);
 
             item = new MenuItemLabel();
-            item.text = "Slide";
+			item.text = utilitySkills[0];
             item.height = -550;
             item.normalStyle = normal;
             item.focusedStyle = focused;
