@@ -106,7 +106,12 @@ public class Menu: MonoBehaviour
 		{
 			this.focusedItem = item;
 		}
-
+		
+		if (!this.focusedItem.isEnabled) 
+		{
+			this.focusedItem = item;
+		}
+		
 		menuItems.Add (item);
     }
 
