@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using XInputDotNetPure;
 using UnityEngine;
 
-
 public class Menu: MonoBehaviour
 {
-	public Menu()
-	{
-		this.controllers = new List<GamePad>();
-		this.menuItems = new List<MenuItem>();
-		this._startTime = DateTime.Now;
-	}
-
 	/// <summary>
 	/// Gets or sets a value indicating whether this <see cref="Menu"/> is showing.
 	/// </summary>
@@ -87,7 +79,21 @@ public class Menu: MonoBehaviour
 	/// <summary>
 	/// Gets or sets the region of the menu
 	/// </summary>
-	public Rect region { get; set; }
+	public Rect region { get; set; }	
+
+	/// <summary>
+	/// A list of controllers that can navigate this menu.
+	/// </summary>
+	/// <value>The controllers.</value>
+	public List<GamePad> controllers {get;set;}
+	public Dictionary<GamePad, bool> readInput {get;set;}
+
+	public Menu()
+	{
+		this.controllers = new List<GamePad>();
+		this.menuItems = new List<MenuItem>();
+		readInput = new Dictionary<GamePad, bool>(); 
+	}
 
     /// <summary>
     /// Adds an item to the menu
@@ -102,22 +108,21 @@ public class Menu: MonoBehaviour
 		}
 
 		menuItems.Add (item);
-
-
     }
 
     /// <summary>
     /// Removes an item
     /// </summary>
-    public void Remove(MenuItem item)
+    public void RemoveItem(MenuItem item)
     {
 		menuItems.Remove(item);
-    }
+		item = null;
+	}
 
     /// <summary>
     /// Removes an item at a specific index
     /// </summary>
-    public void RemoteAt(int itemIndex)
+    public void RemoveAtIndex(int itemIndex)
     {
 		menuItems.RemoveAt (itemIndex);
     }
@@ -133,44 +138,12 @@ public class Menu: MonoBehaviour
     /// <summary>
     /// Inserts a menu item
     /// </summary>
-    /// <param name="Index">The index to nsert the menu item at</param>
+    /// <param name="Index">The index to insert the menu item at</param>
     /// <param name="Item">The item to insert</param>
-    public void InsertAt(int index, MenuItem item)
+    public void InsertAtIndex(int index, MenuItem item)
     {
 		menuItems.Insert(index, item);
     }
-
-	/// <summary>
-	/// Tthe start time of the 'timer'  for axis contro
-	/// </summary>
-	private DateTime _startTime;
-
-	/// <summary>
-	/// Resets the timer Axis controls
-	/// </summary>
-	public void ResetTime()
-	{
-		_startTime = DateTime.Now;
-	}
-	
-	/// <summary>
-	/// We need to use this method when the game is paused because
-	/// most unity methods are not working after setting
-	/// timeScale to 0.f.
-	/// </summary>
-	public float ElapsedSeconds()
-	{
-		TimeSpan span = DateTime.Now.Subtract(_startTime);
-		
-		return ((float)span.Ticks / (float)TimeSpan.TicksPerSecond);
-	}
-
-	/// <summary>
-	/// A list of controllers that can navigate this menu.
-	/// </summary>
-	/// <value>The controllers.</value>
-	public List<GamePad> controllers {get;set;}
-	public Dictionary<GamePad, bool> canPress {get;set;}
 
 	private void Update()
 	{
@@ -178,18 +151,14 @@ public class Menu: MonoBehaviour
         {
             if (controllers != null)
             {
-                //Keeping track of the controllers
-                if (canPress == null) { canPress = new Dictionary<GamePad, bool>(); }
-
                 //Looping each controller
                 foreach (GamePad controller in controllers)
                 {
-
                     if ((controller.Axis(Axis.LeftVertical) <= -axisThreshhold) || controller.Pressed(Button.DPadDown))
                     {
-                        if (canPress[controller])
+                        if (readInput[controller])
                         {
-                            canPress[controller] = false;
+                            readInput[controller] = false;
                             NextItem();
                         }
 
@@ -198,16 +167,16 @@ public class Menu: MonoBehaviour
 
                     if ((controller.Axis(Axis.LeftVertical) >= axisThreshhold) || controller.Pressed(Button.DPadUp))
                     {
-                        if (canPress[controller])
+                        if (readInput[controller])
                         {
-                            canPress[controller] = false;
+                            readInput[controller] = false;
                             PreviousItem();
                         }
 
                         return;
                     }
 
-                    canPress[controller] = true;
+                    readInput[controller] = true;
 
                     if (focusedItem != null)
                     {
@@ -216,11 +185,12 @@ public class Menu: MonoBehaviour
                 }
             }
         }
-        else 
-        {
-            Destroy(GameObject.Find("Menubackground"));
-            Destroy(this);
-        }
+	}
+
+	public void Remove()
+	{
+		Destroy(GameObject.Find("Menubackground"));
+		Destroy(this);
 	}
 	
 	public void OnGUI()
@@ -237,7 +207,7 @@ public class Menu: MonoBehaviour
 	}
 
 	/// <summary>
-	/// Focusses the Nexts item
+	/// Focusses the Next item
 	/// </summary>
 	public void NextItem()
 	{
@@ -249,16 +219,10 @@ public class Menu: MonoBehaviour
 		//Gets the focused item to do some checks
 		int focusedItemIndex = menuItems.IndexOf(focusedItem) + 1;
 
-		//Checks if below range
-		if (focusedItemIndex  < 0)
-		{
-			focusedItemIndex = 0;
-		}
-
 		//Checks if above range
 		if (focusedItemIndex >= this.count)
 		{
-			focusedItemIndex = this.count-1 ;
+			focusedItemIndex = this.count - 1;
 		}
 
 		//Changing focused item
@@ -282,12 +246,6 @@ public class Menu: MonoBehaviour
 		if (focusedItemIndex  < 0)
 		{
 			focusedItemIndex = 0;
-		}
-		
-		//Checks if above range
-		if (focusedItemIndex >= this.count)
-		{
-			focusedItemIndex = this.count - 1 ;
 		}
 		
 		//Changing focused item

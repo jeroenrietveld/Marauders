@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 using XInputDotNetPure;
 
-public class MenuItemLabel:MenuItem
+public class MenuItemLabel : MenuItem
 {
 	public event XboxPressedEventHandler XboxPressed;
-    private GUIStyle style = new GUIStyle();
+	protected virtual void OnXboxPressed(Button button) 
+	{
+		if (XboxPressed != null)
+		{
+			XboxPressed(this, button);
+		}
+	}
+
+    private GUIStyle style;
 
 	public override void Draw (int yLocation)
 	{
@@ -26,8 +34,8 @@ public class MenuItemLabel:MenuItem
                     yLocation,
                     parent.region.width,
                     this.height),
-                    this.text,
-                    style);
+	            this.text,
+	            style);
         }
         // draw a GUI.Label without a text
         else if (this.text == null)
@@ -37,25 +45,27 @@ public class MenuItemLabel:MenuItem
                     yLocation,
                     parent.region.width,
                     this.height),
-                    this.normalTexture,
-                    style);
+	            this.normalTexture,
+	            style);
         }
         // draw a GUI.Label and GUI texture
         else
         {
-            GUI.DrawTexture(new Rect(parent.region.x,
-                            yLocation,
-                            parent.region.width,
-                            this.height), 
-                            this.normalTexture);
+            GUI.DrawTexture(
+				new Rect(parent.region.x,
+		            yLocation,
+		            parent.region.width,
+		            this.height), 
+	            this.normalTexture);
 
             GUI.Label(
-                    new Rect(parent.region.x,
-                        yLocation,
-                        parent.region.width,
-                        this.height),
-                        this.text,
-                        style);
+				new Rect(
+					parent.region.x,
+	                yLocation,
+	                parent.region.width,
+	                this.height),
+                this.text,
+                style);
         }       
 	}
 

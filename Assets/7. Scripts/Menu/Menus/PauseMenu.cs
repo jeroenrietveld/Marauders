@@ -10,41 +10,35 @@ public class PauseMenu {
 			//Making menu
 			menu = (Menu)gameObject.AddComponent("Menu");
 			menu.region = new Rect(Screen.width / 2, Screen.height / 2, 100, 100);
-			menu.visible = true;
 
             // adding a GUITexture to the menu
             GameObject background = new GameObject("Menubackground");
             background.AddComponent<GUITexture>();
             background.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
             background.guiTexture.texture = (Texture)Resources.Load("testMenu");
             background.guiTexture.pixelInset = menu.region;
 
-            Texture texture = (Texture)Resources.Load("testMenu");
-
             // setting normal and focused style. This can be changed for every menu or menu item.
             GUIStyle normal = new GUIStyle();
-            GUIStyle focused = new GUIStyle();
             normal.normal.textColor = Color.yellow;
             normal.alignment = TextAnchor.MiddleCenter;
-            
+			
+			GUIStyle focused = new GUIStyle();
             focused.normal.textColor = Color.blue;
             focused.alignment = TextAnchor.MiddleCenter;
             focused.margin = new RectOffset(11, 22, 33, 44);
 
-            MenuItem item = new MenuItemLabel();
+			MenuItemLabel item = new MenuItemLabel();
             item.text = "Resume" ;
 			item.height = 100;
             item.normalStyle = normal;
             item.normalStyle.padding = new RectOffset(100, 100, 10, 10);
-
             item.focusedStyle = focused;
-           
 			item.XboxPressed += new XboxPressedEventHandler(button_Resume);
 			menu.Add (item);
 			
 			item = new MenuItemLabel();
-			//item.text = "Options" ;
+			item.text = "Options" ;
             item.normalTexture = (Texture)Resources.Load("testOptions");
 			item.height = 100;
 			menu.Add (item);
