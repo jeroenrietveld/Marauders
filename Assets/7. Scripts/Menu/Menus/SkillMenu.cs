@@ -55,6 +55,7 @@ public class SkillMenu
             item.height = -525;
             item.normalStyle = normal;
             item.focusedStyle = focused;
+			item.isEnabled = true;
             menu.Add(item);
 
             item = new MenuItemLabel();
@@ -70,6 +71,7 @@ public class SkillMenu
             item.height = -550;
             item.normalStyle = normal;
             item.focusedStyle = focused;
+			item.isEnabled = true;
             menu.Add(item);
 
             item = new MenuItemLabel();
@@ -85,6 +87,7 @@ public class SkillMenu
             item.height = -550;
             item.normalStyle = normal;
             item.focusedStyle = focused;
+			item.isEnabled = true;
             menu.Add(item);
         }
 
