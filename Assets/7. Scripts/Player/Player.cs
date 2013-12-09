@@ -41,6 +41,7 @@ public partial class Player : MonoBehaviour
 		_controller = ControllerInput.GetController (playerIndex);
 		//_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 
+
 		InitializeAnimations();
 	}
 

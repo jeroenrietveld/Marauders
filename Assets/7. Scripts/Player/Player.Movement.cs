@@ -24,13 +24,6 @@ public partial class Player : MonoBehaviour
 
 	private GamePad _controller;
 
-	void Awake()
-	{
-		_camera = Camera.main;
-		_controller = ControllerInput.GetController (playerIndex);
-		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-	}
-	
 	void FixedUpdate()
 	{
 		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
