@@ -16,6 +16,8 @@ public abstract class GameMode
 {
 	public readonly GameModeID id;
 
+    public Scoreboard scoreboard;
+
 	protected GameMode(GameModeID id)
 	{
 		this.id = id;
