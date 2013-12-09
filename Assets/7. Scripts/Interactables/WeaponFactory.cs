@@ -36,6 +36,7 @@ public static class WeaponFactory
 
 			//Add a rigidbody to the weapon, this makes sures collision events are always fired
 			Rigidbody rigidbody = prefab.AddComponent<Rigidbody>();
+			rigidbody.mass = 1.0f;
 			rigidbody.isKinematic = true;
 			rigidbody.useGravity = false;
 
