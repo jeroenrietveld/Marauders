@@ -10,7 +10,6 @@ public class Scoreboard
     private struct ScoreRow
     {
         public String rowName;
-        public <T> content;
     }
 
 }
