@@ -5,7 +5,7 @@ using System.Text;
 
 public class Scoreboard
 {
-	private List<List<Cell>> _cells;
+	/*private List<List<Cell>> _cells;
 
     public Scoreboard()
 	{
@@ -15,6 +15,6 @@ public class Scoreboard
 	public void AddCell(Cell cell)
 	{
 		_cells.Add (cell);
-	}
+	}*/
 }
 
