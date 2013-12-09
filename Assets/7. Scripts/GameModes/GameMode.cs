@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 [Flags]
@@ -28,5 +28,61 @@ public abstract class GameMode
 			bool active = (description.gameModes & id) == id;
 			description.gameObject.SetActive(active);
 		}
+
+        InitializeScoreboard();
 	}
+
+    public void InitializeScoreboard()
+    { 
+        List<Cell> fieldNameList = new List<Cell>();
+        scoreboard.AddCellList(fieldNameList);
+        foreach(String name in new String[] {"Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio"})
+        {
+            fieldNameList.Add(new StringCell(name));
+        }
+
+        foreach(Player player in GameManager.Instance.players)
+        {
+            List<Cell> addition = new List<Cell>();
+            scoreboard.AddCellList(addition);
+
+            addition.Add(new PlayerCell(player));
+
+            //Declare all cells
+            ProgressbarCell timeSync = new ProgressbarCell();
+            IntegerCell eliminations = new IntegerCell();
+            IntegerCell eliminated = new IntegerCell();
+            IntegerCell suicides = new IntegerCell();
+            PercentageCell hitratio = new PercentageCell();
+
+            //Add all cells to the list of cells
+            addition.Add(timeSync);
+            addition.Add(eliminations);
+            addition.Add(eliminated);
+            addition.Add(suicides);
+            addition.Add(hitratio);
+
+            Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt) 
+            { 
+                if(evt.victim == player) 
+                {                  
+                    timeSync.effective -= 20;
+                    eliminated.amount += 1;
+                    if(evt.offender == player)
+                    {
+                        suicides.amount += 1;
+                        //Apply a suicide penalty to the timeSync
+                        timeSync.effective -= 10;
+                    }
+                }
+                else if(evt.offender == player)
+                {
+                    timeSync.effective += 20;
+                    eliminations.amount += 1;
+                }
+            });
+        }
+        Debug.Log(scoreboard.ToString());
+    }
+   
 }

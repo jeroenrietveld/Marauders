@@ -16,5 +16,10 @@ public class Scoreboard
 	{
 		_cells.Add (list);
 	}
+
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }
 
