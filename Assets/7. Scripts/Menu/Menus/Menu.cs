@@ -225,8 +225,8 @@ public class Menu: MonoBehaviour
 			focusedItemIndex = this.count - 1;
 		}
 
-		//Changing focused item
-		this.focusedItem = this[focusedItemIndex];
+        //Changing focused item
+        this.focusedItem = this[focusedItemIndex];
 	}
 
 	/// <summary>
