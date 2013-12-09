@@ -12,5 +12,8 @@ public class WeaponPrototype : MonoBehaviour {
 		pickup.GetComponent<WeaponInteractable> ().weaponObject = weapon;*/
 
 		PickupSpawner.SpawnWeapon (weapon, new Vector3(0, 15, 0));
+
+		GameObject weapon1 = WeaponFactory.create ("Katana");
+		PickupSpawner.SpawnWeapon (weapon1, new Vector3(5, 15, 0));
 	}
 }

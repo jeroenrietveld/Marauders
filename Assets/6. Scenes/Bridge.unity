@@ -11828,7 +11828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000
@@ -12832,6 +12832,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400156, guid: 41b488ad60f59884d8f38d12c6d55b67, type: 2}
       propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 41b488ad60f59884d8f38d12c6d55b67, type: 2}
+      propertyPath: playerIndex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
