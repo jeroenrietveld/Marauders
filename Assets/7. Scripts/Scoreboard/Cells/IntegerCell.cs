@@ -3,9 +3,5 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets._7._Scripts.Misc.Score.Cells
-{
-    class IntegerCell
-    {
-    }
-}
+public class IntegerCell : Cell { }
+
