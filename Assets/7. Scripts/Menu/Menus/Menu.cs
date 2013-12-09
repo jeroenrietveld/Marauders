@@ -217,12 +217,30 @@ public class Menu: MonoBehaviour
 		}
 
 		//Gets the focused item to do some checks
-		int focusedItemIndex = menuItems.IndexOf(focusedItem) + 1;
+		int focusedItemIndex = menuItems.IndexOf(focusedItem);
 
-		//Checks if above range
-		if (focusedItemIndex >= this.count)
+		//Directionn of the loop
+		int direction = 1;
+
+		while (true) 
 		{
-			focusedItemIndex = this.count - 1;
+			//Adding or substracting 1
+			focusedItemIndex += direction;
+
+			//Checking if next item exists and can be selected
+			if (focusedItemIndex >= this.count)
+			{
+				//Its out of range...
+				focusedItemIndex = this.count;
+				direction = -1;
+			} 
+			else
+			{
+				if (this[focusedItemIndex].isEnabled == true)
+				{ 
+					break;
+				}
+			}
 		}
 
         //Changing focused item
@@ -240,12 +258,30 @@ public class Menu: MonoBehaviour
 		}
 		
 		//Gets the focused item to do some checks
-		int focusedItemIndex = menuItems.IndexOf (focusedItem) - 1;
-
-		//Checks if below range
-		if (focusedItemIndex  < 0)
+		int focusedItemIndex = menuItems.IndexOf(focusedItem);
+		
+		//Directionn of the loop
+		int direction = -1;
+		
+		while (true) 
 		{
-			focusedItemIndex = 0;
+			//Adding or substracting 1
+			focusedItemIndex += direction;
+			
+			//Checking if next item exists and can be selected
+			if (focusedItemIndex <= 0)
+			{
+				//Its out of range...
+				focusedItemIndex = 0;
+				direction = 1;
+			} 
+			else
+			{
+				if (this[focusedItemIndex].isEnabled == true)
+				{ 
+					break;
+				}
+			}
 		}
 		
 		//Changing focused item
