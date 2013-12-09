@@ -99,10 +99,13 @@ public partial class Player : MonoBehaviour
     {
 		if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
 		{
-			GameManager.Instance.PauseGame();
+			//GameManager.Instance.PauseGame();
 			
-			Menu menu = PauseMenu.Attach(this.gameObject);
-			menu.controllers.Add (controller);
+			//Menu menu = PauseMenu.Attach(this.gameObject);
+			//menu.controllers.Add (controller);
+
+            Menu skillMenu = SkillMenu.Attach(this.gameObject);
+            skillMenu.controllers.Add(controller);
 		} 
 		
 		if (controller.JustPressed(Button.X))
