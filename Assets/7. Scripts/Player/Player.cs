@@ -123,7 +123,7 @@ public partial class Player : MonoBehaviour
 
 		if (controller.JustPressed(Button.B))
 		{
-			AttackStart();
+			Attack();
 		}
     }
 
