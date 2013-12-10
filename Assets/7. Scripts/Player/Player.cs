@@ -91,7 +91,7 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-		if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
+		if (Input.GetMouseButtonDown(0) || controller.JustPressed(Button.Start) && !GameManager.isPaused)
 		{
 			//GameManager.Instance.PauseGame();
 			
