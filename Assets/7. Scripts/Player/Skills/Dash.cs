@@ -6,33 +6,50 @@ using UnityEngine;
 
 public class Dash : SkillBase
 {
-	public override string animationName { get; set; }
-
-	private bool _dashing = false;
 	private Player _player;
+
+	private Timer _dashing;
+
+	private Timer _cooldown;
 
 	public Dash()
 	{
 		animationName = "Dash";
+		_dashing = new Timer (0.3f);
+		_dashing.AddCallback (_dashing.endTime, delegate {
+			Debug.Log("ASD");
+			_player.animation.Stop();
+			_player.rigidbody.velocity = Vector3.zero;
+		});
 	}
 
-    public override void performAction(Player player)
-    {
-		_dashing = true;
-		_player = player;
-		//player.rigidbody.AddForce(Vector3.up * 1000);
+	void Start()
+	{
+		_player = GetComponent<Player> ();
+		initializeAnimation ();
+	}
+
+    public override void performAction()
+	{
+		_dashing.Start ();
     }
+
+	public void initializeAnimation()
+	{
+		Animation animation = _player.animation;
+
+		animation[animationName].speed = 1.0f;
+		animation[animationName].wrapMode = WrapMode.Loop;
+		animation[animationName].layer = 2;
+	}
 
 	public void Update()
 	{
-		if(_dashing)
+		_dashing.Update ();
+
+		if(_dashing.running)
 		{
-			_player.rigidbody.velocity = _player.transform.forward * 100;
-			_dashing = false;
-		}
-		else
-		{
-			_player.rigidbody.velocity = Vector3.zero;
+			_player.rigidbody.velocity = _player.transform.forward * 20;
 		}
 	}
 }

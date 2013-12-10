@@ -9,8 +9,8 @@ using UnityEngine;
 /// </summary>
 public abstract class SkillBase : MonoBehaviour
 {
-	public abstract string animationName { get; set; }
+	public string animationName { get; protected set; }
 
-    public abstract void performAction(Player player);
+    public abstract void performAction();
 }
 

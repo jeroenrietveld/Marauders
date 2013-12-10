@@ -4,8 +4,8 @@ using System;
 
 public partial class Player : MonoBehaviour
 {
-	private Transform LowerBody;
-	private Transform UpperBody;
+	private Transform _lowerBody;
+	private Transform _upperBody;
 
 	private float crossFadeDuration = 0.3f;
 
@@ -19,30 +19,30 @@ public partial class Player : MonoBehaviour
 
 	protected void InitializeAnimations()
 	{
-		UpperBody = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine");
-		LowerBody = transform.Find("Character1_Reference/Character1_Hips/");
+		_upperBody = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine");
+		_lowerBody = transform.Find("Character1_Reference/Character1_Hips/");
 
 		//Starting with idle, need to start like this
 		animation.Play ("Idle");
 		animation["Idle"].wrapMode = WrapMode.Once;
 		animation["Idle"].layer = 1;
-		animation["Idle"].AddMixingTransform(LowerBody);
+		animation["Idle"].AddMixingTransform(_lowerBody);
 
 		animation["Walk"].wrapMode = WrapMode.Once;
 		animation["Walk"].layer = 1;
-		animation["Walk"].AddMixingTransform(LowerBody);
+		animation["Walk"].AddMixingTransform(_lowerBody);
 
 		animation["Run"].wrapMode = WrapMode.Once;
 		animation["Run"].layer = 1;
-		animation["Run"].AddMixingTransform(LowerBody);
+		animation["Run"].AddMixingTransform(_lowerBody);
 
 		animation["Jump"].wrapMode = WrapMode.ClampForever;
 		animation["Jump"].layer = 1;
-		animation["Jump"].AddMixingTransform(LowerBody);
+		animation["Jump"].AddMixingTransform(_lowerBody);
 
 		animation["Jump Land"].wrapMode = WrapMode.Once;
 		animation["Jump Land"].layer = 1;
-		animation["Jump Land"].AddMixingTransform(LowerBody);
+		animation["Jump Land"].AddMixingTransform(_lowerBody);
 	}
 
 	protected void AnimationIdle()
@@ -50,7 +50,7 @@ public partial class Player : MonoBehaviour
 		//We want the FULL attack animation when standing still
 		if ((attackAnimationName != "") && (attackLowerBody == false))
 		{
-			animation[attackAnimationName].AddMixingTransform(LowerBody);
+			animation[attackAnimationName].AddMixingTransform(_lowerBody);
 			attackLowerBody = true;
 		}
 		animation.CrossFade("Idle", crossFadeDuration, PlayMode.StopSameLayer);
@@ -84,7 +84,7 @@ public partial class Player : MonoBehaviour
 			if ((attackAnimationName != "") && (attackLowerBody))
 			{
 				attackLowerBody = false;
-				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
+				animation[attackAnimationName].RemoveMixingTransform(_lowerBody);
 			} 
 
 			//Walking
@@ -108,7 +108,7 @@ public partial class Player : MonoBehaviour
 			if ((attackAnimationName != "") && (attackLowerBody))
 			{
 				attackLowerBody = false;
-				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
+				animation[attackAnimationName].RemoveMixingTransform(_lowerBody);
 			} 
 
 			inAir = true;
@@ -147,7 +147,7 @@ public partial class Player : MonoBehaviour
 			//Playing the attack animation
 			//Setting the attack name
 			attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
-			animation[attackAnimationName].AddMixingTransform(LowerBody);
+			animation[attackAnimationName].AddMixingTransform(_lowerBody);
 			animation[attackAnimationName].speed = 1.0f;
 			animation[attackAnimationName].wrapMode = WrapMode.Once;
 			animation[attackAnimationName].layer = 2;

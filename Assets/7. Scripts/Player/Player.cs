@@ -11,6 +11,7 @@ public partial class Player : MonoBehaviour
 	public SkillBase offensiveSkill { get; set; }
 	public SkillBase utilitySkill { get; set; }
 	public SkillBase defensiveSkill { get; set; }
+
 	public float health
 	{
 		get {
@@ -42,6 +43,9 @@ public partial class Player : MonoBehaviour
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 
 		InitializeAnimations();
+
+		//TODO: remove (testing purposes)
+		utilitySkill = gameObject.AddComponent<Dash> ();
 	}
 
 	public Player()
@@ -121,6 +125,12 @@ public partial class Player : MonoBehaviour
 		if (controller.JustPressed(Button.B))
 		{
 			AnimationAttack();
+		}
+
+		if(controller.JustPressed(Button.X))
+		{
+			utilitySkill.performAction();
+			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
 		}
     }
 

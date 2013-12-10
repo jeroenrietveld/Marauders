@@ -16,6 +16,13 @@ public class Timer
 
 	public delegate void Callback();
 
+	public bool running
+	{
+		get
+		{
+			return _running;
+		}
+	}
 	private bool _running;
 
 	private float _startTimeStamp;
@@ -107,11 +114,17 @@ public class Timer
 
 	public float Phase()
 	{
-		return (GetCurrentTime - startTime) / (endTime - startTime);
+		return (GetCurrentTime() - startTime) / (endTime - startTime);
 	}
 
 	public void AddCallback(float time, Callback callback)
 	{
-		_callbacks.Add (new CallbackPair (time, callback));
+		int index = 0;
+		while(index < _callbacks.Count && _callbacks[index].time < time) 
+		{
+			index++;
+		}
+
+		_callbacks.Insert (index, new CallbackPair (time, callback));
 	}
 }
