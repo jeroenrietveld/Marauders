@@ -9,7 +9,7 @@ public class ProgressbarCell : Cell
     GUIProgressbar progbar;
     public ProgressbarCell(float max) 
     { 
-        GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/progbar")) as GameObject;
+        GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/GUIProgressbar")) as GameObject;
         progbar = prefab.GetComponent<GUIProgressbar>();
         progbar.effective = 0f;
         progbar.max = max;
