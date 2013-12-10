@@ -29,10 +29,9 @@ public class Dash : SkillBase
 		initializeAnimation ();
 	}
 
-    public override void performAction()
+	protected override void OnPerformAction()
 	{
 		_dashing.Start ();
-		cooldown.Start ();
     }
 
 	public void initializeAnimation()
@@ -44,10 +43,9 @@ public class Dash : SkillBase
 		animation[animationName].layer = 2;
 	}
 
-	public void Update()
+	protected override void OnUpdate()
 	{
 		_dashing.Update ();
-		cooldown.Update ();
 
 		if(_dashing.running)
 		{

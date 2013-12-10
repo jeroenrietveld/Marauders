@@ -129,7 +129,7 @@ public partial class Player : MonoBehaviour
 
 		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running)
 		{
-			utilitySkill.performAction();
+			utilitySkill.PerformAction();
 			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
 		}
     }
