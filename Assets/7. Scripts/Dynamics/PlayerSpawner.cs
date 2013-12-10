@@ -6,6 +6,7 @@ public class PlayerSpawner : MonoBehaviour {
 	public GameObject player;
 	public float spawnDelay = 1;
 	public Vector3 exitForce = Vector3.zero;
+	//public Timer timer;
 
 	// Use this for initialization
 	void Start () {

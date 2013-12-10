@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using XInputDotNetPure;
 using UnityEngine;
-using System.Linq;
 
 public class Menu: MonoBehaviour
 {
@@ -169,7 +168,7 @@ public class Menu: MonoBehaviour
                             NextItem();
 
                             SkillMenu.currentActiveSkill = SkillMenu.currentActiveSkill + prevDirection;
-                            SkillMenu.activeSkill = this.focusedItem.text;
+							SkillMenu.activeSkill = this.focusedItem.text;
                         }
 
                         return;
