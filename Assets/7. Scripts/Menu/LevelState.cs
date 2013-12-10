@@ -22,8 +22,10 @@ public class LevelState : MenuStateBase
                 manager.ChangeState(MenuStates.ArmoryState);
             }
 	    }
+	}
 
-		
-
+	public override void OnActive()
+	{
+		LevelSelectionManager.currentState = LevelSelectionManager.selectionBlocks [LevelSelectionState.LevelSelection];
 	}
 }
