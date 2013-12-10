@@ -17,7 +17,6 @@ public class Dash : SkillBase
 		animationName = "Dash";
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (_dashing.endTime, delegate {
-			Debug.Log("ASD");
 			_player.animation.Stop();
 			_player.rigidbody.velocity = Vector3.zero;
 		});
