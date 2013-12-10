@@ -8,9 +8,9 @@ public partial class Player : MonoBehaviour
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
 	
-	public SkillBase bSkill { get; set; }
-	public SkillBase xSkill { get; set; }
-	public SkillBase ySkill { get; set; }
+	public SkillBase offensiveSkill { get; set; }
+	public SkillBase utilitySkill { get; set; }
+	public SkillBase defensiveSkill { get; set; }
 	public float health
 	{
 		get {
@@ -40,7 +40,6 @@ public partial class Player : MonoBehaviour
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-
 
 		InitializeAnimations();
 	}
@@ -78,15 +77,10 @@ public partial class Player : MonoBehaviour
 	
 	public void DropPrimaryWeapon()
 	{
-		//Moving secondary to primary
-		//primaryWeapon = secondaryWeapon;
-
-		//Secondary is definately null now
-		//secondaryWeapon = null;
-
 		//Manually set the position a little higher so it wont fall through the ground
 		Vector3 position = transform.position;
 		position.y += 2;
+
 		PickupSpawner.SpawnWeapon (primaryWeapon.gameObject, primaryWeapon.transform.position);
 		primaryWeapon.owner = null;
 	}
@@ -97,7 +91,7 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-		if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
+		if (Input.GetMouseButtonDown(0) || controller.JustPressed(Button.Start) && !GameManager.isPaused)
 		{
 			//GameManager.Instance.PauseGame();
 			
@@ -154,11 +148,11 @@ public partial class Player : MonoBehaviour
 		health = health - amount;
 	}
 	
-	public void AddModel(PlayerModel model)
+	public void LoadModel(PlayerModel model)
 	{
-		this.xSkill = (SkillBase)Activator.CreateInstance(null, model.xAction).Unwrap();
-		this.bSkill = (SkillBase)Activator.CreateInstance(null, model.bAction).Unwrap();
-		this.ySkill = (SkillBase)Activator.CreateInstance(null, model.yAction).Unwrap();
+		this.utilitySkill = (SkillBase)Activator.CreateInstance(null, model.utilitySkill).Unwrap();
+		this.offensiveSkill = (SkillBase)Activator.CreateInstance(null, model.offensiveSkill).Unwrap();
+		this.defensiveSkill = (SkillBase)Activator.CreateInstance(null, model.defensiveSkill).Unwrap();
 		this.playerIndex = model.index;
 	}
 }

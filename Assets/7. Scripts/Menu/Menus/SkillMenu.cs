@@ -3,32 +3,56 @@ using System.Collections;
 using XInputDotNetPure;
 using System.Collections.Generic;
 
+/// <summary>
+/// Enum with the three different PlayerSkills.
+/// </summary>
+public enum PlayerSkills
+{
+    AttackSkills = 1,
+    DefenseSkills = 2,
+    UtilitySkills = 3
+}
+
+/// <summary>
+/// With this class we can create a SkillMenu. THe user can navigate through the skills and select the skill they want.
+/// In the Dictionary we keep the three PlayerSkills (attack, defense and utility) and a list with the different skills
+/// per PlayerSkill.
+/// The string activeSkill is used to know which string in PlayerSkill we have currently selected.
+/// currenActiveSkill is so we know what PlayerSkill is active.
+/// </summary>
 public class SkillMenu
 {
-	public static List<string> utilitySkills;
-	public static List<string> defenseSkills;
-	public static List<string> attackSkills;
+    public static Dictionary<PlayerSkills, List<string>> skillList;
+    public static PlayerSkills currentActiveSkill = PlayerSkills.AttackSkills;
+    public static string activeSkill;
 
     public static Menu Attach(GameObject gameObject)
     {
         if (menu == null)
         {
-			// creating the dictionary with the texts in the skillmenu
-			utilitySkills = new List<string>();
-			defenseSkills = new List<string>();
-			attackSkills = new List<string>();
+            skillList = new Dictionary<PlayerSkills, List<string>>();
 
-			utilitySkills.Add ("utility1");
-			utilitySkills.Add ("utility2");
-			utilitySkills.Add ("utility3");
+            List<string> utilitySkills = new List<string>();
+            List<string> defenseSkills = new List<string>();
+            List<string> attackSkills = new List<string>();
 
-			defenseSkills.Add ("defense1");
-			defenseSkills.Add ("defense2");
-			defenseSkills.Add ("defense3");
+			utilitySkills.Add ("Utility1");
+            utilitySkills.Add ("Utility2");
+            utilitySkills.Add ("Utility3");
 
-			attackSkills.Add ("attack1");
-			attackSkills.Add ("attack2");
-			attackSkills.Add ("attack3");
+			defenseSkills.Add ("Defense1");
+			defenseSkills.Add ("Defense2");
+			defenseSkills.Add ("Defense3");
+
+			attackSkills.Add ("Attack1");
+			attackSkills.Add ("Attack2");
+			attackSkills.Add ("Attack3");
+
+            skillList.Add(PlayerSkills.DefenseSkills, defenseSkills);
+            skillList.Add(PlayerSkills.AttackSkills, attackSkills);
+            skillList.Add(PlayerSkills.UtilitySkills, utilitySkills);
+
+            activeSkill = skillList[PlayerSkills.AttackSkills][0];
 
             // Making menu
             menu = (Menu)gameObject.AddComponent("Menu");

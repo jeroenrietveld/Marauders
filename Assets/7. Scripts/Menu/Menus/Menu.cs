@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using XInputDotNetPure;
 using UnityEngine;
+using System.Linq;
 
 public class Menu: MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Menu: MonoBehaviour
 	/// </summary>
 	/// <value><c>true</c> if showing; otherwise, <c>false</c>.</value>
 	public bool visible { get;set; }
+    private int prevDirection = 0;
 
 	/// <summary>
 	/// Sets the <see cref="Menu"/> with the specified i.
@@ -165,6 +167,9 @@ public class Menu: MonoBehaviour
                         {
                             readInput[controller] = false;
                             NextItem();
+
+                            SkillMenu.currentActiveSkill = SkillMenu.currentActiveSkill + prevDirection;
+                            SkillMenu.activeSkill = this.focusedItem.text;
                         }
 
                         return;
@@ -176,36 +181,37 @@ public class Menu: MonoBehaviour
                         {
                             readInput[controller] = false;
                             PreviousItem();
+
+                            SkillMenu.currentActiveSkill = SkillMenu.currentActiveSkill + prevDirection;
+                            SkillMenu.activeSkill = this.focusedItem.text;
                         }
 
                         return;
                     }
 
-					if ((controller.Axis(Axis.LeftHorizantal) >= axisThreshhold) || controller.Pressed(Button.DPadRight))
+					if ((Input.GetMouseButtonDown(1) || controller.Axis(Axis.LeftHorizantal) >= axisThreshhold) || controller.Pressed(Button.DPadRight))
 					{
 						if (readInput[controller])
 						{
 							readInput[controller] = false;
 
-							
-
-							this.focusedItem.text = SkillMenu.attackSkills[1];
+                            SkillSelection(1);
 						}
 						
 						return;
 					}
 
-					if ((controller.Axis(Axis.LeftHorizantal) <= -axisThreshhold) || controller.Pressed(Button.DPadLeft))
+					if ((Input.GetMouseButtonDown(2) || controller.Axis(Axis.LeftHorizantal) <= -axisThreshhold) || controller.Pressed(Button.DPadLeft))
 					{
 						if (readInput[controller])
 						{
 							readInput[controller] = false;
-							this.focusedItem.text = "left";
+
+                            SkillSelection(-1);
 						}
 						
 						return;
 					}
-				
 					
 					readInput[controller] = true;
 					
@@ -217,6 +223,28 @@ public class Menu: MonoBehaviour
 			}
 		}
 	}
+
+    /// <summary>
+    /// Selects the next or previous skill based on the direction parameter(-1 or 1)
+    /// </summary>
+    private void SkillSelection(int direction)
+    {
+        int indexSkill = SkillMenu.skillList[SkillMenu.currentActiveSkill].IndexOf(SkillMenu.activeSkill) + direction;
+
+        if (indexSkill >= SkillMenu.skillList.Count)
+        {
+            indexSkill = SkillMenu.skillList.Count - 1;
+        }
+        if (indexSkill < 0)
+        {
+            indexSkill = 0;
+        }
+
+        string name = SkillMenu.skillList[SkillMenu.currentActiveSkill][indexSkill];
+        SkillMenu.activeSkill = name;
+
+        this.focusedItem.text = name;
+    }
 
 	public void Remove()
 	{
@@ -268,7 +296,8 @@ public class Menu: MonoBehaviour
 			else
 			{
 				if (this[focusedItemIndex].isEnabled == true)
-				{ 
+				{
+                    prevDirection = direction;
 					break;
 				}
 			}
@@ -287,7 +316,7 @@ public class Menu: MonoBehaviour
 		{
 			return;
 		}
-		
+        
 		//Gets the focused item to do some checks
 		int focusedItemIndex = menuItems.IndexOf(focusedItem);
 		
@@ -309,7 +338,8 @@ public class Menu: MonoBehaviour
 			else
 			{
 				if (this[focusedItemIndex].isEnabled == true)
-				{ 
+				{
+                    prevDirection = direction;
 					break;
 				}
 			}
