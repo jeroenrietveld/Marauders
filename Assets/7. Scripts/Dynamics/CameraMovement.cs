@@ -62,9 +62,16 @@ public class CameraMovement : MonoBehaviour
 	void UpdateCameraPosition()
 	{
 		Vector3 minPosition, maxPosition;
+        if (_trackableObjects.Count > 0)
+        {
+            minPosition = _trackableObjects[0].transform.position;
+		    maxPosition = _trackableObjects[0].transform.position;
+        }
+        else
+        {
+            minPosition = maxPosition = Vector3.zero;
+        }
 		
-		minPosition = _trackableObjects[0].transform.position;
-		maxPosition = _trackableObjects[0].transform.position;
 		
 		for (int i = 1; i < _trackableObjects.Count; i++)
 		{

@@ -13,12 +13,12 @@ public class GUIProgressbar : MonoBehaviour {
     public Texture2D progbarEmpty;
     public Texture2D progbarFull;
 
-    public Vector2 pos { get; set; }
-    public Vector2 size { get; set; }
+    public Vector2 pos = new Vector2(20,40);
+    public Vector2 size = new Vector2(90, 20);
 
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(pos.x, pos.y, size.x, size.y), progbarEmpty);
+        GUI.DrawTexture(new Rect(pos.x-4, pos.y-4, size.x+8, size.y+8), progbarEmpty);
         GUI.DrawTexture(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(_progress), size.y), progbarFull);
     }
 
