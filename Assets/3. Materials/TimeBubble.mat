@@ -31,30 +31,22 @@ Material:
         first:
           name: FractalLayer2
         second:
-          m_Texture: {fileID: 2800000, guid: 4f220386884043c49a906f83bb776cd1, type: 3}
+          m_Texture: {fileID: 2800000, guid: afd9115b062568b42844810082eb7955, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
-      data:
-        first:
-          name: DistortionCenter
-        second: .75
-      data:
-        first:
-          name: DistortionRange
-        second: .0125000002
       data:
         first:
           name: DistortionCenter1
         second: .5
       data:
         first:
-          name: DistortionRange1
-        second: .0149999997
-      data:
-        first:
           name: DistortionCenter2
         second: 1.5
+      data:
+        first:
+          name: DistortionRange1
+        second: .0149999997
       data:
         first:
           name: DistortionRange2
@@ -63,6 +55,14 @@ Material:
         first:
           name: FillAlpha
         second: .0399999991
+      data:
+        first:
+          name: DistortionCenter
+        second: .75
+      data:
+        first:
+          name: DistortionRange
+        second: .0125000002
     m_Colors:
       data:
         first:
@@ -74,13 +74,13 @@ Material:
         second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
-          name: DistortionColor
-        second: {r: .676470578, g: 1, b: .595588207, a: 1}
-      data:
-        first:
           name: DistortionColor1
         second: {r: 0, g: 1, b: 0, a: .196078435}
       data:
         first:
           name: DistortionColor2
         second: {r: 1, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: DistortionColor
+        second: {r: .676470578, g: 1, b: .595588207, a: 1}

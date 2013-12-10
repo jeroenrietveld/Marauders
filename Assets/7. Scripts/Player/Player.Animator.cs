@@ -43,7 +43,6 @@ public partial class Player : MonoBehaviour
 		animation["Jump Land"].wrapMode = WrapMode.Once;
 		animation["Jump Land"].layer = 1;
 		animation["Jump Land"].AddMixingTransform(LowerBody);
-	
 	}
 
 	protected void AnimationIdle()
@@ -142,15 +141,12 @@ public partial class Player : MonoBehaviour
 		//Upping the animation index
 		attackAnimationIndex = (attackAnimationIndex + 1) % primaryWeapon.animations.Count;
 
-
-
 		//Can not attack 2x at the same time
 		if (!animation.IsPlaying(attackAnimationName))
 		{
 			//Playing the attack animation
 			//Setting the attack name
 			attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
-			animation[attackAnimationName].AddMixingTransform(UpperBody);
 			animation[attackAnimationName].AddMixingTransform(LowerBody);
 			animation[attackAnimationName].speed = 1.0f;
 			animation[attackAnimationName].wrapMode = WrapMode.Once;

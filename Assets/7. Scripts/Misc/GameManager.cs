@@ -2,36 +2,25 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// Keeps track of the game.
-/// </summary>
 public class GameManager {
 
 	/// <summary>
 	/// Instance of the game manager (singleton)
 	/// </summary>
 	private static GameManager _instance;
-    public static bool isPaused = false;
-    public MatchSettings matchSettings;
 
-    public List<PlayerModel> playerModels;
+    public static bool isPaused = false;
+
     public List<Player> players;
+	public List<PlayerModel> playerModels;
 
 	public struct MatchSettings
 	{
 		public string level;
 		public GameMode gameMode;
 	}
+	public MatchSettings matchSettings;
 
-	/// <summary>
-	/// Playlist of matches. (level, game mode combination)
-	/// </summary>
-	//private List<MatchSettings> _matches;
-
-	/// <summary>
-	/// Gets the instance.
-	/// </summary>
-	/// <value>The instance.</value>
 	public static GameManager Instance
 	{
 		get
@@ -46,50 +35,35 @@ public class GameManager {
 
 	private GameManager()
 	{
-		//_matches = new List<MatchSettings>();
         matchSettings = new MatchSettings();
-        playerModels = new List<PlayerModel>();
-        players = new List<Player>();
-	}
-
-	/// <summary>
-	/// Loads the next scene.
-	/// </summary>
-	private void NextLevel()
-	{
-		// TODO implementation
-		// Application.LoadLevel();
+		players = new List<Player>();
+		playerModels = new List<PlayerModel>();
 	}
 
 	public void Start()
 	{   
         if (matchSettings.level != null)
         {
-           Application.LoadLevel(matchSettings.level);
-            foreach (PlayerModel model in playerModels)
-            {
-                GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + model.character)) as GameObject;
-                prefab.AddComponent("Player");
-                prefab.GetComponent<Player>().AddModel(model);
+			Application.LoadLevel(matchSettings.level);
 
-                players.Add(prefab.GetComponent<Player>());
-            }
-            
+			foreach (PlayerModel model in playerModels)
+			{
+				GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + model.marauder)) as GameObject;
+				prefab.AddComponent("Player");
+				prefab.GetComponent<Player>().LoadModel(model);
+
+				//add the players to the player list, this way they are always easily accessible
+				players.Add(prefab.GetComponent<Player>());
+			}
         } 
 	}
 
-    /// <summary>
-    /// Pause the game by setting the timeScale to 0f.
-    /// </summary>
     public void PauseGame()
     {
         isPaused = true;
         Time.timeScale = 0f;
     }
 
-    /// <summary>
-    /// Resume  the game by setting timeScale to 1f.
-    /// </summary>
     public void ResumeGame()
     {
         isPaused = false;
