@@ -1189,7 +1189,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 111: {fileID: 11100000}
   m_Layer: 0
-  m_Name: Bandit
+  m_Name: Bandit_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

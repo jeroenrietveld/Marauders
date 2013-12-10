@@ -10,16 +10,17 @@ public class Dash : SkillBase
 
 	private Timer _dashing;
 
-	private Timer _cooldown;
-
 	public Dash()
 	{
 		animationName = "Dash";
+
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (_dashing.endTime, delegate {
 			_player.animation.Stop();
 			_player.rigidbody.velocity = Vector3.zero;
 		});
+
+		cooldown = new Timer (10f);
 	}
 
 	void Start()
@@ -31,6 +32,7 @@ public class Dash : SkillBase
     public override void performAction()
 	{
 		_dashing.Start ();
+		cooldown.Start ();
     }
 
 	public void initializeAnimation()
@@ -45,6 +47,7 @@ public class Dash : SkillBase
 	public void Update()
 	{
 		_dashing.Update ();
+		cooldown.Update ();
 
 		if(_dashing.running)
 		{

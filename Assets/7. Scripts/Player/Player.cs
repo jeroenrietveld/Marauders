@@ -127,7 +127,7 @@ public partial class Player : MonoBehaviour
 			AnimationAttack();
 		}
 
-		if(controller.JustPressed(Button.X))
+		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running)
 		{
 			utilitySkill.performAction();
 			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);

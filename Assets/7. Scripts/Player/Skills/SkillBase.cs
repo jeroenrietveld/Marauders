@@ -11,6 +11,8 @@ public abstract class SkillBase : MonoBehaviour
 {
 	public string animationName { get; protected set; }
 
+	public Timer cooldown { get; protected set; }
+
     public abstract void performAction();
 }
 
