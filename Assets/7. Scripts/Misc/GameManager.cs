@@ -18,6 +18,7 @@ public class GameManager {
 	{
 		public string level;
 		public GameMode gameMode;
+        public float timeSync;
 	}
 	public MatchSettings matchSettings;
 

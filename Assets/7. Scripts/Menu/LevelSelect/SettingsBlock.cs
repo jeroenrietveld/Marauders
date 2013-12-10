@@ -53,6 +53,9 @@ class SettingsBlock : LevelSelectionBlockBase
             }
             else
             {
+
+                //TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
+
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
                 string gameModeID = LevelSelectionBlock.current.gameModes[_gameModeIndex];           
 

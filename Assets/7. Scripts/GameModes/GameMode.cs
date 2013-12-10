@@ -33,7 +33,8 @@ public abstract class GameMode
 	}
 
     public void InitializeScoreboard()
-    { 
+    {
+        scoreboard = new Scoreboard();
         List<Cell> fieldNameList = new List<Cell>();
         scoreboard.AddCellList(fieldNameList);
         foreach(String name in new String[] {"Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio"})
@@ -49,7 +50,7 @@ public abstract class GameMode
             addition.Add(new PlayerCell(player));
 
             //Declare all cells
-            ProgressbarCell timeSync = new ProgressbarCell();
+            ProgressbarCell timeSync = new ProgressbarCell(GameManager.Instance.matchSettings.timeSync);
             IntegerCell eliminations = new IntegerCell();
             IntegerCell eliminated = new IntegerCell();
             IntegerCell suicides = new IntegerCell();
@@ -62,27 +63,27 @@ public abstract class GameMode
             addition.Add(suicides);
             addition.Add(hitratio);
 
+            //Register the events that are always needed
             Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt) 
             { 
                 if(evt.victim == player) 
                 {                  
-                    timeSync.effective -= 20;
+                    timeSync.Add(-20);
                     eliminated.amount += 1;
                     if(evt.offender == player)
                     {
                         suicides.amount += 1;
                         //Apply a suicide penalty to the timeSync
-                        timeSync.effective -= 10;
+                        timeSync.Add(-10);
                     }
                 }
                 else if(evt.offender == player)
                 {
-                    timeSync.effective += 20;
+                    timeSync.Add(20);
                     eliminations.amount += 1;
                 }
             });
         }
-        Debug.Log(scoreboard.ToString());
     }
    
 }

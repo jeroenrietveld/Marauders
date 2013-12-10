@@ -11,7 +11,7 @@ public class LevelSelectionManager : MonoBehaviour {
 	public static Dictionary<LevelSelectionState, LevelSelectionBlockBase> selectionBlocks;
 	public static LevelSelectionBlockBase currentState;
 
-    private static string _resourcePath = "Levels";
+    private static string _resourcePath = "Materials/Levels";
 
 	// Use this for initialization
 	void Start() {

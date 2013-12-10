@@ -34,7 +34,7 @@ public class PauseMenu {
             item.normalStyle = normal;
             item.normalStyle.padding = new RectOffset(100, 100, 10, 10);
             item.focusedStyle = focused;     
-			((MenuItemLabel)item).XboxPressed += new XboxPressedEventHandler(button_Resume);
+			((MenuItemLabel)item).xboxPressed += new XboxPressedEventHandler(button_Resume);
 			menu.Add (item);
 			
 			item = new MenuItemLabel();

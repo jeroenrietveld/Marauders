@@ -6,10 +6,10 @@ using System.Text;
 
 public class StringCell : Cell 
 {
-    private String _content;
+    public String content { get; set; }
     public StringCell(String content)
     {
-        _content = content;
+        this.content = content;
     }
 }
 

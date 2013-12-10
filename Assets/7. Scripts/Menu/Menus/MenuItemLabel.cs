@@ -3,7 +3,7 @@ using XInputDotNetPure;
 
 public class MenuItemLabel:MenuItem
 {
-	public event XboxPressedEventHandler XboxPressed;
+	public event XboxPressedEventHandler xboxPressed;
     private GUIStyle style = new GUIStyle();
 
 	public override void Draw (int yLocation)
@@ -43,7 +43,8 @@ public class MenuItemLabel:MenuItem
         // draw a GUI.Label and GUI texture
         else
         {
-            GUI.DrawTexture(new Rect(parent.region.x,
+            GUI.DrawTexture(
+                    new Rect(parent.region.x,
                             yLocation,
                             parent.region.width,
                             this.height), 
@@ -63,7 +64,7 @@ public class MenuItemLabel:MenuItem
 	{
 		if (controller.Pressed(Button.A))
 		{
-			this.XboxPressed(this, Button.A);
+			this.xboxPressed(this, Button.A);
 		}
 	}
 }
