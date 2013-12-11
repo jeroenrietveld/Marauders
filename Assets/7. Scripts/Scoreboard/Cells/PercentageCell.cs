@@ -14,4 +14,9 @@ public class PercentageCell : Cell
     {
         percentage = (int) (effective / total) * 100;
     }
+
+    public override String GetContent()
+    {
+        return percentage + "";
+    }
 }

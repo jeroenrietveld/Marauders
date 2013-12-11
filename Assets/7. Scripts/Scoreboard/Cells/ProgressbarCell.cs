@@ -12,13 +12,18 @@ public class ProgressbarCell : Cell
         GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/GUIProgressbar")) as GameObject;
         progbar = prefab.GetComponent<GUIProgressbar>();
         progbar.effective = 0f;
-        progbar.max = max;
-        progbar.pos = new Vector2(prefab.transform.position.x, prefab.transform.position.y);
-        progbar.size = new Vector2(20, 10);
+        progbar.max = max;       
     }
 
     public void Add(float addition)
+    {              
+        progbar.effective = Mathf.Clamp(progbar.effective + addition, 0, progbar.max);
+    }
+
+    public override String GetContent()
     {
-        progbar.effective += addition;
+        progbar.pos = this.pos;
+        progbar.size = this.size;
+        return "";
     }
 }

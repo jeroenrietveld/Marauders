@@ -11,5 +11,10 @@ public class StringCell : Cell
     {
         this.content = content;
     }
+
+    public override string GetContent()
+    {
+        return content + "";
+    }
 }
 
