@@ -19,6 +19,7 @@ public class GUIProgressbar : MonoBehaviour{
     void OnGUI()
     {
         size -= padding;
+        pos += 0.5f * padding;
         GUI.depth = -1;
         GUI.DrawTexture(new Rect(pos.x, pos.y, size.x, size.y), _progbarEmpty);
         GUI.DrawTexture(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(_progress), size.y), _progbarFull);

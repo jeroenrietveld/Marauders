@@ -24,16 +24,20 @@ public class Scoreboard : MonoBehaviour
         List<Player> testlist = new List<Player>();
         testlist.Add(GameObject.Find("Player1").GetComponent<Player>());
         testlist.Add(GameObject.Find("Player2").GetComponent<Player>());
+
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
+
         List<Cell> fieldNameList = new List<Cell>();
         scoreboard.AddCellList(fieldNameList);
+
         foreach (String name in new String[] { "Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio" })
         {
             fieldNameList.Add(new StringCell(name));
         }
 
-        foreach (Player player in testlist)
+        foreach (Player _player in testlist)
         {
+            Player player = _player;
             List<Cell> addition = new List<Cell>();
             scoreboard.AddCellList(addition);
 
@@ -56,8 +60,11 @@ public class Scoreboard : MonoBehaviour
             //Register the events that are always needed
             Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt)
             {
-                if (evt.victim == player)
+                
+               
+               if (evt.victim == player)
                 {
+                    Debug.Log(evt.victim);
                     timeSync.Add(-20);
                     eliminated.amount += 1;
                     if (evt.offender == player)
@@ -68,15 +75,14 @@ public class Scoreboard : MonoBehaviour
                     }
                 }
                 else if (evt.offender == player)
-                {
-                    timeSync.Add(20);
+                { 
+                    timeSync.Add(90);
                     eliminations.amount += 1;
                 }
             });
-        }
-        
-       
+        }         
     }
+
    void OnGUI()
     {
         GUI.skin = scoreboardskin;

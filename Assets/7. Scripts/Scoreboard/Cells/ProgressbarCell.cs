@@ -16,8 +16,8 @@ public class ProgressbarCell : Cell
     }
 
     public void Add(float addition)
-    {
-        progbar.effective += addition;
+    {              
+        progbar.effective = Mathf.Clamp(progbar.effective + addition, 0, progbar.max);
     }
 
     public override String GetContent()

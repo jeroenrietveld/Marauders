@@ -35,7 +35,7 @@ public abstract class GameMode
 
     public void InitializeScoreboard()
     {
-        scoreboard = new Scoreboard();
+        scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
         List<Cell> fieldNameList = new List<Cell>();
         scoreboard.AddCellList(fieldNameList);
         foreach(String name in new String[] {"Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio"})
