@@ -10,7 +10,12 @@ public class Menu: MonoBehaviour
 	/// </summary>
 	/// <value><c>true</c> if showing; otherwise, <c>false</c>.</value>
 	public bool visible { get;set; }
-    private int prevDirection = 0;
+
+	/// <summary>
+	/// Gets or sets the style.
+	/// </summary>
+	/// <value>The style.</value>
+	public GUISkin skin { get;set; }
 
 	/// <summary>
 	/// Sets the <see cref="Menu"/> with the specified i.
@@ -33,6 +38,12 @@ public class Menu: MonoBehaviour
     /// A list of menu items
     /// </summary>
 	private List<MenuItem> menuItems;
+
+	/// <summary>
+	/// Gets or sets the index of the window.
+	/// </summary>
+	/// <value>The index of the window.</value>
+	public int windowIndex {get;set;}
 
     /// <summary>
     /// The currently selected item
@@ -93,7 +104,8 @@ public class Menu: MonoBehaviour
 	{
 		this.controllers = new List<GamePad>();
 		this.menuItems = new List<MenuItem>();
-		readInput = new Dictionary<GamePad, bool>(); 
+		this.readInput = new Dictionary<GamePad, bool>(); 
+		this.windowIndex = 1;
 	}
 
     /// <summary>
@@ -104,11 +116,6 @@ public class Menu: MonoBehaviour
 		item.parent = this;
 
 		if (this.focusedItem == null)
-		{
-			this.focusedItem = item;
-		}
-		
-		if (!this.focusedItem.isEnabled) 
 		{
 			this.focusedItem = item;
 		}
@@ -166,9 +173,6 @@ public class Menu: MonoBehaviour
                         {
                             readInput[controller] = false;
                             NextItem();
-
-                            SkillMenu.currentActiveSkill = SkillMenu.currentActiveSkill + prevDirection;
-							SkillMenu.activeSkill = this.focusedItem.text;
                         }
 
                         return;
@@ -180,37 +184,10 @@ public class Menu: MonoBehaviour
                         {
                             readInput[controller] = false;
                             PreviousItem();
-
-                            SkillMenu.currentActiveSkill = SkillMenu.currentActiveSkill + prevDirection;
-                            SkillMenu.activeSkill = this.focusedItem.text;
                         }
 
                         return;
                     }
-
-					if ((Input.GetMouseButtonDown(1) || controller.Axis(Axis.LeftHorizantal) >= axisThreshhold) || controller.Pressed(Button.DPadRight))
-					{
-						if (readInput[controller])
-						{
-							readInput[controller] = false;
-
-                            SkillSelection(1);
-						}
-						
-						return;
-					}
-
-					if ((Input.GetMouseButtonDown(2) || controller.Axis(Axis.LeftHorizantal) <= -axisThreshhold) || controller.Pressed(Button.DPadLeft))
-					{
-						if (readInput[controller])
-						{
-							readInput[controller] = false;
-
-                            SkillSelection(-1);
-						}
-						
-						return;
-					}
 					
 					readInput[controller] = true;
 					
@@ -223,28 +200,6 @@ public class Menu: MonoBehaviour
 		}
 	}
 
-    /// <summary>
-    /// Selects the next or previous skill based on the direction parameter(-1 or 1)
-    /// </summary>
-    private void SkillSelection(int direction)
-    {
-        int indexSkill = SkillMenu.skillList[SkillMenu.currentActiveSkill].IndexOf(SkillMenu.activeSkill) + direction;
-
-        if (indexSkill >= SkillMenu.skillList.Count)
-        {
-            indexSkill = SkillMenu.skillList.Count - 1;
-        }
-        if (indexSkill < 0)
-        {
-            indexSkill = 0;
-        }
-
-        string name = SkillMenu.skillList[SkillMenu.currentActiveSkill][indexSkill];
-        SkillMenu.activeSkill = name;
-
-        this.focusedItem.text = name;
-    }
-
 	public void Remove()
 	{
 		Destroy(GameObject.Find("Menubackground"));
@@ -253,6 +208,11 @@ public class Menu: MonoBehaviour
 	
 	public void OnGUI()
 	{
+		GUI.Window(windowIndex, this.region, MakeMenu, GUIContent.none, skin.window);
+	}
+
+	private void MakeMenu(int windowID)
+	{	
 		if (visible)
 		{
 			int offset = 0;
@@ -262,6 +222,7 @@ public class Menu: MonoBehaviour
 				offset += item.height;
 			}
 		}
+		
 	}
 
 	/// <summary>
@@ -275,32 +236,14 @@ public class Menu: MonoBehaviour
 		}
 
 		//Gets the focused item to do some checks
-		int focusedItemIndex = menuItems.IndexOf(focusedItem);
+		int focusedItemIndex = menuItems.IndexOf(focusedItem) + 1;
 
-		//Directionn of the loop
-		int direction = 1;
-
-		while (true) 
+		//Checking if next item exists and can be selected
+		if (focusedItemIndex >= this.count)
 		{
-			//Adding or substracting 1
-			focusedItemIndex += direction;
-
-			//Checking if next item exists and can be selected
-			if (focusedItemIndex >= this.count)
-			{
-				//Its out of range...
-				focusedItemIndex = this.count;
-				direction = -1;
-			} 
-			else
-			{
-				if (this[focusedItemIndex].isEnabled == true)
-				{
-                    prevDirection = direction;
-					break;
-				}
-			}
-		}
+			//Its out of range...
+			focusedItemIndex = this.count - 1;
+		} 
 
         //Changing focused item
         this.focusedItem = this[focusedItemIndex];
@@ -317,34 +260,17 @@ public class Menu: MonoBehaviour
 		}
         
 		//Gets the focused item to do some checks
-		int focusedItemIndex = menuItems.IndexOf(focusedItem);
-		
-		//Directionn of the loop
-		int direction = -1;
-		
-		while (true) 
+		int focusedItemIndex = menuItems.IndexOf(focusedItem) - 1;
+
+		//Checking if next item exists and can be selected
+		if (focusedItemIndex <= 0)
 		{
-			//Adding or substracting 1
-			focusedItemIndex += direction;
-			
-			//Checking if next item exists and can be selected
-			if (focusedItemIndex <= 0)
-			{
-				//Its out of range...
-				focusedItemIndex = 0;
-				direction = 1;
-			} 
-			else
-			{
-				if (this[focusedItemIndex].isEnabled == true)
-				{
-                    prevDirection = direction;
-					break;
-				}
-			}
-		}
-		
+			//Its out of range...
+			focusedItemIndex = 0;
+		} 
+
 		//Changing focused item
 		this.focusedItem = this[focusedItemIndex];
 	}
+	
 }

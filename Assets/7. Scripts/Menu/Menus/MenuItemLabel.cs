@@ -4,60 +4,37 @@ using XInputDotNetPure;
 public class MenuItemLabel:MenuItem
 {
 	public event XboxPressedEventHandler xboxPressed;
-    private GUIStyle style = new GUIStyle();
+
+	private GUIStyle style = new GUIStyle();
+	private Texture texture = null;
 
 	public override void Draw (int yLocation)
 	{
-		//Swithcing to focused style if needed
+		//Getting the label skin
+		GUIStyle style = parent.skin.GetStyle("label");
+
+		//Setting the default ocolor
+		string color = "";
+
+		//Getting the color
 		if (this.hasFocus)
+		{ 
+			color = ToHex(style.focused.textColor);
+		}else
 		{
-            style = focusedStyle;
-		} 
-		else 
-		{
-            style = normalStyle;
+			color = ToHex(style.normal.textColor);
 		}
 
-        // draw a GUI.Label without a texture
-        if (this.normalTexture == null)
-        {
-            GUI.Label(
-                new Rect(parent.region.x,
-                    yLocation,
-                    parent.region.width,
-                    this.height),
-                    this.text,
-                    style);
-        }
-        // draw a GUI.Label without a text
-        else if (this.text == null)
-        {
-            GUI.Label(
-                new Rect(parent.region.x,
-                    yLocation,
-                    parent.region.width,
-                    this.height),
-                    this.normalTexture,
-                    style);
-        }
-        // draw a GUI.Label and GUI texture
-        else
-        {
-            GUI.DrawTexture(
-                    new Rect(parent.region.x,
-                            yLocation,
-                            parent.region.width,
-                            this.height), 
-                            this.normalTexture);
-
-            GUI.Label(
-                    new Rect(parent.region.x,
-                        yLocation,
-                        parent.region.width,
-                        this.height),
-                        this.text,
-                        style);
-        }       
+		//Draws a label, style is handled by the skin
+		GUI.Label(
+			new Rect(
+				0,
+				yLocation,
+				parent.region.width,
+				this.height),
+			"<color='" + color + "'>" + this.text + "</color>",
+			style);	
+	
 	}
 
 	public override void HandleInput(GamePad controller)

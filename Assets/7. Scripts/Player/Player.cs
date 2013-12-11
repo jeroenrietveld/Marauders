@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 using System;
@@ -36,8 +36,6 @@ public partial class Player : MonoBehaviour
 
 	void Awake()
 	{
-		anim = GetComponent<Animator>();
-		hash = GetComponent<HashIDs>();
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
@@ -98,11 +96,9 @@ public partial class Player : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) || controller.JustPressed(Button.Start) && !GameManager.isPaused)
 		{
 			//GameManager.Instance.PauseGame();
-			
-			//Menu menu = PauseMenu.Attach(this.gameObject);
-			//menu.controllers.Add (controller);
+		
 
-            Menu skillMenu = SkillMenu.Attach(this.gameObject);
+            Menu skillMenu = SkillSelectMenu.Attach(this.gameObject);
             skillMenu.controllers.Add(controller);
 		} 
 		

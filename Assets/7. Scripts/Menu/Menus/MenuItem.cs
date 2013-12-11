@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using XInputDotNetPure;
+using System.Text;
+using System.Linq;
 
 public delegate void XboxPressedEventHandler(MenuItem sender, Button button);
 
@@ -21,7 +23,7 @@ public abstract class MenuItem
 		set;
     }
 
-    public Texture normalTexture
+    /*public Texture normalTexture
     {
         get;
         set;
@@ -32,18 +34,12 @@ public abstract class MenuItem
         get;
         set;
     }
-
-    public GUITexture normalGUITexture
-    {
-        get;
-        set;
-    }
-
-    public GUITexture focusedGUITexture
-    {
-        get;
-        set;
-    }
+    
+    public ScaleMode textureScaleMode 
+	{
+		get;
+		set;
+	}
 
     public GUIStyle normalStyle
     {
@@ -55,7 +51,7 @@ public abstract class MenuItem
     {
         get;
         set;
-    }
+    }*/
 
     /// <summary>
     /// Returns true if selected; false otherwise
@@ -68,10 +64,11 @@ public abstract class MenuItem
 			{
 				return true;
 			}
+
 			return false;
 		}
     }
-
+	
     public Menu parent
     {
 		get;
@@ -83,14 +80,39 @@ public abstract class MenuItem
         get;
 		set;
     }
-
-    public bool isEnabled
+   /* public RectOffset padding 
     {
-		get;
-		set;
-    }
+	    get;
+	    set;
+    }*/
 
 	public abstract void Draw(int locationY);
 
 	public abstract void HandleInput(GamePad controller);
+
+
+	//Fastest for converting colors to hex
+	protected static string[] HexTbl = Enumerable.Range(0, 256).Select(v => v.ToString("X2")).ToArray();
+
+	protected static string ToHex(byte[] array)
+	{
+		StringBuilder s = new StringBuilder(array.Length*2);
+		foreach (var v in array)
+			s.Append(HexTbl[v]);
+		return s.ToString();
+	}
+
+	protected static string ToHex(Color c)
+	{
+
+		return "#" + ToHex (new byte[] 
+		         {
+					(byte)(c.r * 255f),
+					(byte)(c.g * 255f),
+					(byte)(c.b * 255f),
+					(byte)(c.a * 255f)
+				});
+	}
+
+	
 }

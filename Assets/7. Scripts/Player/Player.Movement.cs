@@ -5,17 +5,12 @@ using XInputDotNetPure;
 public partial class Player : MonoBehaviour
 {
 	public PlayerIndex playerIndex;
-	private Animator anim;
 	public float turnSmoothing = 15f;
 	public float speedDampTime = 0.1f;
 
 	public float jumpHeight = 22500;
 
 	public GamePad controller { get { return _controller; } }
-	
-	//private Animator anim;
-	private HashIDs hash;
-	
 	private Camera _camera;
 	/// <summary>
 	/// The move speed, 5 is default

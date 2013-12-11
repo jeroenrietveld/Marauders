@@ -7,7 +7,7 @@ public class PauseMenu {
 	{
 		if (menu == null)
 		{
-			//Making menu
+			/*//Making menu
 			menu = (Menu)gameObject.AddComponent("Menu");
 			menu.region = new Rect(Screen.width / 2, Screen.height / 2, 100, 100);
 
@@ -51,7 +51,7 @@ public class PauseMenu {
 			menu.Add (item);
             item.normalStyle = normal;
             item.focusedStyle = focused;
-		}
+		*/}
 
 		menu.visible = true;
 

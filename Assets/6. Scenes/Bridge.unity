@@ -6038,7 +6038,7 @@ GameObject:
   - 114: {fileID: 665099909}
   - 111: {fileID: 665099908}
   m_Layer: 0
-  m_Name: Samurai
+  m_Name: Samurai_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11735,7 +11735,7 @@ GameObject:
   - 114: {fileID: 1172923562}
   - 111: {fileID: 1172923561}
   m_Layer: 0
-  m_Name: Bandit
+  m_Name: Bandit_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
