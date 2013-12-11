@@ -40,7 +40,6 @@ public class CharacterSelectBlock : MonoBehaviour {
         _controller.deadZone = GamePadDeadZone.IndependentAxes;
 
         bigCharacterSelectPlane = transform.FindChild("BigCharacterSelect").gameObject;
-		textHolder = bigCharacterSelectPlane.transform.FindChild("text_select").gameObject.GetComponent<TextMesh>();
         skillSelectPlane = transform.FindChild("SkillSelect").gameObject;
         smallCharacterSelectPlane = transform.FindChild("SmallCharacterSelect").gameObject;
 		

@@ -4,9 +4,19 @@ using System.Collections.Generic;
 
 public class ArmoryState : MenuStateBase
 {
+	private List<CharacterSelect> _selectBlocks;
+
 	public ArmoryState()
 	{
 		center = GameObject.Find ("ArmoryScreen").transform.position;
+
+		_selectBlocks = new List<CharacterSelect> ();
+
+		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelect>())
+		{
+			_selectBlocks.Add(block);
+			block.enabled = false;
+		}
 	}
     
 	public override void Update(MenuManager manager)
@@ -19,23 +29,11 @@ public class ArmoryState : MenuStateBase
 		{
 			manager.ChangeState(MenuStates.SplashState);
 		}
-
-		EnableArmoryStateText();
-	}
-
-	private void EnableArmoryStateText()
-	{
-		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("MenuText");
-		
-		foreach (GameObject go in gameObjects)
-		{
-			go.renderer.enabled = true;
-		}
 	}
 
 	public override void OnActive()
 	{
-		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
+		foreach(var block in _selectBlocks)
 		{
 			block.enabled = true;
 		}
@@ -43,7 +41,7 @@ public class ArmoryState : MenuStateBase
 
 	public override void OnInactive()
 	{
-		foreach(var block in MonoBehaviour.FindObjectsOfType<CharacterSelectBlock>())
+		foreach(var block in _selectBlocks)
 		{
 			block.enabled = false;
 		}
