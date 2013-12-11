@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets._7._Scripts.GameModes
+public class Normal : GameMode
 {
-    class Normal
+    public Normal() : base(GameModeID.Normal) 
     {
+        //No addition to the list
+        //No addition to the gamemode
     }
 }

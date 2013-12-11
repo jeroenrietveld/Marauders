@@ -6,7 +6,8 @@ using System;
 public enum GameModeID
 {
 	CaptureTheFlag	= (1 <<  0),
-	DeathMatch		= (1 <<  1)
+	DeathMatch		= (1 <<  1),
+    Normal          = (1 <<  2)
 }
 
 /// <summary>

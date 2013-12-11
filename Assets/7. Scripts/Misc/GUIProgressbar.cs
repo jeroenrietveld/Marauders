@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GUIProgressbar : MonoBehaviour {
+public class GUIProgressbar : GUIElement{
 
     private float _progress;
 
@@ -26,11 +26,33 @@ public class GUIProgressbar : MonoBehaviour {
         _progbarFull = Resources.Load("Textures/progbar_full", typeof(Texture2D)) as Texture2D;
         _progress = 1;
         max = 0;
-        effective = 0;
+        effective = 0;              
     }
 	
 	// Update is called once per frame
 	void Update () {
         _progress = (effective / max);
 	}
+
+    public GUIContent GetGUIContent()
+    {
+        GUIContent content = new GUIContent();
+        Texture2D texture = new Texture2D((int)size.x + 8, (int)size.y + 8);
+
+        int i = 0;
+        int j = 0;
+        while (i < size.y)
+        {
+            while (j < size.x)
+            {
+                Color c = j < size.x * Mathf.Clamp01(_progress) ? _progbarFull.GetPixel(j, i) : _progbarEmpty.GetPixel(j, i);
+                texture.SetPixel(j, i, c);
+                j++;
+            }
+            i++;
+        }
+
+        content.image = texture;
+        return content;
+    }
 }

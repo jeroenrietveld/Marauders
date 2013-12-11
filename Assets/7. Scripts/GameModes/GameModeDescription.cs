@@ -7,7 +7,8 @@ using System.Collections;
 public class GameModeDescription : MonoBehaviour {
 	public static readonly GameModeID DEFAULT_GAME_MODES =
 			GameModeID.CaptureTheFlag |
-			GameModeID.DeathMatch;
+			GameModeID.DeathMatch |
+            GameModeID.Normal;
 
 	public static readonly TeamColor DEFAULT_TEAM_COLOR =
 			TeamColor.Neutral;
