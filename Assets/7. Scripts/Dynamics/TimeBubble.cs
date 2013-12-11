@@ -7,7 +7,14 @@ public struct TimeBubbleEnterEvent
 
 public struct TimeBubbleExitEvent
 {
+	public GameObject obj;
+	public Vector3 collisionPosition;
 
+	public TimeBubbleExitEvent(GameObject obj, Vector3 pos) 
+	{
+		this.obj = obj;
+		this.collisionPosition = pos;
+	}
 }
 
 public class TimeBubble : MonoBehaviour {
@@ -25,18 +32,19 @@ public class TimeBubble : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider collider)
+	void OnTriggerExit(Collider collider)
 	{
 		collider.gameObject.SetActive(false);
+		Vector3 pos = collider.transform.position;
 
 		var exitDirection = collider.transform.position - transform.position;
-		collider.transform.position = transform.position - exitDirection * exitDistanceScale;
+		collider.transform.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
 
 		var playerSpawner = new GameObject("PlayerSpawner").AddComponent<PlayerSpawner>();
 		playerSpawner.player = collider.gameObject;
 		playerSpawner.exitForce = exitDirection.normalized * exitForce;
-		playerSpawner.spawnDelay = 3f;
+		playerSpawner.spawnDelay = 0.5f;
 
-		Event.dispatch (new TimeBubbleExitEvent ());
+		Event.dispatch (new TimeBubbleExitEvent (collider.gameObject, pos));
 	}
 }
