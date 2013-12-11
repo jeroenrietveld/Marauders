@@ -11,4 +11,9 @@ public class PlayerCell : Cell
     {
         _player = player;
     }
+
+    public override String GetContent()
+    {
+        return _player.name;
+    }
 }

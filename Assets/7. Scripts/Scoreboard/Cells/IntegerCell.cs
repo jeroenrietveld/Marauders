@@ -7,5 +7,10 @@ public class IntegerCell : Cell
 {
     public int amount { get; set; }
 
+    public override String GetContent()
+    {
+        return amount + "";
+    }
+
 }
 
