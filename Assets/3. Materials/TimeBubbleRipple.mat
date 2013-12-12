@@ -56,7 +56,7 @@ Material:
       data:
         first:
           name: RipplePhase
-        second: 0
+        second: .319999993
       data:
         first:
           name: SrcColorWeight
@@ -64,6 +64,10 @@ Material:
       data:
         first:
           name: RippleSize
+        second: 5
+      data:
+        first:
+          name: RippleCompression
         second: 5
     m_Colors:
       data:

@@ -26,11 +26,6 @@ struct Pixel
 
 void main(string[] args)
 {
-	//args = args[1..$];
-	//args = ["512", "0", "169", "0", "857", "0"];
-	//enforce(args.length % 2 == 0);
-	//enforce(args.length >= 2);
-	
 	DerelictIL.load();
 	ilInit();
 	
@@ -57,9 +52,7 @@ void main(string[] args)
 	int[] steps = new int[imgData.length];
 	steps[] = int.max;
 	
-	Point[] floodFillBuffer = 
-		//args.chunks(2).map!(a => Point(a[0].to!int, a[1].to!int)).array();
-		iota(width).map!(a => Point(a, 0)).array;
+	Point[] floodFillBuffer = iota(width).map!(a => Point(a, 0)).array;
 	Point[] floodFillStack;
 	
 	size_t modifications = 0;
@@ -76,6 +69,8 @@ void main(string[] args)
 			floodFillBuffer = floodFillStack;
 			floodFillStack = temp;
 			floodFillStack.assumeSafeAppend();
+			
+			writeln("Mods: ", modifications, ", Stack: ", floodFillBuffer.length);
 		}
 		
 		size_t idx = point.x + point.y * width;
@@ -105,13 +100,7 @@ void main(string[] args)
 		if(point.y > 0)			floodFillStack ~= Point(point.x, point.y-1, point.pathLength+255);
 		if(point.y < height-1)	floodFillStack ~= Point(point.x, point.y+1, point.pathLength+255);
 		
-		//writeln(point.x, " ", point.y, " ", point.pathLength);
-		
 		modifications++;
-		if((modifications & 0xFFF) == 0)
-		{
-			writeln("Mods: ", modifications, ", Stack: ", floodFillStack.length);
-		}
 	}
 	
 	auto maxPathLength = steps.filter!(a => a != int.max).reduce!max;
@@ -121,7 +110,6 @@ void main(string[] args)
 		if(steps[idx] == int.max) continue;
 		
 		pixel.a = ((steps[idx] * 0xFF) / maxPathLength) & 0xFF;
-		//pixel.r = pixel.g = pixel.b = 0xFF;
 		pixel.g = 0xFF;
 	}
 	
