@@ -36,21 +36,26 @@ public class CharacterSelectState : SelectionBase
         }
         else if (controller.JustPressed(Button.B))
         {
-            block.OnLeave("Press A to join");
+            block._currentState = null;
+            block.MarauderSelect.SetActive(false);
+            block.StartScreen.SetActive(true);
         }
     }
 
     public override void OnActive()
     {
-        block.textHolder.gameObject.SetActive(true);
-        block.bigCharacterSelectPlane.renderer.enabled = true;
-        block.bigCharacterSelectPlane.renderer.material = block.marauders[block.marauderIndex];
-        block.textHolder.text = Locale.Current["press_select"];
+        block.StartScreen.SetActive(false);
+        block.MarauderSelect.SetActive(true);
+        block.changeMarauder(0);
     }
 
     public override void OnInActive()
     {
-        block.textHolder.gameObject.SetActive(false);
-        block.bigCharacterSelectPlane.renderer.enabled = false;
+        block.MarauderSelect.SetActive(false);
+
+        if (block._currentEnum == CharacterSelectBlockStates.CharSelectState)
+        {
+            block.StartScreen.SetActive(true);
+        }
     }
 }

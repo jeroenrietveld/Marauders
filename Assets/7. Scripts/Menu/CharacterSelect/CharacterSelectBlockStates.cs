@@ -3,5 +3,6 @@ using System;
 public enum CharacterSelectBlockStates
 {
 	CharSelectState,
-	SkillSelectState
+	SkillSelectState,
+    StartState
 }
