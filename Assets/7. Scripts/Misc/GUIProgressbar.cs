@@ -11,24 +11,17 @@ public class GUIProgressbar : MonoBehaviour{
     private Texture2D _progbarEmpty;
     private Texture2D _progbarFull;
 
-    public Vector2 pos { get; set; }
-    public Vector2 size { get; set; }
-
-    private Vector2 padding = new Vector2(2, 2);
+    public Vector3 pos { get; set; }
+    public Vector3 size { get; set; }
 
     void OnGUI()
-    {        
-        GUI.depth = -1;
-        GUI.DrawTexture(new Rect(pos.x, pos.y, size.x, size.y), _progbarEmpty);
-        GUI.DrawTexture(new Rect(pos.x, pos.y, size.x * Mathf.Clamp01(_progress), size.y), _progbarFull);
+    {
+        pos = this.transform.position;
+        var newPos = Camera.main.WorldToScreenPoint(pos);
+        GUI.DrawTexture(new Rect(newPos.x, newPos.y, size.x, size.z), _progbarEmpty);
+        GUI.DrawTexture(new Rect(newPos.x, newPos.y, size.x * Mathf.Clamp01(_progress), size.z), _progbarFull);
     }
 
-    void OnEnable()
-    {
-        size -= padding;
-        pos += 0.5f * padding;
-        Debug.Log(size);
-    }
 
     void Start()
     {      
@@ -40,4 +33,9 @@ public class GUIProgressbar : MonoBehaviour{
 	void Update () {
         _progress = (effective / max);
 	}   
+
+    public void Add(float addition)
+    {
+        effective = Mathf.Clamp(effective + addition, 0, max);
+    }
 }

@@ -12,7 +12,8 @@ public class ProgressbarCell : Cell
         GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/GUIProgressbar")) as GameObject;
         progbar = prefab.GetComponent<GUIProgressbar>();
         progbar.effective = 0f;
-        progbar.max = max;       
+        progbar.max = max;
+        Debug.Log("I made a cell.. WHY?!");
     }
 
     public void Add(float addition)

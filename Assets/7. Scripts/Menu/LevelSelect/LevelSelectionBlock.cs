@@ -25,15 +25,15 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _levelSelectUp = GameObject.Find("LevelSelectUp");
         _levelSelectDown = GameObject.Find("LevelSelectDown");
         _levelDescription = GameObject.Find("LevelDescription");
-        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo/LevelInfo_Text").gameObject.GetComponent<TextMesh>();
+        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.GetComponent<TextMesh>();
         SetLevel(_currentIndex);		
 	}
 
 	public override void Update()
 	{
 		int index = _currentIndex;
-		SetAlpha(_levelSelectUp, .75f);
-		SetAlpha(_levelSelectDown, .75f);
+		SetAlpha(_levelSelectUp, .9f);
+		SetAlpha(_levelSelectDown, .9f);
 
 		if(Input.GetKeyDown(KeyCode.I))
 		{
@@ -72,7 +72,7 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 		}
 
 		current = LevelSelectionManager.levels [_currentIndex];
-		_levelPreview.renderer.material.mainTexture = current.previewImage;
+		_levelPreview.transform.FindChild("LevelPreviewImage").renderer.material.mainTexture = current.previewImage;
 		_levelInfoText.text = current.levelInfo;
 	}
 
