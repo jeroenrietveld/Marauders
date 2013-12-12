@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class TimeBubbleGraphics : MonoBehaviour {
@@ -14,8 +14,8 @@ public class TimeBubbleGraphics : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Event.register<TimeBubbleEnterEvent> (OnEnterEvent);
-		Event.register<TimeBubbleExitEvent> (OnExitEvent);
+		Event.register<TimeBubbleEnterEvent> (OnEnterEvent);
+		//Event.register<TimeBubbleObjectExitEvent> (OnExitEvent);
 
 		_currentOffsets = new Vector4(Random.value, Random.value, Random.value, Random.value);
 		AnimateSecondaryDistortion (1.5f, float.Epsilon);
@@ -23,19 +23,20 @@ public class TimeBubbleGraphics : MonoBehaviour {
 
 	void OnDestroy()
 	{
-		//Event.unregister<TimeBubbleEnterEvent> (OnEnterEvent);
-		Event.unregister<TimeBubbleExitEvent> (OnExitEvent);
+		Event.unregister<TimeBubbleEnterEvent> (OnEnterEvent);
+		//Event.unregister<TimeBubbleObjectExitEvent> (OnExitEvent);
 	}
 
 	private void OnEnterEvent(TimeBubbleEnterEvent evt)
 	{
+		AnimateSecondaryDistortion (secondaryDistortionEndValue == -0.025f ? 1.5f : -0.025f , 1.5f);
+		offsetMovementSpeed.Scale(offsetSpeedExitMultiplier);
 		//AnimateSecondaryDistortion (2, 3);
 	}
 
-	private void OnExitEvent(TimeBubbleExitEvent evt)
+	private void OnExitEvent(TimeBubbleObjectExitEvent evt)
 	{
-		AnimateSecondaryDistortion (secondaryDistortionEndValue == -0.025f ? 1.5f : -0.025f , 3);
-		offsetMovementSpeed.Scale(offsetSpeedExitMultiplier);
+
 	}
 
 	void AnimateSecondaryDistortion(float targetValue, float time)

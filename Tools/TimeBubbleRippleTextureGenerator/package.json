@@ -1,0 +1,9 @@
+{
+	"name": "TimeBubbleRippleTextureGenerator",
+	"authors": [
+		"René Zwanenburg"
+	],
+	"dependencies": {
+		"derelict:devil": "~master"
+	}
+}

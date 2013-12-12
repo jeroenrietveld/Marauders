@@ -7,8 +7,12 @@ public class Timer
 	public float startTime;
 	public float endTime;
 
+	public float startPhase;
+	public float endPhase;
+
 	public enum WrapMode
 	{
+		NONE,
 		ONCE,
 		LOOP
 	}
@@ -51,6 +55,9 @@ public class Timer
 		this.endTime = endTime;
 		this.wrapMode = wrapMode;
 
+		this.startPhase = 0;
+		this.endPhase = 1;
+
 		this._running = false;
 		this._startTimeStamp = 0f;
 		this._callbackIndex = 0;
@@ -92,6 +99,8 @@ public class Timer
 			{
 				switch(wrapMode)
 				{
+					case WrapMode.NONE:
+					break;
 					case WrapMode.ONCE:
 						Stop();
 					break;
@@ -108,13 +117,18 @@ public class Timer
 
 	private float GetCurrentTime()
 	{
-		float currentTime = Time.time - _startTimeStamp;
+		float currentTime = _running ? Time.time - _startTimeStamp : 0;
 		return currentTime + startTime;
 	}
 
 	public float Phase()
 	{
-		return (GetCurrentTime() - startTime) / (endTime - startTime);
+		return startPhase + (GetCurrentTime() - startTime) / (endTime - startTime) * (endPhase - startPhase);
+	}
+
+	public void AddCallback(Callback callback)
+	{
+		AddCallback(endTime, callback);
 	}
 
 	public void AddCallback(float time, Callback callback)
