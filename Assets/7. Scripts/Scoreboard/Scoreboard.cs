@@ -18,6 +18,22 @@ public class Scoreboard : MonoBehaviour
 	{
 		_cells.Add (list);
 	}
+    
+    /// <summary>
+    /// WORK IN PROGRESS. Dont use this yet.
+    /// </summary>
+    /// <param name="cellName"></param>
+    /// <param name="celltype"></param>
+    /// <param name="evt"></param>
+    public void AddColumn(String cellName, Type celltype, Event.EventListener<EventType> evt)
+    {
+        _cells[0].Add(new StringCell(cellName));
+        for(int i = 1; i < _cells[0].Count; i++)
+        {
+            Cell cell = (Cell)Activator.CreateInstance(celltype);
+            _cells[i].Add(cell);
+        }
+    }
 
     void Start()
     {
@@ -30,7 +46,7 @@ public class Scoreboard : MonoBehaviour
         List<Cell> fieldNameList = new List<Cell>();
         scoreboard.AddCellList(fieldNameList);
 
-        foreach (String name in new String[] { "Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio" })
+        foreach (String name in new String[] { "Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Heartstops", "Hitratio"  })
         {
             fieldNameList.Add(new StringCell(name));
         }
@@ -48,20 +64,20 @@ public class Scoreboard : MonoBehaviour
             IntegerCell eliminations = new IntegerCell();
             IntegerCell eliminated = new IntegerCell();
             IntegerCell suicides = new IntegerCell();
-            PercentageCell hitratio = new PercentageCell();
+            IntegerCell heartstopped = new IntegerCell();
+            PercentageCell hitratio = new PercentageCell();          
 
             //Add all cells to the list of cells
             addition.Add(timeSync);
             addition.Add(eliminations);
             addition.Add(eliminated);
             addition.Add(suicides);
+            addition.Add(heartstopped);
             addition.Add(hitratio);
 
             //Register the events that are always needed
             Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt)
-            {
-                
-               
+            {             
                if (evt.victim == player)
                 {
                     Debug.Log(evt.victim);
@@ -91,8 +107,8 @@ public class Scoreboard : MonoBehaviour
 
         int width = Screen.width;
         int heigth = Screen.height;
-        int cellwidth = 200;
-        int cellheigth = 40;
+        int cellwidth = 100;
+        int cellheigth = 20;
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < columns; j++)
