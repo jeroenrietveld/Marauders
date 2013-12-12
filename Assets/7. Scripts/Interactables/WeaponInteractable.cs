@@ -42,9 +42,10 @@ public class WeaponInteractable : Interactable {
 	{
 		foreach (Player player in pickupPlayers)
 		{
-			if (player.controller.JustPressed(Button.X) || Input.GetKeyDown("f"))
+			if (player.controller.JustPressed(Button.X))
 			{
 				player.PickUpWeapon(weapon, weapon.isGameModeObject);
+				weapon.transform.parent = player.transform;
 				Destroy(gameObject);
 			}
 		}

@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 1
+  playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000
@@ -3958,7 +3958,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 4a152d31b1f33b943ac3cbc885f727ee, type: 2}
       propertyPath: playerIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11100000, guid: 4a152d31b1f33b943ac3cbc885f727ee, type: 2}
       propertyPath: m_Animations.Array.data[10]
@@ -5209,6 +5209,14 @@ Prefab:
       propertyPath: m_Animations.Array.data[10]
       value: 
       objectReference: {fileID: 7400002, guid: 83360eb7f48269849a682d42cb9d8e78, type: 3}
+    - target: {fileID: 11400002, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
+      propertyPath: playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100128, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
+      propertyPath: m_Name
+      value: Grip_0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
   m_RootGameObject: {fileID: 2075965845}
@@ -9946,7 +9954,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1653662879}
   m_Layer: 0
-  m_Name: MainHand
+  m_Name: Grip_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12757,7 +12765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bbd77bf37a0d14cbf48dc1682f4035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
   turnSmoothing: 15
   speedDampTime: .100000001
   jumpHeight: 30000

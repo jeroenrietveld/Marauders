@@ -65,16 +65,39 @@ public partial class Player : MonoBehaviour
 		SetWeapon (weapon);
 	}
 	
-	private void SetWeapon(Weapon weapon)
+	private void SetWeapon(Weapon weaponHolder)
 	{
-		primaryWeapon = weapon;
-		
-		Transform mainHand = transform.FindChild("Character1_Reference/Character1_Hips/Character1_Spine/Character1_Spine1/Character1_Spine2/Character1_RightShoulder/Character1_RightArm/Character1_RightForeArm/Character1_RightHand/MainHand");
-		
-		weapon.transform.rotation = mainHand.rotation;
-		weapon.transform.parent = mainHand;
-		weapon.transform.position = mainHand.position;
-		weapon.owner = this;
+		primaryWeapon = weaponHolder;
+		weaponHolder.owner = this;
+
+		for(int i = 0; i < weaponHolder.transform.childCount; i++)
+		{
+			Transform weapon = weaponHolder.transform.GetChild(i);
+			Transform hand = FindInChildren(transform, weapon.gameObject.name);
+
+			weapon.rotation = hand.rotation;
+			weapon.parent = hand;
+			weapon.position = hand.position;
+		}
+	}
+
+	private static Transform FindInChildren(Transform transform, string name)
+	{
+		if(transform.gameObject.name == name)
+		{
+			return transform;
+		}
+
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			Transform result = FindInChildren(transform.GetChild(i), name);
+			if(result)
+			{
+				return result;
+			}
+		}
+
+		return null;
 	}
 	
 	public void DropPrimaryWeapon()

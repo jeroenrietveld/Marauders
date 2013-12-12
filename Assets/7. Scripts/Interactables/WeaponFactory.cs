@@ -12,21 +12,24 @@ public static class WeaponFactory
 	public static GameObject create(string weaponName)
 	{
 		string filePath = dataPath + weaponName;
-		//File file;
 		TextAsset jsonString;
 
 		if(jsonString = Resources.Load(filePath) as TextAsset)
 		{
 			var node = JSON.Parse(jsonString.text);
 
-			//The grips center is where the character holds the weapon
-			GameObject grip = new GameObject();
-			grip.name = "grip";
-			//The prefab is the weapon game object
-			GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefab"].Value)) as GameObject;
-			prefab.transform.parent = grip.transform;
+			GameObject weaponHolder = new GameObject("Weapon_holder");
 
-			Weapon weapon = grip.AddComponent<Weapon>();
+			for(int i = 0; i < node["prefabs"].AsArray.Count; i++)
+			{
+				GameObject grip = new GameObject("Grip_"+i);
+				grip.transform.parent = weaponHolder.transform;
+
+				GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefabs"].AsArray[i].Value)) as GameObject;
+				prefab.transform.parent = grip.transform;
+			}
+
+			Weapon weapon = weaponHolder.AddComponent<Weapon>();
 			weapon.name = node["name"].Value;
 			weapon.range = node["range"].AsFloat;
 			weapon.damage = node["damage"].AsFloat;
@@ -35,13 +38,7 @@ public static class WeaponFactory
 				weapon.AddAnimation(node["animations"][i]);
 			}
 
-			//Add a rigidbody to the weapon, this makes sures collision events are always fired
-			Rigidbody rigidbody = prefab.AddComponent<Rigidbody>();
-			rigidbody.mass = 1.0f;
-			rigidbody.isKinematic = true;
-			rigidbody.useGravity = false;
-
-			return grip;
+			return weaponHolder;
 		}
 		else
 		{
