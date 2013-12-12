@@ -19,15 +19,11 @@ public class SkillSelectState : SelectionBase
 
     public override void OnActive()
     {
-        block.skillSelectPlane.SetActive(true);
-        block.smallCharacterSelectPlane.SetActive(true);
-		//Show the selected Marauder
-        block.smallCharacterSelectPlane.renderer.material = block.marauders[block.marauderIndex];
+        block.SkillSelect.SetActive(true);
     }
 
     public override void OnInActive()
     {
-        block.skillSelectPlane.SetActive(false);
-        block.smallCharacterSelectPlane.SetActive(false);
+        block.SkillSelect.SetActive(false);
     }
 }

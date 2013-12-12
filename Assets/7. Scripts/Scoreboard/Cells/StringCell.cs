@@ -14,7 +14,7 @@ public class StringCell : Cell
 
     public override string GetContent()
     {
-        return content + "";
+        return content;
     }
 }
 

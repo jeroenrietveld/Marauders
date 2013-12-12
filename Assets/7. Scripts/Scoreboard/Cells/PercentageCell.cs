@@ -17,6 +17,6 @@ public class PercentageCell : Cell
 
     public override String GetContent()
     {
-        return percentage + "";
+        return percentage.ToString() + "%";
     }
 }

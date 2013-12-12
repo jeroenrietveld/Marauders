@@ -70,11 +70,11 @@ public partial class Player : MonoBehaviour
 		primaryWeapon = weaponHolder;
 		weaponHolder.owner = this;
 
-		for(int i = 0; i < weaponHolder.transform.childCount; i++)
-		{
-			Transform weapon = weaponHolder.transform.GetChild(i);
+		while(weaponHolder.transform.childCount > 0)
+		{	
+			Transform weapon = weaponHolder.transform.GetChild(0);
 			Transform hand = FindInChildren(transform, weapon.gameObject.name);
-
+			
 			weapon.rotation = hand.rotation;
 			weapon.parent = hand;
 			weapon.position = hand.position;

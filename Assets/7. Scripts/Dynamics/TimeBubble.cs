@@ -3,40 +3,63 @@ using System.Collections;
 
 public struct TimeBubbleEnterEvent
 {
+	public GameObject obj;
+
+	public TimeBubbleEnterEvent(GameObject obj)
+	{
+		this.obj = obj;
+	}
 }
 
-public struct TimeBubbleExitEvent
+public struct TimeBubbleObjectExitEvent
 {
+	public GameObject obj;
+	public float respawnDelay;
 
+	public TimeBubbleObjectExitEvent(GameObject obj, float respawnDelay) 
+	{
+		this.obj = obj;
+		this.respawnDelay = respawnDelay;
+	}
+}
+
+public struct TimeBubblePlayerExitEvent
+{
+	public Player player;
+	public float respawnDelay;
+	
+	public TimeBubblePlayerExitEvent(Player player, float respawnDelay) 
+	{
+		this.player = player;
+		this.respawnDelay = respawnDelay;
+	}
 }
 
 public class TimeBubble : MonoBehaviour {
-
 	public float exitForce = 10000;
-	public float exitDistanceScale = .9f;
+	public float respawnDelay = 1;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	void OnTriggerEnter(Collider collider)
+	void OnTriggerExit(Collider collider)
 	{
 		collider.gameObject.SetActive(false);
 
 		var exitDirection = collider.transform.position - transform.position;
-		collider.transform.position = transform.position - exitDirection * exitDistanceScale;
 
-		var playerSpawner = new GameObject("PlayerSpawner").AddComponent<PlayerSpawner>();
-		playerSpawner.player = collider.gameObject;
-		playerSpawner.exitForce = exitDirection.normalized * exitForce;
-		playerSpawner.spawnDelay = 3f;
+		var spawner = new GameObject("ObjectSpawner").AddComponent<ObjectSpawner>();
+		spawner.obj = collider.gameObject;
+		spawner.exitForce = exitDirection.normalized * exitForce;
+		spawner.spawnDelay = respawnDelay;
+		spawner.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
 
-		Event.dispatch (new TimeBubbleExitEvent ());
+		
+		var player = collider.GetComponent<Player>();
+		if(player)
+		{
+			Event.dispatch(new TimeBubblePlayerExitEvent(player, respawnDelay));
+		}
+		else
+		{
+			Event.dispatch (new TimeBubbleObjectExitEvent (collider.gameObject, respawnDelay));
+		}
 	}
 }

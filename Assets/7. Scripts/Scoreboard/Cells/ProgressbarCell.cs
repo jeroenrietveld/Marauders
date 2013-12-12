@@ -24,6 +24,6 @@ public class ProgressbarCell : Cell
     {
         progbar.pos = this.pos;
         progbar.size = this.size;
-        return "";
+        return null;
     }
 }
