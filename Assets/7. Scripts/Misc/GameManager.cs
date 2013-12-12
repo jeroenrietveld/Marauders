@@ -61,12 +61,14 @@ public class GameManager {
 
     public void PauseGame()
     {
+		Debug.Log ("Paused");
         isPaused = true;
         Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
+		Debug.Log ("Resume");
         isPaused = false;
         Time.timeScale = 1f;
     }
