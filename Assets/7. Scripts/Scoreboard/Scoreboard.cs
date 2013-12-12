@@ -91,8 +91,8 @@ public class Scoreboard : MonoBehaviour
 
         int width = Screen.width;
         int heigth = Screen.height;
-        int cellwidth = 100;
-        int cellheigth = 20;
+        int cellwidth = 200;
+        int cellheigth = 40;
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < columns; j++)

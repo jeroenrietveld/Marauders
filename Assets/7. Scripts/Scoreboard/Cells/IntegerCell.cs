@@ -9,7 +9,7 @@ public class IntegerCell : Cell
 
     public override String GetContent()
     {
-        return amount + "";
+        return amount.ToString();
     }
 
 }
