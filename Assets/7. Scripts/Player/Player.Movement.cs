@@ -17,53 +17,37 @@ public partial class Player : MonoBehaviour
 	/// </summary>
 	public DecoratableFloat movementSpeed;
 
+	/// <summary>
+	/// Determines whether this instance is grounded.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is grounded; otherwise, <c>false</c>.</returns>
+	public bool isGrounded {
+		get
+		{
+			return (distanceToGround < 0.5f);
+		}
+	}
+
+	private float distanceToGround { 
+		get
+		{
+			return _distanceToGround;
+		}
+		set
+		{
+			_distanceToGround = value;
+			if (value > highestDistanceToGround)
+			{
+				highestDistanceToGround = value;
+			}
+		}
+	}
+	private float _distanceToGround;
+
+	private float highestDistanceToGround {get;set;}
+
 	private GamePad _controller;
 
-	void FixedUpdate()
-	{
-		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
-		camDirection.y = 0;
-		camDirection.Normalize();
-		
-		Vector3 camRight = _camera.transform.right;
-		camDirection.y = 0;
-		camDirection.Normalize();
-
-		//Xbox Controls:
-		float h = _controller.Axis (Axis.LeftHorizantal);
-		float v = _controller.Axis (Axis.LeftVertical);
-		bool jump = _controller.Pressed (Button.A);
-		bool[] attacks = new bool[3];
-		//attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
-		attacks [0] = _controller.Axis (Axis.RightTrigger) > 0.1;
-		attacks[1] = Input.GetKeyDown(KeyCode.LeftShift);
-		attacks[2] = _controller.Axis(Axis.LeftTrigger) != 0;
-		
-		//PC Controls:
-		//float h = Input.GetAxis("Horizontal");
-		//float v = Input.GetAxis ("Vertical");
-		//bool jump = Input.GetKeyDown("space");
-		//bool[] attacks = new bool[3];
-		//attacks[0] = Input.GetKeyDown(KeyCode.LeftControl);
-		//attacks[1] = Input.GetKeyDown(KeyCode.LeftShift);
-		//attacks[2] = Input.GetKeyDown(KeyCode.Z);
-		
-		Vector3 moveSpeed = camDirection * v + camRight * h;
-		
-		//Disabling walk animation
-		if (!IsGrounded())
-		{
-			jump = false;
-		}
-
-
-		MovementManagement(moveSpeed);
-
-		JumpManagement(moveSpeed, jump);
-
-		AttackManagement(attacks);
-	}
-	
 	void MovementManagement (Vector3 moveSpeed)
 	{
 		if (moveSpeed.sqrMagnitude > 0)
@@ -81,19 +65,6 @@ public partial class Player : MonoBehaviour
 
 		AnimationMovement(moveSpeed.magnitude * movementSpeed);
 	}
-
-	void JumpManagement(Vector3 direction, bool jump)
-	{
-		if (jump && !AgainstWall(direction))
-		{
-			Jump(jumpHeight);
-		}
-	}
-
-	void AttackManagement(bool[] attacks)
-	{
-
-	}
 	
 	void Rotating (Vector3 moveSpeed)
 	{
@@ -108,27 +79,19 @@ public partial class Player : MonoBehaviour
 		}
 	}
 	
-	void Jump(float height)
+	void Jump()
 	{
-		// This solves the high jumping when the player is on a lovecube
+		// Setting the jumping velocity to 0, from where we can add a fixed amount
+		// This provides a constent heigvht
 		var velocity = rigidbody.velocity;
 		velocity.y = 0;
 		rigidbody.velocity = velocity;
-		rigidbody.AddForce(Vector3.up * height);
+		rigidbody.AddForce(Vector3.up * this.jumpHeight);
 
 		//Playing the jump
 		AnimationJump();
 	}
-	
-	/// <summary>
-	/// Determines whether this instance is grounded.
-	/// </summary>
-	/// <returns><c>true</c> if this instance is grounded; otherwise, <c>false</c>.</returns>
-	bool IsGrounded()
-	{
-		return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
-	}
-
+	 
 	/// <summary>
 	/// Returns true if the player walks against an object with a "Wall" tag.
 	/// </summary>

@@ -8,9 +8,7 @@ public partial class Player : MonoBehaviour
 	private Transform UpperBody;
 	
 	private float crossFadeDuration = 0.3f;
-	
-	private bool inAir = false;
-	
+
 	private bool attackLowerBody = false;
 	
 	private int attackAnimationIndex = 0;
@@ -60,19 +58,21 @@ public partial class Player : MonoBehaviour
 	protected void AnimationJump()
 	{
 		//Should jump
-		animation.Play ("Jump");
+		animation.Play ("Jump", PlayMode.StopSameLayer);
 	}
 	
 	protected void AnimationMovement(float speed)
 	{
-		if (this.IsGrounded())
+		if (this.isGrounded)
 		{
 			//Should play land animation
-			if(inAir)
+			if(highestDistanceToGround > 0.5)
 			{
 				animation.Play ("Jump Land");
-				inAir = false;
 			}
+
+			//Resetting it
+			highestDistanceToGround = 0.1f;
 			
 			//Idling
 			if (speed < 0.2f)
@@ -103,16 +103,20 @@ public partial class Player : MonoBehaviour
 			
 			
 			return;
-		} else
+		} 
+		else
 		{
+			if ( highestDistanceToGround > 0.5 )
+			{
+				AnimationJump();
+			}
+
 			//Removing lower body attack animation, cause we're walking!
 			if ((attackAnimationName != "") && (attackLowerBody))
 			{
 				attackLowerBody = false;
 				animation[attackAnimationName].RemoveMixingTransform(LowerBody);
 			} 
-			
-			inAir = true;
 		}
 	}
 	
@@ -121,14 +125,7 @@ public partial class Player : MonoBehaviour
 		//Security checks
 		if (primaryWeapon == null) { return ; }
 		if (primaryWeapon.animations.Count == 0 ) { return ; }
-		
-		//Can be null
-		if (attackAnimationStart == null)
-		{
-			attackAnimationStart = DateTime.Now;
-			attackAnimationIndex = -1;
-		}
-		
+
 		//Calculating the amount the time that has passed since last accak
 		TimeSpan span = DateTime.Now.Subtract(attackAnimationStart);
 		
@@ -141,9 +138,7 @@ public partial class Player : MonoBehaviour
 		
 		//Upping the animation index
 		attackAnimationIndex = (attackAnimationIndex + 1) % primaryWeapon.animations.Count;
-		
-		
-		
+
 		//Can not attack 2x at the same time
 		if (!animation.IsPlaying(attackAnimationName))
 		{

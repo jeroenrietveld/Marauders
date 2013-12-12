@@ -207,22 +207,21 @@ public class Menu: MonoBehaviour
 	}
 	
 	public void OnGUI()
-	{
-		GUI.Window(windowIndex, this.region, MakeMenu, GUIContent.none, skin.window);
-	}
-
-	private void MakeMenu(int windowID)
 	{	
 		if (visible)
 		{
-			int offset = 0;
-			foreach (MenuItem item in menuItems)
-			{
-				item.Draw (offset);
-				offset += item.height;
-			}
+			GUI.Window(windowIndex, this.region, MakeMenu, GUIContent.none, skin.window);
 		}
-		
+	}
+
+	private void MakeMenu(int windowID)
+	{
+		int offset = 0;
+		foreach (MenuItem item in menuItems)
+		{
+			item.Draw (offset);
+			offset += item.height;
+		}
 	}
 
 	/// <summary>

@@ -110,47 +110,90 @@ public partial class Player : MonoBehaviour
 		primaryWeapon.owner = null;
 	}
 
+	Menu pauseMenu;
+
     /// <summary>
     /// Check is game is paused and sets the timeScale in the GameManager.
     /// Create the menu from the prefabMenu.
     /// </summary>
     public void Update()
     {
-		if (Input.GetMouseButtonDown(0) || controller.JustPressed(Button.Start) && !GameManager.isPaused)
-		{
-			//GameManager.Instance.PauseGame();
-		
+		//We want to calculate this only once, so filling it up here
+		RaycastHit hit;
+		//Vector3 vector = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
+		Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity);
+		this.distanceToGround = hit.distance;
+		//Transform heartbeat = transform.FindChild ("Heartbeat_indicator");
+		//heartbeat.position = new Vector3(heartbeat.position.x, (distanceToGround) + 0.02f, heartbeat.position.z);
 
-            Menu skillMenu = SkillSelectMenu.Attach(this.gameObject);
-            skillMenu.controllers.Add(controller);
-		} 
-		
-		if (controller.JustPressed(Button.X))
-		{
-			//xSkill.performAction(this);
-		}
-
+		//Dropping weapon / Doing skill
 		if(controller.JustPressed(Button.Y))
 		{
 			DropPrimaryWeapon();
 		}
 
-        if (controller.JustPressed(Button.Start) && !GameManager.isPaused)
+		//Pausing/resuming game
+        if (controller.JustPressed(Button.Start))
         {
-            GameManager.Instance.PauseGame();
-            //Instantiate(prefabMenu);
+			if (!GameManager.isPaused)
+			{
+            	//Showing the menu
+				pauseMenu = SkillSelectMenu.Attach(this.gameObject);
+				pauseMenu.controllers.Add(controller);
+				pauseMenu.visible = true;
+
+				//Pausing the game
+				GameManager.Instance.PauseGame();
+			} else
+			{
+				//Hiding the menu
+				pauseMenu.visible = false;
+
+				//Resming the game
+				GameManager.Instance.ResumeGame();
+			}
         }
 
+		//Attacking
 		if (controller.JustPressed(Button.B))
 		{
 			AnimationAttack();
 		}
 
+		//Utility skill
 		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running)
 		{
 			utilitySkill.PerformAction();
 			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
 		}
+
+		//Calculating the movement, relative to the camera
+		Vector3 camDirection = _camera.transform.forward + _camera.transform.up;
+		camDirection.y = 0;
+		camDirection.Normalize();
+		
+		Vector3 camRight = _camera.transform.right;
+		camDirection.y = 0;
+		camDirection.Normalize();
+		
+		//Xbox Controls:
+		float h = _controller.Axis (Axis.LeftHorizantal);
+		float v = _controller.Axis (Axis.LeftVertical);
+		Vector3 moveSpeed = camDirection * v + camRight * h;
+
+		//Applying the movement
+		MovementManagement(moveSpeed);
+
+		//Jumping
+		if (controller.JustPressed(Button.A) && this.isGrounded)
+		{
+			Jump();
+			/*if (AgainstWall(moveSpeed))
+			{
+				
+			}*/
+		}
+
     }
 
 	/// <summary>
