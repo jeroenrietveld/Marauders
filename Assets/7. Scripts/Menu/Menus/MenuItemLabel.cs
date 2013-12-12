@@ -20,7 +20,8 @@ public class MenuItemLabel:MenuItem
 		if (this.hasFocus)
 		{ 
 			color = ToHex(style.focused.textColor);
-		}else
+		}
+		else
 		{
 			color = ToHex(style.normal.textColor);
 		}
