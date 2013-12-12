@@ -1,0 +1,7 @@
+{
+	"name":"Daggers",
+	"prefabs":["Dagger_right", "Dagger_left"],
+	"range": 1.5,
+	"damage": 0.2,
+	"animations":["Daggers1", "Daggers2"]
+}
