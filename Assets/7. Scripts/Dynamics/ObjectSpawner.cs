@@ -11,7 +11,7 @@ public class ObjectSpawner : MonoBehaviour {
 
 	void Start () {
 		gameObject.AddComponent<CameraTracking>();
-		transform.position = obj.transform.position;
+		transform.position = position;
 
 		timer = new Timer (spawnDelay);
 		timer.AddCallback (SpawnPlayer);

@@ -83,7 +83,6 @@ public class Timer
 
 	public void Update()
 	{
-		Debug.Log (running);
 		if(_running)
 		{
 			float currentTime = GetCurrentTime();
