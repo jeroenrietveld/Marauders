@@ -2,5 +2,5 @@
 	"levelname":"Bridge",
 	"gamemodes":["CaptureTheFlag","DeathMatch","Normal"],
 	"previewImagePath":"Bridge",
-	"levelinfo":"An epic battleground."
+	"levelinfo":"A bridge, above water."
 }

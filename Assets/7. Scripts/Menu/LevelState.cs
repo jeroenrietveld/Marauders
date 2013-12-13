@@ -1,24 +1,30 @@
 using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class LevelState : MenuStateBase
 {
+    private GamePad _controller;
+
 	public LevelState()
 	{
-        center = GameObject.Find("LevelScreen").transform.position;     
+        center = GameObject.Find("LevelScreen").transform.position;
+
+        _controller = ControllerInput.GetController(PlayerIndex.One);
+        _controller.deadZone = GamePadDeadZone.IndependentAxes;
 	}
 
 	public override void Update(MenuManager manager)
 	{
         if (LevelSelectionManager.currentState != null)
         {
-            LevelSelectionManager.currentState.Update();
+            LevelSelectionManager.currentState.Update(_controller);
         }
 
-        if (Input.GetKey(KeyCode.B))
+        if (_controller.JustPressed(Button.B))
 	    {
             if(LevelSelectionManager.currentState == LevelSelectionManager.selectionBlocks[LevelSelectionState.NotSelecting])
-            { 
+            {
                 manager.ChangeState(MenuStates.ArmoryState);
             }
 	    }
