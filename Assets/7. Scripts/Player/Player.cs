@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
 			_health = Mathf.Clamp01(value);
 
 			//Event.dispatch(new PlayerHitEvent());
-			
+
 			if(_health == 0f)
 			{
 				//Event.dispatch(new PlayerDeathEvent());
@@ -32,13 +32,16 @@ public partial class Player : MonoBehaviour
 	public float armorFactor = 0.5f;
 	private float _health = 0.6f;
 	private Heartbeat _heartbeat;
+	private GameObject _body;
 
+	private Timer deadTimer;
 
 	void Awake()
 	{
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+		_body = FindInChildren (transform, "Body").gameObject;
 
 		InitializeAnimations();
 
@@ -73,6 +76,7 @@ public partial class Player : MonoBehaviour
 		while(weaponHolder.transform.childCount > 0)
 		{	
 			Transform weapon = weaponHolder.transform.GetChild(0);
+			Debug.Log(weapon);
 			Transform hand = FindInChildren(transform, weapon.gameObject.name);
 			
 			weapon.rotation = hand.rotation;
@@ -127,6 +131,7 @@ public partial class Player : MonoBehaviour
 		//heartbeat.position = new Vector3(heartbeat.position.x, (distanceToGround) + 0.02f, heartbeat.position.z);
 
 		//Dropping weapon / Doing skill
+
 		if(controller.JustPressed(Button.Y))
 		{
 			DropPrimaryWeapon();
