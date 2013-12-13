@@ -17,7 +17,10 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private GameObject _levelSelectUp;
 	private GameObject _levelSelectDown;
 	private GameObject _levelDescription;
+    private TextMesh _levelName;
 	private TextMesh _levelInfoText;
+    private float _time = 0.2f;
+    private float _resetTime = 0.2f;
 
 	public LevelSelectionBlock()
 	{
@@ -26,7 +29,8 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _levelSelectUp = GameObject.Find("LevelSelectUp");
         _levelSelectDown = GameObject.Find("LevelSelectDown");
         _levelDescription = GameObject.Find("LevelDescription");
-        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.GetComponent<TextMesh>();
+        _levelName = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Name").gameObject.GetComponent<TextMesh>();
+        _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
         SetLevel(_currentIndex);
 	}
 
@@ -35,16 +39,19 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 		int index = _currentIndex;
 		SetAlpha(_levelSelectUp, .9f);
 		SetAlpha(_levelSelectDown, .9f);
+        _time -= Time.deltaTime;
 
-		if(controller.JustPressed(Button.DPadLeft))
+        if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizantal) >= 0.75f && _time <= 0f))
 		{
 			_currentIndex++;
 			SetAlpha(_levelSelectUp, 1f);
+            _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.DPadRight))
+        if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizantal) <= -0.75f && _time <= 0f))
 		{
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);
+            _time = _resetTime;
 		}
         if (controller.JustPressed(Button.A))
 		{
@@ -74,14 +81,16 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
 		current = LevelSelectionManager.levels [_currentIndex];
 		_levelPreview.transform.FindChild("LevelPreviewImage").renderer.material.mainTexture = current.previewImage;
+
+        _levelName.text = current.levelName;
 		_levelInfoText.text = current.levelInfo;
 	}
 
 	public void SetAlpha(GameObject gameObject, float alpha)
 	{
-		Color color = gameObject.renderer.material.color;
-		color.a = alpha;
-		gameObject.renderer.material.color = color;
+		//Color color = gameObject.renderer.material.color;
+		//color.a = alpha;
+		//gameObject.renderer.material.color = color;
 	}
 }
 

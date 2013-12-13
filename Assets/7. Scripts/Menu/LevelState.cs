@@ -25,7 +25,6 @@ public class LevelState : MenuStateBase
 	    {
             if(LevelSelectionManager.currentState == LevelSelectionManager.selectionBlocks[LevelSelectionState.NotSelecting])
             {
-                
                 manager.ChangeState(MenuStates.ArmoryState);
             }
 	    }
