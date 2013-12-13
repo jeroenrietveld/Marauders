@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using XInputDotNetPure;
 
 /// <summary>
 /// This class will create a block containing level selection methods.
@@ -10,13 +11,13 @@ using UnityEngine;
 public class LevelSelectionBlock : LevelSelectionBlockBase
 {
     public static Level current;
+
     private int _currentIndex;
 	private GameObject _levelPreview;
 	private GameObject _levelSelectUp;
 	private GameObject _levelSelectDown;
 	private GameObject _levelDescription;
 	private TextMesh _levelInfoText;
-
 
 	public LevelSelectionBlock()
 	{
@@ -26,30 +27,30 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _levelSelectDown = GameObject.Find("LevelSelectDown");
         _levelDescription = GameObject.Find("LevelDescription");
         _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.GetComponent<TextMesh>();
-        SetLevel(_currentIndex);		
+        SetLevel(_currentIndex);
 	}
 
-	public override void Update()
+    public override void Update(GamePad controller)
 	{
 		int index = _currentIndex;
 		SetAlpha(_levelSelectUp, .9f);
 		SetAlpha(_levelSelectDown, .9f);
 
-		if(Input.GetKeyDown(KeyCode.I))
+		if(controller.JustPressed(Button.DPadLeft))
 		{
 			_currentIndex++;
 			SetAlpha(_levelSelectUp, 1f);
 		}
-		if(Input.GetKeyDown(KeyCode.J))
+        if (controller.JustPressed(Button.DPadRight))
 		{
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);
 		}
-		if(Input.GetKeyDown(KeyCode.A))
+        if (controller.JustPressed(Button.A))
 		{
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
-        if(Input.GetKeyDown(KeyCode.B))
+        if (controller.JustPressed(Button.B))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.NotSelecting);
         }
