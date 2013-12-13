@@ -21,6 +21,7 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private TextMesh _levelInfoText;
     private float _time = 0.2f;
     private float _resetTime = 0.2f;
+    private bool enableGUIProgress = true;
 
 	public LevelSelectionBlock()
 	{
@@ -36,6 +37,12 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
     public override void Update(GamePad controller)
 	{
+        if (enableGUIProgress)
+        {
+            GameObject.Find("GUIProgressbar").GetComponent<GUIProgressbar>().enabled = true;
+            enableGUIProgress = false;
+        }
+
 		int index = _currentIndex;
 		SetAlpha(_levelSelectUp, .9f);
 		SetAlpha(_levelSelectDown, .9f);
@@ -70,6 +77,7 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
 	public void SetLevel(int index)
 	{
+
 		if(index > (LevelSelectionManager.levels.Count - 1))
 		{
 			_currentIndex = 0;
