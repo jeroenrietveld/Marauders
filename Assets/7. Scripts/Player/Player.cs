@@ -138,7 +138,7 @@ public partial class Player : MonoBehaviour
 			if (!GameManager.isPaused)
 			{
             	//Showing the menu
-				pauseMenu = SkillSelectMenu.Attach(this.gameObject);
+				pauseMenu = PauseMenu.Attach(this.gameObject);
 				pauseMenu.controllers.Add(controller);
 				pauseMenu.visible = true;
 

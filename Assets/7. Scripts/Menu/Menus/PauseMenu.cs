@@ -7,51 +7,30 @@ public class PauseMenu {
 	{
 		if (menu == null)
 		{
-			/*//Making menu
+			//Making menu
 			menu = (Menu)gameObject.AddComponent("Menu");
-			menu.region = new Rect(Screen.width / 2, Screen.height / 2, 100, 100);
+            menu.region = new Rect((Screen.width / 2) - 100, (Screen.height / 2) - 150, 250, 350);
+            menu.skin = MonoBehaviour.Instantiate(Resources.Load("UI/Skins/PauseMenuSkin")) as GUISkin;
 
-            // adding a GUITexture to the menu
-            GameObject background = new GameObject("Menubackground");
-            background.AddComponent<GUITexture>();
-            background.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            background.guiTexture.texture = (Texture)Resources.Load("testMenu");
-            background.guiTexture.pixelInset = menu.region;
-
-            // setting normal and focused style. This can be changed for every menu or menu item.
-            GUIStyle normal = new GUIStyle();
-            normal.normal.textColor = Color.yellow;
-            normal.alignment = TextAnchor.MiddleCenter;
-			
-			GUIStyle focused = new GUIStyle();
-            focused.normal.textColor = Color.blue;
-            focused.alignment = TextAnchor.MiddleCenter;
-            focused.margin = new RectOffset(11, 22, 33, 44);
-
+            // Adding the items to the menu, resume, options and quit
 			MenuItemLabel item = new MenuItemLabel();
-            item.text = "Resume" ;
-			item.height = 100;
-            item.normalStyle = normal;
-            item.normalStyle.padding = new RectOffset(100, 100, 10, 10);
-            item.focusedStyle = focused;     
+            item.height = 90;
+            item.text = "Resume";
 			((MenuItemLabel)item).xboxPressed += new XboxPressedEventHandler(button_Resume);
 			menu.Add (item);
+            menu.focusedItem = item;
 			
 			item = new MenuItemLabel();
-			item.text = "Options" ;
-            item.normalTexture = (Texture)Resources.Load("testOptions");
-			item.height = 100;
+            item.height = 90;
+			item.text = "Options";
 			menu.Add (item);
-            item.normalStyle = normal;
-            item.focusedStyle = focused;
 			
 			item = new MenuItemLabel();
-            item.normalTexture = (Texture)Resources.Load("testQuit");
-			item.height = 100;
+            item.height = 90;
+            item.text = "Quit";
 			menu.Add (item);
-            item.normalStyle = normal;
-            item.focusedStyle = focused;
-		*/}
+            ((MenuItemLabel)item).xboxPressed += new XboxPressedEventHandler(button_Exit);
+		}
 
 		menu.visible = true;
 
@@ -65,4 +44,10 @@ public class PauseMenu {
 		GameManager.Instance.ResumeGame();
 		menu.visible = false;
 	}
+
+    private static void button_Exit(MenuItem sender, Button button)
+    {
+        GameManager.Instance.ResumeGame();
+        Application.LoadLevel(0);
+    }
 }
