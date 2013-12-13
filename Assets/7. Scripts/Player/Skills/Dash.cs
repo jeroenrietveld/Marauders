@@ -20,7 +20,7 @@ public class Dash : SkillBase
 			_player.rigidbody.velocity = Vector3.zero;
 		});
 
-		cooldown = new Timer (10f);
+		cooldown = new Timer (5f);
 	}
 
 	void Start()
@@ -49,7 +49,7 @@ public class Dash : SkillBase
 
 		if(_dashing.running)
 		{
-			_player.rigidbody.velocity = _player.transform.forward * 20;
+			_player.rigidbody.velocity = _player.transform.forward * 10;
 		}
 	}
 }

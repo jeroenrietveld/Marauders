@@ -39,7 +39,7 @@ public partial class Player : MonoBehaviour
 				AnimationEvent e = new AnimationEvent();
 				e.time = attack.timing * attack.speed;
 				e.functionName = "DetectPlayerHit";
-				animation[attackAnimationName].clip.AddEvent(e);
+				animation[attack.animationName].clip.AddEvent(e);
 
 				attackAnimationsInitialized.Add (attack.animationName);
 			}

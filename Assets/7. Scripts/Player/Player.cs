@@ -27,6 +27,8 @@ public partial class Player : MonoBehaviour
 			
 			if(_health == 0f)
 			{
+				//TODO: respan
+				_health = 1;
 				//Event.dispatch(new PlayerDeathEvent());
 			}
 		}
@@ -230,10 +232,5 @@ public partial class Player : MonoBehaviour
 		
 		this.health = this.health - amount;
 
-		if (this.health == 0)
-		{
-			//TODO: respan
-			health = 1;
-		}
 	}
 }
