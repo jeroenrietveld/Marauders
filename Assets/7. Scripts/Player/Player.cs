@@ -12,6 +12,8 @@ public partial class Player : MonoBehaviour
 	public SkillBase utilitySkill { get; set; }
 	public SkillBase defensiveSkill { get; set; }
 
+	public Heartbeat heartbeat { get; set; }
+	public float armorFactor = 0.5f;
 	public float health
 	{
 		get {
@@ -20,37 +22,36 @@ public partial class Player : MonoBehaviour
 		
 		set {
 			_health = Mathf.Clamp01(value);
-
+			
 			//Event.dispatch(new PlayerHitEvent());
-
+			
 			if(_health == 0f)
 			{
 				//Event.dispatch(new PlayerDeathEvent());
 			}
 		}
 	}
-	public float armorFactor = 0.5f;
-	private float _health = 0.6f;
-	private Heartbeat _heartbeat;
-	private GameObject _body;
 
+	private float _health = 1f;
+	private GameObject _body;
 	private Timer deadTimer;
+	private DateTime _attackStart;
+
+	public Player()
+	{
+	}
 
 	void Awake()
 	{
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
-		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+		heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
 		_body = FindInChildren (transform, "Body").gameObject;
 
 		InitializeAnimations();
 
 		//TODO: remove (testing purposes)
 		utilitySkill = gameObject.AddComponent<Dash> ();
-	}
-
-	public Player()
-	{
 	}
 	
 	/// <summary>
@@ -64,7 +65,15 @@ public partial class Player : MonoBehaviour
 		{
 			secondaryWeapon = primaryWeapon;
 		}
-		
+
+		if (primaryWeapon != null)
+		{
+			//Dropping primary weapon
+			DropPrimaryWeapon();
+		}
+
+
+		//Setting our new weapon
 		SetWeapon (weapon);
 	}
 	
@@ -83,6 +92,8 @@ public partial class Player : MonoBehaviour
 			weapon.parent = hand;
 			weapon.position = hand.position;
 		}
+
+		InitializeAnimationEvents(weaponHolder);
 	}
 
 	private static Transform FindInChildren(Transform transform, string name)
@@ -130,13 +141,6 @@ public partial class Player : MonoBehaviour
 		//Transform heartbeat = transform.FindChild ("Heartbeat_indicator");
 		//heartbeat.position = new Vector3(heartbeat.position.x, (distanceToGround) + 0.02f, heartbeat.position.z);
 
-		//Dropping weapon / Doing skill
-
-		if(controller.JustPressed(Button.Y))
-		{
-			DropPrimaryWeapon();
-		}
-
 		//Pausing/resuming game
         if (controller.JustPressed(Button.Start))
         {
@@ -160,7 +164,7 @@ public partial class Player : MonoBehaviour
         }
 
 		//Attacking
-		if (controller.JustPressed(Button.B))
+		if (controller.JustPressed(Button.RightShoulder))
 		{
 			AnimationAttack();
 		}
@@ -200,21 +204,23 @@ public partial class Player : MonoBehaviour
 		}
 
     }
-
-	/// <summary>
-	/// This method is called by the attack animation
-	/// </summary>
-	public void Attack()
-	{
-		if(primaryWeapon)
-		{
-			primaryWeapon.Attack ();
-		}
-	}
 	
+	public void DetectPlayerHit()
+	{
+		primaryWeapon.DetectPlayerHit();
+	}
+
+	public void LoadModel(PlayerModel model)
+	{
+		this.utilitySkill = (SkillBase)Activator.CreateInstance(null, model.utilitySkill).Unwrap();
+		this.offensiveSkill = (SkillBase)Activator.CreateInstance(null, model.offensiveSkill).Unwrap();
+		this.defensiveSkill = (SkillBase)Activator.CreateInstance(null, model.defensiveSkill).Unwrap();
+		this.playerIndex = model.index;
+	}
+
 	public void ApplyDamage(Vector3 direction, float amount)
 	{
-		float dot = Vector3.Dot(direction.normalized, _heartbeat.transform.forward);
+		float dot = Vector3.Dot(direction.normalized, heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 		
 		if(armorHit)
@@ -222,14 +228,12 @@ public partial class Player : MonoBehaviour
 			amount = amount * armorFactor;
 		}
 		
-		health = health - amount;
-	}
-	
-	public void LoadModel(PlayerModel model)
-	{
-		this.utilitySkill = (SkillBase)Activator.CreateInstance(null, model.utilitySkill).Unwrap();
-		this.offensiveSkill = (SkillBase)Activator.CreateInstance(null, model.offensiveSkill).Unwrap();
-		this.defensiveSkill = (SkillBase)Activator.CreateInstance(null, model.defensiveSkill).Unwrap();
-		this.playerIndex = model.index;
+		this.health = this.health - amount;
+
+		if (this.health == 0)
+		{
+			//TODO: respan
+			health = 1;
+		}
 	}
 }

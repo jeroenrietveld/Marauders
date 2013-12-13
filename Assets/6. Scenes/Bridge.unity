@@ -12135,6 +12135,14 @@ Prefab:
       propertyPath: m_Radius
       value: .25
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
+      propertyPath: movementSpeed.rawValue
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
+      propertyPath: jumpHeight
+      value: 25000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef5b6cd097482ad4aa7d0c82ec3b1959, type: 2}
   m_RootGameObject: {fileID: 1928339252}
@@ -19068,9 +19076,9 @@ MonoBehaviour:
   playerIndex: 0
   turnSmoothing: 15
   speedDampTime: .100000001
-  jumpHeight: 30000
+  jumpHeight: 25000
   movementSpeed:
-    rawValue: 5
+    rawValue: 4.5
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
   armorFactor: .5

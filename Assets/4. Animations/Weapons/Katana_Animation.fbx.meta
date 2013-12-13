@@ -1204,8 +1204,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Katana1
       takeName: Take 001
-      firstFrame: 6
-      lastFrame: 25
+      firstFrame: 1
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1804,8 +1804,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Katana2
       takeName: Take 001
-      firstFrame: 23
-      lastFrame: 35
+      firstFrame: 25
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

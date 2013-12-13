@@ -2,7 +2,23 @@
 	"name":"Katana",
 	"prefab":"Katana",
 	"prefabs":["Katana"],
-	"range": 1.5,
-	"damage": 0.2,
-	"animations":["Katana1", "Katana2", "Katana3"]
+	"range": 2,
+	"damage": 0.4,
+	"attacks": [
+		{
+			animation: "Katana1",
+			speed: 1.0,
+			timing: 0.528
+		},
+		{
+			animation: "Katana2",
+			speed: 1.0,
+			timing: 0.125
+		},		
+		{
+			animation: "Katana3",
+			speed: 1.0,
+			timing: 0.42557
+		}
+	]
 }

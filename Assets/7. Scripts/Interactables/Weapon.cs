@@ -12,7 +12,10 @@ public class Weapon : MonoBehaviour
 {
 	public bool isGameModeObject = false;
 	public float range;
-	public List<String> animations;
+
+	public List<AttackInfo> attacks = new List<AttackInfo>();
+	public int currentAttack { get; set; }
+	private int _currentAttack = 0;
 
 	public float damage
 	{
@@ -61,23 +64,27 @@ public class Weapon : MonoBehaviour
 		throw new System.NotImplementedException();
 	}
 
-	public void Attack()
+	public void DetectPlayerHit()
 	{
 		CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
-
+		
 		RaycastHit[] hits = Physics.CapsuleCastAll (
 			owner.transform.TransformPoint(coll.center + new Vector3(0, coll.height/2, 0)),
-		    owner.transform.TransformPoint(coll.center + new Vector3(0, -coll.height/2, 0)),
-		    coll.radius,
+			owner.transform.TransformPoint(coll.center + new Vector3(0, -coll.height/2, 0)),
+			coll.radius,
 			owner.transform.forward,
 			range);
 
 		foreach(var hit in hits)
 		{
 			Player player = hit.collider.gameObject.GetComponent<Player>();
+
 			if(player)
 			{
-				ApplyDamage(player);
+				if (player != owner)
+				{
+					ApplyDamage(player);
+				}
 			}
 		}
 	}
@@ -85,17 +92,7 @@ public class Weapon : MonoBehaviour
 	public void ApplyDamage(Player player)
 	{
 		Vector3 attackDirection = player.transform.position - owner.transform.position;
-
+		
 		player.ApplyDamage(-attackDirection, owner.primaryWeapon.damage);
-	}
-
-	public void AddAnimation(string animation)
-	{
-		if(animations == null)
-		{
-			animations = new List<String>();
-		}
-
-		animations.Add (animation);
 	}
 }

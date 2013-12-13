@@ -1221,7 +1221,7 @@ ModelImporter:
       name: Daggers1
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 28
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1826,7 +1826,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Daggers2
       takeName: Take 001
-      firstFrame: 29
+      firstFrame: 34
       lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0

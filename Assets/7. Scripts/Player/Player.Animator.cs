@@ -1,20 +1,51 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : MonoBehaviour
 {
-	private Transform LowerBody;
-	private Transform UpperBody;
+	public Transform LowerBody;
+	public Transform UpperBody;
 	
 	private float crossFadeDuration = 0.3f;
 
 	private bool attackLowerBody = false;
-	
-	private int attackAnimationIndex = 0;
+
 	private DateTime attackAnimationStart;
-	private string attackAnimationName = "";
-	
+
+	private List<string> attackAnimationsInitialized = new List<string>();
+
+	private string attackAnimationName 
+	{ 
+		get 
+		{ 
+			if (primaryWeapon != null)
+			{
+				return primaryWeapon.attacks[primaryWeapon.currentAttack].animationName;
+			}
+
+			return "";
+		}
+	}
+
+	private void InitializeAnimationEvents(Weapon weapon)
+	{
+		foreach (AttackInfo attack in weapon.attacks)
+		{
+			if (!attackAnimationsInitialized.Contains(attack.animationName))
+			{
+				//Setting the event
+				AnimationEvent e = new AnimationEvent();
+				e.time = attack.timing * attack.speed;
+				e.functionName = "DetectPlayerHit";
+				animation[attackAnimationName].clip.AddEvent(e);
+
+				attackAnimationsInitialized.Add (attack.animationName);
+			}
+		}
+	}
+
 	protected void InitializeAnimations()
 	{
 		UpperBody = transform.Find("Character1_Reference/Character1_Hips/Character1_Spine");
@@ -96,12 +127,10 @@ public partial class Player : MonoBehaviour
 				
 				return;
 			}
-			
-			
+						
 			animation.CrossFade("Run", crossFadeDuration, PlayMode.StopSameLayer);
 			animation["Run"].speed = speed * 0.2f;
-			
-			
+						
 			return;
 		} 
 		else
@@ -124,45 +153,36 @@ public partial class Player : MonoBehaviour
 	{
 		//Security checks
 		if (primaryWeapon == null) { return ; }
-		if (primaryWeapon.animations.Count == 0 ) { return ; }
-
+		if (primaryWeapon.attacks.Count == 0 ) { return ; }
+		
 		//Calculating the amount the time that has passed since last accak
 		TimeSpan span = DateTime.Now.Subtract(attackAnimationStart);
 		
 		//checking which attack animation should be played
-		if (span.TotalSeconds > 2)
+		if (span.TotalMilliseconds > 2500)
 		{
 			//ressetting it to -1, will get updated to 0 later on
-			attackAnimationIndex = -1;
-		} 
-		
-		//Upping the animation index
-		attackAnimationIndex = (attackAnimationIndex + 1) % primaryWeapon.animations.Count;
+			primaryWeapon.currentAttack = 0;
+		}
 
 		//Can not attack 2x at the same time
-		if (!animation.IsPlaying(attackAnimationName))
+		if (!animation.IsPlaying(primaryWeapon.attacks[primaryWeapon.currentAttack].animationName))
 		{
-			//Playing the attack animation
-			//Setting the attack name
-			attackAnimationName = primaryWeapon.animations[attackAnimationIndex];
-			animation[attackAnimationName].AddMixingTransform(UpperBody);
-			animation[attackAnimationName].AddMixingTransform(LowerBody);
-			animation[attackAnimationName].speed = 1.0f;
-			animation[attackAnimationName].wrapMode = WrapMode.Once;
-			animation[attackAnimationName].layer = 2;
+			//Upping the animation index
+			primaryWeapon.currentAttack = (primaryWeapon.currentAttack + 1) % primaryWeapon.attacks.Count;
+
+			//Setting the info
+			AttackInfo attack = primaryWeapon.attacks[primaryWeapon.currentAttack];
+			animation[attack.animationName].AddMixingTransform(UpperBody);
+			animation[attack.animationName].AddMixingTransform(LowerBody);
+			animation[attack.animationName].speed = attack.speed;
+			animation[attack.animationName].wrapMode = WrapMode.Once;
+			animation[attack.animationName].layer = 2;
 			attackLowerBody = true;
-			
-			//Setting the event
-			AnimationEvent e = new AnimationEvent();
-			e.time = 0.2f;
-			e.functionName = "Attack";
-			animation[attackAnimationName].clip.AddEvent(e);
-			
+
 			//Resseting the start time
 			attackAnimationStart = DateTime.Now;
-			
-			//animation.Play (attackAnimationName, PlayMode.StopSameLayer);
-			//animation.Play(attackAnimationName, PlayMode.StopSameLayer);
+
 			animation.CrossFade(attackAnimationName, 0.1f, PlayMode.StopSameLayer);
 		}
 	}
