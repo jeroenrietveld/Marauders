@@ -38,6 +38,7 @@ public partial class Player : MonoBehaviour
 	private GameObject _body;
 	private Timer _deadTimer;
 	private DateTime _attackStart;
+	private bool _isDeath = false;
 	
 	private Menu _pauseMenu;
 
@@ -204,6 +205,18 @@ public partial class Player : MonoBehaviour
 			}*/
 		}
 
+		if(Input.GetKeyDown(KeyCode.D) && playerIndex == PlayerIndex.One)
+		{
+			Die ();
+		}
+		/*if(_isDeath)
+		{
+			Vector3 scale = new Vector3(
+				transform.localScale.x * 0.5f * Time.deltaTime,
+				transform.localScale.y * 0.5f * Time.deltaTime,
+				transform.localScale.z * 0.5f * Time.deltaTime);
+			transform.localScale = scale;
+		}*/
     }
 	
 	public void DetectPlayerHit()
@@ -231,5 +244,30 @@ public partial class Player : MonoBehaviour
 		
 		this.health = this.health - amount;
 
+		if(this.health <= 0)
+		{
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+		GameObject portal = GameObject.Instantiate(Resources.Load("Prefabs/Portal")) as GameObject;
+		portal.transform.position = transform.position + new Vector3 (0, 1.5f, -2);
+
+		GameObject body = transform.FindChild ("Body").gameObject;
+		body.renderer.material.SetFloat ("CutoffHeight", portal.transform.position.z);
+
+		//Get the direction from the player to the portal
+		Vector3 direction = (portal.transform.position - transform.position).normalized;
+
+		//apply a force to the player when the timer ends
+		Timer portalTimer = portal.GetComponent<Portal> ().portalTimer;
+
+		portalTimer.AddCallback (portalTimer.endTime - 0.5f, delegate {
+			rigidbody.velocity = direction * 10;
+			transform.localScale = Vector3.one;
+			_isDeath = true;
+		});
 	}
 }

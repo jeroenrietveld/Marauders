@@ -35,7 +35,7 @@
 			{
 				FragInput output;
 				
-				float height = mul(_Object2World, input.vertex).y;
+				float height = mul(_Object2World, input.vertex).z;
 				
 				output.position = mul(UNITY_MATRIX_MVP, input.vertex);
 				output.texCoord = input.texcoord.xy;	
@@ -55,7 +55,6 @@
 			
 				if(input.difference < CutoffSize)
 				{
-					//color = float4(1, 1 - (input.difference * 10), 1 - (input.difference * 10), 1);
 					color = float4(tex2D(LookupTable, float2(-input.difference / CutoffSize, 0.5)));
 				}
 				
