@@ -36,8 +36,10 @@ public partial class Player : MonoBehaviour
 
 	private float _health = 1f;
 	private GameObject _body;
-	private Timer deadTimer;
+	private Timer _deadTimer;
 	private DateTime _attackStart;
+	
+	private Menu _pauseMenu;
 
 	public Player()
 	{
@@ -73,7 +75,6 @@ public partial class Player : MonoBehaviour
 			//Dropping primary weapon
 			DropPrimaryWeapon();
 		}
-
 
 		//Setting our new weapon
 		SetWeapon (weapon);
@@ -127,8 +128,6 @@ public partial class Player : MonoBehaviour
 		primaryWeapon.owner = null;
 	}
 
-	Menu pauseMenu;
-
     /// <summary>
     /// Check is game is paused and sets the timeScale in the GameManager.
     /// Create the menu from the prefabMenu.
@@ -149,16 +148,16 @@ public partial class Player : MonoBehaviour
 			if (!GameManager.isPaused)
 			{
             	//Showing the menu
-				pauseMenu = PauseMenu.Attach(this.gameObject);
-				pauseMenu.controllers.Add(controller);
-				pauseMenu.visible = true;
+				_pauseMenu = PauseMenu.Attach(this.gameObject);
+				_pauseMenu.controllers.Add(controller);
+				_pauseMenu.visible = true;
 
 				//Pausing the game
 				GameManager.Instance.PauseGame();
 			} else
 			{
 				//Hiding the menu
-				pauseMenu.visible = false;
+				_pauseMenu.visible = false;
 
 				//Resming the game
 				GameManager.Instance.ResumeGame();
