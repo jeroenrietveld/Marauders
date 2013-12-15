@@ -42,6 +42,9 @@ public partial class Player : MonoBehaviour
 	
 	private Menu _pauseMenu;
 
+	private Material _cooldownMat;
+	private Texture _cooldownTex;
+
 	public Player()
 	{
 	}
@@ -57,6 +60,15 @@ public partial class Player : MonoBehaviour
 
 		//TODO: remove (testing purposes)
 		utilitySkill = gameObject.AddComponent<Dash> ();
+
+		_cooldownMat = Resources.Load ("Materials/Cooldown", typeof(Material)) as Material;
+		_cooldownTex = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
+	}
+
+	void OnGUI()
+	{
+		Graphics.DrawTexture (new Rect (10, 10, 100, 100), _cooldownTex, _cooldownMat);
+		_cooldownMat.SetFloat ("health", (utilitySkill.cooldown.running) ? 1 - utilitySkill.cooldown.Phase() : 0);
 	}
 	
 	/// <summary>
@@ -172,7 +184,7 @@ public partial class Player : MonoBehaviour
 		}
 
 		//Utility skill
-		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running)
+		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running || Input.GetKeyDown(KeyCode.X) && !utilitySkill.cooldown.running)
 		{
 			utilitySkill.PerformAction();
 			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
