@@ -14,19 +14,19 @@ public class PauseMenu {
 
             // Adding the items to the menu, resume, options and quit
 			MenuItemLabel item = new MenuItemLabel();
-            item.height = 90;
+            item.height = 115;
             item.text = "Resume";
 			((MenuItemLabel)item).xboxPressed += new XboxPressedEventHandler(button_Resume);
 			menu.Add (item);
             menu.focusedItem = item;
 			
 			item = new MenuItemLabel();
-            item.height = 90;
+            item.height = 115;
 			item.text = "Options";
 			menu.Add (item);
 			
 			item = new MenuItemLabel();
-            item.height = 90;
+            item.height = 115;
             item.text = "Quit";
 			menu.Add (item);
             ((MenuItemLabel)item).xboxPressed += new XboxPressedEventHandler(button_Exit);
