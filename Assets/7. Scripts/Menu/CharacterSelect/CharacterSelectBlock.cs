@@ -11,9 +11,15 @@ public class CharacterSelectBlock : MonoBehaviour
     public GameObject SkillSelect;
 	
     public PlayerIndex player;
+    
+    // These list should later be filled dynamicly.
     public List<Material> marauders;
+    public List<string> marauderNames;
+
 	public int marauderIndex { get; set; }
 	public bool isConnected { get; set; }
+    public bool isPlayerReady { get; set; }
+    public bool isJoined { get; set; }
 	private GamePad _controller;
 
     public SelectionBase _currentState;
@@ -88,6 +94,7 @@ public class CharacterSelectBlock : MonoBehaviour
                 }
                 else if (_controller.JustPressed(Button.A))
                 {
+                    isJoined = true;
                     ChangeState(CharacterSelectBlockStates.CharSelectState);
                 }
             }
@@ -96,8 +103,8 @@ public class CharacterSelectBlock : MonoBehaviour
 
     private void OnControllerDisConnect()
     {
+        isJoined = false;
         isConnected = false;
-
         _currentState = null;
         SkillSelect.SetActive(false);
         MarauderSelect.SetActive(false);
@@ -111,14 +118,10 @@ public class CharacterSelectBlock : MonoBehaviour
         StartScreen.transform.FindChild("ControllerText").gameObject.GetComponent<TextMesh>().text = "Press A \n to Join";
     }
 
-    public void OnLeave(string s)
-    {
-		marauderIndex = 0;
-    }
-
 	public void changeMarauder(int index)
 	{
 		marauderIndex = index;
 		MarauderSelect.transform.FindChild("MarauderModel").gameObject.renderer.material = marauders[marauderIndex];
+        MarauderSelect.transform.FindChild("MauraderSelectNameText").GetComponent<TextMesh>().text = marauderNames[marauderIndex];
 	}
 }
