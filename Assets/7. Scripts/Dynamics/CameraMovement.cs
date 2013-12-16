@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
 	private List<GameObject> _trackableObjects = new List<GameObject>();
 	private List<Vector3> _vectorBuffer = new List<Vector3>();
 	private List<GameObject> _occluders = new List<GameObject>();
-	public float maxPlayerAngle = 30f;
+	public float maxPlayerAngle = 50f;
 	public const float degToRad = 1 / (360 / Mathf.PI);
 
 	public float minCameraDistance = 10f;
@@ -23,7 +23,13 @@ public class CameraMovement : MonoBehaviour
 	
 	void UpdateCameraPosition()
 	{
-		transform.position = Vector3.zero;
+		// Reset position instead of working from where we are to ensure inter frame stability.
+		// Some distance from center of trackable objects in world space is a decent heuristic,
+		// this means we need fewer iterations.
+		_vectorBuffer.Clear();
+		foreach(var obj in _trackableObjects) _vectorBuffer.Add(obj.transform.position);
+		transform.position = GetCenter(_vectorBuffer) - transform.forward * 25;
+
 		for(int _ = 0; _ < solverIterations; ++_)
 		{
 			UpdatePositionIteration();
@@ -113,16 +119,18 @@ public class CameraMovement : MonoBehaviour
 		}
 	}
 
+	// Uses the current transform to determine object position in screen space. Call multiple times to improve accuracy.
 	private void UpdatePositionIteration()
 	{
+		// Transform 
 		_vectorBuffer.Clear();
 		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(obj.transform.position));
-		Vector3 playerCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
+		Vector3 objectCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
 
 		_vectorBuffer.Clear();
-		foreach (GameObject player in _trackableObjects)
+		foreach (GameObject obj in _trackableObjects)
 		{
-			_vectorBuffer.Add(Project(playerCenter, -transform.forward, player.transform.position));
+			_vectorBuffer.Add(Project(objectCenter, -transform.forward, obj.transform.position));
 		}
 		
 		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
@@ -135,24 +143,27 @@ public class CameraMovement : MonoBehaviour
 			
 			float cameraDistance = Vector3.Distance(
 				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
-				playerCenter);
+				objectCenter);
 			
 			maxDistance = Mathf.Max(maxDistance, cameraDistance);
 		}
 		
 		maxDistance = Mathf.Clamp(maxDistance, minCameraDistance, maxCameraDistance);
 		
-		Vector3 targetPosition = playerCenter - transform.forward * maxDistance;
+		Vector3 targetPosition = objectCenter - transform.forward * maxDistance;
 		transform.position = targetPosition;
 	}
 
+	// Transform point to projection space, move origin to center of screen, 
+	// apply aspect ratio correction, move origin back to ll corner,
+	// transform result back to world space
 	private Vector3 ScalePosition(Vector3 v)
 	{
 		return camera.ViewportToWorldPoint(
 			Vector3.Scale(
-				(camera.WorldToViewportPoint(v) - new Vector3(.5f, .5f, 0)) * 2,
+				camera.WorldToViewportPoint(v) - new Vector3(.5f, .5f, 0),
 				new Vector3(1 / camera.aspect, 1, 1)
-			) / 2 + new Vector3(.5f, .5f, .5f)
+			) + new Vector3(.5f, .5f, 0)
 		);
 	}
 
