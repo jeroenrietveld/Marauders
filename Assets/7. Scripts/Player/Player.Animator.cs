@@ -168,9 +168,6 @@ public partial class Player : MonoBehaviour
 		//Can not attack 2x at the same time
 		if (!animation.IsPlaying(primaryWeapon.attacks[primaryWeapon.currentAttack].animationName))
 		{
-			//Upping the animation index
-			primaryWeapon.currentAttack = (primaryWeapon.currentAttack + 1) % primaryWeapon.attacks.Count;
-
 			//Setting the info
 			AttackInfo attack = primaryWeapon.attacks[primaryWeapon.currentAttack];
 			animation[attack.animationName].AddMixingTransform(UpperBody);

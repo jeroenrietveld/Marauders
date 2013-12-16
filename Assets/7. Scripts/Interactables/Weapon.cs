@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
 
 	public List<AttackInfo> attacks = new List<AttackInfo>();
 	public int currentAttack { get; set; }
-	private int _currentAttack = 0;
 
 	public float damage
 	{
@@ -66,7 +65,37 @@ public class Weapon : MonoBehaviour
 
 	public void DetectPlayerHit()
 	{
-		CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
+		// get all colliders whose bounds touch the sphere
+		Collider[] colls = Physics.OverlapSphere(owner.transform.position, this.range);
+
+		//Looping each collision
+		foreach(Collider hit in colls) 
+		{
+			Player player = hit.collider.gameObject.GetComponent<Player>();
+
+			if (player && player != owner)
+			{ 
+				float dst = Vector3.Distance(player.transform.position, owner.transform.position);
+
+				if (dst <= this.range)
+				{
+					float angle = Mathf.Acos(Vector3.Dot (owner.transform.forward, (player.transform.position - owner.transform.position).normalized));
+
+					if (Math.Abs(angle/ 0.0174532925f) < 45)
+					{
+						ApplyDamage(player);
+
+						currentAttack = (currentAttack + 1) % attacks.Count;
+					}
+					else
+					{
+						currentAttack = 0;
+					}
+				}
+			}
+		}
+
+		/*CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
 		
 		RaycastHit[] hits = Physics.CapsuleCastAll (
 			owner.transform.TransformPoint(coll.center + new Vector3(0, coll.height/2, 0)),
@@ -74,7 +103,7 @@ public class Weapon : MonoBehaviour
 			coll.radius,
 			owner.transform.forward,
 			range);
-
+		
 		foreach(var hit in hits)
 		{
 			Player player = hit.collider.gameObject.GetComponent<Player>();
@@ -83,13 +112,13 @@ public class Weapon : MonoBehaviour
 			{
 				ApplyDamage(player);
 			}
-		}
+		}*/
 	}
 
 	public void ApplyDamage(Player player)
 	{
 		Vector3 attackDirection = player.transform.position - owner.transform.position;
-		
+
 		player.ApplyDamage(-attackDirection, owner.primaryWeapon.damage);
 	}
 }

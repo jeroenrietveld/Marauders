@@ -55,6 +55,7 @@ public class TimeBubble : MonoBehaviour {
 		var player = collider.GetComponent<Player>();
 		if(player)
 		{
+			player.canJump = true;
 			Event.dispatch(new TimeBubblePlayerExitEvent(player, respawnDelay));
 		}
 		else

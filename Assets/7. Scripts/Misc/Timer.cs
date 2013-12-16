@@ -107,9 +107,6 @@ public class Timer
 					case WrapMode.LOOP:
 						Start(currentTime - endTime);
 					break;
-					default:
-						throw new NotImplementedException();
-					break;
 				}
 			}
 		}
