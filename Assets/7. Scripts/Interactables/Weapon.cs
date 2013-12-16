@@ -79,12 +79,9 @@ public class Weapon : MonoBehaviour
 		{
 			Player player = hit.collider.gameObject.GetComponent<Player>();
 
-			if(player)
+			if(player && player != owner)
 			{
-				if (player != owner)
-				{
-					ApplyDamage(player);
-				}
+				ApplyDamage(player);
 			}
 		}
 	}
