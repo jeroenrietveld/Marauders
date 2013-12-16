@@ -43,6 +43,9 @@ public partial class Player : MonoBehaviour
 	private Material _cooldownMat;
 	private Texture _cooldownTex;
 
+	//Move states to a better location?
+	public bool frozen = false;
+
 	public Player()
 	{
 	}
@@ -56,7 +59,8 @@ public partial class Player : MonoBehaviour
 		InitializeAnimations();
 
 		//TODO: remove (testing purposes)
-		utilitySkill = gameObject.AddComponent<Dash> ();
+		//utilitySkill = gameObject.AddComponent<Dash> ();
+		utilitySkill = gameObject.AddComponent<Timeshift> ();
 
 		_cooldownMat = Resources.Load ("Materials/Cooldown", typeof(Material)) as Material;
 		_cooldownTex = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
@@ -143,6 +147,12 @@ public partial class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
+		//well that sucks
+		if(frozen)
+		{
+			return;
+		}
+
 		//We want to calculate this only once, so filling it up here
 		RaycastHit hit;
 		//Vector3 vector = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);

@@ -37,8 +37,8 @@ public class CharacterSelectState : SelectionBase
         else if (controller.JustPressed(Button.B))
         {
             block._currentState = null;
-            block.MarauderSelect.SetActive(false);
-            block.StartScreen.SetActive(true);
+            block._currentEnum = CharacterSelectBlockStates.StartState;
+            OnInActive();
         }
     }
 
@@ -46,16 +46,18 @@ public class CharacterSelectState : SelectionBase
     {
         block.StartScreen.SetActive(false);
         block.MarauderSelect.SetActive(true);
-        block.changeMarauder(0);
+        block.changeMarauder(block.marauderIndex);
     }
 
     public override void OnInActive()
     {
         block.MarauderSelect.SetActive(false);
 
-        if (block._currentEnum == CharacterSelectBlockStates.CharSelectState)
+        if (block._currentEnum == CharacterSelectBlockStates.StartState)
         {
+            block.isJoined = false;
             block.StartScreen.SetActive(true);
+            block.marauderIndex = 0;
         }
     }
 }
