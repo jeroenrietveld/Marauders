@@ -74,7 +74,8 @@ public class CameraMovement : MonoBehaviour
 			obj.renderer.material.color = color;
 		}
 	}
-	
+
+	// Project point 'v' on the line defined by point 'p' and direction 'd'
 	Vector3 Project(Vector3 p, Vector3 d, Vector3 v)
 	{
 		return Vector3.Dot(d, v - p) * d + p;
@@ -89,8 +90,7 @@ public class CameraMovement : MonoBehaviour
 	{
 		_trackableObjects.Remove(obj);
 	}
-
-
+	
 	private Vector3 GetCenter(List<Vector3> positions)
 	{
 		Vector3 min, max;
@@ -122,7 +122,6 @@ public class CameraMovement : MonoBehaviour
 	// Uses the current transform to determine object position in screen space. Call multiple times to improve accuracy.
 	private void UpdatePositionIteration()
 	{
-		// Transform 
 		_vectorBuffer.Clear();
 		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(obj.transform.position));
 		Vector3 objectCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
