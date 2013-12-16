@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 using System;
-
+ 
 public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
@@ -35,10 +35,8 @@ public partial class Player : MonoBehaviour
 	}
 
 	private float _health = 1f;
-	private GameObject _body;
 	private Timer _deadTimer;
 	private DateTime _attackStart;
-	private bool _isDeath = false;
 	
 	private Menu _pauseMenu;
 
@@ -54,7 +52,6 @@ public partial class Player : MonoBehaviour
 		_camera = Camera.main;
 		_controller = ControllerInput.GetController (playerIndex);
 		heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-		_body = FindInChildren (transform, "Body").gameObject;
 
 		InitializeAnimations();
 
@@ -101,7 +98,6 @@ public partial class Player : MonoBehaviour
 		while(weaponHolder.transform.childCount > 0)
 		{	
 			Transform weapon = weaponHolder.transform.GetChild(0);
-			Debug.Log(weapon);
 			Transform hand = FindInChildren(transform, weapon.gameObject.name);
 			
 			weapon.rotation = hand.rotation;
@@ -279,7 +275,6 @@ public partial class Player : MonoBehaviour
 		portalTimer.AddCallback (portalTimer.endTime - 0.5f, delegate {
 			rigidbody.velocity = direction * 10;
 			transform.localScale = Vector3.one;
-			_isDeath = true;
 		});
 	}
 }

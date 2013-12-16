@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
 
 	public List<AttackInfo> attacks = new List<AttackInfo>();
 	public int currentAttack { get; set; }
-	private int _currentAttack = 0;
 
 	public float damage
 	{
@@ -66,7 +65,24 @@ public class Weapon : MonoBehaviour
 
 	public void DetectPlayerHit()
 	{
-		CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
+		// get all colliders whose bounds touch the sphere
+		Collider[] colls= Physics.OverlapSphere(owner.transform.position, this.range);
+
+		//Looping each collision
+		foreach(Collider hit in colls) 
+		{
+			Player player = hit.collider.gameObject.GetComponent<Player>();
+
+			if (player && player != owner)
+			{ 
+				if (Vector3.Distance(hit.transform.position, owner.transform.position) <= this.range)
+				{
+					ApplyDamage(player);
+				}
+			}
+		}
+
+		/*CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
 		
 		RaycastHit[] hits = Physics.CapsuleCastAll (
 			owner.transform.TransformPoint(coll.center + new Vector3(0, coll.height/2, 0)),
@@ -74,7 +90,7 @@ public class Weapon : MonoBehaviour
 			coll.radius,
 			owner.transform.forward,
 			range);
-
+		
 		foreach(var hit in hits)
 		{
 			Player player = hit.collider.gameObject.GetComponent<Player>();
@@ -83,7 +99,7 @@ public class Weapon : MonoBehaviour
 			{
 				ApplyDamage(player);
 			}
-		}
+		}*/
 	}
 
 	public void ApplyDamage(Player player)

@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using XInputDotNetPure;
-
+ 
 public class MenuItemLabel:MenuItem
 {
 	public event XboxPressedEventHandler xboxPressed;
-
-	private GUIStyle style = new GUIStyle();
-	private Texture texture = null;
-
+	
 	public override void Draw (int yLocation)
 	{
 		//Getting the label skin

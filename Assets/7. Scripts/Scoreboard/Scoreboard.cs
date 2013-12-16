@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
+ 
 public class Scoreboard : MonoBehaviour
 {
 	private List<List<Cell>> _cells;
@@ -104,9 +104,7 @@ public class Scoreboard : MonoBehaviour
         GUI.skin = scoreboardskin;
         int rows = _cells.Count;
         int columns = _cells[0].Count;
-
-        int width = Screen.width;
-        int heigth = Screen.height;
+		
         int cellwidth = 100;
         int cellheigth = 20;
         for (int i = 0; i < rows; i++)

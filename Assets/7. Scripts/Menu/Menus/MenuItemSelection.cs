@@ -81,11 +81,7 @@ public class MenuItemSelection : MenuItem
 		//All should be well and i wil now be the new SelectedOptioNItem
 		SelectedOptionIndex = i;
 	}
-
-
-	private GUIStyle style = new GUIStyle();
-	private Texture texture = null;
-
+	
 	public override void Draw(int yLocation)
 	{
 		//Drawing the About
