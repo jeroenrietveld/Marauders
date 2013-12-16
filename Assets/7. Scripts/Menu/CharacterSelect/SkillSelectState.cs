@@ -70,6 +70,15 @@ public class SkillSelectState : SelectionBase
             {
                 block.isPlayerReady = true;
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
+
+                // Add selected marauder and skills to the gamemanager.
+                PlayerModel pl = new PlayerModel();
+                pl.index = block.player;
+                pl.marauder = block.marauderNames[block.marauderIndex];
+                pl.offensiveSkill = list[0].active;
+                pl.defensiveSkill = list[1].active;
+                pl.utilitySkill = list[2].active;
+                GameManager.Instance.playerModels.Add(pl);
             }
             else if(block.player == PlayerIndex.One)
             {
@@ -85,14 +94,6 @@ public class SkillSelectState : SelectionBase
 
                 if (canContinue)
                 {
-                    // Add selected marauder and skills to the gamemanager.
-                    PlayerModel pl = new PlayerModel();
-                    pl.index = block.player;
-                    pl.marauder = block.marauderNames[block.marauderIndex];
-                    pl.offensiveSkill = list[0].active;
-                    pl.defensiveSkill = list[1].active;
-                    pl.utilitySkill = list[2].active;
-                    GameManager.Instance.playerModels.Add(pl);
                     GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
                 }
             }
