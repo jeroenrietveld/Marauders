@@ -37,6 +37,7 @@ public partial class Player : MonoBehaviour
 	private float _health = 1f;
 	private Timer _deadTimer;
 	private DateTime _attackStart;
+	public bool canJump = true;
 	
 	private Menu _pauseMenu;
 
@@ -59,8 +60,8 @@ public partial class Player : MonoBehaviour
 		InitializeAnimations();
 
 		//TODO: remove (testing purposes)
-		//utilitySkill = gameObject.AddComponent<Dash> ();
-		utilitySkill = gameObject.AddComponent<Timeshift> ();
+		utilitySkill = gameObject.AddComponent<Dash> ();
+		//utilitySkill = gameObject.AddComponent<Timeshift> ();
 
 		_cooldownMat = Resources.Load ("Materials/Cooldown", typeof(Material)) as Material;
 		_cooldownTex = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
@@ -157,9 +158,14 @@ public partial class Player : MonoBehaviour
 		RaycastHit hit;
 		//Vector3 vector = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
 		Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity);
-		this.distanceToGround = hit.distance;
-		//Transform heartbeat = transform.FindChild ("Heartbeat_indicator");
-		//heartbeat.position = new Vector3(heartbeat.position.x, (distanceToGround) + 0.02f, heartbeat.position.z);
+
+		if (hit.collider != null)
+		{
+			this.distanceToGround = hit.distance;
+		} else
+		{
+			this.distanceToGround = 100;
+		}
 
 		//Pausing/resuming game
         if (controller.JustPressed(Button.Start))
@@ -184,7 +190,7 @@ public partial class Player : MonoBehaviour
         }
 
 		//Attacking
-		if (controller.JustPressed(Button.RightShoulder))
+		if (controller.JustPressed(Button.B))
 		{
 			AnimationAttack();
 		}
@@ -213,14 +219,20 @@ public partial class Player : MonoBehaviour
 		//Applying the movement
 		MovementManagement(moveSpeed);
 
-		//Jumping
-		if (controller.JustPressed(Button.A) && this.isGrounded)
+		//To jump when falling off
+		if (distanceToGround < 0.1f)
 		{
-			Jump();
-			/*if (AgainstWall(moveSpeed))
+			canJump = true;
+		}
+
+		//Jumping
+		if (controller.JustPressed(Button.A))
+		{
+			if (canJump)
 			{
-				
-			}*/
+				Jump ();
+			}
+			canJump = false;
 		}
 
 		if(Input.GetKeyDown(KeyCode.D) && playerIndex == PlayerIndex.One)
@@ -252,6 +264,7 @@ public partial class Player : MonoBehaviour
 
 	public void ApplyDamage(Vector3 direction, float amount)
 	{
+
 		float dot = Vector3.Dot(direction.normalized, heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 		

@@ -84,6 +84,12 @@ public class Weapon : MonoBehaviour
 					if (Math.Abs(angle/ 0.0174532925f) < 45)
 					{
 						ApplyDamage(player);
+
+						currentAttack = (currentAttack + 1) % attacks.Count;
+					}
+					else
+					{
+						currentAttack = 0;
 					}
 				}
 			}
@@ -112,7 +118,7 @@ public class Weapon : MonoBehaviour
 	public void ApplyDamage(Player player)
 	{
 		Vector3 attackDirection = player.transform.position - owner.transform.position;
-		
+
 		player.ApplyDamage(-attackDirection, owner.primaryWeapon.damage);
 	}
 }
