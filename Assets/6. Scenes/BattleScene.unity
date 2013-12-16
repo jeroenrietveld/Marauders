@@ -1715,6 +1715,7 @@ MonoBehaviour:
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
   armorFactor: .200000003
+  frozen: 0
 --- !u!136 &260254638
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13343,6 +13344,7 @@ MonoBehaviour:
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
   armorFactor: .200000003
+  frozen: 0
 --- !u!136 &2075965850
 CapsuleCollider:
   m_ObjectHideFlags: 0
