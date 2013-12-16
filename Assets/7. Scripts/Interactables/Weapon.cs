@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
 	public void DetectPlayerHit()
 	{
 		// get all colliders whose bounds touch the sphere
-		Collider[] colls= Physics.OverlapSphere(owner.transform.position, this.range);
+		Collider[] colls = Physics.OverlapSphere(owner.transform.position, this.range);
 
 		//Looping each collision
 		foreach(Collider hit in colls) 
@@ -75,9 +75,16 @@ public class Weapon : MonoBehaviour
 
 			if (player && player != owner)
 			{ 
-				if (Vector3.Distance(hit.transform.position, owner.transform.position) <= this.range)
+				float dst = Vector3.Distance(player.transform.position, owner.transform.position);
+
+				if (dst <= this.range)
 				{
-					ApplyDamage(player);
+					float angle = Mathf.Acos(Vector3.Dot (owner.transform.forward, (player.transform.position - owner.transform.position).normalized));
+
+					if (Math.Abs(angle/ 0.0174532925f) < 45)
+					{
+						ApplyDamage(player);
+					}
 				}
 			}
 		}

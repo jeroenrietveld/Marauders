@@ -13060,7 +13060,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -.707106829
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
       propertyPath: m_LocalRotation.y
@@ -13068,11 +13068,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
       propertyPath: m_LocalRotation.w
-      value: .707106829
+      value: -.707106829
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
@@ -13795,6 +13795,7 @@ MonoBehaviour:
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
   armorFactor: .200000003
+  frozen: 0
 --- !u!136 &1432107418
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14077,6 +14078,7 @@ MonoBehaviour:
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
   armorFactor: .200000003
+  frozen: 0
 --- !u!136 &1446261130
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17669,7 +17671,6 @@ GameObject:
   - 4: {fileID: 1809357399}
   - 33: {fileID: 1809357398}
   - 23: {fileID: 1809357397}
-  - 136: {fileID: 1809357396}
   m_Layer: 0
   m_Name: Katana
   m_TagString: Untagged
@@ -17677,20 +17678,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!136 &1809357396
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600000, guid: 2bbc944311bb1f44e9f9ecb66ca8a7b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 190226805}
-  m_GameObject: {fileID: 1809357395}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: .300000012
-  m_Height: 2
-  m_Direction: 0
-  m_Center: {x: .699999988, y: -.0123999529, z: .00414207205}
 --- !u!23 &1809357397
 Renderer:
   m_ObjectHideFlags: 0
@@ -19580,7 +19567,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 15366438557fc4d41a304639f224b9ce, type: 3}
   m_PrefabInternal: {fileID: 1372340952}
   m_GameObject: {fileID: 1919082215}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: -.707106829}
   m_LocalPosition: {x: -4.97440958, y: 3.09031868, z: 1.21567154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
