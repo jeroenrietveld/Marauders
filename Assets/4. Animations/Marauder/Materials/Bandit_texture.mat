@@ -31,7 +31,7 @@ Material:
       data:
         first:
           name: CutoffHeight
-        second: -1000
+        second: -2.20000005
       data:
         first:
           name: CutoffSize
