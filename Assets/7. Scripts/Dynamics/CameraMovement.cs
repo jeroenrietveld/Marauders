@@ -13,6 +13,8 @@ public class CameraMovement : MonoBehaviour
 	public float cameraSmoothing = 5f;
 	public float minCameraDistance = 10f;
 	public float maxCameraDistance = 100f;
+	
+	public int solverIterations = 5;
 
 	void FixedUpdate()
 	{
@@ -22,36 +24,12 @@ public class CameraMovement : MonoBehaviour
 	
 	void UpdateCameraPosition()
 	{
-		_vectorBuffer.Clear();
-		foreach(var obj in _trackableObjects) _vectorBuffer.Add(obj.transform.position);
-		Vector3 playerCenter = GetCenter(_vectorBuffer);
-		
-		_vectorBuffer.Clear();
-		foreach (GameObject player in _trackableObjects)
+		transform.position = Vector3.zero;
+		for(int _ = 0; _ < solverIterations; ++_)
 		{
-			_vectorBuffer.Add(Project(playerCenter, -transform.forward, player.transform.position));
+			UpdatePositionIteration();
 		}
-		
-		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
-		
-		float maxDistance = float.NegativeInfinity;
-
-		for (int i = 0; i < _trackableObjects.Count; i++)
-		{
-			float distance = Vector3.Distance(_trackableObjects[i].transform.position, _vectorBuffer[i]);
-			
-			float cameraDistance = Vector3.Distance(
-				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
-									playerCenter);
-			
-			maxDistance = Mathf.Max(maxDistance, cameraDistance);
-		}
-		
-		maxDistance = Mathf.Clamp(maxDistance, minCameraDistance,maxCameraDistance);
-		
-		Vector3 targetPosition = playerCenter - transform.forward * maxDistance;
-		
-		transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraSmoothing);
+		//transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraSmoothing);
 	}
 	
 	void UpdateOccluderTransparency()
@@ -135,6 +113,39 @@ public class CameraMovement : MonoBehaviour
 			max.y = Mathf.Max(max.y, positions[i].y);
 			max.z = Mathf.Max(max.z, positions[i].z);
 		}
+	}
+
+	private void UpdatePositionIteration()
+	{
+		_vectorBuffer.Clear();
+		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(obj.transform.position));
+		Vector3 playerCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
+
+		_vectorBuffer.Clear();
+		foreach (GameObject player in _trackableObjects)
+		{
+			_vectorBuffer.Add(Project(playerCenter, -transform.forward, player.transform.position));
+		}
+		
+		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
+		
+		float maxDistance = float.NegativeInfinity;
+		
+		for (int i = 0; i < _trackableObjects.Count; i++)
+		{
+			float distance = Vector3.Distance(_trackableObjects[i].transform.position, _vectorBuffer[i]);
+			
+			float cameraDistance = Vector3.Distance(
+				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
+				playerCenter);
+			
+			maxDistance = Mathf.Max(maxDistance, cameraDistance);
+		}
+		
+		maxDistance = Mathf.Clamp(maxDistance, minCameraDistance, maxCameraDistance);
+		
+		Vector3 targetPosition = playerCenter - transform.forward * maxDistance;
+		transform.position = targetPosition;
 	}
 
 }
