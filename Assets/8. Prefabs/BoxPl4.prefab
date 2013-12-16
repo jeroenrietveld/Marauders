@@ -177,7 +177,7 @@ GameObject:
   - 33: {fileID: 3300010}
   - 23: {fileID: 2300016}
   m_Layer: 0
-  m_Name: SkillSelector
+  m_Name: SkillSelectorUtility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +228,7 @@ GameObject:
   - 23: {fileID: 2300022}
   - 102: {fileID: 10200008}
   m_Layer: 0
-  m_Name: MauraderNameText
+  m_Name: MauraderNameSkillText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ GameObject:
   - 33: {fileID: 3300016}
   - 23: {fileID: 2300030}
   m_Layer: 0
-  m_Name: SkillSelector
+  m_Name: SkillSelectorAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ GameObject:
   - 23: {fileID: 2300036}
   - 102: {fileID: 10200014}
   m_Layer: 0
-  m_Name: MauraderNameText
+  m_Name: MauraderSelectNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ GameObject:
   - 33: {fileID: 3300022}
   - 23: {fileID: 2300038}
   m_Layer: 0
-  m_Name: MarauderModel
+  m_Name: MarauderModelSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,7 @@ GameObject:
   - 33: {fileID: 3300026}
   - 23: {fileID: 2300044}
   m_Layer: 0
-  m_Name: SkillSelector
+  m_Name: SkillSelectorDefense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,7 +661,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.01593852, y: 18.3762817, z: -25.9106979}
+  m_LocalPosition: {x: -1.53988695, y: 18.3762817, z: -25.0220509}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400046}
@@ -672,7 +672,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 1.8946236e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -1.24075413, y: 19.312233, z: -25.9107285}
+  m_LocalPosition: {x: -1.24075413, y: 19.312233, z: -24.6028595}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400038}
@@ -683,7 +683,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 1.8946236e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -1.18981242, y: 19.3733025, z: -25.9107361}
+  m_LocalPosition: {x: -1.18981242, y: 19.3733025, z: -24.6028595}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400046}
@@ -738,7 +738,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.88227761, y: 21.0500164, z: -25.9106579}
+  m_LocalPosition: {x: -1.71135795, y: 21.0500164, z: -25}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400028}
@@ -774,7 +774,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.01593852, y: 18.3763142, z: -25.9106674}
+  m_LocalPosition: {x: -1.11468399, y: 18.3763142, z: -25.0581608}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -785,7 +785,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 1.8946236e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -1.18981242, y: 19.3122463, z: -25.9106941}
+  m_LocalPosition: {x: -1.18981242, y: 19.3122463, z: -24.6028595}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -843,7 +843,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: 0, y: 1.8946236e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -1.96829712, y: 12.9413052, z: -25.910635}
+  m_LocalPosition: {x: -2.12148595, y: 12.9413052, z: -25.910635}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400054}
@@ -895,9 +895,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100052}
-  m_LocalRotation: {x: -.707106829, y: -5.22768914e-15, z: -5.22768914e-15, w: .707106829}
-  m_LocalPosition: {x: -0, y: 24.4407539, z: -23.9289932}
-  m_LocalScale: {x: .699999988, y: 1, z: .80000025}
+  m_LocalRotation: {x: -3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
+  m_LocalPosition: {x: -2.85167914e-07, y: 24.7579002, z: -23.9290009}
+  m_LocalScale: {x: .699999988, y: 1, z: .720000029}
   m_Children: []
   m_Father: {fileID: 400028}
 --- !u!4 &400054
@@ -949,7 +949,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.01593852, y: 18.3762741, z: -25.9106979}
+  m_LocalPosition: {x: -1.53988695, y: 18.3762741, z: -25.0220509}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 400038}
@@ -1093,7 +1093,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1114,7 +1114,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1135,7 +1135,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1240,7 +1240,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1282,7 +1282,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1303,7 +1303,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1387,7 +1387,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1402,7 +1402,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100052}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -1450,7 +1450,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1672,7 +1672,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1693,7 +1693,7 @@ TextMesh:
   m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -1714,7 +1714,7 @@ TextMesh:
   m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -1756,7 +1756,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1777,7 +1777,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1798,7 +1798,7 @@ TextMesh:
   m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -1819,7 +1819,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1840,7 +1840,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1876,15 +1876,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbc09b1ff19d3d4787d10013f025fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bigCharacterSelectPlane: {fileID: 0}
-  textHolder: {fileID: 0}
-  skillSelectPlane: {fileID: 0}
-  smallCharacterSelectPlane: {fileID: 0}
+  StartScreen: {fileID: 0}
+  MarauderSelect: {fileID: 0}
+  SkillSelect: {fileID: 0}
   player: 3
   marauders:
-  - {fileID: 2100000, guid: 51c1ffb782ad3284189054cfc9c53662, type: 2}
-  - {fileID: 2100000, guid: a24579db76ca3aa47a0651fbf9940f44, type: 2}
-  - {fileID: 2100000, guid: 764ba4c3d15709147a4c24553f615579, type: 2}
+  - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
+  - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  marauderNames:
+  - Bandit
+  - Samurai
+  _currentEnum: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
