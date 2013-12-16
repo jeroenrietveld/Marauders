@@ -9,8 +9,7 @@ public class CameraMovement : MonoBehaviour
 	private List<GameObject> _occluders = new List<GameObject>();
 	public float maxPlayerAngle = 30f;
 	public const float degToRad = 1 / (360 / Mathf.PI);
-	
-	public float cameraSmoothing = 5f;
+
 	public float minCameraDistance = 10f;
 	public float maxCameraDistance = 100f;
 	
@@ -29,7 +28,6 @@ public class CameraMovement : MonoBehaviour
 		{
 			UpdatePositionIteration();
 		}
-		//transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraSmoothing);
 	}
 	
 	void UpdateOccluderTransparency()
@@ -133,7 +131,7 @@ public class CameraMovement : MonoBehaviour
 		
 		for (int i = 0; i < _trackableObjects.Count; i++)
 		{
-			float distance = Vector3.Distance(_trackableObjects[i].transform.position, _vectorBuffer[i]);
+			float distance = Vector3.Distance(ScalePosition(_trackableObjects[i].transform.position), _vectorBuffer[i]);
 			
 			float cameraDistance = Vector3.Distance(
 				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
@@ -146,6 +144,16 @@ public class CameraMovement : MonoBehaviour
 		
 		Vector3 targetPosition = playerCenter - transform.forward * maxDistance;
 		transform.position = targetPosition;
+	}
+
+	private Vector3 ScalePosition(Vector3 v)
+	{
+		return camera.ViewportToWorldPoint(
+			Vector3.Scale(
+				(camera.WorldToViewportPoint(v) - new Vector3(.5f, .5f, 0)) * 2,
+				new Vector3(1 / camera.aspect, 1, 1)
+			) / 2 + new Vector3(.5f, .5f, .5f)
+		);
 	}
 
 }
