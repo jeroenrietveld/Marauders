@@ -11,7 +11,6 @@ public class CameraMovement : MonoBehaviour
 	public const float degToRad = 1 / (360 / Mathf.PI);
 
 	public float minCameraDistance = 10f;
-	public float maxCameraDistance = 100f;
 	
 	public int solverIterations = 5;
 
@@ -147,7 +146,7 @@ public class CameraMovement : MonoBehaviour
 			maxDistance = Mathf.Max(maxDistance, cameraDistance);
 		}
 		
-		maxDistance = Mathf.Clamp(maxDistance, minCameraDistance, maxCameraDistance);
+		maxDistance = Mathf.Max(maxDistance, minCameraDistance);
 		
 		Vector3 targetPosition = objectCenter - transform.forward * maxDistance;
 		transform.position = targetPosition;
