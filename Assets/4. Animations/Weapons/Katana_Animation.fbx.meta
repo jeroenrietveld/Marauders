@@ -1205,7 +1205,7 @@ ModelImporter:
       name: Katana1
       takeName: Take 001
       firstFrame: 7
-      lastFrame: 18
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1805,7 +1805,7 @@ ModelImporter:
       name: Katana2
       takeName: Take 001
       firstFrame: 19
-      lastFrame: 33
+      lastFrame: 36
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2405,7 +2405,7 @@ ModelImporter:
       name: Katana3
       takeName: Take 001
       firstFrame: 38
-      lastFrame: 56
+      lastFrame: 58
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
