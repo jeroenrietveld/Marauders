@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class SpawnTarget : MonoBehaviour {
 
 	private static List<SpawnTarget> activeInstances = new List<SpawnTarget>();
-	private static System.Random rng = new System.Random();
 
 	public static Vector3 GetClosestTargetDirection(Vector3 position)
 	{
