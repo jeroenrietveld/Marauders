@@ -49,7 +49,7 @@ public class Avatar : MonoBehaviour
 	private void SetWeapon(Weapon weaponHolder)
 	{
 		primaryWeapon = weaponHolder;
-		weaponHolder.owner = this;
+		//weaponHolder.owner = this;
 		
 		while(weaponHolder.transform.childCount > 0)
 		{	
