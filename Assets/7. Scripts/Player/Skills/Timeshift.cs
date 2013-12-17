@@ -10,7 +10,7 @@ public class Timeshift : SkillBase
 	
 	private Timer _shifting;
 	
-	public Timeshift()
+	public Timeshift() : base(SkillType.Defensive, 2)
 	{
 		animationName = "Timeshift";
 		
@@ -23,8 +23,6 @@ public class Timeshift : SkillBase
 			_player.frozen = false;
 			//_player.renderer.material.color.a = 1f;
 		});
-		
-		cooldown = new Timer (2f);
 	}
 	
 	void Start()
