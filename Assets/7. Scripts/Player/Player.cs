@@ -205,7 +205,7 @@ public partial class Player : MonoBehaviour
 		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running || Input.GetKeyDown(KeyCode.X) && !utilitySkill.cooldown.running)
 		{
 			utilitySkill.PerformAction();
-			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
+			//animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
 		}
 
 		//Calculating the movement, relative to the camera

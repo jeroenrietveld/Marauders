@@ -8,12 +8,17 @@ public class Dash : SkillBase
 {
 	//private Player _player;
 
+	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
+		"Dash",
+		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
+		1,
+		WrapMode.Loop
+	);
+
 	private Timer _dashing;
 
-	public Dash() : base(SkillType.Utility, 5)
+	public Dash() : base(SkillType.Utility, 5, _animationSettings)
 	{
-		animationName = "Dash";
-
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (delegate {
 			//_player.animation.Stop();
