@@ -12,7 +12,7 @@ public class CharacterSelectState : SelectionBase
 
     public override void OnUpdate(GamePad controller)
     {
-		if (controller.Axis(Axis.LeftHorizantal) != 0 || controller.JustPressed(Button.DPadLeft) || controller.JustPressed(Button.DPadRight))
+        if (controller.Axis(Axis.LeftHorizantal) < -0.7 || controller.Axis(Axis.LeftHorizantal) > 0.7 || controller.JustPressed(Button.DPadLeft) || controller.JustPressed(Button.DPadRight))
         {
 			int direction = 0;
             bool timer = false;
