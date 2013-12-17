@@ -30,7 +30,7 @@ public class MenuItemSelection : MenuItem
 
 	public override void HandleInput(GamePad controller)
 	{
-		if ((controller.Axis(Axis.LeftHorizantal) >= Menu.axisThreshhold) || controller.Pressed(Button.DPadRight))
+		if ((controller.Axis(Axis.LeftHorizontal) >= Menu.axisThreshhold) || controller.Pressed(Button.DPadRight))
 		{
 			if (readInput[controller])
 			{
@@ -42,7 +42,7 @@ public class MenuItemSelection : MenuItem
 			return;
 		} 
 
-		if ((controller.Axis(Axis.LeftHorizantal) <= -Menu.axisThreshhold) || controller.Pressed(Button.DPadLeft))
+		if ((controller.Axis(Axis.LeftHorizontal) <= -Menu.axisThreshhold) || controller.Pressed(Button.DPadLeft))
 		{
 			if (readInput[controller])
 			{

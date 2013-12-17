@@ -22,7 +22,9 @@ public partial class Player : MonoBehaviour
 		
 		set {
 			_health = Mathf.Clamp01(value);
-			
+
+			_controller.SetVibration(1, 1, damagedControllerPulse);
+
 			//Event.dispatch(new PlayerHitEvent());
 			
 			if(_health == 0f)
@@ -43,6 +45,8 @@ public partial class Player : MonoBehaviour
 
 	private Material _cooldownMat;
 	private Texture _cooldownTex;
+
+	public float damagedControllerPulse = 0.25f;
 
 	//Move states to a better location?
 	public bool frozen = false;
@@ -212,7 +216,7 @@ public partial class Player : MonoBehaviour
 		camDirection.Normalize();
 		
 		//Xbox Controls:
-		float h = _controller.Axis (Axis.LeftHorizantal);
+		float h = _controller.Axis (Axis.LeftHorizontal);
 		float v = _controller.Axis (Axis.LeftVertical);
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 

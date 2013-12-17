@@ -34,7 +34,7 @@ namespace XInputDotNetPure
 
     public enum Axis
     {
-        LeftHorizantal,
+        LeftHorizontal,
         LeftVertical,
 
         RightHorizontal,
@@ -46,7 +46,7 @@ namespace XInputDotNetPure
 
     public enum PlayerIndex
     {
-        One = 0,
+        One,
         Two,
         Three,
         Four
@@ -79,10 +79,12 @@ namespace XInputDotNetPure
     public class GamePad
     {
         private PlayerIndex _index;
+
         public GamePadDeadZone deadZone = GamePadDeadZone.Circular;
 
         private RawState _current, _previous;
         private float[] _axis = new float[System.Enum.GetValues(typeof(Axis)).Length];
+        private float _vibrationTime;
 
         public bool connected { get; private set; }
 
@@ -116,12 +118,13 @@ namespace XInputDotNetPure
             return (state.Gamepad.dwButtons & (ushort)button) != 0;
         }
 
-        public void SetVibration(float leftMotor, float rightMotor)
+        public void SetVibration(float leftMotor, float rightMotor, float time)
         {
             Imports.XInputGamePadSetState((uint)_index, leftMotor, rightMotor);
+            _vibrationTime = time;
         }
 
-		public void Update()
+		public void Update(float tpf)
 		{
             _previous = _current;
 
@@ -138,7 +141,7 @@ namespace XInputDotNetPure
             var gamePad = _current.Gamepad;
 
             var leftThumbstick = Utils.ApplyStickDeadZone(gamePad.sThumbLX, gamePad.sThumbLY, deadZone, Utils.LeftStickDeadZone);
-            _axis[(int)XInputDotNetPure.Axis.LeftHorizantal] = leftThumbstick.x;
+            _axis[(int)XInputDotNetPure.Axis.LeftHorizontal] = leftThumbstick.x;
             _axis[(int)XInputDotNetPure.Axis.LeftVertical] = leftThumbstick.y;
 
             var rightThumbstick = Utils.ApplyStickDeadZone(gamePad.sThumbRX, gamePad.sThumbRY, deadZone, Utils.RightStickDeadZone);
@@ -147,6 +150,16 @@ namespace XInputDotNetPure
 
             _axis[(int)XInputDotNetPure.Axis.LeftTrigger] = Utils.ApplyTriggerDeadZone(gamePad.bLeftTrigger, deadZone);
             _axis[(int)XInputDotNetPure.Axis.RightTrigger] = Utils.ApplyTriggerDeadZone(gamePad.bRightTrigger, deadZone);
+
+            // Only if vibration hasn't been switched off yet. Avoid unneccesary calls to XInput.
+            if (_vibrationTime >= 0)
+            {
+                _vibrationTime -= tpf;
+                if (_vibrationTime <= 0)
+                {
+                    Imports.XInputGamePadSetState((uint)_index, 0, 0);
+                }
+            }
 		}
     }
 }
