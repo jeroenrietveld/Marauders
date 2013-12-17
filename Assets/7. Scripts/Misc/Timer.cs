@@ -30,6 +30,7 @@ public class Timer
 	private bool _running;
 
 	private float _startTimeStamp;
+	private float _currentTime;
 
 	private List<CallbackPair> _callbacks;
 	private int _callbackIndex;
@@ -60,6 +61,7 @@ public class Timer
 
 		this._running = false;
 		this._startTimeStamp = 0f;
+		this._currentTime = startTime;
 		this._callbackIndex = 0;
 		this._callbacks = new List<CallbackPair> ();
 	}
@@ -73,6 +75,7 @@ public class Timer
 	{
 		_running = true;
 		_startTimeStamp = Time.time - remainingTime;
+		_currentTime = startTime;
 		_callbackIndex = 0;
 	}
 
@@ -81,13 +84,18 @@ public class Timer
 		_running = false;
 	}
 
+	public void Continue()
+	{
+		_running = true;
+	}
+
 	public void Update()
 	{
 		if(_running)
 		{
-			float currentTime = GetCurrentTime();
+			_currentTime += Time.deltaTime;
 
-			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < currentTime)
+			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < _currentTime)
 			{
 				_callbacks[_callbackIndex].callback();
 
@@ -95,7 +103,7 @@ public class Timer
 			}
 
 
-			if(currentTime > endTime)
+			if(_currentTime > endTime)
 			{
 				switch(wrapMode)
 				{
@@ -105,7 +113,7 @@ public class Timer
 						Stop();
 					break;
 					case WrapMode.LOOP:
-						Start(currentTime - endTime);
+						Start(_currentTime - endTime);
 					break;
 				}
 			}
@@ -114,8 +122,7 @@ public class Timer
 
 	public float GetCurrentTime()
 	{
-		float currentTime = _running ? Time.time - _startTimeStamp : 0;
-		return currentTime + startTime;
+		return _currentTime;
 	}
 
 	public float Phase()
