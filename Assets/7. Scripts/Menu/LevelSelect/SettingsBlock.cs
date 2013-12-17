@@ -26,19 +26,20 @@ public class SettingsBlock : LevelSelectionBlockBase
 
 	public override void Update(GamePad controller)
 	{
-		if(controller.JustPressed(Button.DPadRight))
+        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
             _timeSyncBar.Add(10);
             _progress += 1;
 		}
-		if(controller.JustPressed(Button.DPadLeft))
+        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             _timeSyncBar.Add(-10);
             _progress -= 1;
 		}
-        if (_progress >= 3f)
-        {
-            if (controller.JustPressed(Button.A))
+        /// For BETA version no settings
+        ///if (_progress >= 3f)
+        ///{
+            if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
             {
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
@@ -49,12 +50,12 @@ public class SettingsBlock : LevelSelectionBlockBase
                 // var selectedGameMode = Activator.CreateInstance(null, "Normal");
                 // GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();    
 
-                // temporary loading Gaia
+                // Just start the Gaia level without setting settings for the BETA version.
                 Application.LoadLevel(2);
                 // GameManager.Instance.Start();
             }
-        }
-        if(controller.JustPressed(Button.B))
+        ///}
+        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
         }

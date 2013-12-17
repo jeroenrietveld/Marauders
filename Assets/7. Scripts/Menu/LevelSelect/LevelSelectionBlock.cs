@@ -48,23 +48,24 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 		SetAlpha(_levelSelectDown, .9f);
         _time -= Time.deltaTime;
 
-        if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizantal) >= 0.75f && _time <= 0f))
+        if (controller.JustPressed(Button.DPadUp) || (controller.Axis(Axis.LeftVertical) >= 0.75f && _time <= 0f) || Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			_currentIndex++;
 			SetAlpha(_levelSelectUp, 1f);
             _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizantal) <= -0.75f && _time <= 0f))
+        if (controller.JustPressed(Button.DPadDown) || (controller.Axis(Axis.LeftVertical) <= -0.75f && _time <= 0f) || Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);
             _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.A))
+        if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
 		{
+            GameObject.Find("TempConfirmText").renderer.enabled = true;
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
-        if (controller.JustPressed(Button.B))
+        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.NotSelecting);
         }
