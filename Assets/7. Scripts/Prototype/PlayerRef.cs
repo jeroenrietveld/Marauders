@@ -49,6 +49,7 @@ public class PlayerRef {
 		_avatar.AddComponent<Movement> ();
 		_avatar.AddComponent<Attack> ();
 		_avatar.AddComponent<Jump> ();
+		_avatar.AddComponent<Interactor> ();
 
 		Avatar avatar = _avatar.GetComponent<Avatar> ();
 		avatar.Initialize (this);
