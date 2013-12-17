@@ -26,7 +26,7 @@ public class Dash : SkillBase
 	void Start()
 	{
 		_player = GetComponent<Player> ();
-		initializeAnimation ();
+		//initializeAnimation ();
 	}
 
 	protected override void OnPerformAction()

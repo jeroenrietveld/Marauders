@@ -1,70 +1,85 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
+using System;
 
-public struct PlayerHitEvent
-{
-
-}
-
-public class Avatar : MonoBehaviour {
-
-	public float health
-	{
-		get {
-			return _health;
-		}
-
-		set {
-			_health = Mathf.Clamp01(value);
-
-			Event.dispatch(new PlayerHitEvent());
-
-			if(_health == 0f)
-			{
-				Event.dispatch(new PlayerDeathEvent());
-			}
-		}
-	}
-
-	public float armorFactor = 0.1f;
+public class Avatar : MonoBehaviour 
+{	
+	public GamePad controller;
+	public Weapon primaryWeapon;
 
 	private float _health = 1f;
 	private Heartbeat _heartbeat;
+	private PlayerRef _player;
 
-	// Use this for initialization
 	void Start () {
-		_heartbeat = GetComponent<Heartbeat>();
-		_heartbeat.heartbeatSpeed.filters += ModulateHeartbeat;
+		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
+		_heartbeat.renderer.material.SetColor("playerColor", _player.color);
+
+		GetComponent<AnimationHandler>().AddAnimation(
+			new AnimationHandler.AnimationSettings(
+				"Idle",
+				AnimationHandler.MixTransforms.Lowerbody,
+				1,
+				WrapMode.Loop
+			));
 	}
 	
-	// Update is called once per frame
+	public void Initialize(PlayerRef player)
+	{
+		this.controller = player.controller;
+		this._player = player;
+		
+		AddSkill (player.skills.utilitySkill);
+		AddSkill (player.skills.defensiveSkill);
+		AddSkill (player.skills.offensiveSkill);
+	}
+	
+	private void AddSkill(string skill)
+	{
+		if(skill != null)
+		{
+			gameObject.AddComponent(skill);
+		}
+	}
+
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			ApplyDamage(-Vector3.forward, 0.25f);
-		}
-
-		if(Input.GetKeyDown(KeyCode.LeftShift))
-		{
-			health = 1f;
-		}
 	}
 
-	void ApplyDamage(Vector3 direction, float amount)
+	private void SetWeapon(Weapon weaponHolder)
 	{
-		float dot = Vector3.Dot(direction, _heartbeat.transform.forward);
-		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+		primaryWeapon = weaponHolder;
+		weaponHolder.owner = this;
+		
+		while(weaponHolder.transform.childCount > 0)
+		{	
+			Transform weapon = weaponHolder.transform.GetChild(0);
+			Transform hand = FindInChildren(transform, weapon.gameObject.name);
+			
+			weapon.rotation = hand.rotation;
+			weapon.parent = hand;
+			weapon.position = hand.position;
+		}
 
-		if(armorHit) amount *= armorFactor;
-
-		health = health - amount;
+		GetComponent<Attack> ().UpdateAttackAnimations (weaponHolder);
 	}
-
-	float ModulateHeartbeat(float f)
+	
+	private static Transform FindInChildren(Transform transform, string name)
 	{
-		float primaryBeat = Mathf.Pow(Mathf.Abs(Mathf.Sin(Time.time * 4 * (health * .5f + .5f))), 25f) * 2.5f;
-		float secondaryBeat = Mathf.Pow(Mathf.Abs(Mathf.Sin((Time.time - 0.25f) * 4 * (health * .5f + .5f))), 25f) * 1.5f;
-		return 40 + 90 * secondaryBeat + 90 * primaryBeat;
-		//return f * (health * .5f + .5f);
+		if(transform.gameObject.name == name)
+		{
+			return transform;
+		}
+		
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			Transform result = FindInChildren(transform.GetChild(i), name);
+			if(result)
+			{
+				return result;
+			}
+		}
+		
+		return null;
 	}
 }
