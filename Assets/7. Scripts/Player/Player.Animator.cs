@@ -90,6 +90,10 @@ public partial class Player : MonoBehaviour
 	{
 		//Should jump
 		animation.Play ("Jump", PlayMode.StopSameLayer);
+        if (!Audioclips[2].isPlaying)
+        {
+            Audioclips[2].Play();
+        }
 	}
 	
 	protected void AnimationMovement(float speed)
@@ -108,6 +112,7 @@ public partial class Player : MonoBehaviour
 			//Idling
 			if (speed < 0.2f)
 			{
+                Audioclips[3].Stop();
 				AnimationIdle();
 				return;
 			}
@@ -122,6 +127,11 @@ public partial class Player : MonoBehaviour
 			//Walking
 			if (speed < 3f)
 			{
+                if (!Audioclips[3].isPlaying)
+                {
+                    Audioclips[0].Stop();
+                    Audioclips[3].Play();
+                }
 				animation.CrossFade("Walk", crossFadeDuration, PlayMode.StopSameLayer);
 				animation["Walk"].speed = speed * 0.7f;
 				
@@ -130,6 +140,11 @@ public partial class Player : MonoBehaviour
 						
 			animation.CrossFade("Run", crossFadeDuration, PlayMode.StopSameLayer);
 			animation["Run"].speed = speed * 0.2f;
+            if (!Audioclips[0].isPlaying)
+            {
+                Audioclips[3].Stop();
+                Audioclips[0].Play();
+            }
 						
 			return;
 		} 
@@ -181,6 +196,11 @@ public partial class Player : MonoBehaviour
 			attackAnimationStart = DateTime.Now;
 
 			animation.CrossFade(attackAnimationName, 0.1f, PlayMode.StopSameLayer);
+
+            if (!Audioclips[1].isPlaying)
+            {
+                Audioclips[1].Play();
+            }
 		}
 	}
 }

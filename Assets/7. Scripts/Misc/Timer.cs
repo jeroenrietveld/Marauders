@@ -29,7 +29,6 @@ public class Timer
 	}
 	private bool _running;
 
-	private float _startTimeStamp;
 	private float _currentTime;
 
 	private List<CallbackPair> _callbacks;
@@ -60,7 +59,6 @@ public class Timer
 		this.endPhase = 1;
 
 		this._running = false;
-		this._startTimeStamp = 0f;
 		this._currentTime = startTime;
 		this._callbackIndex = 0;
 		this._callbacks = new List<CallbackPair> ();
@@ -74,8 +72,7 @@ public class Timer
 	private void Start(float remainingTime)
 	{
 		_running = true;
-		_startTimeStamp = Time.time - remainingTime;
-		_currentTime = startTime;
+		_currentTime = startTime + remainingTime;
 		_callbackIndex = 0;
 	}
 

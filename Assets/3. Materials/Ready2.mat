@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ReadyText
-  m_Shader: {fileID: 4800000, guid: 8ada9837582ec784d8b1bf89cb16542b, type: 3}
+  m_Name: Ready2
+  m_Shader: {fileID: 4800000, guid: 60ccce660acd55b4db8338d284123586, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
