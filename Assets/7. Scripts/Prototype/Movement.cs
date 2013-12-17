@@ -77,7 +77,7 @@ public class Movement : MonoBehaviour {
 		
 		Vector3 targetVelocity = 
 			(camDirection * _avatar.controller.Axis (Axis.LeftVertical)) + 
-			(camRight * _avatar.controller.Axis (Axis.LeftHorizantal));
+			(camRight * _avatar.controller.Axis (Axis.LeftHorizontal));
 		
 		return Vector3.ClampMagnitude(targetVelocity, 1.0f) * movementSpeed;
 	}
