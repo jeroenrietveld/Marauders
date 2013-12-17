@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 using System;
+using System.Collections.Generic;
  
 public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
+    public List<AudioSource> Audioclips;
 	
 	public SkillBase offensiveSkill { get; set; }
 	public SkillBase utilitySkill { get; set; }
