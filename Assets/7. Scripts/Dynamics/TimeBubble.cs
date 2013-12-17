@@ -49,7 +49,7 @@ public class TimeBubble : MonoBehaviour {
 		spawner.obj = collider.gameObject;
 		spawner.spawnDelay = respawnDelay;
 		spawner.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
-		spawner.exitForce = (SpawnTarget.GetRandomSpawnTarget() - spawner.position).normalized * exitForce;
+		spawner.exitForce = SpawnTarget.GetClosestTargetDirection(spawner.position) * exitForce;
 		
 		var player = collider.GetComponent<Player>();
 		if(player)

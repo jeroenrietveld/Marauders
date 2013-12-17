@@ -6,11 +6,22 @@ public class SpawnTarget : MonoBehaviour {
 	private static List<SpawnTarget> activeInstances = new List<SpawnTarget>();
 	private static System.Random rng = new System.Random();
 
-	public static Vector3 GetRandomSpawnTarget()
+	public static Vector3 GetClosestTargetDirection(Vector3 position)
 	{
-		if(activeInstances.Count == 0) return Vector3.zero;
+		if(activeInstances.Count == 0) return -position.normalized;
 
-		return activeInstances[rng.Next(activeInstances.Count)].transform.position;
+		Vector3 bestDirection = new Vector3(float.PositiveInfinity, float.PositiveInfinity);
+
+		foreach(var p in activeInstances)
+		{
+			var direction = p.transform.position - position;
+			if(direction.sqrMagnitude < bestDirection.sqrMagnitude)
+			{
+				bestDirection = direction;
+			}
+		}
+
+		return bestDirection.normalized;
 	}
 
 	void OnEnable()
