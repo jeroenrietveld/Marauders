@@ -5858,8 +5858,8 @@ Transform:
   - {fileID: 1388722944}
   - {fileID: 713845751}
   - {fileID: 39535571}
-  - {fileID: 1800586308}
   - {fileID: 60078137}
+  - {fileID: 1800586308}
   - {fileID: 1262588795}
   - {fileID: 2073497652}
   - {fileID: 1527940431}
@@ -5967,7 +5967,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400066, guid: 4c712cfe07698534ea11875b2cd00205, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.79208732
+      value: 6.24284744
       objectReference: {fileID: 0}
     - target: {fileID: 400066, guid: 4c712cfe07698534ea11875b2cd00205, type: 2}
       propertyPath: m_LocalPosition.z
@@ -18117,7 +18117,6 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
-  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1101231428
 CapsuleCollider:
@@ -24796,7 +24795,6 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
-  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1432107418
 CapsuleCollider:
@@ -24914,7 +24912,7 @@ Transform:
   m_PrefabInternal: {fileID: 355973849}
   m_GameObject: {fileID: 1446261125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .937152863, y: 2.79208732, z: 3.71872735}
+  m_LocalPosition: {x: .937152863, y: 6.24284744, z: 3.71872735}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 12104323}
@@ -25009,7 +25007,6 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
-  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1446261130
 CapsuleCollider:
@@ -27535,8 +27532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerAngle: 50
-  yAxisTrackingCenter: 0
-  yAxisTrackingRange: 10
   minCameraDistance: 8
   solverIterations: 5
 --- !u!1 &1627054603
@@ -28883,10 +28878,10 @@ Transform:
   - {fileID: 1919082219}
   - {fileID: 1091280542}
   - {fileID: 1889009307}
-  - {fileID: 108239277}
-  - {fileID: 1385982797}
   - {fileID: 1650915901}
   - {fileID: 415446458}
+  - {fileID: 108239277}
+  - {fileID: 1385982797}
   - {fileID: 1394607089}
   - {fileID: 1357541738}
   m_Father: {fileID: 0}
