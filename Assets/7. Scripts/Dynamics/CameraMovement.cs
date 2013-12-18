@@ -143,13 +143,11 @@ public class CameraMovement : MonoBehaviour
 			float distance = Vector3.Distance(ScalePosition(ClampPosition(_trackableObjects[i])), _vectorBuffer[i]);
 			
 			float cameraDistance = Vector3.Distance(
-				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
+				_vectorBuffer[i] - Mathf.Max(distance * distanceScale, minCameraDistance) * transform.forward,
 				objectCenter);
 			
 			maxDistance = Mathf.Max(maxDistance, cameraDistance);
 		}
-		
-		maxDistance = Mathf.Max(maxDistance, minCameraDistance);
 		
 		Vector3 targetPosition = objectCenter - transform.forward * maxDistance;
 		transform.position = targetPosition;
