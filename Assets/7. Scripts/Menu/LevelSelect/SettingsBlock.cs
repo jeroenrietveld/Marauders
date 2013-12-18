@@ -25,12 +25,12 @@ public class SettingsBlock : LevelSelectionBlockBase
 	public override void Update(GamePad controller)
 	{
         Debug.Log("UPDATE");
-        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.A))
+        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
             _timeSyncBar.Add(0.1f);
             _progress += 1;
 		}
-        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.B))
+        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             _timeSyncBar.Add(-0.1f);
             _progress -= 1;
@@ -38,7 +38,7 @@ public class SettingsBlock : LevelSelectionBlockBase
         /// For BETA version no settings
         ///if (_progress >= 3f)
         ///{
-            if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.Q))
+            if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
             {
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
@@ -54,7 +54,7 @@ public class SettingsBlock : LevelSelectionBlockBase
                 // GameManager.Instance.Start();
             }
         ///}
-        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.W))
+        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
         }
