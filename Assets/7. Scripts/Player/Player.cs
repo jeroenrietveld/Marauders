@@ -254,11 +254,6 @@ public partial class Player : MonoBehaviour
 			transform.localScale = scale;
 		}*/
     }
-	
-	public void DetectPlayerHit()
-	{
-		primaryWeapon.DetectPlayerHit();
-	}
 
 	public void LoadModel(PlayerModel model)
 	{

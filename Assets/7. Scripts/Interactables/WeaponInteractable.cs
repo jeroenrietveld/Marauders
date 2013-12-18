@@ -25,13 +25,11 @@ public class WeaponInteractable : Interactable {
 	
 	public override void OnInteract(GameObject obj)
 	{
-		var avatar = obj.GetComponent<Avatar>();
+		var attack = obj.GetComponent<Attack>();
 
-		if (avatar)
+		if (attack)
 		{
-			//TODO: set weapon. Old code below for reference
-			//player.PickUpWeapon(weapon, weapon.isGameModeObject);
-			//weapon.transform.parent = player.transform;
+			attack.SetWeapon(weapon);
 			Destroy(gameObject);
 		}
 	}

@@ -22,7 +22,7 @@ public partial class Player : MonoBehaviour
 		{ 
 			if (primaryWeapon != null)
 			{
-				return primaryWeapon.attacks[primaryWeapon.currentAttack].animationName;
+				//return primaryWeapon.attacks[primaryWeapon.currentAttack].animationName;
 			}
 
 			return "";
@@ -151,6 +151,7 @@ public partial class Player : MonoBehaviour
 	
 	protected void AnimationAttack()
 	{
+		/*
 		//Security checks
 		if (primaryWeapon == null) { return ; }
 		if (primaryWeapon.attacks.Count == 0 ) { return ; }
@@ -182,5 +183,6 @@ public partial class Player : MonoBehaviour
 
 			animation.CrossFade(attackAnimationName, 0.1f, PlayMode.StopSameLayer);
 		}
+		*/
 	}
 }
