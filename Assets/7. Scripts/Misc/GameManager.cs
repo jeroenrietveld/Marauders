@@ -15,8 +15,6 @@ public class GameManager {
 
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<PlayerRef> playerRefs;
-    public List<Player> players;
-	public List<PlayerModel> playerModels;
 
 	public struct MatchSettings
 	{
@@ -42,8 +40,6 @@ public class GameManager {
 	{
         matchSettings = new MatchSettings();
 		playerRefs = new List<PlayerRef> ();
-		players = new List<Player>();
-		playerModels = new List<PlayerModel>();
 	}
 
 	public void Start()
@@ -51,16 +47,6 @@ public class GameManager {
         if (matchSettings.level != null)
         {
 			Application.LoadLevel(matchSettings.level);
-
-			foreach (PlayerModel model in playerModels)
-			{
-				GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + model.marauder)) as GameObject;
-				prefab.AddComponent("Player");
-				prefab.GetComponent<Player>().LoadModel(model);
-
-				//add the players to the player list, this way they are always easily accessible
-				players.Add(prefab.GetComponent<Player>());
-			}
         } 
 	}
 

@@ -26,5 +26,10 @@ public class WeaponPrototype : MonoBehaviour {
 		player2.skills.utilitySkill = "Dash";
 		player2.skills.defensiveSkill = "Windsweep";
 		player2.CreateAvatar ();
+		
+		PlayerRef player3 = new PlayerRef (PlayerIndex.Three);
+		player3.skills.utilitySkill = "Dash";
+		player3.skills.defensiveSkill = "Windsweep";
+		player3.CreateAvatar ();
 	}
 }

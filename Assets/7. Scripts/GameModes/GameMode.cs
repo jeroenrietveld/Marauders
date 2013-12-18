@@ -43,7 +43,7 @@ public abstract class GameMode
             fieldNameList.Add(new StringCell(name));
         }
 
-        foreach(Player player in GameManager.Instance.players)
+        foreach(var player in GameManager.Instance.playerRefs)
         {
             List<Cell> addition = new List<Cell>();
             scoreboard.AddCellList(addition);
@@ -65,7 +65,7 @@ public abstract class GameMode
             addition.Add(hitratio);
 
             //Register the events that are always needed
-            Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt) 
+			Event.register<AvatarDeathEvent>(delegate(AvatarDeathEvent evt) 
             { 
                 if(evt.victim == player) 
                 {                  

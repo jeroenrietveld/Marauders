@@ -47,15 +47,6 @@ public class Weapon : MonoBehaviour
 		get;
 		set;
 	}
-	
-	/// <summary>
-	/// A pointer to the player that holds this weapon
-	/// </summary>
-	public Player owner
-	{
-		get;
-		set;
-	}
 
 	public void Reload()
 	{

@@ -23,14 +23,14 @@ public struct TimeBubbleObjectExitEvent
 	}
 }
 
-public struct TimeBubblePlayerExitEvent
+public struct TimeBubbleAvatarExitEvent
 {
-	public Player player;
+	public Avatar avatar;
 	public float respawnDelay;
 	
-	public TimeBubblePlayerExitEvent(Player player, float respawnDelay) 
+	public TimeBubbleAvatarExitEvent(Avatar avatar, float respawnDelay) 
 	{
-		this.player = player;
+		this.avatar = avatar;
 		this.respawnDelay = respawnDelay;
 	}
 }
@@ -51,11 +51,10 @@ public class TimeBubble : MonoBehaviour {
 		spawner.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
 		spawner.exitForce = SpawnTarget.GetClosestTargetDirection(spawner.position) * exitForce;
 		
-		var player = collider.GetComponent<Player>();
-		if(player)
+		var avatar = collider.GetComponent<Avatar>();
+		if(avatar)
 		{
-			player.canJump = true;
-			Event.dispatch(new TimeBubblePlayerExitEvent(player, respawnDelay));
+			Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, respawnDelay));
 		}
 		else
 		{

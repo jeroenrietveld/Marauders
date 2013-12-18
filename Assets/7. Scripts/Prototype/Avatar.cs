@@ -20,6 +20,8 @@ public class Avatar : MonoBehaviour
 			{
 				_health = Mathf.Clamp01(value);
 
+				controller.SetVibration(1, 1, .2f);
+
 				if(_health == 0)
 				{
 					//TODO: Handle player death
@@ -39,11 +41,11 @@ public class Avatar : MonoBehaviour
 	private float _armorFactor = 0.1f;
 
 	private Heartbeat _heartbeat;
-	private PlayerRef _player;
+	public PlayerRef player { get; private set; }
 
 	void Start () {
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-		_heartbeat.renderer.material.SetColor("playerColor", _player.color);
+		_heartbeat.renderer.material.SetColor("playerColor", player.color);
 
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
@@ -57,7 +59,7 @@ public class Avatar : MonoBehaviour
 	public void Initialize(PlayerRef player)
 	{
 		this.controller = player.controller;
-		this._player = player;
+		this.player = player;
 		
 		AddSkill (player.skills.utilitySkill);
 		AddSkill (player.skills.defensiveSkill);

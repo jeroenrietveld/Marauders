@@ -37,10 +37,6 @@ public class Scoreboard : MonoBehaviour
 
     void Start()
     {
-        List<Player> testlist = new List<Player>();
-        testlist.Add(GameObject.Find("Player1").GetComponent<Player>());
-        testlist.Add(GameObject.Find("Player2").GetComponent<Player>());
-
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
         List<Cell> fieldNameList = new List<Cell>();
@@ -51,9 +47,9 @@ public class Scoreboard : MonoBehaviour
             fieldNameList.Add(new StringCell(name));
         }
 
-        foreach (Player _player in testlist)
+        foreach (var _player in GameManager.Instance.playerRefs)
         {
-            Player player = _player;
+            var player = _player;
             List<Cell> addition = new List<Cell>();
             scoreboard.AddCellList(addition);
 
@@ -76,7 +72,7 @@ public class Scoreboard : MonoBehaviour
             addition.Add(hitratio);
 
             //Register the events that are always needed
-            Event.register<PlayerDeathEvent>(delegate(PlayerDeathEvent evt)
+			Event.register<AvatarDeathEvent>(delegate(AvatarDeathEvent evt)
             {             
                if (evt.victim == player)
                 {

@@ -6,14 +6,14 @@ using System.Text;
 
 public class PlayerCell : Cell 
 {
-    private Player _player;
-    public PlayerCell(Player player)
+    private PlayerRef _player;
+	public PlayerCell(PlayerRef player)
     {
         _player = player;
     }
 
     public override String GetContent()
     {
-        return _player.name;
+        return _player.marauder;
     }
 }

@@ -13,7 +13,7 @@ public class TimeBubbleRipple : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Event.register<TimeBubbleObjectExitEvent>(OnObjectExit);
-		Event.register<TimeBubblePlayerExitEvent>(OnPlayerExit);
+		Event.register<TimeBubbleAvatarExitEvent>(OnAvatarExit);
 
 		timer.startPhase = -10;
 	}
@@ -21,14 +21,14 @@ public class TimeBubbleRipple : MonoBehaviour {
 	void OnDestroy()
 	{
 		Event.unregister<TimeBubbleObjectExitEvent>(OnObjectExit);
-		Event.unregister<TimeBubblePlayerExitEvent>(OnPlayerExit);
+		Event.unregister<TimeBubbleAvatarExitEvent>(OnAvatarExit);
 	}
 
-	void OnPlayerExit(TimeBubblePlayerExitEvent evt)
+	void OnAvatarExit(TimeBubbleAvatarExitEvent evt)
 	{
-		if(!reactOnObjects && player == evt.player.playerIndex)
+		if(!reactOnObjects && player == evt.avatar.player.index)
 		{
-			DoRipple(evt.player.transform.position, evt.respawnDelay);
+			DoRipple(evt.avatar.transform.position, evt.respawnDelay);
 		}
 	}
 

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public struct PlayerDeathEvent
+public struct AvatarDeathEvent
 {
-	public Player victim;
-	public Player offender;
+	public PlayerRef victim;
+	public PlayerRef offender;
 
-	public PlayerDeathEvent(Player victim, Player offender)
+	public AvatarDeathEvent(PlayerRef victim, PlayerRef offender)
 	{
 		this.victim = victim;
 		this.offender = offender;

@@ -69,7 +69,7 @@ public class Attack : ActionBase {
 			animationHandler.AddAnimation(
 				new AnimationHandler.AnimationSettings(
 				attackInfo.animationName,
-				AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
+				AnimationHandler.MixTransforms.Upperbody,
 				3,
 				WrapMode.Once
 			));
