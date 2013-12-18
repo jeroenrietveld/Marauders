@@ -37,7 +37,7 @@ public class MenuItemLabel:MenuItem
 
 	public override void HandleInput(GamePad controller)
 	{
-		if (controller.Pressed(Button.A))
+		if (controller.JustPressed(Button.A) || controller.JustPressed(Button.Start))
 		{
 			this.xboxPressed(this, Button.A);
 		}
