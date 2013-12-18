@@ -65,21 +65,20 @@ public class GameManager {
 	}
 
     /// <summary>
-    /// Adds the player model to the list. If the player already has a playermodel in the list remove that one 
+    /// Adds the player ref to the list. If the player already has a playerref in the list remove that one 
     /// and add the new one.
     /// </summary>
     /// <param name="model"></param>
-    public void AddPlayerModel(PlayerModel model)
+    public void AddPlayerRef(PlayerRef model)
     {
-        PlayerModel temp = playerModels.First(x => x.index == model.index);
-        if (temp.Equals(null))
+        PlayerRef pl = playerRefs.First(x => x.index == model.index);
+        if(pl.Equals(null))
         {
-            playerModels.Add(model);
-        }
-        else
+            playerRefs.Add(model);
+        }else
         {
-            playerModels.Remove(temp);
-            playerModels.Add(model);
+            playerRefs.Remove(pl);
+            playerRefs.Add(model);
         }
     }
 

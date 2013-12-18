@@ -5857,13 +5857,13 @@ Transform:
   m_Children:
   - {fileID: 1388722944}
   - {fileID: 713845751}
+  - {fileID: 39535571}
   - {fileID: 1800586308}
   - {fileID: 60078137}
   - {fileID: 1262588795}
   - {fileID: 2073497652}
   - {fileID: 1527940431}
   - {fileID: 1204490566}
-  - {fileID: 39535571}
   - {fileID: 797432646}
   - {fileID: 1768455073}
   - {fileID: 686952391}
@@ -18117,6 +18117,7 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
+  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1101231428
 CapsuleCollider:
@@ -24795,6 +24796,7 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
+  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1432107418
 CapsuleCollider:
@@ -25007,6 +25009,7 @@ MonoBehaviour:
   Audioclips: []
   armorFactor: .200000003
   canJump: 1
+  damagedControllerPulse: .25
   frozen: 0
 --- !u!136 &1446261130
 CapsuleCollider:
@@ -27532,6 +27535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerAngle: 50
+  yAxisTrackingCenter: 0
+  yAxisTrackingRange: 10
   minCameraDistance: 8
   solverIterations: 5
 --- !u!1 &1627054603
@@ -28878,10 +28883,10 @@ Transform:
   - {fileID: 1919082219}
   - {fileID: 1091280542}
   - {fileID: 1889009307}
+  - {fileID: 108239277}
   - {fileID: 1385982797}
   - {fileID: 1650915901}
   - {fileID: 415446458}
-  - {fileID: 108239277}
   - {fileID: 1394607089}
   - {fileID: 1357541738}
   m_Father: {fileID: 0}
