@@ -6,30 +6,33 @@ using UnityEngine;
 
 public class Timeshift : SkillBase
 {
-	private Player _player;
+	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
+		"Timeshift",
+		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
+		1,
+		WrapMode.Loop
+	);
+
+	//private Player _player;
 	
 	private Timer _shifting;
 	
-	public Timeshift()
+	public Timeshift() : base(SkillType.Defensive, 2, _animationSettings)
 	{
-		animationName = "Timeshift";
-		
 		_shifting = new Timer (0.5f);
 		_shifting.AddCallback(_shifting.startTime, delegate {
-			_player.frozen = true;
+			//_player.frozen = true;
 			//transparency
 		});
 		_shifting.AddCallback (_shifting.endTime, delegate {
-			_player.frozen = false;
+			//_player.frozen = false;
 			//_player.renderer.material.color.a = 1f;
 		});
-		
-		cooldown = new Timer (2f);
 	}
 	
 	void Start()
 	{
-		_player = GetComponent<Player> ();
+		//_player = GetComponent<Player> ();
 	}
 	
 	protected override void OnPerformAction()

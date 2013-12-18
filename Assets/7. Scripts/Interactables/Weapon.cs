@@ -10,11 +10,10 @@ using XInputDotNetPure;
 /// </summary>
 public class Weapon : MonoBehaviour
 {
-	public bool isGameModeObject = false;
 	public float range;
 
 	public List<AttackInfo> attacks = new List<AttackInfo>();
-	public int currentAttack { get; set; }
+	//public int currentAttack { get; set; }
 
 	public float damage
 	{
@@ -63,56 +62,4 @@ public class Weapon : MonoBehaviour
 		throw new System.NotImplementedException();
 	}
 
-	public void DetectPlayerHit()
-	{
-		// get all colliders whose bounds touch the sphere
-		Collider[] colls = Physics.OverlapSphere(owner.transform.position, this.range);
-
-		//Looping each collision
-		foreach(Collider hit in colls) 
-		{
-			Player player = hit.collider.gameObject.GetComponent<Player>();
-
-			if (player && player != owner)
-			{ 
-				float dst = Vector3.Distance(player.transform.position, owner.transform.position);
-
-				if (dst <= this.range)
-				{
-					float angle = Mathf.Acos(Vector3.Dot (owner.transform.forward, (player.transform.position - owner.transform.position).normalized));
-
-					if (Math.Abs(angle/ 0.0174532925f) < 45)
-					{
-						ApplyDamage(player);
-					}
-				}
-			}
-		}
-
-		/*CapsuleCollider coll = owner.GetComponent<CapsuleCollider> ();
-		
-		RaycastHit[] hits = Physics.CapsuleCastAll (
-			owner.transform.TransformPoint(coll.center + new Vector3(0, coll.height/2, 0)),
-			owner.transform.TransformPoint(coll.center + new Vector3(0, -coll.height/2, 0)),
-			coll.radius,
-			owner.transform.forward,
-			range);
-		
-		foreach(var hit in hits)
-		{
-			Player player = hit.collider.gameObject.GetComponent<Player>();
-
-			if(player && player != owner)
-			{
-				ApplyDamage(player);
-			}
-		}*/
-	}
-
-	public void ApplyDamage(Player player)
-	{
-		Vector3 attackDirection = player.transform.position - owner.transform.position;
-		
-		player.ApplyDamage(-attackDirection, owner.primaryWeapon.damage);
-	}
 }

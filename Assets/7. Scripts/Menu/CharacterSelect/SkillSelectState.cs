@@ -42,7 +42,7 @@ public class SkillSelectState : SelectionBase
     public override void OnUpdate(GamePad controller)
     {
         float vertical = controller.Axis(Axis.LeftVertical);
-        float horizontal = controller.Axis(Axis.LeftHorizantal);
+        float horizontal = controller.Axis(Axis.LeftHorizontal);
         int dPadVertical = (-1 * Convert.ToInt32(controller.JustPressed(Button.DPadUp))) + Convert.ToInt32(controller.JustPressed(Button.DPadDown));
         int dPadHorizontal = (-1 * Convert.ToInt32(controller.JustPressed(Button.DPadLeft))) + Convert.ToInt32(controller.JustPressed(Button.DPadRight));
 

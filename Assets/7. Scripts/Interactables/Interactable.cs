@@ -3,43 +3,29 @@ using System.Collections;
 
 public abstract class Interactable : MonoBehaviour {
 
-	/// <summary>
-	/// <para>Gets or sets a value indicating whether this <see cref="Interactable"/> is interactable.</para><para>Can be disabled if ( for example ) a weapon is picked up</para>
-	/// </summary>
-	/// <value><c>true</c> if is interactable; can be used by a player<c>false</c>.</value>
-	public bool isInteractable = false;
-
 	void OnTriggerEnter (Collider collider) {
 		//Looking if the one colliding with us is a player
-		Player player = collider.gameObject.GetComponent<Player>();
+		var interactor = collider.gameObject.GetComponent<Interactor>();
 
 		//Are we a player
-		if (player != null)
+		if (interactor)
 		{
-			//Are we allowed to interact
-			if (isInteractable)
-			{
-				OnInteractEnter(player);
-			}
+			interactor.currentInteractable = this;
 		}
 	}
 
 	void OnTriggerExit (Collider collider) {
 		//Looking if the one colliding with us is a player
-		Player player = collider.gameObject.GetComponent<Player>();
+		var interactor = collider.gameObject.GetComponent<Interactor>();
 		
 		//Are we a player
-		if (player != null)
+		if (interactor && interactor.currentInteractable == this)
 		{
-			//Are we allowed to interact
-			if (isInteractable)
-			{
-				OnInteractLeave(player);
-			}
+			interactor.currentInteractable = null;
 		}
 	}
-	
-	public abstract void OnInteractEnter(Player player);
 
-	public abstract void OnInteractLeave(Player player);
+	public abstract void OnInteract(GameObject obj);
+
+	public abstract void ShowMessage();
 }

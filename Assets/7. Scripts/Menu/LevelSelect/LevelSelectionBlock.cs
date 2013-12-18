@@ -48,13 +48,13 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 		SetAlpha(_levelSelectDown, .9f);
         _time -= Time.deltaTime;
 
-        if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizantal) >= 0.75f && _time <= 0f))
+        if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizontal) >= 0.75f && _time <= 0f))
 		{
 			_currentIndex++;
 			SetAlpha(_levelSelectUp, 1f);
             _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizantal) <= -0.75f && _time <= 0f))
+        if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizontal) <= -0.75f && _time <= 0f))
 		{
 			_currentIndex--;
 			SetAlpha(_levelSelectDown, 1f);

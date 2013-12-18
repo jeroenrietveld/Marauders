@@ -4,20 +4,38 @@ using System.Collections.Generic;
 
 public class CameraMovement : MonoBehaviour
 {
-	private IList<GameObject> _trackableObjects = new List<GameObject>();
-	private IList<Vector3> _projectedPositions = new List<Vector3>();
-	private IList<GameObject> _occluders = new List<GameObject>();
-	public float maxPlayerAngle = 30f;
+	private List<GameObject> _trackableObjects = new List<GameObject>();
+	private List<Vector3> _vectorBuffer = new List<Vector3>();
+	private List<GameObject> _occluders = new List<GameObject>();
+	public float maxPlayerAngle = 50f;
 	public const float degToRad = 1 / (360 / Mathf.PI);
-	
-	public float cameraSmoothing = 5f;
+
+	public float yAxisTrackingCenter = 0;
+	public float yAxisTrackingRange = 10;
+
 	public float minCameraDistance = 10f;
-	public float maxCameraDistance = 100f;
 	
+	public int solverIterations = 5;
+
 	void FixedUpdate()
 	{
 		UpdateCameraPosition();
-		UpdateOccluderTransparency();
+		//UpdateOccluderTransparency();
+	}
+	
+	void UpdateCameraPosition()
+	{
+		// Reset position instead of working from where we are to ensure inter frame stability.
+		// Some distance from center of trackable objects in world space is a decent heuristic,
+		// this means we need fewer iterations.
+		_vectorBuffer.Clear();
+		foreach(var obj in _trackableObjects) _vectorBuffer.Add(obj.transform.position);
+		transform.position = GetCenter(_vectorBuffer) - transform.forward * 25;
+
+		for(int _ = 0; _ < solverIterations; ++_)
+		{
+			UpdatePositionIteration();
+		}
 	}
 	
 	void UpdateOccluderTransparency()
@@ -58,64 +76,8 @@ public class CameraMovement : MonoBehaviour
 			obj.renderer.material.color = color;
 		}
 	}
-	
-	void UpdateCameraPosition()
-	{
-		Vector3 minPosition, maxPosition;
-        if (_trackableObjects.Count > 0)
-        {
-            minPosition = _trackableObjects[0].transform.position;
-		    maxPosition = _trackableObjects[0].transform.position;
-        }
-        else
-        {
-            minPosition = maxPosition = Vector3.zero;
-        }
-		
-		
-		for (int i = 1; i < _trackableObjects.Count; i++)
-		{
-			minPosition.x = Mathf.Min(minPosition.x, _trackableObjects[i].transform.position.x);
-			minPosition.y = Mathf.Min(minPosition.y, _trackableObjects[i].transform.position.y);
-			minPosition.z = Mathf.Min(minPosition.z, _trackableObjects[i].transform.position.z);
-			
-			maxPosition.x = Mathf.Max(maxPosition.x, _trackableObjects[i].transform.position.x);
-			maxPosition.y = Mathf.Max(maxPosition.y, _trackableObjects[i].transform.position.y);
-			maxPosition.z = Mathf.Max(maxPosition.z, _trackableObjects[i].transform.position.z);
-		}
-		
-		Vector3 playerCenter = (minPosition + maxPosition) / 2;
-		
-		Vector3 viewDirection = this.transform.forward;
-		
-		_projectedPositions.Clear();
-		foreach (GameObject player in _trackableObjects)
-		{
-			_projectedPositions.Add(Project(playerCenter, -viewDirection, player.transform.position));
-		}
-		
-		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
-		
-		float maxDistance = float.NegativeInfinity;
-		
-		for (int i = 0; i < _trackableObjects.Count; i++)
-		{
-			float distance = Vector3.Distance(_trackableObjects[i].transform.position, _projectedPositions[i]);
-			
-			float cameraDistance = Vector3.Distance(
-									_projectedPositions[i] - (distance * distanceScale) * viewDirection,
-									playerCenter);
-			
-			maxDistance = Mathf.Max(maxDistance, cameraDistance);
-		}
-		
-		maxDistance = Mathf.Clamp(maxDistance, minCameraDistance,maxCameraDistance);
-		
-		Vector3 targetPosition = playerCenter - viewDirection * maxDistance;
-		
-		this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, Time.deltaTime * cameraSmoothing);
-	}
-	
+
+	// Project point 'v' on the line defined by point 'p' and direction 'd'
 	Vector3 Project(Vector3 p, Vector3 d, Vector3 v)
 	{
 		return Vector3.Dot(d, v - p) * d + p;
@@ -130,4 +92,85 @@ public class CameraMovement : MonoBehaviour
 	{
 		_trackableObjects.Remove(obj);
 	}
+	
+	private Vector3 GetCenter(List<Vector3> positions)
+	{
+		Vector3 min, max;
+		min = max = Vector3.zero;
+
+		GetMinMax(positions, ref min, ref max);
+		return (min + max) / 2;
+	}
+
+	private void GetMinMax(List<Vector3> positions, ref Vector3 min, ref Vector3 max)
+	{
+		if(positions.Count == 0) return;
+
+		min = positions[0];
+		max = positions[0];
+
+		for (int i = 1; i < _trackableObjects.Count; i++)
+		{
+			min.x = Mathf.Min(min.x, positions[i].x);
+			min.y = Mathf.Min(min.y, positions[i].y);
+			min.z = Mathf.Min(min.z, positions[i].z);
+			
+			max.x = Mathf.Max(max.x, positions[i].x);
+			max.y = Mathf.Max(max.y, positions[i].y);
+			max.z = Mathf.Max(max.z, positions[i].z);
+		}
+	}
+
+	// Uses the current transform to determine object position in screen space. Call multiple times to improve accuracy.
+	private void UpdatePositionIteration()
+	{
+		_vectorBuffer.Clear();
+		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(ClampPosition(obj)));
+		Vector3 objectCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
+
+		_vectorBuffer.Clear();
+		foreach (GameObject obj in _trackableObjects)
+		{
+			_vectorBuffer.Add(Project(objectCenter, -transform.forward, ClampPosition(obj)));
+		}
+		
+		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
+		
+		float maxDistance = float.NegativeInfinity;
+		
+		for (int i = 0; i < _trackableObjects.Count; i++)
+		{
+			float distance = Vector3.Distance(ScalePosition(ClampPosition(_trackableObjects[i])), _vectorBuffer[i]);
+			
+			float cameraDistance = Vector3.Distance(
+				_vectorBuffer[i] - Mathf.Max(distance * distanceScale, minCameraDistance) * transform.forward,
+				objectCenter);
+			
+			maxDistance = Mathf.Max(maxDistance, cameraDistance);
+		}
+		
+		Vector3 targetPosition = objectCenter - transform.forward * maxDistance;
+		transform.position = targetPosition;
+	}
+
+	// Transform point to projection space, move origin to center of screen, 
+	// apply aspect ratio correction, move origin back to ll corner,
+	// transform result back to world space
+	private Vector3 ScalePosition(Vector3 v)
+	{
+		return camera.ViewportToWorldPoint(
+			Vector3.Scale(
+				camera.WorldToViewportPoint(v) - new Vector3(.5f, .5f, 0),
+				new Vector3(1 / camera.aspect, 1, 1)
+			) + new Vector3(.5f, .5f, 0)
+		);
+	}
+
+	private Vector3 ClampPosition(GameObject obj)
+	{
+		Vector3 pos = obj.transform.position;
+		pos.y = Mathf.Clamp(pos.y, yAxisTrackingCenter - yAxisTrackingRange, yAxisTrackingCenter + yAxisTrackingRange);
+		return pos;
+	}
+
 }

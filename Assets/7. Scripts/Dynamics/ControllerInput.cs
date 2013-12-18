@@ -27,7 +27,7 @@ public class ControllerInput : MonoBehaviour {
 	void Update () {
 		foreach(GamePad controller in controllers)
 		{
-			controller.Update();
+			controller.Update(Time.deltaTime);
 		}
 	}
 

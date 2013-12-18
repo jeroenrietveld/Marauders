@@ -29,10 +29,12 @@ public class Timer
 	}
 	private bool _running;
 
-	private float _startTimeStamp;
+	private float _currentTime;
 
 	private List<CallbackPair> _callbacks;
+	private List<CallbackPair> _phaseCallbacks;
 	private int _callbackIndex;
+	private int _phaseCallbackIndex;
 	private struct CallbackPair
 	{
 		public float time;
@@ -59,9 +61,11 @@ public class Timer
 		this.endPhase = 1;
 
 		this._running = false;
-		this._startTimeStamp = 0f;
-		this._callbackIndex = 0;
+		this._currentTime = startTime;
 		this._callbacks = new List<CallbackPair> ();
+		this._phaseCallbacks = new List<CallbackPair> ();
+		this._callbackIndex = 0;
+		this._phaseCallbackIndex = 0;
 	}
 
 	public void Start()
@@ -72,8 +76,9 @@ public class Timer
 	private void Start(float remainingTime)
 	{
 		_running = true;
-		_startTimeStamp = Time.time - remainingTime;
+		_currentTime = startTime + remainingTime;
 		_callbackIndex = 0;
+		_phaseCallbackIndex = 0;
 	}
 
 	public void Stop()
@@ -81,21 +86,33 @@ public class Timer
 		_running = false;
 	}
 
+	public void Continue()
+	{
+		_running = true;
+	}
+
 	public void Update()
 	{
 		if(_running)
 		{
-			float currentTime = GetCurrentTime();
+			_currentTime += Time.deltaTime;
 
-			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < currentTime)
+			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < _currentTime)
 			{
 				_callbacks[_callbackIndex].callback();
 
 				_callbackIndex++;
 			}
 
+			var phase = Phase();
+			while(_phaseCallbackIndex < _phaseCallbacks.Count && _phaseCallbacks[_phaseCallbackIndex].time < phase)
+			{
+				_phaseCallbacks[_phaseCallbackIndex].callback();
+				_phaseCallbackIndex++;
+			}
 
-			if(currentTime > endTime)
+
+			if(_currentTime > endTime)
 			{
 				switch(wrapMode)
 				{
@@ -105,7 +122,7 @@ public class Timer
 						Stop();
 					break;
 					case WrapMode.LOOP:
-						Start(currentTime - endTime);
+						Start(_currentTime - endTime);
 					break;
 				}
 			}
@@ -114,8 +131,7 @@ public class Timer
 
 	public float GetCurrentTime()
 	{
-		float currentTime = _running ? Time.time - _startTimeStamp : 0;
-		return currentTime + startTime;
+		return _currentTime;
 	}
 
 	public float Phase()
@@ -130,12 +146,27 @@ public class Timer
 
 	public void AddCallback(float time, Callback callback)
 	{
+		SortedInsert(_callbacks, time, callback);
+	}
+
+	public void AddPhaseCallback(Callback callback)
+	{
+		AddPhaseCallback (endPhase, callback);
+	}
+
+	public void AddPhaseCallback(float phase, Callback callback)
+	{
+		SortedInsert (_phaseCallbacks, phase, callback);
+	}
+
+	private void SortedInsert(List<CallbackPair> callbacks, float time, Callback callback)
+	{
 		int index = 0;
-		while(index < _callbacks.Count && _callbacks[index].time < time) 
+		while(index < callbacks.Count && callbacks[index].time < time) 
 		{
 			index++;
 		}
-
-		_callbacks.Insert (index, new CallbackPair (time, callback));
+		
+		callbacks.Insert (index, new CallbackPair (time, callback));
 	}
 }

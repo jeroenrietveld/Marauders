@@ -4,50 +4,22 @@ using XInputDotNetPure;
 
 public class LoveCube : Interactable
 {
-	private bool _showMessage = false;
-	private Vector2 _messageLocation;
-	private Player _player;
-
-	public override void OnInteractEnter(Player player)
+	public override void OnInteract(GameObject obj)
 	{
-		//Lets show this message
-		this._showMessage = true;
-		this._player = player;
+		//Applying speedboost
+		Speedboost speedboost = obj.AddComponent<Speedboost>();
+		speedboost.factor = 5f;
+		speedboost.duration = 2f;
+
+		//Destroy after pickup
+		Destroy(this.gameObject);
 	}
 
-	public override void OnInteractLeave(Player player)
+	public override void ShowMessage()
 	{
-		this._showMessage = false;
-		this._player = null;
-	}
-
-	public void Update()
-	{
-		//showMea
-		if (_showMessage)
-		{
-			//TODO update controller input
-			if (_player.controller.Pressed(Button.X) || Input.GetKeyDown("f"))
-			{
-				//Applying speedboost
-				Speedboost speedboost = _player.gameObject.AddComponent<Speedboost>();
-				speedboost.factor = 5f;
-				speedboost.duration = 2f;
-
-				//Destroy after pickup
-				Destroy(this.gameObject);
-			}
-		}
-	}
-
-	public void OnGUI()
-	{
-		if (_showMessage)
-		{
-			//Getting the cube's location on screen and storing it		 
-			Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
-			//GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[_player.controller.PickupPowerup]);
-			GUI.Label(new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
-		}
+		//Getting the cube's location on screen and storing it		 
+		Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	
+		//GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), ControllerMapping.ButtonImages[_player.controller.PickupPowerup]);
+		GUI.Label(new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["speedboost_pickup"]);
 	}
 }

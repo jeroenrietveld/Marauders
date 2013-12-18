@@ -47,14 +47,14 @@ public class TimeBubble : MonoBehaviour {
 
 		var spawner = new GameObject("ObjectSpawner").AddComponent<ObjectSpawner>();
 		spawner.obj = collider.gameObject;
-		spawner.exitForce = exitDirection.normalized * exitForce;
 		spawner.spawnDelay = respawnDelay;
 		spawner.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
-
+		spawner.exitForce = SpawnTarget.GetClosestTargetDirection(spawner.position) * exitForce;
 		
 		var player = collider.GetComponent<Player>();
 		if(player)
 		{
+			player.canJump = true;
 			Event.dispatch(new TimeBubblePlayerExitEvent(player, respawnDelay));
 		}
 		else

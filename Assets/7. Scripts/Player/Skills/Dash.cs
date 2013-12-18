@@ -6,34 +6,40 @@ using UnityEngine;
 
 public class Dash : SkillBase
 {
-	private Player _player;
+	//private Player _player;
+
+	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
+		"Dash",
+		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
+		1,
+		WrapMode.Loop
+	);
 
 	private Timer _dashing;
 
-	public Dash()
+	public Dash() : base(SkillType.Utility, 5, _animationSettings)
 	{
-		animationName = "Dash";
-
 		_dashing = new Timer (0.3f);
-		_dashing.AddCallback (_dashing.endTime, delegate {
-			_player.animation.Stop();
-			_player.rigidbody.velocity = Vector3.zero;
+		_dashing.AddCallback (delegate {
+			//_player.animation.Stop();
+			rigidbody.velocity = Vector3.zero;
 		});
-
-		cooldown = new Timer (5f);
 	}
 
+	/*
 	void Start()
 	{
 		_player = GetComponent<Player> ();
 		initializeAnimation ();
 	}
+	*/
 
 	protected override void OnPerformAction()
 	{
 		_dashing.Start ();
     }
 
+	/*
 	public void initializeAnimation()
 	{
 		Animation animation = _player.animation;
@@ -42,6 +48,7 @@ public class Dash : SkillBase
 		animation[animationName].wrapMode = WrapMode.Loop;
 		animation[animationName].layer = 2;
 	}
+	*/
 
 	protected override void OnUpdate()
 	{
@@ -49,7 +56,7 @@ public class Dash : SkillBase
 
 		if(_dashing.running)
 		{
-			_player.rigidbody.velocity = _player.transform.forward * 10;
+			rigidbody.velocity = transform.forward * 10;
 		}
 	}
 }

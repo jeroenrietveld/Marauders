@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 using System;
+using System.Collections.Generic;
  
 public partial class Player : MonoBehaviour
 {
 	public Weapon primaryWeapon;
 	public Weapon secondaryWeapon;
+    public List<AudioSource> Audioclips;
 	
 	public SkillBase offensiveSkill { get; set; }
 	public SkillBase utilitySkill { get; set; }
@@ -22,7 +24,9 @@ public partial class Player : MonoBehaviour
 		
 		set {
 			_health = Mathf.Clamp01(value);
-			
+
+			_controller.SetVibration(1, 1, damagedControllerPulse);
+
 			//Event.dispatch(new PlayerHitEvent());
 			
 			if(_health == 0f)
@@ -37,11 +41,14 @@ public partial class Player : MonoBehaviour
 	private float _health = 1f;
 	private Timer _deadTimer;
 	private DateTime _attackStart;
+	public bool canJump = true;
 	
 	private Menu _pauseMenu;
 
 	private Material _cooldownMat;
 	private Texture _cooldownTex;
+
+	public float damagedControllerPulse = 0.25f;
 
 	//Move states to a better location?
 	public bool frozen = false;
@@ -59,8 +66,8 @@ public partial class Player : MonoBehaviour
 		InitializeAnimations();
 
 		//TODO: remove (testing purposes)
-		//utilitySkill = gameObject.AddComponent<Dash> ();
-		utilitySkill = gameObject.AddComponent<Timeshift> ();
+		utilitySkill = gameObject.AddComponent<Dash> ();
+		//utilitySkill = gameObject.AddComponent<Timeshift> ();
 
 		_cooldownMat = Resources.Load ("Materials/Cooldown", typeof(Material)) as Material;
 		_cooldownTex = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
@@ -157,9 +164,14 @@ public partial class Player : MonoBehaviour
 		RaycastHit hit;
 		//Vector3 vector = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
 		Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity);
-		this.distanceToGround = hit.distance;
-		//Transform heartbeat = transform.FindChild ("Heartbeat_indicator");
-		//heartbeat.position = new Vector3(heartbeat.position.x, (distanceToGround) + 0.02f, heartbeat.position.z);
+
+		if (hit.collider != null)
+		{
+			this.distanceToGround = hit.distance;
+		} else
+		{
+			this.distanceToGround = 100;
+		}
 
 		//Pausing/resuming game
         if (controller.JustPressed(Button.Start))
@@ -184,7 +196,7 @@ public partial class Player : MonoBehaviour
         }
 
 		//Attacking
-		if (controller.JustPressed(Button.RightShoulder))
+		if (controller.JustPressed(Button.B))
 		{
 			AnimationAttack();
 		}
@@ -193,7 +205,7 @@ public partial class Player : MonoBehaviour
 		if(controller.JustPressed(Button.X) && !utilitySkill.cooldown.running || Input.GetKeyDown(KeyCode.X) && !utilitySkill.cooldown.running)
 		{
 			utilitySkill.PerformAction();
-			animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
+			//animation.Play(utilitySkill.animationName, PlayMode.StopSameLayer);
 		}
 
 		//Calculating the movement, relative to the camera
@@ -206,21 +218,27 @@ public partial class Player : MonoBehaviour
 		camDirection.Normalize();
 		
 		//Xbox Controls:
-		float h = _controller.Axis (Axis.LeftHorizantal);
+		float h = _controller.Axis (Axis.LeftHorizontal);
 		float v = _controller.Axis (Axis.LeftVertical);
 		Vector3 moveSpeed = camDirection * v + camRight * h;
 
 		//Applying the movement
 		MovementManagement(moveSpeed);
 
-		//Jumping
-		if (controller.JustPressed(Button.A) && this.isGrounded)
+		//To jump when falling off
+		if (distanceToGround < 0.1f)
 		{
-			Jump();
-			/*if (AgainstWall(moveSpeed))
+			canJump = true;
+		}
+
+		//Jumping
+		if (controller.JustPressed(Button.A))
+		{
+			if (canJump)
 			{
-				
-			}*/
+				Jump ();
+			}
+			canJump = false;
 		}
 
 		if(Input.GetKeyDown(KeyCode.D) && playerIndex == PlayerIndex.One)
@@ -236,11 +254,6 @@ public partial class Player : MonoBehaviour
 			transform.localScale = scale;
 		}*/
     }
-	
-	public void DetectPlayerHit()
-	{
-		primaryWeapon.DetectPlayerHit();
-	}
 
 	public void LoadModel(PlayerModel model)
 	{
@@ -252,6 +265,7 @@ public partial class Player : MonoBehaviour
 
 	public void ApplyDamage(Vector3 direction, float amount)
 	{
+
 		float dot = Vector3.Dot(direction.normalized, heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 		
