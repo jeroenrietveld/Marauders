@@ -45,6 +45,8 @@ public class CharacterSelectBlock : MonoBehaviour
         StartScreen = transform.FindChild("Start").gameObject;
         MarauderSelect = transform.FindChild("MarauderSelect").gameObject;
         SkillSelect = transform.FindChild("SkillSelect").gameObject;
+
+        ChangeState(CharacterSelectBlockStates.StartState);
     }
 
     public void ChangeState(CharacterSelectBlockStates state)
@@ -95,7 +97,6 @@ public class CharacterSelectBlock : MonoBehaviour
                 else if (_controller.JustPressed(Button.A))
                 {
                     isJoined = true;
-                    ChangeState(CharacterSelectBlockStates.CharSelectState);
                 }
             }
         }

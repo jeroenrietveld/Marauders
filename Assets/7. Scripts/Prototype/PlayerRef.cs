@@ -5,7 +5,7 @@ using XInputDotNetPure;
 public class PlayerRef {
 
 	private static Color[] _colors = new []{Color.red, Color.green, Color.blue, Color.yellow};
-
+    public string marauder { get; set; }
 	public PlayerIndex index;
 	public Color color
 	{
