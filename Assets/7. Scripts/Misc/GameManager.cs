@@ -11,6 +11,8 @@ public class GameManager {
 
     public static bool isPaused = false;
 
+	//TODO: Remove Player list, rename playerRefs to players.
+	public List<PlayerRef> playerRefs;
     public List<Player> players;
 	public List<PlayerModel> playerModels;
 
@@ -37,6 +39,7 @@ public class GameManager {
 	private GameManager()
 	{
         matchSettings = new MatchSettings();
+		playerRefs = new List<PlayerRef> ();
 		players = new List<Player>();
 		playerModels = new List<PlayerModel>();
 	}

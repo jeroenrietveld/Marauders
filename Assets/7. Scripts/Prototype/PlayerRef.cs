@@ -24,12 +24,16 @@ public class PlayerRef {
 	public SkillModel skills;
 	public GamePad controller;
 
-	private GameObject _avatar;
+	public GameObject avatar { get; private set; }
 
 	public PlayerRef(PlayerIndex index)
 	{
 		controller = ControllerInput.GetController (index);
 		skills = new SkillModel ();
+
+
+		// Not sure if we want to do this here... Jeroen?
+		GameManager.Instance.playerRefs.Add (this);
 	}
 
 	public void Update()
@@ -40,23 +44,23 @@ public class PlayerRef {
 	public void CreateAvatar()
 	{
 		//TODO: make avatar dynamic
-		 _avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/Samurai_avatar")) as GameObject;
+		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/Samurai_avatar")) as GameObject;
 
-		_avatar.AddComponent<CameraTracking> ();
-		_avatar.AddComponent<Avatar> ();
-		_avatar.AddComponent<ControllerMapping> ();
-		_avatar.AddComponent<AnimationHandler> ();
-		_avatar.AddComponent<Movement> ();
-		_avatar.AddComponent<Attack> ();
-		_avatar.AddComponent<Jump> ();
-		_avatar.AddComponent<Interactor> ();
+		avatar.AddComponent<CameraTracking> ();
+		avatar.AddComponent<Avatar> ();
+		avatar.AddComponent<ControllerMapping> ();
+		avatar.AddComponent<AnimationHandler> ();
+		avatar.AddComponent<Movement> ();
+		avatar.AddComponent<Attack> ();
+		avatar.AddComponent<Jump> ();
+		avatar.AddComponent<Interactor> ();
 
-		Avatar avatar = _avatar.GetComponent<Avatar> ();
-		avatar.Initialize (this);
+		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
+		avatarComponent.Initialize (this);
 	}
 
 	public void DestroyAvatar()
 	{
-		GameObject.Destroy (_avatar);
+		GameObject.Destroy (avatar);
 	}
 }
