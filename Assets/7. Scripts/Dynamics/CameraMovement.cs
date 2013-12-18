@@ -17,6 +17,11 @@ public class CameraMovement : MonoBehaviour
 	
 	public int solverIterations = 5;
 
+    void Start()
+    {
+        GameManager.Instance.LoadMarauders();
+    }
+
 	void FixedUpdate()
 	{
 		UpdateCameraPosition();
