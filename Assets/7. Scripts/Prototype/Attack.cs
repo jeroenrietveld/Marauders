@@ -47,20 +47,38 @@ public class Attack : ActionBase {
 
 	public void SetWeapon(Weapon weaponHolder)
 	{
+		//Dropping the weapon
+		if (_weapon != null)
+		{
+			GameObject dropWeapon = WeaponFactory.create (_weapon.name);
+			PickupSpawner.SpawnWeapon (dropWeapon, transform.position);
+
+			//Deleting the first grip
+			Transform hand = transform.FindInChildren("Grip_0");
+			int i = 1;
+
+			//Deleting all the other hands
+			while(hand != null)
+			{
+				hand.DestroyChildren();
+				hand = transform.FindInChildren("Grip_" + i);
+				i++;
+			}
+		}
+
 		_weapon = weaponHolder;
-		
+
 		while(weaponHolder.transform.childCount > 0)
 		{	
 			Transform weapon = weaponHolder.transform.GetChild(0);
-			Transform hand = Util.FindInChildren(transform, weapon.gameObject.name);
-			
+			Transform hand = transform.FindInChildren(weapon.gameObject.name);
+
 			weapon.rotation = hand.rotation;
 			weapon.parent = hand;
 			weapon.position = hand.position;
 		}
 
 		weaponHolder.transform.parent = transform;
-
 
 		AnimationHandler animationHandler = GetComponent<AnimationHandler> ();
 		

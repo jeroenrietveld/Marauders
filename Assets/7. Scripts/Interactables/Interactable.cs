@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public abstract class Interactable : MonoBehaviour {
 
@@ -27,5 +28,5 @@ public abstract class Interactable : MonoBehaviour {
 
 	public abstract void OnInteract(GameObject obj);
 
-	public abstract void ShowMessage();
+	public abstract void ShowMessage(Button interactButton);
 }
