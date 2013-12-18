@@ -10,6 +10,9 @@ public class CameraMovement : MonoBehaviour
 	public float maxPlayerAngle = 50f;
 	public const float degToRad = 1 / (360 / Mathf.PI);
 
+	public float yAxisTrackingCenter = 0;
+	public float yAxisTrackingRange = 10;
+
 	public float minCameraDistance = 10f;
 	
 	public int solverIterations = 5;
@@ -122,13 +125,13 @@ public class CameraMovement : MonoBehaviour
 	private void UpdatePositionIteration()
 	{
 		_vectorBuffer.Clear();
-		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(obj.transform.position));
+		foreach(var obj in _trackableObjects) _vectorBuffer.Add(camera.WorldToViewportPoint(ClampPosition(obj)));
 		Vector3 objectCenter = camera.ViewportToWorldPoint(GetCenter(_vectorBuffer));
 
 		_vectorBuffer.Clear();
 		foreach (GameObject obj in _trackableObjects)
 		{
-			_vectorBuffer.Add(Project(objectCenter, -transform.forward, obj.transform.position));
+			_vectorBuffer.Add(Project(objectCenter, -transform.forward, ClampPosition(obj)));
 		}
 		
 		float distanceScale = 1 / Mathf.Tan(maxPlayerAngle * degToRad);
@@ -137,7 +140,7 @@ public class CameraMovement : MonoBehaviour
 		
 		for (int i = 0; i < _trackableObjects.Count; i++)
 		{
-			float distance = Vector3.Distance(ScalePosition(_trackableObjects[i].transform.position), _vectorBuffer[i]);
+			float distance = Vector3.Distance(ScalePosition(ClampPosition(_trackableObjects[i])), _vectorBuffer[i]);
 			
 			float cameraDistance = Vector3.Distance(
 				_vectorBuffer[i] - (distance * distanceScale) * transform.forward,
@@ -163,6 +166,13 @@ public class CameraMovement : MonoBehaviour
 				new Vector3(1 / camera.aspect, 1, 1)
 			) + new Vector3(.5f, .5f, 0)
 		);
+	}
+
+	private Vector3 ClampPosition(GameObject obj)
+	{
+		Vector3 pos = obj.transform.position;
+		pos.y = Mathf.Clamp(pos.y, yAxisTrackingCenter - yAxisTrackingRange, yAxisTrackingCenter + yAxisTrackingRange);
+		return pos;
 	}
 
 }
