@@ -12,38 +12,37 @@ public class SettingsBlock : LevelSelectionBlockBase
 {
     private int _currentIndex;
 	private GameObject _levelDescription;
-    private GUIProgressbar _timeSyncBar;
+    private TimeSyncBar _timeSyncBar;
     private float _progress;
         
 	public SettingsBlock()
 	{
-        _levelDescription = GameObject.Find("LevelDescription");
-        _timeSyncBar = _levelDescription.transform.FindChild("GUIProgressbar").GetComponent<GUIProgressbar>();
-        _timeSyncBar.max = 30;
-        _timeSyncBar.pos = _timeSyncBar.transform.position;
-        _timeSyncBar.size = new Vector3(200, 0, 40);
+        _levelDescription = GameObject.Find("LevelScreen/LevelDescription");
+        _timeSyncBar = GameObject.Find("TimeSyncBar").GetComponent<TimeSyncBar>();
+        _timeSyncBar.Add(0.5f);
 	}
 
 	public override void Update(GamePad controller)
 	{
-        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
+        Debug.Log("UPDATE");
+        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.A))
 		{
-            _timeSyncBar.Add(10);
+            _timeSyncBar.Add(0.1f);
             _progress += 1;
 		}
-        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.B))
 		{
-            _timeSyncBar.Add(-10);
+            _timeSyncBar.Add(-0.1f);
             _progress -= 1;
 		}
         /// For BETA version no settings
         ///if (_progress >= 3f)
         ///{
-            if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
+            if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.Q))
             {
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
-                GameManager.Instance.matchSettings.timeSync = _timeSyncBar.effective;
+                GameManager.Instance.matchSettings.timeSync = _timeSyncBar.GetPercentage();
 
                 // Get the selected game mode class by using the Activator
                 // Default Normal until new game modes are implemented.
@@ -55,7 +54,7 @@ public class SettingsBlock : LevelSelectionBlockBase
                 // GameManager.Instance.Start();
             }
         ///}
-        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
+        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.W))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
         }

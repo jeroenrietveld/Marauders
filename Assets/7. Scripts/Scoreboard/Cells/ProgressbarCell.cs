@@ -6,19 +6,16 @@ using UnityEngine;
 
 public class ProgressbarCell : Cell
 {
-    GUIProgressbar progbar;
+    GUITimeSyncBar progbar;
     public ProgressbarCell(float max) 
     { 
-        GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/GUIProgressbar")) as GameObject;
-        progbar = prefab.GetComponent<GUIProgressbar>();
-        progbar.effective = 0f;
-        progbar.max = max;
-        Debug.Log("I made a cell.. WHY?!");
+        GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/GUITimeSyncBar")) as GameObject;
+        progbar = prefab.GetComponent<GUITimeSyncBar>();
     }
 
     public void Add(float addition)
     {              
-        progbar.effective = Mathf.Clamp(progbar.effective + addition, 0, progbar.max);
+        progbar.Add(addition);
     }
 
     public override String GetContent()

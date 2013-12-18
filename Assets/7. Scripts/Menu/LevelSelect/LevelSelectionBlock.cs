@@ -21,7 +21,6 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private TextMesh _levelInfoText;
     private float _time = 0.2f;
     private float _resetTime = 0.2f;
-    private bool enableGUIProgress = true;
 
 	public LevelSelectionBlock()
 	{
@@ -37,30 +36,21 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
     public override void Update(GamePad controller)
 	{
-        if (enableGUIProgress)
-        {
-            GameObject.Find("GUIProgressbar").GetComponent<GUIProgressbar>().enabled = true;
-            enableGUIProgress = false;
-        }
 
 		int index = _currentIndex;
-		SetAlpha(_levelSelectUp, .9f);
-		SetAlpha(_levelSelectDown, .9f);
         _time -= Time.deltaTime;
 
         if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizontal) >= 0.75f && _time <= 0f))
 		{
 			_currentIndex++;
-			SetAlpha(_levelSelectUp, 1f);
             _time = _resetTime;
 		}
         if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizontal) <= -0.75f && _time <= 0f))
 		{
 			_currentIndex--;
-			SetAlpha(_levelSelectDown, 1f);
             _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.A))
+        if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
 		{
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
@@ -92,13 +82,6 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
         _levelName.text = current.levelName;
 		_levelInfoText.text = current.levelInfo;
-	}
-
-	public void SetAlpha(GameObject gameObject, float alpha)
-	{
-		//Color color = gameObject.renderer.material.color;
-		//color.a = alpha;
-		//gameObject.renderer.material.color = color;
 	}
 }
 
