@@ -37,7 +37,6 @@ public class CharacterSelectState : SelectionBase
         else if (controller.JustPressed(Button.B))
         {
             block._currentState = null;
-            //block._currentEnum = CharacterSelectBlockStates.StartState;
             block.ChangeState(CharacterSelectBlockStates.StartState);
             OnInActive();
         }
