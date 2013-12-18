@@ -78,7 +78,7 @@ public class SkillSelectState : SelectionBase
                 pl.offensiveSkill = list[0].active;
                 pl.defensiveSkill = list[1].active;
                 pl.utilitySkill = list[2].active;
-                GameManager.Instance.playerModels.Add(pl);
+                GameManager.Instance.AddPlayerModel(pl);
             }
             else if(block.player == PlayerIndex.One)
             {
