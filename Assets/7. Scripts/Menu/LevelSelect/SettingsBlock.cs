@@ -24,7 +24,6 @@ public class SettingsBlock : LevelSelectionBlockBase
 
 	public override void Update(GamePad controller)
 	{
-        Debug.Log("UPDATE");
         if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
             _timeSyncBar.Add(0.1f);
