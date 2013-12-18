@@ -35,7 +35,7 @@ public class PlayerRef {
 
 
 		// Not sure if we want to do this here... Jeroen?
-		GameManager.Instance.playerRefs.Add (this);
+		//GameManager.Instance.playerRefs.Add (this);
 	}
 
 	public void Update()
@@ -45,8 +45,7 @@ public class PlayerRef {
 
 	public void CreateAvatar()
 	{
-		//TODO: make avatar dynamic
-		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/Samurai_avatar")) as GameObject;
+		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
 
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
@@ -56,6 +55,7 @@ public class PlayerRef {
 		avatar.AddComponent<Attack> ();
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
+		avatar.AddComponent<SoundPlayer>();
 
 		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
 		avatarComponent.Initialize (this);

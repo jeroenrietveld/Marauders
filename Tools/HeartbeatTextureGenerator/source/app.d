@@ -26,19 +26,21 @@ void main()
 		
 	auto imgData = ilGetData();
 	
-	vec2 center = vec2(width / 2f, height / 2f);
+	vec3 center = vec3(width / 2f, height / 2f, 0);
 	
 	float[4] multiplier = [1, 1, 1, 1];
 	
 	foreach(y; 0..height)
 		foreach(x; 0..width)
 		{
-			vec2 pos = vec2(x, y);
-			vec2 dir = pos - center;
+			vec3 pos = vec3(x, y, 0);
+			vec3 dir = pos - center;
 			
 			if(dir.length > 0) dir.normalize();
 			
-			multiplier[3] = dir.dot(vec2(0, -1)) * .5f + .5f;
+			multiplier[3] = (dir.dot(vec3(0, -1, 0)) * .5f + .5f);// * 0.5f;
+			
+			//if(dir.cross(vec3(0, -1, 0)).z > 0) multiplier[3] = 1 - multiplier[3];
 			
 			auto idx = (y * width + x) * 4;
 			foreach(i; 0..4)
