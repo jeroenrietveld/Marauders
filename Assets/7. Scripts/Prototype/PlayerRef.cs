@@ -28,6 +28,8 @@ public class PlayerRef {
 
 	public PlayerRef(PlayerIndex index)
 	{
+		this.index = index;
+
 		controller = ControllerInput.GetController (index);
 		skills = new SkillModel ();
 
