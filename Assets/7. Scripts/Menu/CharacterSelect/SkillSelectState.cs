@@ -74,6 +74,7 @@ public class SkillSelectState : SelectionBase
                 // Add selected marauder and skills to the gamemanager.
                 PlayerRef playerRef = new PlayerRef(block.player);
                 playerRef.marauder = block.marauderNames[block.marauderIndex];
+                playerRef.marauder = "Prefabs/Marauders/Samurai_avatar";
                 playerRef.skills.offensiveSkill = list[0].active;
                 playerRef.skills.defensiveSkill = list[1].active;
                 playerRef.skills.utilitySkill = list[2].active;

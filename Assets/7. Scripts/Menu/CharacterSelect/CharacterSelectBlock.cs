@@ -92,6 +92,8 @@ public class CharacterSelectBlock : MonoBehaviour
             {
                 if (_currentState != null)
                 {
+                    Debug.Log(_currentState.ToString() + " | " + player.ToString());
+
                     _currentState.OnUpdate(_controller);
                 }
                 else if (_controller.JustPressed(Button.A))

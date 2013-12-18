@@ -14,11 +14,11 @@ public class StartState : SelectionBase
 
     public override void OnUpdate(GamePad controller)
     {
-        if (controllerOne.JustPressed(Button.B))
+        if (controller.JustPressed(Button.B))
         {
             GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
         }
-        else if (controllerOne.JustPressed(Button.A))
+        else if (controller.JustPressed(Button.A))
         {
             block.ChangeState(CharacterSelectBlockStates.CharSelectState);
         }

@@ -50,6 +50,20 @@ public class GameManager {
         } 
 	}
 
+    public void LoadMarauders()
+    {
+        foreach (PlayerRef player in playerRefs)
+        {
+            // GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + player.marauder)) as GameObject;
+            //prefab.AddComponent("Player");
+            //prefab.GetComponent<Player>().LoadModel(player);
+
+            //add the players to the player list, this way they are always easily accessible
+            //players.Add(prefab.GetComponent<Player>());
+            player.CreateAvatar();
+        }
+    }
+
     /// <summary>
     /// Adds the player ref to the list. If the player already has a playerref in the list remove that one 
     /// and add the new one.
@@ -57,15 +71,8 @@ public class GameManager {
     /// <param name="model"></param>
     public void AddPlayerRef(PlayerRef model)
     {
-        PlayerRef pl = playerRefs.First(x => x.index == model.index);
-        if(pl.Equals(null))
-        {
-            playerRefs.Add(model);
-        }else
-        {
-            playerRefs.Remove(pl);
-            playerRefs.Add(model);
-        }
+        playerRefs.RemoveAll(x => x.index.Equals(model.index));
+        playerRefs.Add(model);
     }
 
     public void PauseGame()
