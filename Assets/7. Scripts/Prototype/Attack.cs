@@ -24,9 +24,8 @@ public class Attack : ActionBase {
 			_comboCount = 0;
 		});
 
-		//TODO: Attack delay weapon / player dependent?
 		_attackDelay = new Timer(.5f);
-		_attackDelay.AddCallback (DoAttack);
+		_attackDelay.AddPhaseCallback (DoAttack);
 	}
 
 	void Start () {
@@ -38,6 +37,7 @@ public class Attack : ActionBase {
 	{
 		if (_weapon && !animation.IsPlaying(_weapon.attacks[_comboCount].animationName))
 		{
+			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
 			_attackDelay.Start();
 			_comboReset.Start();
 

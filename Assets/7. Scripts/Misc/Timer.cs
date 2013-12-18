@@ -32,7 +32,9 @@ public class Timer
 	private float _currentTime;
 
 	private List<CallbackPair> _callbacks;
+	private List<CallbackPair> _phaseCallbacks;
 	private int _callbackIndex;
+	private int _phaseCallbackIndex;
 	private struct CallbackPair
 	{
 		public float time;
@@ -60,8 +62,10 @@ public class Timer
 
 		this._running = false;
 		this._currentTime = startTime;
-		this._callbackIndex = 0;
 		this._callbacks = new List<CallbackPair> ();
+		this._phaseCallbacks = new List<CallbackPair> ();
+		this._callbackIndex = 0;
+		this._phaseCallbackIndex = 0;
 	}
 
 	public void Start()
@@ -74,6 +78,7 @@ public class Timer
 		_running = true;
 		_currentTime = startTime + remainingTime;
 		_callbackIndex = 0;
+		_phaseCallbackIndex = 0;
 	}
 
 	public void Stop()
@@ -97,6 +102,13 @@ public class Timer
 				_callbacks[_callbackIndex].callback();
 
 				_callbackIndex++;
+			}
+
+			var phase = Phase();
+			while(_phaseCallbackIndex < _phaseCallbacks.Count && _phaseCallbacks[_phaseCallbackIndex].time < phase)
+			{
+				_phaseCallbacks[_phaseCallbackIndex].callback();
+				_phaseCallbackIndex++;
 			}
 
 
@@ -134,12 +146,27 @@ public class Timer
 
 	public void AddCallback(float time, Callback callback)
 	{
+		SortedInsert(_callbacks, time, callback);
+	}
+
+	public void AddPhaseCallback(Callback callback)
+	{
+		AddPhaseCallback (endPhase, callback);
+	}
+
+	public void AddPhaseCallback(float phase, Callback callback)
+	{
+		SortedInsert (_phaseCallbacks, phase, callback);
+	}
+
+	private void SortedInsert(List<CallbackPair> callbacks, float time, Callback callback)
+	{
 		int index = 0;
-		while(index < _callbacks.Count && _callbacks[index].time < time) 
+		while(index < callbacks.Count && callbacks[index].time < time) 
 		{
 			index++;
 		}
-
-		_callbacks.Insert (index, new CallbackPair (time, callback));
+		
+		callbacks.Insert (index, new CallbackPair (time, callback));
 	}
 }
