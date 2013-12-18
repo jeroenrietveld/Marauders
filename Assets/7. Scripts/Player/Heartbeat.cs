@@ -7,11 +7,11 @@ using System.Collections;
 public class Heartbeat : MonoBehaviour {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 
-	private Player player;
+	private Avatar _avatar;
 
 	// Use this for initialization
 	void Start () {
-		player = transform.parent.gameObject.GetComponent<Player>();
+		_avatar = transform.parent.GetComponent<Avatar>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,6 @@ public class Heartbeat : MonoBehaviour {
 		//Rotate the health circle
 		transform.Rotate(Vector3.up, heartbeatSpeed * Time.deltaTime);
 		//Pass player health to shader
-		//renderer.material.SetFloat("health", player.health);
+		renderer.material.SetFloat("phase", _avatar.health);
 	}
 }

@@ -6,8 +6,38 @@ using System;
 public class Avatar : MonoBehaviour 
 {	
 	public GamePad controller;
-
+	
 	private float _health = 1f;
+	public float health
+	{
+		get
+		{
+			return _health;
+		}
+		set
+		{
+			if(alive)
+			{
+				_health = Mathf.Clamp01(value);
+
+				if(_health == 0)
+				{
+					//TODO: Handle player death
+				}
+			}
+		}
+	}
+
+	public bool alive
+	{
+		get
+		{
+			return health > 0;
+		}
+	}
+
+	private float _armorFactor = 0.1f;
+
 	private Heartbeat _heartbeat;
 	private PlayerRef _player;
 
@@ -42,9 +72,17 @@ public class Avatar : MonoBehaviour
 		}
 	}
 
-	public void ApplyDamage(Vector3 direction, float damage)
+	public void ApplyDamage(Vector3 direction, float amount)
 	{
-
+		float dot = Vector3.Dot(direction.normalized, _heartbeat.transform.forward);
+		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > _health;
+		
+		if(armorHit)
+		{
+			amount = amount * _armorFactor;
+		}
+		
+		_health = _health - amount;
 	}
 
 }
