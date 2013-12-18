@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 public class ArmoryState : MenuStateBase
 {
@@ -15,10 +16,6 @@ public class ArmoryState : MenuStateBase
         {
             manager.ChangeState(MenuStates.LevelState);
             LevelSelectionManager.currentState = LevelSelectionManager.selectionBlocks[LevelSelectionState.LevelSelection];
-        }
-        if (Input.GetKey(KeyCode.B))
-        {
-            manager.ChangeState(MenuStates.SplashState);
         }
     }
 

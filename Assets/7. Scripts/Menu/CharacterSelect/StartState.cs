@@ -4,14 +4,24 @@ using XInputDotNetPure;
 
 public class StartState : SelectionBase
 {
+    private GamePad controllerOne;
+
     public StartState(CharacterSelectBlock block)
     {
         this.block = block;
+        controllerOne = ControllerInput.GetController(PlayerIndex.One);
     }
 
     public override void OnUpdate(GamePad controller)
     {
-       
+        if (controllerOne.JustPressed(Button.B))
+        {
+            GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
+        }
+        else if (controllerOne.JustPressed(Button.A))
+        {
+            block.ChangeState(CharacterSelectBlockStates.CharSelectState);
+        }
     }
 
     public override void OnActive()

@@ -1879,7 +1879,7 @@ MonoBehaviour:
   StartScreen: {fileID: 0}
   MarauderSelect: {fileID: 0}
   SkillSelect: {fileID: 0}
-  player: 0
+  player: 3
   marauders:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
