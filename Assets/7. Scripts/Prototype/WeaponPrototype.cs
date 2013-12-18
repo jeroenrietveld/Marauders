@@ -19,20 +19,30 @@ public class WeaponPrototype : MonoBehaviour {
 
            
 		PlayerRef player1 = new PlayerRef (PlayerIndex.One);
-		player1.marauder = "Samurai_avatar";
-		player1.skills.utilitySkill = "Dash";
-		player1.skills.defensiveSkill = "Windsweep";
-		player1.CreateAvatar();
+		player1.marauder = "Samurai";
+		player1.skills = new []{"Dash", "Dash", "Dash"};
+		player1.CreateAvatar ();
 
-		/*PlayerRef player2 = new PlayerRef (PlayerIndex.Two);
-		player2.skills.utilitySkill = "Dash";
-		player2.skills.defensiveSkill = "Windsweep";
+		PlayerRef player2 = new PlayerRef (PlayerIndex.Two);
+		player2.marauder = "Samurai";
+		player2.skills = new []{"Dash", "Dash", "Dash"};
 		player2.CreateAvatar ();
-		
+
+		PlayerRef player3 = new PlayerRef (PlayerIndex.Three);
+		player3.marauder = "Samurai";
+		player3.skills = new []{"Dash", "Dash", "Dash"};
+		player3.CreateAvatar ();
+
+		PlayerRef player4 = new PlayerRef (PlayerIndex.Four);
+		player4.marauder = "Samurai";
+		player4.skills = new []{"Dash", "Dash", "Dash"};
+		player4.CreateAvatar ();
+
+		/*
 		PlayerRef player3 = new PlayerRef (PlayerIndex.Three);
 		player3.skills.utilitySkill = "Dash";
 		player3.skills.defensiveSkill = "Windsweep";
 		player3.CreateAvatar ();
-            */
+        */
 	}
 }

@@ -15,13 +15,7 @@ public class PlayerRef {
 		}
 	}
 
-	public struct SkillModel
-	{
-		public string utilitySkill;
-		public string defensiveSkill;
-		public string offensiveSkill;
-	}
-	public SkillModel skills;
+	public string[] skills = new string[3];
 	public GamePad controller;
 
 	public GameObject avatar { get; private set; }
@@ -31,11 +25,9 @@ public class PlayerRef {
 		this.index = index;
 
 		controller = ControllerInput.GetController (index);
-		skills = new SkillModel ();
-
 
 		// Not sure if we want to do this here... Jeroen?
-		//GameManager.Instance.playerRefs.Add (this);
+		GameManager.Instance.playerRefs.Add (this);
 	}
 
 	public void Update()
