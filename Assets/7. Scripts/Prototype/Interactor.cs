@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class Interactor : ActionBase {
 
 	public Interactable currentInteractable;
+	private Button interactButton = Button.LeftShoulder;
+
 
 	void Start()
 	{
-		GetComponent<ControllerMapping>().AddAction(XInputDotNetPure.Button.LeftShoulder, this);
+		GetComponent<ControllerMapping>().AddAction(interactButton, this);
 	}
 
 	public override void PerformAction()
@@ -22,7 +25,7 @@ public class Interactor : ActionBase {
 	{
 		if (currentInteractable)
 		{
-			currentInteractable.ShowMessage();
+			currentInteractable.ShowMessage(interactButton);
 		}
 	}
 }

@@ -64,6 +64,11 @@ public class Jump : ActionBase {
 		}
 	}
 
+	private void AnimationStop()
+	{
+		animation.Stop("Jump");
+	}
+
 	private void AnimationJump()
 	{
 		animation.Play ("Jump", PlayMode.StopSameLayer);
@@ -73,11 +78,27 @@ public class Jump : ActionBase {
 	{
 		CalculateDistanceToGround ();
 
-		if(onGround && rigidbody.velocity.y < -5f)
+		if(onGround)
 		{
-			animation.CrossFade("Jump Land", 0.1f, PlayMode.StopSameLayer);
+			if ( rigidbody.velocity.y < 0)
+			{
+				if ( rigidbody.velocity.y < -5)
+				{
+				 	animation.CrossFade("Jump Land", 0.1f, PlayMode.StopSameLayer);
+				} else
+				{
+					AnimationStop();
+				}
+			}
+
 
 			_isJumping = false;
+		} else
+		{
+			if ( rigidbody.velocity.y < -5)
+			{
+				AnimationJump();
+			}
 		}
 	}
 
