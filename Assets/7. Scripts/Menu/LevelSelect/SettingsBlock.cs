@@ -13,8 +13,7 @@ public class SettingsBlock : LevelSelectionBlockBase
     private int _currentIndex;
 	private GameObject _levelDescription;
     private TimeSyncBar _timeSyncBar;
-    private float _progress;
-        
+
 	public SettingsBlock()
 	{
         _levelDescription = GameObject.Find("LevelScreen/LevelDescription");
@@ -27,16 +26,12 @@ public class SettingsBlock : LevelSelectionBlockBase
         if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
             _timeSyncBar.Add(0.1f);
-            _progress += 1;
 		}
         if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             _timeSyncBar.Add(-0.1f);
-            _progress -= 1;
 		}
         /// For BETA version no settings
-        ///if (_progress >= 3f)
-        ///{
             if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
             {
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
@@ -52,7 +47,6 @@ public class SettingsBlock : LevelSelectionBlockBase
                 Application.LoadLevel(2);
                 // GameManager.Instance.Start();
             }
-        ///}
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
