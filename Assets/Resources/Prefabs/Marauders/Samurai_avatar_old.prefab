@@ -2071,7 +2071,7 @@ GameObject:
   - 136: {fileID: 13600000}
   - 111: {fileID: 11100000}
   m_Layer: 0
-  m_Name: Samurai_avatar
+  m_Name: Samurai_avatar_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

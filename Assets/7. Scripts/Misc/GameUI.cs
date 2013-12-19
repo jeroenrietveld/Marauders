@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class GameUI : MonoBehaviour {
 	
 	private Material _material;
+	private Material _testMat;
 	private Texture _texture;
 	private List<List<Rect>> _cooldownUIPositions;
 	private Color[] _skillColors = new Color[]{Color.red, Color.blue, Color.yellow};
@@ -49,10 +50,24 @@ public class GameUI : MonoBehaviour {
 		positions.Add (new Rect (Screen.width - 100, Screen.height - 100, 40, 40));
 		positions.Add (new Rect (Screen.width - 50, Screen.height - 120, 40, 40));
 		positions.Add (new Rect (Screen.width - 60, Screen.height - 60, 50, 50));
+
+		//_testMat = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
 	}
 
 	void OnGUI ()
 	{
+		
+		/*var playerRefs = GameManager.Instance.playerRefs;
+		PlayerRef player = playerRefs[0];
+
+		_material.SetFloat("phase", 0.5f);
+		_material.SetColor("playerColor", player.color);
+		Graphics.DrawTexture (_cooldownUIPositions [0] [3], _texture, _material);
+
+		SkillBase skillBase = (SkillBase) player.avatar.GetComponent(player.skills[0]);
+		_testMat.SetFloat("phase", skillBase.cooldown.Phase());
+		Graphics.DrawTexture(_cooldownUIPositions[0][0], _texture, _testMat);*/
+
 		var playerRefs = GameManager.Instance.playerRefs;
 
 		for(int playerIndex = 0; playerIndex < playerRefs.Count; playerIndex++)
@@ -67,7 +82,7 @@ public class GameUI : MonoBehaviour {
 			{
 				SkillBase skillBase = (SkillBase) player.avatar.GetComponent(player.skills[i]);
 				_material.SetFloat("phase", skillBase.cooldown.Phase());
-				_material.SetColor("playerColor", _skillColors[i]);
+				//_material.SetColor("playerColor", _skillColors[i]);
 				Graphics.DrawTexture(_cooldownUIPositions[playerIndex][i], _texture, _material);
 				Graphics.DrawTexture(_cooldownUIPositions[playerIndex][i], _skillIcons[i]);
 			}
