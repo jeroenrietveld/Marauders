@@ -428,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100052
 GameObject:
   m_ObjectHideFlags: 1
@@ -492,7 +492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100060
 GameObject:
   m_ObjectHideFlags: 1
@@ -1669,7 +1669,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
@@ -1774,7 +1774,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
@@ -1837,7 +1837,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
@@ -1884,7 +1884,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
   marauderNames:
-  - Bandit
+  - Thief
   - Samurai
   _currentEnum: 0
 --- !u!1001 &100100000
