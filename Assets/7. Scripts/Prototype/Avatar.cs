@@ -60,17 +60,13 @@ public class Avatar : MonoBehaviour
 	{
 		this.controller = player.controller;
 		this.player = player;
-		
-		AddSkill (player.skills.utilitySkill);
-		AddSkill (player.skills.defensiveSkill);
-		AddSkill (player.skills.offensiveSkill);
-	}
-	
-	private void AddSkill(string skill)
-	{
-		if(skill != null)
+
+		foreach(string skill in player.skills)
 		{
-			gameObject.AddComponent(skill);
+			if(skill != null)
+			{
+				gameObject.AddComponent(skill);
+			}
 		}
 	}
 

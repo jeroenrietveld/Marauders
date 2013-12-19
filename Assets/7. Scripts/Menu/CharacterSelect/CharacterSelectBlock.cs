@@ -94,10 +94,6 @@ public class CharacterSelectBlock : MonoBehaviour
                 {
                     _currentState.OnUpdate(_controller);
                 }
-                else if (_controller.JustPressed(Button.A))
-                {
-                    isJoined = true;
-                }
             }
         }
 	}

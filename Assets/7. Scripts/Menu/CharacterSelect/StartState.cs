@@ -18,8 +18,9 @@ public class StartState : SelectionBase
         {
             GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
         }
-        else if (controllerOne.JustPressed(Button.A))
+        else if (controller.JustPressed(Button.A))
         {
+            block.isJoined = true;
             block.ChangeState(CharacterSelectBlockStates.CharSelectState);
         }
     }

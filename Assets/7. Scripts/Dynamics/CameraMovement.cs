@@ -17,6 +17,11 @@ public class CameraMovement : MonoBehaviour
 	
 	public int solverIterations = 5;
 
+    void Start()
+    {
+        GameManager.Instance.LoadMarauders();
+    }
+
 	void FixedUpdate()
 	{
 		UpdateCameraPosition();
@@ -28,13 +33,16 @@ public class CameraMovement : MonoBehaviour
 		// Reset position instead of working from where we are to ensure inter frame stability.
 		// Some distance from center of trackable objects in world space is a decent heuristic,
 		// this means we need fewer iterations.
-		_vectorBuffer.Clear();
-		foreach(var obj in _trackableObjects) _vectorBuffer.Add(obj.transform.position);
-		transform.position = GetCenter(_vectorBuffer) - transform.forward * 25;
-
-		for(int _ = 0; _ < solverIterations; ++_)
+		if(_trackableObjects.Count > 0)
 		{
-			UpdatePositionIteration();
+			_vectorBuffer.Clear();
+			foreach(var obj in _trackableObjects) _vectorBuffer.Add(obj.transform.position);
+			transform.position = GetCenter(_vectorBuffer) - transform.forward * 25;
+
+			for(int _ = 0; _ < solverIterations; ++_)
+			{
+				UpdatePositionIteration();
+			}
 		}
 	}
 	

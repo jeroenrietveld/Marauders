@@ -383,11 +383,13 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    optimizeGameObjects: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
+    extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -420,8 +422,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .193776757, y: 0, z: .0968883783}
-        preQ: {x: .516601205, y: .482828319, z: -.516601026, w: -.482828408}
-        postQ: {x: 1.93715096e-07, y: -7.74860382e-07, z: -.999429405, w: .0337727331}
         length: .242221013
         modified: 1
     - boneName: char_ethan_LeftUpLeg
@@ -430,8 +430,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .357833594, y: 0, z: .178916797}
-        preQ: {x: -.968118131, y: -.249328256, z: -.0233751889, w: .00602117972}
-        postQ: {x: 7.45057989e-08, y: .00289946771, z: .999995649, w: -2.23517404e-07}
         length: .447292119
         modified: 1
     - boneName: char_ethan_RightUpLeg
@@ -440,8 +438,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .357832551, y: 0, z: .178916276}
-        preQ: {x: -.968118012, y: -.24932839, z: .023375012, w: -.0060188612}
-        postQ: {x: 2.68220873e-07, y: -.00289976574, z: .999995768, w: -1.19209282e-07}
         length: .447290838
         modified: 1
     - boneName: char_ethan_LeftLeg
@@ -450,8 +446,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .332367539, y: 0, z: .16618377}
-        preQ: {x: -.00247554504, y: .0346322544, z: -.646572709, w: .762061775}
-        postQ: {x: 5.96046448e-08, y: .00530306995, z: -.999985874, w: -2.23517418e-07}
         length: .415459573
         modified: 1
     - boneName: char_ethan_RightLeg
@@ -460,8 +454,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .332369179, y: 0, z: .166184589}
-        preQ: {x: .00247602421, y: -.0346320122, z: -.646573007, w: .762061357}
-        postQ: {x: 3.27825546e-07, y: -.00530287623, z: -.999985874, w: -6.10947609e-07}
         length: .4154616
         modified: 1
     - boneName: char_ethan_LeftFoot
@@ -470,8 +462,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .105710529, y: 0, z: .0528552644}
-        preQ: {x: -.0242262781, y: .00202798843, z: -.990446329, w: -.135738403}
-        postQ: {x: 2.98023224e-08, y: .0871555507, z: -.996194661, w: 1.49011612e-07}
         length: .132138193
         modified: 1
     - boneName: char_ethan_RightFoot
@@ -480,8 +470,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .105710313, y: 0, z: .0528551564}
-        preQ: {x: .0242264308, y: -.00202778005, z: -.990446389, w: -.135738328}
-        postQ: {x: -2.98023224e-08, y: -.0871556699, z: -.996194661, w: 8.94069743e-08}
         length: .132137924
         modified: 1
     - boneName: char_ethan_Spine1
@@ -490,8 +478,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .128895327, y: 0, z: .0644476637}
-        preQ: {x: -8.94069743e-08, y: -1.2665987e-06, z: .999999881, w: -.000398248463}
-        postQ: {x: -1.04308128e-07, y: -1.2665987e-06, z: .999999881, w: -.000398278236}
         length: .161119238
         modified: 1
     - boneName: char_ethan_Spine2
@@ -500,8 +486,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .225262612, y: 0, z: .112631306}
-        preQ: {x: -7.4505806e-08, y: 1.25169754e-06, z: -.997323394, w: -.0731158555}
-        postQ: {x: -8.94069672e-08, y: 1.25169754e-06, z: -.997323394, w: -.0731158257}
         length: .281578332
         modified: 1
     - boneName: char_ethan_Head
@@ -510,8 +494,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .112631306, y: 0, z: .056315653}
-        preQ: {x: -1.7881392e-07, y: -1.19209278e-06, z: .996159911, w: -.0875522122}
-        postQ: {x: 2.98023224e-08, y: 1.16229057e-06, z: -.99999994, w: 2.98023224e-08}
         length: .140789166
         modified: 1
     - boneName: char_ethan_LeftShoulder
@@ -520,8 +502,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .126734152, y: 0, z: .0633670762}
-        preQ: {x: .541307509, y: .469324678, z: .352668315, w: -.60195142}
-        postQ: {x: 1.25914812e-06, y: .735715151, z: -.677291036, w: 1.64646201e-06}
         length: .158417761
         modified: 1
     - boneName: char_ethan_RightShoulder
@@ -530,8 +510,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .126733512, y: 0, z: .0633667558}
-        preQ: {x: -.60194999, y: .352666855, z: .469325632, w: .541309178}
-        postQ: {x: -2.03400873e-06, y: -.677290976, z: .735715151, w: -2.22492986e-06}
         length: .158416957
         modified: 1
     - boneName: char_ethan_LeftArm
@@ -540,8 +518,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .246101543, y: 0, z: .123050772}
-        preQ: {x: -.00017923514, y: .728607416, z: -.611087978, w: .309358329}
-        postQ: {x: -1.49011612e-06, y: .681173623, z: -.732121825, w: -1.79865185e-06}
         length: .307626992
         modified: 1
     - boneName: char_ethan_RightArm
@@ -550,8 +526,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .246101946, y: 0, z: .123050973}
-        preQ: {x: .309354365, y: -.611088097, z: .728608966, w: -.000182534684}
-        postQ: {x: 2.60770356e-08, y: -.732121587, z: .681173921, w: -9.67877099e-07}
         length: .307627499
         modified: 1
     - boneName: char_ethan_LeftForeArm
@@ -560,8 +534,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .161594003, y: 0, z: .0807970017}
-        preQ: {x: -.0425008684, y: -.00218286226, z: -.746926665, w: .663543105}
-        postQ: {x: 4.15742397e-06, y: -.0285399649, z: -.999592602, w: 1.44075614e-06}
         length: .201992571
         modified: 1
     - boneName: char_ethan_RightForeArm
@@ -570,8 +542,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .16159372, y: 0, z: .0807968602}
-        preQ: {x: .66354394, y: -.74692589, z: -.00218410138, w: -.0424994044}
-        postQ: {x: 1.3783573e-06, y: -.999592602, z: -.0285393391, w: 1.32527191e-06}
         length: .201992214
         modified: 1
     - boneName: char_ethan_LeftHand
@@ -580,8 +550,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0807970017, y: 0, z: .0403985009}
-        preQ: {x: 1.92550942e-06, y: .686363757, z: -.727258325, w: 3.95681127e-06}
-        postQ: {x: -.087116003, y: .995766878, z: -.0292035732, w: .00248705456}
         length: .100996286
         modified: 1
     - boneName: char_ethan_RightHand
@@ -590,8 +558,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0807968602, y: 0, z: .0403984301}
-        preQ: {x: 1.91107438e-06, y: -.727257907, z: .686364293, w: -3.72529101e-08}
-        postQ: {x: .00248705968, y: -.0292029288, z: .99576664, w: -.0871186703}
         length: .100996107
         modified: 1
     - boneName: char_ethan_LeftToe1
@@ -600,8 +566,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -50}
         max: {x: 0, y: 0, z: 50}
         value: {x: .0696877465, y: 0, z: .0348438732}
-        preQ: {x: .0616283193, y: -.0616283491, z: .704416096, w: .704415917}
-        postQ: {x: .0871556699, y: 4.21468513e-08, z: .996194661, w: -8.42937027e-08}
         length: .0871097147
         modified: 1
     - boneName: char_ethan_RightToe1
@@ -610,8 +574,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -50}
         max: {x: 0, y: 0, z: 50}
         value: {x: .0696877241, y: 0, z: .0348438621}
-        preQ: {x: -.0616283454, y: .0616283454, z: .704416037, w: .704415917}
-        postQ: {x: -.0871556476, y: -0, z: .996194661, w: -1.26440554e-07}
         length: .0871096924
         modified: 1
     - boneName: char_ethan_LeftEye
@@ -620,8 +582,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -10}
         max: {x: 0, y: 20, z: 15.000001}
         value: {x: .0799999759, y: 0, z: .0399999879}
-        preQ: {x: -.707106709, y: -.707106769, z: -8.94069785e-07, w: 8.34465141e-07}
-        postQ: {x: -3.57627925e-07, y: -.707106769, z: .707106769, w: 4.1723257e-07}
         length: .100000001
         modified: 1
     - boneName: char_ethan_RightEye
@@ -630,8 +590,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -10}
         max: {x: 0, y: 20, z: 15.000001}
         value: {x: .0799999759, y: 0, z: .0399999879}
-        preQ: {x: -.707106709, y: -.707106769, z: -8.94069785e-07, w: 8.34465141e-07}
-        postQ: {x: -3.57627925e-07, y: -.707106769, z: .707106769, w: 4.1723257e-07}
         length: .100000001
         modified: 1
     - boneName: char_ethan_Jaw
@@ -640,8 +598,6 @@ ModelImporter:
         min: {x: 0, y: -10, z: -10}
         max: {x: 0, y: 10, z: 10}
         value: {x: .0799999759, y: 0, z: .0399999879}
-        preQ: {x: -.76764375, y: -.64087683, z: -8.01423653e-07, w: 9.2015307e-07}
-        postQ: {x: -3.57627925e-07, y: -.707106769, z: .707106769, w: 4.1723257e-07}
         length: .100000001
         modified: 1
     - boneName: char_ethan_LeftHandThumb1
@@ -650,8 +606,6 @@ ModelImporter:
         min: {x: 0, y: -25, z: -20}
         max: {x: 0, y: 25, z: 20}
         value: {x: .0297564138, y: 0, z: .0148782069}
-        preQ: {x: .443671584, y: .624596536, z: -.582470536, w: .271592855}
-        postQ: {x: 1.04308117e-06, y: .16955252, z: -.985521019, w: 1.7136334e-07}
         length: .0371955261
         modified: 1
     - boneName: char_ethan_LeftHandThumb2
@@ -660,8 +614,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0218482856, y: 0, z: .0109241428}
-        preQ: {x: -.0262720436, y: .106116146, z: -.968621552, w: -.223207027}
-        postQ: {x: -5.18560364e-06, y: .160181612, z: -.987087429, w: 5.7220459e-06}
         length: .0273103658
         modified: 1
     - boneName: char_ethan_LeftHandThumb3
@@ -670,8 +622,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0163862128, y: 0, z: .00819310639}
-        preQ: {x: -.0302633885, y: .10504742, z: -.976362109, w: -.1864568}
-        postQ: {x: -.00604948401, y: .160066903, z: -.98638314, w: .0372825339}
         length: .0204827748
         modified: 1
     - boneName: char_ethan_LeftHandIndex1
@@ -680,8 +630,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0278854389, y: 0, z: .0139427194}
-        preQ: {x: .327156514, y: .935807526, z: -.0446796268, w: .123436235}
-        postQ: {x: 2.84612179e-06, y: .999197781, z: -.0400468186, w: -1.83819793e-06}
         length: .0348568074
         modified: 1
     - boneName: char_ethan_LeftHandIndex2
@@ -690,8 +638,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0239225365, y: 0, z: .0119612683}
-        preQ: {x: .344061732, y: .935290337, z: -.0820564404, w: .0109642129}
-        postQ: {x: 2.27093697e-05, y: .999003589, z: -.0446281061, w: 1.62003562e-06}
         length: .029903179
         modified: 1
     - boneName: char_ethan_LeftHandIndex3
@@ -700,8 +646,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0179418996, y: 0, z: .0089709498}
-        preQ: {x: .310618609, y: .946922779, z: -.0816142038, w: .0138758253}
-        postQ: {x: -.0335867517, y: .998043001, z: -.0516456179, w: .0107033551}
         length: .0224273838
         modified: 1
     - boneName: char_ethan_LeftHandMiddle1
@@ -710,8 +654,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0325332545, y: 0, z: .0162666272}
-        preQ: {x: .285675138, y: .956301033, z: -.0403511189, w: .0474321954}
-        postQ: {x: 7.44313093e-06, y: .999952257, z: .00976696238, w: -3.02250601e-06}
         length: .0406665839
         modified: 1
     - boneName: char_ethan_LeftHandMiddle2
@@ -720,8 +662,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0264009815, y: 0, z: .0132004907}
-        preQ: {x: .342278689, y: .939555585, z: -.00851437356, w: -.00282291998}
-        postQ: {x: -3.06963921e-06, y: .999966681, z: .00816120207, w: -9.98581527e-07}
         length: .0330012366
         modified: 1
     - boneName: char_ethan_LeftHandMiddle3
@@ -730,8 +670,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0198007356, y: 0, z: .00990036782}
-        preQ: {x: .312937379, y: .94973135, z: -.00859803893, w: -.00255495007}
-        postQ: {x: -.0377702154, y: .999253094, z: .0081549827, w: -.000308369199}
         length: .0247509275
         modified: 1
     - boneName: char_ethan_LeftHandRing1
@@ -740,8 +678,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0278862175, y: 0, z: .0139431087}
-        preQ: {x: .359873205, y: .930003822, z: -.0740033463, w: .0103729088}
-        postQ: {x: -6.1839819e-06, y: .999576151, z: -.0291115195, w: 5.82705252e-06}
         length: .0348577797
         modified: 1
     - boneName: char_ethan_LeftHandRing2
@@ -750,8 +686,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0208837334, y: 0, z: .0104418667}
-        preQ: {x: .344370872, y: .936172307, z: -.070190236, w: .00794564653}
-        postQ: {x: 2.82675046e-05, y: .99943769, z: -.0335296877, w: 2.60025263e-06}
         length: .0261046756
         modified: 1
     - boneName: char_ethan_LeftHandRing3
@@ -760,8 +694,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0156627987, y: 0, z: .00783139933}
-        preQ: {x: .310911477, y: .947810233, z: -.0698634684, w: .0104311267}
-        postQ: {x: -.0399503708, y: .998638928, z: -.0335022174, w: .00134341256}
         length: .0195785072
         modified: 1
     - boneName: char_ethan_LeftHandPinky1
@@ -770,8 +702,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0172571149, y: 0, z: .00862855744}
-        preQ: {x: .354187131, y: .930949211, z: -.0747964755, w: -.0478584766}
-        postQ: {x: -1.43051157e-05, y: .995572209, z: .0939984098, w: -3.89735214e-06}
         length: .0215714015
         modified: 1
     - boneName: char_ethan_LeftHandPinky2
@@ -780,8 +710,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0195623953, y: 0, z: .00978119764}
-        preQ: {x: .346263558, y: .93599844, z: .0576572008, w: -.0261528436}
-        postQ: {x: 1.00433817e-05, y: .995874405, z: .0907405391, w: -3.23378458e-06}
         length: .024453003
         modified: 1
     - boneName: char_ethan_LeftHandPinky3
@@ -790,8 +718,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0146717988, y: 0, z: .0073358994}
-        preQ: {x: .310692787, y: .948399484, z: .0566284657, w: -.028311735}
-        postQ: {x: -.0376117676, y: .995164096, z: .0906747654, w: -.00342748594}
         length: .0183397532
         modified: 1
     - boneName: char_ethan_RightHandThumb1
@@ -800,8 +726,6 @@ ModelImporter:
         min: {x: 0, y: -25, z: -20}
         max: {x: 0, y: 25, z: 20}
         value: {x: .029756045, y: 0, z: .0148780225}
-        preQ: {x: -.271589309, y: .58246845, z: -.624599993, w: -.443671703}
-        postQ: {x: -5.24520874e-06, y: -.985521078, z: .169552684, w: 1.56462193e-07}
         length: .0371950641
         modified: 1
     - boneName: char_ethan_RightHandThumb2
@@ -810,8 +734,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0218490269, y: 0, z: .0109245135}
-        preQ: {x: .22321108, y: .968621135, z: -.106112815, w: .026266899}
-        postQ: {x: 1.30534163e-05, y: -.987087309, z: .160182312, w: 8.27014389e-07}
         length: .0273112934
         modified: 1
     - boneName: char_ethan_RightHandThumb3
@@ -820,8 +742,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0163867678, y: 0, z: .00819338392}
-        preQ: {x: .186448738, y: .976364136, z: -.105045058, w: .0302570481}
-        postQ: {x: .0372837335, y: -.986382961, z: .160068318, w: -.00604784489}
         length: .0204834696
         modified: 1
     - boneName: char_ethan_RightHandIndex1
@@ -830,8 +750,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0278857369, y: 0, z: .0139428684}
-        preQ: {x: -.123450711, y: .0446842723, z: -.935807884, w: -.327149391}
-        postQ: {x: 1.33216372e-05, y: -.0400456116, z: .999197841, w: -4.3350733e-06}
         length: .03485718
         modified: 1
     - boneName: char_ethan_RightHandIndex2
@@ -840,8 +758,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0239222702, y: 0, z: .0119611351}
-        preQ: {x: -.0109705133, y: .0820581838, z: -.935293198, w: -.344053417}
-        postQ: {x: -2.3946166e-05, y: -.0446293168, z: .999003589, w: 1.91524141e-05}
         length: .0299028475
         modified: 1
     - boneName: char_ethan_RightHandIndex3
@@ -850,8 +766,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0179417022, y: 0, z: .00897085108}
-        preQ: {x: -.013852044, y: .0816281959, z: -.946923554, w: -.310613632}
-        postQ: {x: .0106995851, y: -.0516507179, z: .998042583, w: -.0335946269}
         length: .0224271361
         modified: 1
     - boneName: char_ethan_RightHandMiddle1
@@ -860,8 +774,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0325329416, y: 0, z: .0162664708}
-        preQ: {x: -.0474321581, y: .0403509475, z: -.956307828, w: -.28565225}
-        postQ: {x: -1.75833691e-06, y: .00976874121, z: .999952137, w: -1.67083908e-05}
         length: .0406661965
         modified: 1
     - boneName: char_ethan_RightHandMiddle2
@@ -870,8 +782,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0264011901, y: 0, z: .013200595}
-        preQ: {x: .00282105524, y: .00851335377, z: -.939563811, w: -.34225589}
-        postQ: {x: 5.59352247e-06, y: .00816468056, z: .999966621, w: -4.32014258e-06}
         length: .0330014974
         modified: 1
     - boneName: char_ethan_RightHandMiddle3
@@ -880,8 +790,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0198008921, y: 0, z: .00990044605}
-        preQ: {x: .00254975492, y: .00859396253, z: -.949731708, w: -.312936157}
-        postQ: {x: -.000305881695, y: .0081593981, z: .999253094, w: -.0377691016}
         length: .024751123
         modified: 1
     - boneName: char_ethan_RightHandRing1
@@ -890,8 +798,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0278863478, y: 0, z: .0139431739}
-        preQ: {x: -.0103683714, y: .0740022436, z: -.930001795, w: -.359878808}
-        postQ: {x: -6.10947495e-07, y: -.0291123893, z: .999576092, w: 5.87478189e-06}
         length: .0348579437
         modified: 1
     - boneName: char_ethan_RightHandRing2
@@ -900,8 +806,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0208838526, y: 0, z: .0104419263}
-        preQ: {x: -.00793912914, y: .070190534, z: -.936166346, w: -.344387382}
-        postQ: {x: -3.90410378e-06, y: -.0335327275, z: .999437571, w: 6.99656039e-06}
         length: .0261048246
         modified: 1
     - boneName: char_ethan_RightHandRing3
@@ -910,8 +814,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0156628881, y: 0, z: .00783144403}
-        preQ: {x: -.0104267057, y: .0698652565, z: -.94781673, w: -.31089142}
-        postQ: {x: .00134006119, y: -.0335062109, z: .998638809, w: -.0399493724}
         length: .0195786189
         modified: 1
     - boneName: char_ethan_RightHandPinky1
@@ -920,8 +822,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0172573123, y: 0, z: .00862865616}
-        preQ: {x: .0478586033, y: .074796848, z: -.930948615, w: -.354188502}
-        postQ: {x: -2.33203173e-06, y: .0939993113, z: .995572209, w: -8.51275399e-06}
         length: .0215716492
         modified: 1
     - boneName: char_ethan_RightHandPinky2
@@ -930,8 +830,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0195629708, y: 0, z: .00978148542}
-        preQ: {x: .0261536166, y: -.0576581992, z: -.935994446, w: -.346274287}
-        postQ: {x: -5.74626029e-06, y: .0907403454, z: .995874584, w: 3.10558789e-05}
         length: .0244537219
         modified: 1
     - boneName: char_ethan_RightHandPinky3
@@ -940,8 +838,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .01467223, y: 0, z: .007336115}
-        preQ: {x: .0283146836, y: -.0566281676, z: -.948392749, w: -.310712785}
-        postQ: {x: .00342866569, y: -.0906747356, z: -.995164096, w: .0376144871}
         length: .0183402915
         modified: 1
     skeleton:
@@ -1360,7 +1256,6 @@ ModelImporter:
       rotation: {x: -.865403056, y: 0, z: 0, w: .501076221}
       scale: {x: .99999994, y: .999998331, z: .999997079}
       transformModified: 1
-    handles: []
     armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
@@ -1370,6 +1265,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  additionalBone: 1
   animationType: 3
   userData: 

@@ -73,10 +73,12 @@ public class SkillSelectState : SelectionBase
 
                 // Add selected marauder and skills to the gamemanager.
                 PlayerRef playerRef = new PlayerRef(block.player);
-                playerRef.marauder = block.marauderNames[block.marauderIndex];
-                playerRef.skills.offensiveSkill = list[0].active;
-                playerRef.skills.defensiveSkill = list[1].active;
-                playerRef.skills.utilitySkill = list[2].active;
+                // TODO: get hardcoded value gone. When new marauder prefabs are made.
+                //playerRef.marauder = block.marauderNames[block.marauderIndex];
+                playerRef.marauder = "Samurai_avatar";
+				playerRef.skills[(int)SkillType.Offensive] = list[0].active;
+				playerRef.skills[(int)SkillType.Defensive] = list[1].active;
+				playerRef.skills[(int)SkillType.Utility] = list[2].active;
                 GameManager.Instance.AddPlayerRef(playerRef);
             }
             else if(block.player == PlayerIndex.One)

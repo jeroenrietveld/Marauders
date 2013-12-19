@@ -15,13 +15,7 @@ public class PlayerRef {
 		}
 	}
 
-	public struct SkillModel
-	{
-		public string utilitySkill;
-		public string defensiveSkill;
-		public string offensiveSkill;
-	}
-	public SkillModel skills;
+	public string[] skills = new string[3];
 	public GamePad controller;
 
 	public GameObject avatar { get; private set; }
@@ -31,8 +25,6 @@ public class PlayerRef {
 		this.index = index;
 
 		controller = ControllerInput.GetController (index);
-		skills = new SkillModel ();
-
 
 		// Not sure if we want to do this here... Jeroen?
 		GameManager.Instance.playerRefs.Add (this);
@@ -45,8 +37,7 @@ public class PlayerRef {
 
 	public void CreateAvatar()
 	{
-		//TODO: make avatar dynamic
-		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/Samurai_avatar")) as GameObject;
+		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
 
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
@@ -56,6 +47,7 @@ public class PlayerRef {
 		avatar.AddComponent<Attack> ();
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
+		avatar.AddComponent<SoundPlayer>();
 
 		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
 		avatarComponent.Initialize (this);
