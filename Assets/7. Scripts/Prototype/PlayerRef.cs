@@ -22,29 +22,6 @@ public class PlayerRef {
 
 	private float _timeSyncLimit;
 	private float _timeSync;
-	
-	public void SetTimeSyncLimit (float limit)
-	{
-		_timeSyncLimit = limit;
-	}
-	
-	public void AddTimeSync (float timeSync)
-	{
-		if (timeSync > 0f)
-		{
-			_timeSync = _timeSync + timeSync;
-		}
-		
-		if (_timeSync >= _timeSyncLimit)
-		{
-			Event.dispatch(new PlayerTimeSyncEvent(this));
-		}
-	}
-	
-	public float GetTimeSync ()
-	{
-		return _timeSync;
-	}
 
 	public PlayerRef(PlayerIndex index)
 	{
@@ -85,5 +62,28 @@ public class PlayerRef {
 	public void DestroyAvatar()
 	{
 		GameObject.Destroy (avatar);
+	}
+
+	public void SetTimeSyncLimit(float limit)
+	{
+		_timeSyncLimit = limit;
+	}
+	
+	public void AddTimeSync(float timeSync)
+	{
+		if (timeSync > 0f)
+		{
+			_timeSync = _timeSync + timeSync;
+		}
+		
+		if (_timeSync >= _timeSyncLimit)
+		{
+			Event.dispatch(new PlayerTimeSyncEvent(this));
+		}
+	}
+	
+	public float GetTimeSync()
+	{
+		return _timeSync;
 	}
 }
