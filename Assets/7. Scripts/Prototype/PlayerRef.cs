@@ -19,9 +19,8 @@ public class PlayerRef {
 	public GamePad controller;
 
 	public GameObject avatar { get; private set; }
-
-	private float _timeSyncLimit;
-	private float _timeSync;
+	
+	private int _timeSync;
 
 	public PlayerRef(PlayerIndex index)
 	{
@@ -32,8 +31,7 @@ public class PlayerRef {
 		// Not sure if we want to do this here... Jeroen?
 		GameManager.Instance.playerRefs.Add (this);
 
-		_timeSync = 0f;
-		_timeSyncLimit = 500f;
+		_timeSync = 0;
 	}
 
 	public void Update()
@@ -63,26 +61,25 @@ public class PlayerRef {
 	{
 		GameObject.Destroy (avatar);
 	}
+	
+	public void AddTimeSync(int timeSync)
+	{
+		int timeSyncLimit = GameManager.Instance.TimeSyncLimit;
 
-	public void SetTimeSyncLimit(float limit)
-	{
-		_timeSyncLimit = limit;
-	}
-	
-	public void AddTimeSync(float timeSync)
-	{
-		if (timeSync > 0f)
-		{
-			_timeSync = _timeSync + timeSync;
-		}
+		_timeSync = Mathf.Clamp(_timeSync + timeSync, 0, timeSyncLimit);
 		
-		if (_timeSync >= _timeSyncLimit)
+		if (_timeSync >= timeSyncLimit)
 		{
-			Event.dispatch(new PlayerTimeSyncEvent(this));
+			Event.dispatch(new PlayerTimeSyncedEvent(this));
 		}
 	}
+
+	public void SetTimeSync(int timeSync)
+	{
+		_timeSync = timeSync;
+	}
 	
-	public float GetTimeSync()
+	public int GetTimeSync()
 	{
 		return _timeSync;
 	}

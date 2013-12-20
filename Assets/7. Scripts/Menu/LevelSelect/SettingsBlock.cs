@@ -44,7 +44,7 @@ public class SettingsBlock : LevelSelectionBlockBase
                 // GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();    
 
                 // Just start the Gaia level without setting settings for the BETA version.
-                //Application.LoadLevel(2);
+                Application.LoadLevel(2);
                 //GameManager.Instance.Start();
             }
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
