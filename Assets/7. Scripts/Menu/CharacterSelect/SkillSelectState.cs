@@ -35,8 +35,9 @@ public class SkillSelectState : SelectionBase
         list = new Dictionary<int, SkillSelection>();
         list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", new List<string>() {"Attack 1" }));
         list.Add(1, new SkillSelection("SkillDefense", "SkillSelectorDefense", new List<string>() { "Defense 1"}));
-        list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", new List<string>() { "Dash" }));
-        currentSkillCategory = 0;
+        list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", new List<string>() { "Dash", "Windsweep" }));
+        // temp
+        currentSkillCategory = 2;
     }
 
     public override void OnUpdate(GamePad controller)
@@ -48,11 +49,13 @@ public class SkillSelectState : SelectionBase
 
         if(!block.isPlayerReady)
         {
+            // temp because attack and defense skills are not available.
+            arrow.gameObject.transform.position = bottom.transform.FindChild("SkillUtility").transform.FindChild("SkillSelectorUtility").transform.position;
             if (((vertical > 0.7f || vertical < -0.7f) && GetTimer()) || dPadVertical != 0)
             {
-                int newIndex = cal(vertical, dPadVertical, list.Count, currentSkillCategory, true);
-                currentSkillCategory = newIndex;
-                arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentSkillCategory].baseCategory).transform.FindChild(list[currentSkillCategory].category).transform.position;
+                //int newIndex = cal(vertical, dPadVertical, list.Count, currentSkillCategory, true);
+                //currentSkillCategory = newIndex;
+                //arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentSkillCategory].baseCategory).transform.FindChild(list[currentSkillCategory].category).transform.position;
             }
 
             if (((horizontal > 0.7f || horizontal < -0.7f) && GetTimer()) || dPadHorizontal != 0)
@@ -73,9 +76,7 @@ public class SkillSelectState : SelectionBase
 
                 // Add selected marauder and skills to the gamemanager.
                 PlayerRef playerRef = new PlayerRef(block.player);
-                // TODO: get hardcoded value gone. When new marauder prefabs are made.
-                //playerRef.marauder = block.marauderNames[block.marauderIndex];
-                playerRef.marauder = "Samurai_avatar";
+                playerRef.marauder = block.marauderNames[block.marauderIndex];
 				playerRef.skills[(int)SkillType.Offensive] = list[0].active;
 				playerRef.skills[(int)SkillType.Defensive] = list[1].active;
 				playerRef.skills[(int)SkillType.Utility] = list[2].active;

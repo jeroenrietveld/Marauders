@@ -928,7 +928,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
   m_LocalRotation: {x: .00047170461, y: .707106411, z: -.707106888, w: -.000471707433}
-  m_LocalPosition: {x: .554484427, y: 19.9874001, z: -25.0061092}
+  m_LocalPosition: {x: .554484367, y: 19.9874058, z: -25.006115}
   m_LocalScale: {x: .725000024, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
@@ -1093,7 +1093,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 85c599d5d8695a74d9cd3b4406d8d520, type: 2}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1261,7 +1261,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 85c599d5d8695a74d9cd3b4406d8d520, type: 2}
+  - {fileID: 2100000, guid: de50a446b5bcdf34da14808413022012, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1690,13 +1690,13 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4284769428
+    rgba: 4287598479
 --- !u!102 &10200004
 TextMesh:
   serializedVersion: 3
@@ -1753,13 +1753,13 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4284769428
+    rgba: 4292532954
 --- !u!102 &10200010
 TextMesh:
   serializedVersion: 3
@@ -1858,7 +1858,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 16
+  m_FontSize: 14
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
@@ -1884,7 +1884,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
   marauderNames:
-  - Bandit
+  - Thief
   - Samurai
   _currentEnum: 0
 --- !u!1001 &100100000

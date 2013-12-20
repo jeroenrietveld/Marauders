@@ -25,6 +25,7 @@ public class Avatar : MonoBehaviour
 				if(_health == 0)
 				{
 					//TODO: Handle player death
+					_health = 1f;
 				}
 			}
 		}

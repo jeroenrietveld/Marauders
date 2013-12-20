@@ -20,6 +20,32 @@ public class PlayerRef {
 
 	public GameObject avatar { get; private set; }
 
+	private float _timeSyncLimit;
+	private float _timeSync;
+	
+	public void SetTimeSyncLimit (float limit)
+	{
+		_timeSyncLimit = limit;
+	}
+	
+	public void AddTimeSync (float timeSync)
+	{
+		if (timeSync > 0f)
+		{
+			_timeSync = _timeSync + timeSync;
+		}
+		
+		if (_timeSync >= _timeSyncLimit)
+		{
+			Event.dispatch(new PlayerTimeSyncEvent(this));
+		}
+	}
+	
+	public float GetTimeSync ()
+	{
+		return _timeSync;
+	}
+
 	public PlayerRef(PlayerIndex index)
 	{
 		this.index = index;
@@ -28,6 +54,9 @@ public class PlayerRef {
 
 		// Not sure if we want to do this here... Jeroen?
 		GameManager.Instance.playerRefs.Add (this);
+
+		_timeSync = 0f;
+		_timeSyncLimit = 500f;
 	}
 
 	public void Update()
