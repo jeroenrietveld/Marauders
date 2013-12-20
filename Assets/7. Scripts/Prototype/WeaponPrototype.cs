@@ -17,10 +17,11 @@ public class WeaponPrototype : MonoBehaviour {
 		GameObject daggers = WeaponFactory.create ("Daggers");
 		PickupSpawner.SpawnWeapon (daggers, new Vector3(0, 20, 25));
 
-		//PlayerRef player1 = new PlayerRef (PlayerIndex.One);
-		//player1.marauder = "Samurai";
-		//player1.skills = new []{"Dash", "Dash", "Dash"};
-		//player1.CreateAvatar ();
+		PlayerRef player1 = new PlayerRef (PlayerIndex.One);
+		player1.marauder = "Thief";
+		player1.skills = new []{"Dash", "Dash", "Dash"};
+		player1.CreateAvatar ();
+		GameManager.Instance.AddPlayerRef(player1);
 
 		/*PlayerRef player2 = new PlayerRef (PlayerIndex.Two);
 		player2.marauder = "Samurai";

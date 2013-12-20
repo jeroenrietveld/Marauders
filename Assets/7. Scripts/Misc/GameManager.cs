@@ -44,6 +44,7 @@ public class GameManager {
 
 	public void Start()
 	{   
+		Debug.Log ("Start()");
         if (matchSettings.level != null)
         {
 			Application.LoadLevel(matchSettings.level);
