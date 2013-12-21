@@ -42,7 +42,6 @@ public class PlayerRef {
 	public void CreateAvatar()
 	{
 		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
-		Debug.Log ("test");
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
 		avatar.AddComponent<ControllerMapping> ();
