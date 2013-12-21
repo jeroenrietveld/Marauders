@@ -10331,6 +10331,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1068527383}
   - 114: {fileID: 1068527384}
+  - 114: {fileID: 1068527385}
   m_Layer: 0
   m_Name: _GLOBAL
   m_TagString: Untagged
@@ -10358,6 +10359,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5577a36d6dafb62479d965d7d4cd435c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1068527385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068527382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e38ba2b721e63974b959db553688d6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1075792058
@@ -11157,44 +11169,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1280277954}
---- !u!1 &1123735354
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1123735356}
-  - 114: {fileID: 1123735355}
-  m_Layer: 0
-  m_Name: ControllerInputUpdate
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1123735355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1123735354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38ba2b721e63974b959db553688d6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1123735356
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1123735354}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &1133334396
 GameObject:
   m_ObjectHideFlags: 0
