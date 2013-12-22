@@ -17,16 +17,15 @@ public abstract class SkillBase : ActionBase
 	private static Button[] _buttonMapping = new []{ Button.X, Button.B, Button.Y };
 
 
-	public SkillType skillType { get; private set; }
+	public SkillType skillType;
 	public Timer cooldown { get; private set; }
 	public AnimationHandler.AnimationSettings animationSettings { get; private set; }
 
 	protected abstract void OnPerformAction();
 	protected abstract void OnUpdate();
 
-	protected SkillBase(SkillType skillType, float cooldownTime, AnimationHandler.AnimationSettings animationSettings)
+	protected SkillBase(float cooldownTime, AnimationHandler.AnimationSettings animationSettings)
 	{
-		this.skillType = skillType;
 		cooldown = new Timer(cooldownTime);
 		this.animationSettings = animationSettings;
 	}

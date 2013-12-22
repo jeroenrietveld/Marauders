@@ -59,16 +59,8 @@ public class Avatar : MonoBehaviour
 	
 	public void Initialize(PlayerRef player)
 	{
-		this.controller = player.controller;
 		this.player = player;
-
-		foreach(string skill in player.skills)
-		{
-			if(skill != null)
-			{
-				gameObject.AddComponent(skill);
-			}
-		}
+		this.controller = player.controller;
 	}
 
 	public void ApplyDamage(Vector3 direction, float amount)

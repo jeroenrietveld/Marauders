@@ -51,6 +51,16 @@ public class PlayerRef {
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
 		avatar.AddComponent<SoundPlayer>();
+		
+		foreach(SkillType skillType in System.Enum.GetValues(typeof(SkillType)))
+		{
+			var skillName = skills[(int)skillType];
+
+			if(skillName != null)
+			{
+				((SkillBase)avatar.AddComponent(skillName)).skillType = skillType;
+			}
+		}
 
 		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
 		avatarComponent.Initialize (this);
