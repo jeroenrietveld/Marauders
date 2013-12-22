@@ -34,11 +34,6 @@ public class PlayerRef {
 		_timeSync = 0;
 	}
 
-	public void Update()
-	{
-
-	}
-
 	public void CreateAvatar()
 	{
 		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
