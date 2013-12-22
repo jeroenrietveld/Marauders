@@ -20,6 +20,7 @@
 			sampler2D _MainTex;
 			half3 playerColor;
 			float health;
+			float previousHealth;
 
 			struct FragInput {
 				float4 position : SV_POSITION;
@@ -38,7 +39,9 @@
 			{
 				half4 c = tex2D (_MainTex, input.uv_MainTex);
 				
-				return half4(playerColor, (0.5 + step(health, c.a) * 0.5) * c.r);
+				float justDamaged = (1 - step(health, c.a)) * step(previousHealth, c.a);
+				
+				return half4(lerp(playerColor, half3(1, 1, 1), justDamaged), (0.5 + step(previousHealth, c.a) * 0.5) * c.r);
 			}
 			ENDCG
 		}
