@@ -8,12 +8,14 @@ public class Heartbeat : MonoBehaviour {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 	public float groundOffset = 0.1f;
 	private float _groundHeight;
+	private float _playerOffset;
 
 	private Avatar _avatar;
 
 	void Start ()
 	{
 		_avatar = transform.parent.GetComponent<Avatar>();
+		_playerOffset = (int)_avatar.player.index * 0.01f;
 	}
 
 	void FixedUpdate()
@@ -35,7 +37,7 @@ public class Heartbeat : MonoBehaviour {
 	void Update ()
 	{
 		var position = transform.position;
-		position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset;
+		position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset + _playerOffset;
 		transform.position = position;
 
 		//Rotate the health circle
