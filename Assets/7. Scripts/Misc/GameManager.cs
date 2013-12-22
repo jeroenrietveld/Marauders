@@ -53,15 +53,6 @@ public class GameManager {
         } 
 	}
 
-	//TODO: Move this to some level startup script in _GLOBAL
-    public void LoadMarauders()
-    {
-        foreach (PlayerRef player in playerRefs)
-        {
-            player.StartSpawnProcedure();
-        }
-    }
-
     /// <summary>
     /// Adds the player ref to the list. If the player already has a playerref in the list remove that one 
     /// and add the new one.
