@@ -10950,6 +10950,7 @@ GameObject:
   - 4: {fileID: 1068527383}
   - 114: {fileID: 1068527384}
   - 114: {fileID: 1068527385}
+  - 114: {fileID: 1068527386}
   m_Layer: 0
   m_Name: _GLOBAL
   m_TagString: Untagged
@@ -10988,6 +10989,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e38ba2b721e63974b959db553688d6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1068527386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068527382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab176e02f9a59084ca7172cabcf874da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1075792058
@@ -18830,7 +18842,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1705292891}
   - 95: {fileID: 1705292892}
-  - 114: {fileID: 1705292893}
   m_Layer: 0
   m_Name: Tree_CenterClose
   m_TagString: Untagged
@@ -18874,17 +18885,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!114 &1705292893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1705292890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab176e02f9a59084ca7172cabcf874da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1708021021
 GameObject:
   m_ObjectHideFlags: 0
@@ -25025,7 +25025,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetMovementSpeed: {x: .0199999996, y: .0700000003, z: -.00999999978, w: .0500000007}
-  offsetSpeedExitMultiplier: {x: 1, y: 1, z: 1, w: 1}
 --- !u!114 &2085725174
 MonoBehaviour:
   m_ObjectHideFlags: 0
