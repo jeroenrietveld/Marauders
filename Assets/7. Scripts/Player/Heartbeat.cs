@@ -41,6 +41,6 @@ public class Heartbeat : MonoBehaviour {
 		//Rotate the health circle
 		transform.Rotate(Vector3.up, heartbeatSpeed * Time.deltaTime);
 		//Pass player health to shader
-		renderer.material.SetFloat("phase", 1 - _avatar.health);
+		renderer.material.SetFloat("health", 1 - _avatar.health);
 	}
 }
