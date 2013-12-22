@@ -11,6 +11,17 @@ public class ObjectSpawner : MonoBehaviour {
 
 	private Vector3 _startPosition;
 
+	public static void Create(GameObject obj, Vector3 targetPosition, float spawnDelay, Vector3 exitForce)
+	{
+		obj.SetActive (false);
+
+		var spawner = new GameObject("ObjectSpawner").AddComponent<ObjectSpawner>();
+		spawner.obj = obj;
+		spawner.spawnDelay = spawnDelay;
+		spawner.position = targetPosition;
+		spawner.exitForce = exitForce;
+	}
+
 	void Start () {
 		if(obj.GetComponent<CameraTracking>())
 		{
@@ -21,7 +32,7 @@ public class ObjectSpawner : MonoBehaviour {
 		obj.transform.position = position;
 
 		timer = new Timer (spawnDelay);
-		timer.AddCallback (SpawnPlayer);
+		timer.AddCallback (SpawnObject);
 		timer.Start ();
 	}
 
@@ -31,7 +42,7 @@ public class ObjectSpawner : MonoBehaviour {
 		transform.position = Vector3.Lerp(_startPosition, position, timer.Phase());
 	}
 
-	public void SpawnPlayer()
+	public void SpawnObject()
 	{
 		obj.SetActive(true);
 

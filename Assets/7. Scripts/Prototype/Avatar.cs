@@ -24,8 +24,7 @@ public class Avatar : MonoBehaviour
 
 				if(_health == 0)
 				{
-					//TODO: Handle player death
-					_health = 1f;
+					Kill();
 				}
 			}
 		}
@@ -74,6 +73,12 @@ public class Avatar : MonoBehaviour
 		}
 		
 		health = health - amount;
+	}
+
+	public void Kill()
+	{
+		//TODO: death effect, dispatch events...
+		player.StartSpawnProcedure();
 	}
 
 }

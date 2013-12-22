@@ -53,17 +53,12 @@ public class GameManager {
         } 
 	}
 
+	//TODO: Move this to some level startup script in _GLOBAL
     public void LoadMarauders()
     {
         foreach (PlayerRef player in playerRefs)
         {
-            // GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + player.marauder)) as GameObject;
-            //prefab.AddComponent("Player");
-            //prefab.GetComponent<Player>().LoadModel(player);
-
-            //add the players to the player list, this way they are always easily accessible
-            //players.Add(prefab.GetComponent<Player>());
-            player.CreateAvatar();
+            player.StartSpawnProcedure();
         }
     }
 

@@ -5,6 +5,8 @@ public class SpawnTarget : MonoBehaviour {
 
 	private static List<SpawnTarget> activeInstances = new List<SpawnTarget>();
 
+	private static System.Random _rng = new System.Random ();
+
 	public static Vector3 GetClosestTargetDirection(Vector3 position)
 	{
 		if(activeInstances.Count == 0) return -position.normalized;
@@ -21,6 +23,13 @@ public class SpawnTarget : MonoBehaviour {
 		}
 
 		return bestDirection.normalized;
+	}
+
+	public static Vector3 GetRandomTargetDirection(Vector3 position)
+	{
+		if(activeInstances.Count == 0) return -position.normalized;
+
+		return (activeInstances[_rng.Next(activeInstances.Count)].transform.position - position).normalized;
 	}
 
 	void OnEnable()

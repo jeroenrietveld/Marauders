@@ -25,18 +25,35 @@ public class PlayerRef {
 	public PlayerRef(PlayerIndex index)
 	{
 		this.index = index;
-
 		controller = ControllerInput.GetController (index);
-
-		// Not sure if we want to do this here... Jeroen?
-		GameManager.Instance.playerRefs.Add (this);
 
 		_timeSync = 0;
 	}
 
-	public void CreateAvatar()
+	public void StartSpawnProcedure()
+	{
+		Vector3 initialPosition = Vector3.zero; // Used for camera tracking during spawn proc.
+
+		if (avatar)
+		{
+			initialPosition = avatar.transform.position;
+			DestroyAvatar();
+		}
+
+		var newAvatar = CreateAvatar(initialPosition);
+		//TODO: Error handling
+		var timeBubbleObj = GameObject.Find ("TimeBubble");
+		var timeBubble = timeBubbleObj.GetComponent<TimeBubble> ();
+
+		var spawnPoint = timeBubble.GetSpawnPoint(Vector3.up);
+		ObjectSpawner.Create(newAvatar, spawnPoint, 4, SpawnTarget.GetRandomTargetDirection(spawnPoint) * timeBubble.exitForce);
+	}
+
+	private GameObject CreateAvatar(Vector3 initialPosition)
 	{
 		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
+		avatar.transform.position = initialPosition;
+
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
 		avatar.AddComponent<ControllerMapping> ();
@@ -53,12 +70,15 @@ public class PlayerRef {
 
 			if(skillName != null)
 			{
-				((SkillBase)avatar.AddComponent(skillName)).skillType = skillType;
+				var skill = ((SkillBase)avatar.AddComponent(skillName));
+				if(skill) skill.skillType = skillType;
 			}
 		}
 
 		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
 		avatarComponent.Initialize (this);
+
+		return avatar;
 	}
 
 	public void DestroyAvatar()
