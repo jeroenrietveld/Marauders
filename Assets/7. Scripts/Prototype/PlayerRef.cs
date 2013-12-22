@@ -2,7 +2,10 @@
 using System.Collections;
 using XInputDotNetPure;
 
-public class PlayerRef {
+public class PlayerRef
+{
+	private static string _marauderDataPath = "Marauders/";
+	private static string _marauderPrefabPath = "Prefabs/Marauders/";
 
 	private static Color[] _colors = new []{Color.red, Color.green, Color.blue, Color.yellow};
     public string marauder { get; set; }
@@ -51,7 +54,9 @@ public class PlayerRef {
 
 	private GameObject CreateAvatar(Vector3 initialPosition)
 	{
-		avatar = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + marauder)) as GameObject;
+		var node = ResourceCache.json (_marauderDataPath + marauder);
+
+		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
 		avatar.transform.position = initialPosition;
 
 		avatar.AddComponent<CameraTracking> ();
@@ -77,6 +82,9 @@ public class PlayerRef {
 
 		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
 		avatarComponent.Initialize (this);
+
+		var weapon = WeaponFactory.create(node["weapon"].Value);
+		avatar.GetComponent<Attack>().SetWeapon(weapon.GetComponent<Weapon>());
 
 		return avatar;
 	}
