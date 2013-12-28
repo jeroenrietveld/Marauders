@@ -40,5 +40,9 @@ public static class TransformHelper {
 			transform.DetachChildren();
 		}
 	}
-	
+
+	public static string GetPath(this Transform transform)
+	{
+		return transform.parent ? transform.parent.GetPath() + "/" + transform.name : transform.name;
+	}
 }

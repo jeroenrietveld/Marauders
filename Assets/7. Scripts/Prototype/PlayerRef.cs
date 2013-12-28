@@ -68,6 +68,7 @@ public class PlayerRef
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
 		avatar.AddComponent<SoundPlayer>();
+		avatar.AddComponent<AvatarGraphics>();
 		
 		foreach(SkillType skillType in System.Enum.GetValues(typeof(SkillType)))
 		{
