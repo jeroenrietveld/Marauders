@@ -11,7 +11,6 @@ public class Heartbeat : MonoBehaviour {
 
 	private float _groundHeight;
 	private float _playerOffset;
-	private float _currentHealtIndication;
 	private float _previousHealthIndication;
 
 	private Avatar _avatar;
@@ -20,7 +19,7 @@ public class Heartbeat : MonoBehaviour {
 	{
 		_avatar = transform.parent.GetComponent<Avatar>();
 		_playerOffset = (int)_avatar.player.index * 0.01f;
-		_currentHealtIndication = _previousHealthIndication = _avatar.health;
+		_previousHealthIndication = _avatar.health;
 	}
 
 	void FixedUpdate()
@@ -49,14 +48,9 @@ public class Heartbeat : MonoBehaviour {
 		transform.Rotate(Vector3.up, heartbeatSpeed * Time.deltaTime);
 
 		float health = _avatar.health;
+		renderer.material.SetFloat ("health", 1 - health);
 
-		_currentHealtIndication = Mathf.MoveTowards(_currentHealtIndication, health, maxDamagePerSecond * Time.deltaTime);
-
-		if (!Mathf.Approximately(health, _currentHealtIndication))
-		{
-			renderer.material.SetFloat ("health", 1 - _currentHealtIndication);
-		}
-		else if(!Mathf.Approximately(_previousHealthIndication, health))
+		if(!Mathf.Approximately(_previousHealthIndication, health))
 		{
 			_previousHealthIndication = Mathf.MoveTowards(_previousHealthIndication, health, maxDamagePerSecond * Time.deltaTime);
 			renderer.material.SetFloat("previousHealth", 1 - _previousHealthIndication);
