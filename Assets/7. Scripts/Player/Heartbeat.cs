@@ -12,6 +12,7 @@ public class Heartbeat : MonoBehaviour {
 	private float _groundHeight;
 	private float _playerOffset;
 	private float _previousHealthIndication;
+	private float _currentRotation;
 
 	private Avatar _avatar;
 
@@ -44,8 +45,8 @@ public class Heartbeat : MonoBehaviour {
 		position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset + _playerOffset;
 		transform.position = position;
 
-		//Rotate the health circle
-		transform.Rotate(Vector3.up, heartbeatSpeed * Time.deltaTime);
+		_currentRotation = (_currentRotation + heartbeatSpeed * Time.deltaTime) % 360;
+		transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
 		float health = _avatar.health;
 		renderer.material.SetFloat ("health", 1 - health);
