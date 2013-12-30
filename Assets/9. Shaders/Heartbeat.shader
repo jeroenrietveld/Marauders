@@ -4,12 +4,14 @@
 		playerColor ("Player Color", Color) = (1, 1, 1, 1)
 	}
 	SubShader {
-		Tags { "Queue"="Transparent" "RenderType"="Opaque" }
+		Tags { "Queue"="AlphaTest" "RenderType"="Opaque" }
 		
 		Pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
 			AlphaTest Greater 0
+			ZTest Always
+			ZWrite Off
 		
 			CGPROGRAM
 			#pragma vertex vert
@@ -19,8 +21,8 @@
 
 			sampler2D _MainTex;
 			half3 playerColor;
-			float health;
-			float previousHealth;
+			half health;
+			half previousHealth;
 
 			struct FragInput {
 				float4 position : SV_POSITION;
@@ -39,9 +41,10 @@
 			{
 				half4 c = tex2D (_MainTex, input.uv_MainTex);
 				
-				float justDamaged = (1 - step(health, c.a)) * step(previousHealth, c.a);
+				half justDamaged = (1 - step(health, c.a)) * step(previousHealth, c.a);
+				half damageAlpha = .25;
 				
-				return half4(lerp(playerColor, half3(1, 1, 1), justDamaged), (0.5 + step(previousHealth, c.a) * 0.5) * c.r);
+				return half4(lerp(playerColor, half3(1, 1, 1), justDamaged), (damageAlpha + step(previousHealth, c.a) * (1 - damageAlpha)) * c.r);
 			}
 			ENDCG
 		}
