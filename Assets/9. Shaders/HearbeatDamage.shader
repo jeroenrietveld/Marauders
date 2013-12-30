@@ -1,4 +1,4 @@
-﻿Shader "Custom/Heartbeat" {
+﻿Shader "Custom/HeartbeatDamage" {
 	Properties {
 		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white" {}
 		playerColor ("Player Color", Color) = (1, 1, 1, 1)
@@ -21,7 +21,10 @@
 
 			sampler2D _MainTex;
 			half3 playerColor;
-			half health;
+			
+			half upperBound;
+			half lowerBound;
+			half alpha;
 
 			struct FragInput {
 				float4 position : SV_POSITION;
@@ -39,10 +42,8 @@
 			half4 frag (FragInput input) : COLOR
 			{
 				half4 c = tex2D (_MainTex, input.uv_MainTex);
-				
-				half damageAlpha = .25;
-				
-				return half4(playerColor, (damageAlpha + (c.a < health) * (1 - damageAlpha)) * c.r);
+				half justDamaged = all(bool2(lowerBound < c.a, c.a <= upperBound));
+				return half4(playerColor, justDamaged * c.r * alpha);
 			}
 			ENDCG
 		}

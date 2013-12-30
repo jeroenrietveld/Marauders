@@ -45,4 +45,17 @@ public static class TransformHelper {
 	{
 		return transform.parent ? transform.parent.GetPath() + "/" + transform.name : transform.name;
 	}
+
+	public static void SetParentKeepLocal(this Transform transform, Transform parent)
+	{
+		var pos = transform.localPosition;
+		var scale = transform.localScale;
+		var rot = transform.localRotation;
+
+		transform.parent = parent;
+
+		transform.localPosition = pos;
+		transform.localScale = scale;
+		transform.localRotation = rot;
+	}
 }

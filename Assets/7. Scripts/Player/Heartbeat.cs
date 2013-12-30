@@ -7,22 +7,30 @@ using System.Collections;
 public class Heartbeat : MonoBehaviour {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 	public float groundOffset = 0.1f;
-	public float maxDamagePerSecond = .5f;
 
 	private float _groundHeight;
 	private float _playerOffset;
-	private float _previousHealthIndication;
+	private float _previousHealth;
 	private float _currentRotation;
-
+	
+	private GameObject _damage;
 	private Avatar _avatar;
+
+	private Timer _damageTimer;
 
 	void Start ()
 	{
+		_damage = transform.GetChild(0).gameObject;
 		_avatar = transform.parent.GetComponent<Avatar>();
+		_avatar.heartbeat = this;
 
 		renderer.material.SetColor("playerColor", _avatar.player.color);
+		_damage.renderer.material.SetColor("playerColor", _avatar.player.color);
+
 		_playerOffset = (int)_avatar.player.index * 0.01f;
-		_previousHealthIndication = _avatar.health;
+		_previousHealth = _avatar.health;
+
+		_damageTimer = new Timer(.25f);
 	}
 
 	void FixedUpdate()
@@ -51,13 +59,23 @@ public class Heartbeat : MonoBehaviour {
 		transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
 		float health = _avatar.health;
-		renderer.material.SetFloat ("health", 1 - health);
+		renderer.material.SetFloat ("health", health);
 
-		if(!Mathf.Approximately(_previousHealthIndication, health))
+		if(!Mathf.Approximately(_previousHealth, health))
 		{
-			_previousHealthIndication = Mathf.MoveTowards(_previousHealthIndication, health, maxDamagePerSecond * Time.deltaTime);
-			renderer.material.SetFloat("previousHealth", 1 - _previousHealthIndication);
+			var material = _damage.renderer.material;
+
+			material.SetFloat("upperBound", _previousHealth);
+			material.SetFloat("lowerBound", health);
+
+			_previousHealth = health;
+			_damageTimer.Start();
 		}
 
+		_damageTimer.Update();
+
+		_damage.renderer.enabled = _damageTimer.running;
+		_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase());
+		_damage.renderer.material.SetFloat("alpha", 1 - _damageTimer.Phase());
 	}
 }

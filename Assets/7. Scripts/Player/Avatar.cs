@@ -40,12 +40,11 @@ public class Avatar : MonoBehaviour
 
 	private float _armorFactor = 0.1f;
 
+	public Heartbeat heartbeat { set { _heartbeat = value; }}
 	private Heartbeat _heartbeat;
 	public PlayerRef player { get; private set; }
 
 	void Start () {
-		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
 				"Idle",
@@ -63,7 +62,7 @@ public class Avatar : MonoBehaviour
 
 	public void ApplyDamage(Vector3 direction, float amount)
 	{
-		float dot = Vector3.Dot(direction.normalized, -_heartbeat.transform.forward);
+		float dot = Vector3.Dot(direction.normalized, _heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
 		
 		if(armorHit)

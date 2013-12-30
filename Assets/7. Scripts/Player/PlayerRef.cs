@@ -59,6 +59,10 @@ public class PlayerRef
 		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
 		avatar.transform.position = initialPosition;
 
+		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat_indicator")) as GameObject;
+		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
+
+
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
 		avatar.AddComponent<ControllerMapping> ();
