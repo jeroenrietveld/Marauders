@@ -8,6 +8,9 @@ public class Heartbeat : MonoBehaviour {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 	public float groundOffset = 0.1f;
 
+	public float damageScale = 1f;
+	public float damageAlphaScale = 4;
+
 	private float _groundHeight;
 	private float _playerOffset;
 	private float _previousHealth;
@@ -30,7 +33,7 @@ public class Heartbeat : MonoBehaviour {
 		_playerOffset = (int)_avatar.player.index * 0.01f;
 		_previousHealth = _avatar.health;
 
-		_damageTimer = new Timer(.25f);
+		_damageTimer = new Timer(.35f);
 	}
 
 	void FixedUpdate()
@@ -75,7 +78,7 @@ public class Heartbeat : MonoBehaviour {
 		_damageTimer.Update();
 
 		_damage.renderer.enabled = _damageTimer.running;
-		_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase());
-		_damage.renderer.material.SetFloat("alpha", 1 - _damageTimer.Phase());
+		_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
+		_damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
 	}
 }
