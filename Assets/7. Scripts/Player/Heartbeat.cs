@@ -19,6 +19,8 @@ public class Heartbeat : MonoBehaviour {
 	void Start ()
 	{
 		_avatar = transform.parent.GetComponent<Avatar>();
+
+		renderer.material.SetColor("playerColor", _avatar.player.color);
 		_playerOffset = (int)_avatar.player.index * 0.01f;
 		_previousHealthIndication = _avatar.health;
 	}

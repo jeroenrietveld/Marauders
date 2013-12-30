@@ -45,7 +45,6 @@ public class Avatar : MonoBehaviour
 
 	void Start () {
 		_heartbeat = transform.FindChild ("Heartbeat_indicator").GetComponent<Heartbeat>();
-		_heartbeat.renderer.material.SetColor("playerColor", player.color);
 
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
