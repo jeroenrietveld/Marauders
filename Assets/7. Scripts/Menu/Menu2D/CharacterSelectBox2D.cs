@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class CharacterSelect2D : Menu2DBase
+public class CharacterSelectBox2D : MonoBehaviour
 {
     private int _progress;
+    public GamePad controller;
 
+    public List<Menu2DComponent> components;
     void Start()   
     {
         _progress = 0;
@@ -34,7 +37,7 @@ public class CharacterSelect2D : Menu2DBase
         }
     }
 
-    public override void Update(XInputDotNetPure.GamePad controller)
+    public void Update()
     {
         float vertical = controller.Axis(Axis.LeftVertical);
         float horizontal = controller.Axis(Axis.LeftHorizontal);
