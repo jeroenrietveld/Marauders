@@ -33,7 +33,7 @@ public class Player
 		timeSync = 0;
 	}
 
-	public void StartSpawnProcedure()
+	public void StartSpawnProcedure(bool initial = false)
 	{
 		Vector3 initialPosition = Vector3.zero; // Used for camera tracking during spawn proc.
 
@@ -48,8 +48,10 @@ public class Player
 		var timeBubbleObj = GameObject.Find ("TimeBubble");
 		var timeBubble = timeBubbleObj.GetComponent<TimeBubble> ();
 
-		var spawnPoint = timeBubble.GetSpawnPoint(Vector3.up);
-		ObjectSpawner.Create(newAvatar, spawnPoint, 4, SpawnTarget.GetRandomTargetDirection(spawnPoint) * timeBubble.exitForce);
+		var spawnPoint = timeBubble.GetSpawnPoint(Quaternion.AngleAxis((float)index * 90, Vector3.up) * new Vector3(-1, 10, 0));
+		var spawnTarget = initial ? SpawnTarget.GetPlayerTargetDirection (spawnPoint, index) : SpawnTarget.GetRandomTargetDirection (spawnPoint);
+
+		ObjectSpawner.Create(newAvatar, spawnPoint, 4, spawnTarget * timeBubble.exitForce);
 	}
 
 	private GameObject CreateAvatar(Vector3 initialPosition)
@@ -113,7 +115,7 @@ public class Player
 
 	public void SetTimeSync(int timeSync)
 	{
-		timeSync = timeSync;
+		this.timeSync = timeSync;
 	}
 	
 	public int GetTimeSync()

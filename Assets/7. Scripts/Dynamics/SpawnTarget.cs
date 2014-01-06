@@ -7,6 +7,8 @@ public class SpawnTarget : MonoBehaviour {
 
 	private static System.Random _rng = new System.Random ();
 
+	public PlayerIndex player;
+
 	public static Vector3 GetClosestTargetDirection(Vector3 position)
 	{
 		if(activeInstances.Count == 0) return -position.normalized;
@@ -30,6 +32,16 @@ public class SpawnTarget : MonoBehaviour {
 		if(activeInstances.Count == 0) return -position.normalized;
 
 		return (activeInstances[_rng.Next(activeInstances.Count)].transform.position - position).normalized;
+	}
+
+	public static Vector3 GetPlayerTargetDirection(Vector3 position, PlayerIndex index)
+	{
+		foreach(var target in activeInstances)
+		{
+			if(target.player == index) return (target.transform.position - position).normalized;
+		}
+		
+		return Vector3.down;
 	}
 
 	void OnEnable()

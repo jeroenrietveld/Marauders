@@ -16,7 +16,7 @@ public class LevelInit : MonoBehaviour {
 	{
 		foreach (Player player in _game.playerRefs)
 		{
-			player.StartSpawnProcedure();
+			player.StartSpawnProcedure(true);
 		}
 	}
 }
