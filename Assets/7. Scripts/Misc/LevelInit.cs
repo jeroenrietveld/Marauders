@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LevelInit : MonoBehaviour {
@@ -14,7 +14,7 @@ public class LevelInit : MonoBehaviour {
 
 	private void SpawnMarauders()
 	{
-		foreach (PlayerRef player in _game.playerRefs)
+		foreach (Player player in _game.playerRefs)
 		{
 			player.StartSpawnProcedure();
 		}

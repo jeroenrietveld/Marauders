@@ -75,7 +75,7 @@ public class SkillSelectState : SelectionBase
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
 
                 // Add selected marauder and skills to the gamemanager.
-                PlayerRef playerRef = new PlayerRef(block.player);
+                Player playerRef = new Player(block.player);
                 playerRef.marauder = block.marauderNames[block.marauderIndex];
 				playerRef.skills[(int)SkillType.Offensive] = list[0].active;
 				playerRef.skills[(int)SkillType.Defensive] = list[1].active;

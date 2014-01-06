@@ -21,11 +21,6 @@ public class Avatar : MonoBehaviour
 				_health = Mathf.Clamp01(value);
 
 				controller.SetVibration(1, 1, .2f);
-
-				if(_health == 0)
-				{
-					Kill();
-				}
 			}
 		}
 	}
@@ -42,7 +37,7 @@ public class Avatar : MonoBehaviour
 
 	public Heartbeat heartbeat { set { _heartbeat = value; }}
 	private Heartbeat _heartbeat;
-	public PlayerRef player { get; private set; }
+	public Player player { get; private set; }
 
 	void Start () {
 		GetComponent<AnimationHandler>().AddAnimation(
@@ -54,13 +49,13 @@ public class Avatar : MonoBehaviour
 			));
 	}
 	
-	public void Initialize(PlayerRef player)
+	public void Initialize(Player player)
 	{
 		this.player = player;
 		this.controller = player.controller;
 	}
 
-	public void ApplyDamage(Vector3 direction, float amount)
+	public void ApplyDamage(Vector3 direction, float amount, Player offender)
 	{
 		float dot = Vector3.Dot(direction.normalized, _heartbeat.transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
@@ -71,12 +66,12 @@ public class Avatar : MonoBehaviour
 		}
 		
 		health = health - amount;
-	}
 
-	public void Kill()
-	{
-		//TODO: death effect, dispatch events...
-		player.StartSpawnProcedure();
-	}
+		if(!alive) 
+		{
+			Event.dispatch(new AvatarDeathEvent(this.player, offender));
 
+			player.StartSpawnProcedure();
+		}
+	}
 }

@@ -24,9 +24,9 @@ public class WeaponPrototype : MonoBehaviour {
 		player1.marauder = "Thief";
 		player1.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player1);
+		*/
 
-		/*
-		PlayerRef player2 = new PlayerRef (PlayerIndex.Two);
+		Player player2 = new Player (PlayerIndex.Two);
 		player2.marauder = "Samurai";
 		player2.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player2);

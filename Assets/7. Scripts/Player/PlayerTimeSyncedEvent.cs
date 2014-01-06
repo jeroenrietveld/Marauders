@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public struct PlayerTimeSyncedEvent
 {
-	public PlayerRef Player;
+	public Player Player;
 
-	public PlayerTimeSyncedEvent(PlayerRef player)
+	public PlayerTimeSyncedEvent(Player player)
 	{
 		this.Player = player;
 	}

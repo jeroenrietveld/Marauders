@@ -140,8 +140,8 @@ public class Attack : ActionBase {
 	private void ApplyDamage(Avatar avatar, float knockBackForce)
 	{
 		Vector3 attackDirection = (avatar.transform.position - transform.position).normalized;
-		
-		avatar.ApplyDamage(-attackDirection, _weapon.damage);
+
+		avatar.ApplyDamage(-attackDirection, _weapon.damage, gameObject.GetComponent<Avatar>().player);
 		avatar.rigidbody.AddForce(attackDirection * knockBackForce, ForceMode.Impulse);
 	}
 }

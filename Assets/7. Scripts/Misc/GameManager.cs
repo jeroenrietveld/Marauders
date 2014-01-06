@@ -14,9 +14,9 @@ public class GameManager {
     public static bool isPaused = false;
 
 	//TODO: Remove Player list, rename playerRefs to players.
-	public List<PlayerRef> playerRefs;
+	public List<Player> playerRefs;
 
-	public int TimeSyncLimit;
+	public int timeSyncLimit;
 
 	public struct MatchSettings
 	{
@@ -41,7 +41,7 @@ public class GameManager {
 	private GameManager()
 	{
         matchSettings = new MatchSettings();
-		playerRefs = new List<PlayerRef> ();
+		playerRefs = new List<Player> ();
 	}
 
 	public void Start()
@@ -58,7 +58,7 @@ public class GameManager {
     /// and add the new one.
     /// </summary>
     /// <param name="model"></param>
-    public void AddPlayerRef(PlayerRef model)
+    public void AddPlayerRef(Player model)
     {
         playerRefs.RemoveAll(x => x.index.Equals(model.index));
         playerRefs.Add(model);
