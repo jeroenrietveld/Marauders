@@ -10,5 +10,9 @@ public struct AvatarDeathEvent
 	{
 		this.victim = victim;
 		this.offender = offender;
+
+        // Offender gets 1 extra kill, victim 1 extra death
+        this.offender.kills++;
+        this.victim.deaths++;
 	}
 }

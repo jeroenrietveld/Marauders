@@ -122,4 +122,7 @@ public class Player
 	{
 		return timeSync;
 	}
+
+    public int kills { get; set; }
+    public int deaths { get; set; }
 }
