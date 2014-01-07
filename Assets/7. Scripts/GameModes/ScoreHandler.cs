@@ -15,6 +15,7 @@ public class ScoreHandler : MonoBehaviour {
 	void OnDisable()
 	{
 		Event.unregister<AvatarDeathEvent> (OnAvaterDeath);
+		Event.unregister<TimeBubbleAvatarExitEvent>(OnTimeBubbleExit);
 	}
 
 	void OnAvaterDeath(AvatarDeathEvent evt)
