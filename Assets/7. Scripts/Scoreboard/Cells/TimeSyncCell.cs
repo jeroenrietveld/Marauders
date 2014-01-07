@@ -1,16 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-
-public class PlayerCell : Cell 
+public class TimeSyncCell : Cell
 {
-	public PlayerCell(Player player)
+    public TimeSyncCell()
     {
-        this.title = player.index.ToString();
-        this.content = /*Resources.Load(player.marauder) as Texture*/"image";
+        this.title = "Time Sync";
+        this.content = "timesync";
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

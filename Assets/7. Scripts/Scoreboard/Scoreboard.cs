@@ -9,6 +9,13 @@ public class Scoreboard : MonoBehaviour
 	private List<List<Cell>> _cells;
     public GUISkin scoreboardskin;
 
+    public float horizontalOffset = 10f;
+    public float verticalOffset = 5f;
+
+    public float fontScale = 0.01f;
+
+    private Rect _scoreboardRect;
+
     public Scoreboard()
 	{
 		_cells = new List<List<Cell>> ();
@@ -17,101 +24,68 @@ public class Scoreboard : MonoBehaviour
 	public void AddCellList(List<Cell> list)
 	{
 		_cells.Add (list);
-	}
-    
-    /// <summary>
-    /// WORK IN PROGRESS. Dont use this yet.
-    /// </summary>
-    /// <param name="cellName"></param>
-    /// <param name="celltype"></param>
-    /// <param name="evt"></param>
-    public void AddColumn(String cellName, Type celltype, Event.EventListener<EventType> evt)
-    {
-        _cells[0].Add(new StringCell(cellName));
-        for(int i = 1; i < _cells[0].Count; i++)
-        {
-            Cell cell = (Cell)Activator.CreateInstance(celltype);
-            _cells[i].Add(cell);
-        }
-    }
+	}   
 
     void Start()
-    {
+    {      
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
+        var player = new Player(PlayerIndex.One);
+        List<Cell> addition = new List<Cell>();
+        scoreboard.AddCellList(addition);
 
-        List<Cell> fieldNameList = new List<Cell>();
-        scoreboard.AddCellList(fieldNameList);
+        addition.Add(new PlayerCell(player));
 
-        foreach (String name in new String[] { "Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Heartstops", "Hitratio"  })
-        {
-            fieldNameList.Add(new StringCell(name));
-        }
+        //Declare all cells
+        TimeSyncCell timeSync = new TimeSyncCell();
+        TitlesCell titleCell = new TitlesCell();
+        CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
+        CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
+        CustomCell kills = new CustomCell("Kills", CellType.Integer, 0, true);
+        CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);
+        CustomCell heartstops = new CustomCell("Heartstops", CellType.Integer, 0, true);   
 
-        foreach (var _player in GameManager.Instance.playerRefs)
-        {
-            var player = _player;
-            List<Cell> addition = new List<Cell>();
-            scoreboard.AddCellList(addition);
-
-            addition.Add(new PlayerCell(player));
-
-            //Declare all cells
-            ProgressbarCell timeSync = new ProgressbarCell(100);
-            IntegerCell eliminations = new IntegerCell();
-            IntegerCell eliminated = new IntegerCell();
-            IntegerCell suicides = new IntegerCell();
-            IntegerCell heartstopped = new IntegerCell();
-            PercentageCell hitratio = new PercentageCell();          
-
-            //Add all cells to the list of cells
-            addition.Add(timeSync);
-            addition.Add(eliminations);
-            addition.Add(eliminated);
-            addition.Add(suicides);
-            addition.Add(heartstopped);
-            addition.Add(hitratio);
-
-            //Register the events that are always needed
-			Event.register<AvatarDeathEvent>(delegate(AvatarDeathEvent evt)
-            {             
-               if (evt.victim == player)
-                {
-                    Debug.Log(evt.victim);
-                    timeSync.Add(-20);
-                    eliminated.amount += 1;
-                    if (evt.offender == player)
-                    {
-                        suicides.amount += 1;
-                        //Apply a suicide penalty to the timeSync
-                        timeSync.Add(-10);
-                    }
-                }
-                else if (evt.offender == player)
-                { 
-                    timeSync.Add(90);
-                    eliminations.amount += 1;
-                }
-            });
-        }         
+        //Add all cells to the list of cells
+        addition.Add(timeSync);
+        addition.Add(titleCell);
+        addition.Add(eliminations);
+        addition.Add(eliminated);
+        addition.Add(kills);
+        addition.Add(heartstops);
+        addition.Add(hitratio);                          
     }
 
    void OnGUI()
     {
-        GUI.skin = scoreboardskin;
-        int rows = _cells.Count;
-        int columns = _cells[0].Count;
-		
-        int cellwidth = 100;
-        int cellheigth = 20;
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                _cells[i][j].pos = new Vector2(j * cellwidth, i * cellheigth);
-                _cells[i][j].size = new Vector2(cellwidth, cellheigth);
-                GUI.Label(new Rect(j * cellwidth, i * cellheigth, cellwidth, cellheigth), _cells[i][j].GetContent());
-            }
-        }    
+       _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
+       GUI.skin = scoreboardskin;
+       _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
+       
+      
+         
     }
+
+   void DrawScoreboard(int windowID)
+   {
+       float boxWidth = _scoreboardRect.width - horizontalOffset*2;
+       float boxHeight = _scoreboardRect.height / 4 - verticalOffset*2;
+
+       int rows = 1;
+       int columns = _cells[0].Count;
+
+       float cellwidth = boxWidth/columns;
+       float cellheigth = boxHeight*0.2f + 10;
+              
+       for (int i = 0; i < rows; i++)
+       {
+           GUI.Box(new Rect(horizontalOffset, verticalOffset + i * (boxHeight + verticalOffset * 2), boxWidth, boxHeight), "");
+           for (int j = 0; j < columns; j++)
+           {         
+               //_cells[i][j].pos = new Vector2(j * cellwidth, i * cellheigth);
+               //_cells[i][j].size = new Vector2(cellwidth, cellheigth);
+               GUI.Label(new Rect(j * cellwidth, i * cellheigth, cellwidth, cellheigth), _cells[i][j].title);
+               GUI.Label(new Rect(j * cellwidth, (float)(i + 0.5f) * cellheigth, cellwidth, cellheigth), _cells[i][j].GetContent());
+           }
+       }  
+   }
 }
 

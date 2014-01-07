@@ -4,9 +4,24 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+
+public enum CellType
+{
+    Integer,
+    String,
+    Percentage,
+    Static
+}
+
 public abstract class Cell 
 {
-    public Vector2 pos;
-    public Vector2 size;
-    public abstract String GetContent();
+    public String title;
+
+    public object content;
+
+    public bool trophysEnabled;
+
+    protected CellType cellType;
+
+    public abstract string GetContent();
 }

@@ -37,11 +37,6 @@ public abstract class GameMode
     {
         scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
         List<Cell> fieldNameList = new List<Cell>();
-        scoreboard.AddCellList(fieldNameList);
-        foreach(String name in new String[] {"Players", "Time Sync", "Eliminations", "Eliminated", "Suicides", "Hitratio"})
-        {
-            fieldNameList.Add(new StringCell(name));
-        }
 
         foreach(var player in GameManager.Instance.playerRefs)
         {
@@ -51,39 +46,18 @@ public abstract class GameMode
             addition.Add(new PlayerCell(player));
 
             //Declare all cells
-            ProgressbarCell timeSync = new ProgressbarCell(GameManager.Instance.matchSettings.timeSync);
-            IntegerCell eliminations = new IntegerCell();
-            IntegerCell eliminated = new IntegerCell();
-            IntegerCell suicides = new IntegerCell();
-            PercentageCell hitratio = new PercentageCell();
+            TimeSyncCell timeSync = new TimeSyncCell();
+            CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
+            CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
+            CustomCell kills = new CustomCell("Kills", CellType.Integer, 0 , true);
+            CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);
 
             //Add all cells to the list of cells
             addition.Add(timeSync);
             addition.Add(eliminations);
             addition.Add(eliminated);
-            addition.Add(suicides);
-            addition.Add(hitratio);
-
-            //Register the events that are always needed
-			Event.register<AvatarDeathEvent>(delegate(AvatarDeathEvent evt) 
-            { 
-                if(evt.victim == player) 
-                {                  
-                    timeSync.Add(-20);
-                    eliminated.amount += 1;
-                    if(evt.offender == player)
-                    {
-                        suicides.amount += 1;
-                        //Apply a suicide penalty to the timeSync
-                        timeSync.Add(-10);
-                    }
-                }
-                else if(evt.offender == player)
-                {
-                    timeSync.Add(20);
-                    eliminations.amount += 1;
-                }
-            });
+            addition.Add(kills);
+            addition.Add(hitratio);          
         }
     }
    
