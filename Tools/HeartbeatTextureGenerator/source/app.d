@@ -1,5 +1,6 @@
 import std.stdio;
 import std.range;
+import std.math;
 
 import derelict.devil.il;
 import gl3n.linalg;
@@ -47,7 +48,7 @@ void main()
 			if(dir.length > 0) dir.normalize();
 			
 			//multiplier[0] = multiplier[1] = multiplier[2] = p.r != 0;
-			multiplier[3] = (dir.dot(vec3(0, -1, 0)) * .5f + .5f);// * 0.5f;
+			multiplier[3] = acos(dir.dot(vec3(0, 1, 0))) / PI;// * 0.5f;
 			
 			//if(dir.cross(vec3(0, -1, 0)).z > 0) multiplier[3] = 1 - multiplier[3];
 			
