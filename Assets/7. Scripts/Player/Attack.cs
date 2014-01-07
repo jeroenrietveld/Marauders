@@ -9,12 +9,16 @@ public class Attack : ActionBase {
 	public float comboKnockBackForce = 700;
 
 	private Weapon _weapon;
+	private TrailRenderer[] _trailRenderers;
+
 	// Current successive successful attacks
 	private int _comboCount;
 	// Maximum time between successful attacks until combo counter resets
 	private Timer _comboReset;
 	// Time until damage is applied after starting the attack
 	private Timer _attackDelay;
+
+	private Timer _trailTimer;
 
 	public Attack()
 	{
@@ -23,9 +27,23 @@ public class Attack : ActionBase {
 		_comboReset.AddCallback (delegate {
 			_comboCount = 0;
 		});
+		
+		_trailTimer = new Timer(0);
+		_trailTimer.AddTickCallback(delegate ()
+		{
+			if(_trailRenderers != null)
+			{
+				var trailTime = (1 - Mathf.Pow(_trailTimer.Phase(), 3)) * .1f;
+				foreach(var renderer in _trailRenderers)
+				{
+					renderer.time = trailTime;
+				}
+			}
+		});
 
 		_attackDelay = new Timer(.5f);
 		_attackDelay.AddPhaseCallback (DoAttack);
+		_attackDelay.AddPhaseCallback (_trailTimer.Start);
 	}
 
 	void Start () {
@@ -40,6 +58,8 @@ public class Attack : ActionBase {
 			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
 			_attackDelay.Start();
 			_comboReset.Start();
+
+			_trailTimer.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length - _attackDelay.endTime;
 
 			animation.CrossFade(_weapon.attacks[_comboCount].animationName, 0.1f, PlayMode.StopSameLayer);
 		}
@@ -67,6 +87,7 @@ public class Attack : ActionBase {
 		}
 
 		_weapon = weaponHolder;
+		_trailRenderers = weaponHolder.GetComponentsInChildren<TrailRenderer> ();
 
 		while(weaponHolder.transform.childCount > 0)
 		{	
@@ -98,6 +119,7 @@ public class Attack : ActionBase {
 	{
 		_attackDelay.Update ();
 		_comboReset.Update ();
+		_trailTimer.Update ();
 	}
 
 	private void DoAttack()
