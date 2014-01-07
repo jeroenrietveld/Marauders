@@ -1,11 +1,17 @@
 import std.stdio;
 import std.range;
+import std.math;
 
 import derelict.devil.il;
 import gl3n.linalg;
 
 enum templateName = "HeartbeatTemplate.png";
 enum outputName = "Heartbeat.png";
+
+struct Pixel
+{
+	ubyte r, g, b, a;
+}
 
 void main()
 {
@@ -24,7 +30,7 @@ void main()
 		width = ilGetInteger(IL_IMAGE_WIDTH),
 		height = ilGetInteger(IL_IMAGE_HEIGHT);
 		
-	auto imgData = ilGetData();
+	auto imgData = (cast(Pixel*)ilGetData())[0..width*height];
 	
 	vec3 center = vec3(width / 2f, height / 2f, 0);
 	
@@ -33,18 +39,23 @@ void main()
 	foreach(y; 0..height)
 		foreach(x; 0..width)
 		{
+			auto idx = (y * width + x);
+			auto p = &(imgData[idx]);
+			
 			vec3 pos = vec3(x, y, 0);
 			vec3 dir = pos - center;
 			
 			if(dir.length > 0) dir.normalize();
 			
-			multiplier[3] = (dir.dot(vec3(0, -1, 0)) * .5f + .5f);// * 0.5f;
+			//multiplier[0] = multiplier[1] = multiplier[2] = p.r != 0;
+			multiplier[3] = acos(dir.dot(vec3(0, 1, 0))) / PI;// * 0.5f;
 			
 			//if(dir.cross(vec3(0, -1, 0)).z > 0) multiplier[3] = 1 - multiplier[3];
 			
-			auto idx = (y * width + x) * 4;
-			foreach(i; 0..4)
-				imgData[idx + i] = cast(ubyte)(imgData[idx + i] * multiplier[i]);
+			p.r = cast(ubyte)(p.r * multiplier[0]);
+			p.g = cast(ubyte)(p.g * multiplier[1]);
+			p.b = cast(ubyte)(p.b * multiplier[2]);
+			p.a = cast(ubyte)(p.a * multiplier[3]);
 		}
 	
 	ilSaveImage(outputName);

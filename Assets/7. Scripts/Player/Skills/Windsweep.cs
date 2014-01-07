@@ -16,7 +16,7 @@ public class Windsweep : SkillBase
 		WrapMode.Loop
 	);
 
-	public Windsweep() : base(SkillType.Utility, 5, _animationSettings)
+	public Windsweep() : base(5, _animationSettings)
 	{
 
 	}

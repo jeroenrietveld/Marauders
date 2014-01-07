@@ -33,6 +33,7 @@ public class Timer
 
 	private List<CallbackPair> _callbacks;
 	private List<CallbackPair> _phaseCallbacks;
+	private List<Callback> _tickCallbacks;
 	private int _callbackIndex;
 	private int _phaseCallbackIndex;
 	private struct CallbackPair
@@ -64,6 +65,7 @@ public class Timer
 		this._currentTime = startTime;
 		this._callbacks = new List<CallbackPair> ();
 		this._phaseCallbacks = new List<CallbackPair> ();
+		this._tickCallbacks = new List<Callback> ();
 		this._callbackIndex = 0;
 		this._phaseCallbackIndex = 0;
 	}
@@ -109,6 +111,11 @@ public class Timer
 			{
 				_phaseCallbacks[_phaseCallbackIndex].callback();
 				_phaseCallbackIndex++;
+			}
+
+			foreach(var callback in _tickCallbacks)
+			{
+				callback();
 			}
 
 
@@ -157,6 +164,11 @@ public class Timer
 	public void AddPhaseCallback(float phase, Callback callback)
 	{
 		SortedInsert (_phaseCallbacks, phase, callback);
+	}
+
+	public void AddTickCallback(Callback callback)
+	{
+		_tickCallbacks.Add (callback);
 	}
 
 	private void SortedInsert(List<CallbackPair> callbacks, float time, Callback callback)

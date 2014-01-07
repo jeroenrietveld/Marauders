@@ -11,43 +11,32 @@ public static class WeaponFactory
 
 	public static GameObject create(string weaponName)
 	{
-		string filePath = dataPath + weaponName;
-		TextAsset jsonString;
+		GameObject weaponHolder = new GameObject("Weapon_holder");
+		var node = ResourceCache.json(dataPath + weaponName);
 
-		if(jsonString = Resources.Load(filePath) as TextAsset)
+		for(int i = 0; i < node["prefabs"].AsArray.Count; i++)
 		{
-			var node = JSON.Parse(jsonString.text);
+			GameObject grip = new GameObject("Grip_"+i);
+			grip.transform.parent = weaponHolder.transform;
 
-			GameObject weaponHolder = new GameObject("Weapon_holder");
-
-			for(int i = 0; i < node["prefabs"].AsArray.Count; i++)
-			{
-				GameObject grip = new GameObject("Grip_"+i);
-				grip.transform.parent = weaponHolder.transform;
-
-				GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefabs"].AsArray[i].Value)) as GameObject;
-				prefab.transform.parent = grip.transform;
-			}
-
-			Weapon weapon = weaponHolder.AddComponent<Weapon>();
-			weapon.name = node["name"].Value;
-			weapon.range = node["range"].AsFloat;
-			weapon.damage = node["damage"].AsFloat;
-
-			//Adding all the attacks
-			for(int i = 0; i < node["attacks"].AsArray.Count; i++)
-			{
-				weapon.attacks.Add (new AttackInfo(
-					node["attacks"][i]["animation"],
-					node["attacks"][i]["speed"].AsFloat,
-					node["attacks"][i]["timing"].AsFloat));
-			}
-
-			return weaponHolder;
+			GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefabs"].AsArray[i].Value)) as GameObject;
+			prefab.transform.parent = grip.transform;
 		}
-		else
+
+		Weapon weapon = weaponHolder.AddComponent<Weapon>();
+		weapon.name = node["name"].Value;
+		weapon.range = node["range"].AsFloat;
+		weapon.damage = node["damage"].AsFloat;
+
+		//Adding all the attacks
+		for(int i = 0; i < node["attacks"].AsArray.Count; i++)
 		{
-			throw new ArgumentException("File does not exist");
+			weapon.attacks.Add (new AttackInfo(
+				node["attacks"][i]["animation"],
+				node["attacks"][i]["speed"].AsFloat,
+				node["attacks"][i]["timing"].AsFloat));
 		}
+
+		return weaponHolder;
 	}
 }

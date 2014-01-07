@@ -14,7 +14,9 @@ public class GameManager {
     public static bool isPaused = false;
 
 	//TODO: Remove Player list, rename playerRefs to players.
-	public List<PlayerRef> playerRefs;
+	public List<Player> playerRefs;
+
+	public int timeSyncLimit;
 
 	public struct MatchSettings
 	{
@@ -39,7 +41,7 @@ public class GameManager {
 	private GameManager()
 	{
         matchSettings = new MatchSettings();
-		playerRefs = new List<PlayerRef> ();
+		playerRefs = new List<Player> ();
 	}
 
 	public void Start()
@@ -51,26 +53,12 @@ public class GameManager {
         } 
 	}
 
-    public void LoadMarauders()
-    {
-        foreach (PlayerRef player in playerRefs)
-        {
-            // GameObject prefab = GameObject.Instantiate(Resources.Load("Prefabs/Marauders/" + player.marauder)) as GameObject;
-            //prefab.AddComponent("Player");
-            //prefab.GetComponent<Player>().LoadModel(player);
-
-            //add the players to the player list, this way they are always easily accessible
-            //players.Add(prefab.GetComponent<Player>());
-            player.CreateAvatar();
-        }
-    }
-
     /// <summary>
     /// Adds the player ref to the list. If the player already has a playerref in the list remove that one 
     /// and add the new one.
     /// </summary>
     /// <param name="model"></param>
-    public void AddPlayerRef(PlayerRef model)
+    public void AddPlayerRef(Player model)
     {
         playerRefs.RemoveAll(x => x.index.Equals(model.index));
         playerRefs.Add(model);

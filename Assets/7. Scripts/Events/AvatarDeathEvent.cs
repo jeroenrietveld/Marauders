@@ -3,10 +3,10 @@ using System.Collections;
 
 public struct AvatarDeathEvent
 {
-	public PlayerRef victim;
-	public PlayerRef offender;
+	public Player victim;
+	public Player offender;
 
-	public AvatarDeathEvent(PlayerRef victim, PlayerRef offender)
+	public AvatarDeathEvent(Player victim, Player offender)
 	{
 		this.victim = victim;
 		this.offender = offender;

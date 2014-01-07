@@ -17,7 +17,7 @@ public class Timeshift : SkillBase
 	
 	private Timer _shifting;
 	
-	public Timeshift() : base(SkillType.Defensive, 2, _animationSettings)
+	public Timeshift() : base(2, _animationSettings)
 	{
 		_shifting = new Timer (0.5f);
 		_shifting.AddCallback(_shifting.startTime, delegate {

@@ -41,15 +41,16 @@ public class TimeBubble : MonoBehaviour {
 
 	void OnTriggerExit(Collider collider)
 	{
-		collider.gameObject.SetActive(false);
-
 		var exitDirection = collider.transform.position - transform.position;
+		var spawnPoint = GetSpawnPoint (-exitDirection);
 
-		var spawner = new GameObject("ObjectSpawner").AddComponent<ObjectSpawner>();
-		spawner.obj = collider.gameObject;
-		spawner.spawnDelay = respawnDelay;
-		spawner.position = transform.position - Vector3.Scale(exitDirection.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
-		spawner.exitForce = SpawnTarget.GetClosestTargetDirection(spawner.position) * exitForce;
+		ObjectSpawner.Create (
+			collider.gameObject,
+			spawnPoint,
+			respawnDelay,
+			SpawnTarget.GetClosestTargetDirection (spawnPoint) * exitForce
+		);
+
 		
 		var avatar = collider.GetComponent<Avatar>();
 		if(avatar)
@@ -60,5 +61,10 @@ public class TimeBubble : MonoBehaviour {
 		{
 			Event.dispatch (new TimeBubbleObjectExitEvent (collider.gameObject, respawnDelay));
 		}
+	}
+
+	public Vector3 GetSpawnPoint(Vector3 directionFromCenter)
+	{
+		return transform.position + Vector3.Scale(directionFromCenter.normalized, transform.localScale * GetComponent<SphereCollider>().radius);
 	}
 }
