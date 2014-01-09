@@ -32,6 +32,9 @@ public class Scoreboard : MonoBehaviour
         var player = new Player(PlayerIndex.One);
         List<Cell> addition = new List<Cell>();
         scoreboard.AddCellList(addition);
+        scoreboard.AddCellList(addition);
+        scoreboard.AddCellList(addition);
+        scoreboard.AddCellList(addition);
 
         addition.Add(new PlayerCell(player));
 
@@ -43,6 +46,10 @@ public class Scoreboard : MonoBehaviour
         CustomCell kills = new CustomCell("Kills", CellType.Integer, 0, true);
         CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);
         CustomCell heartstops = new CustomCell("Heartstops", CellType.Integer, 0, true);   
+
+        //Testing titles
+        titleCell.AddTitle("TITLE2");
+        titleCell.AddTitle("TITLE3");
 
         //Add all cells to the list of cells
         addition.Add(timeSync);
@@ -69,21 +76,34 @@ public class Scoreboard : MonoBehaviour
        float boxWidth = _scoreboardRect.width - horizontalOffset*2;
        float boxHeight = _scoreboardRect.height / 4 - verticalOffset*2;
 
-       int rows = 1;
+       int rows = _cells.Count;
        int columns = _cells[0].Count;
 
        float cellwidth = boxWidth/columns;
-       float cellheigth = boxHeight*0.2f + 10;
+       float cellTop = boxHeight*0.1f;
+       float cellHeight = boxHeight * 0.8f;
               
        for (int i = 0; i < rows; i++)
        {
            GUI.Box(new Rect(horizontalOffset, verticalOffset + i * (boxHeight + verticalOffset * 2), boxWidth, boxHeight), "");
            for (int j = 0; j < columns; j++)
-           {         
-               //_cells[i][j].pos = new Vector2(j * cellwidth, i * cellheigth);
-               //_cells[i][j].size = new Vector2(cellwidth, cellheigth);
-               GUI.Label(new Rect(j * cellwidth, i * cellheigth, cellwidth, cellheigth), _cells[i][j].title);
-               GUI.Label(new Rect(j * cellwidth, (float)(i + 0.5f) * cellheigth, cellwidth, cellheigth), _cells[i][j].GetContent());
+           {            
+               //Draw the title
+               GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset*2) + cellTop, cellwidth, cellHeight), _cells[i][j].title);
+
+               //Draw the content
+               if (_cells[i][j] is TitlesCell)
+               {
+                   scoreboardskin.label.alignment = TextAnchor.UpperLeft;
+                   //GUI.contentColor = Player.color;
+                   GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth, cellHeight), _cells[i][j].GetContent());
+                   scoreboardskin.label.alignment = TextAnchor.UpperCenter;
+               }
+               else 
+               {
+                   GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth, cellHeight), _cells[i][j].GetContent());
+               }
+               
            }
        }  
    }

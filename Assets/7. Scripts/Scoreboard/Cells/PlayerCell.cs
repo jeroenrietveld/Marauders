@@ -7,8 +7,10 @@ using UnityEngine;
 
 public class PlayerCell : Cell 
 {
+    public Player player;
 	public PlayerCell(Player player)
     {
+        this.player = player;
         this.title = player.index.ToString();
         this.content = /*Resources.Load(player.marauder) as Texture*/"image";
         this.trophysEnabled = false;
