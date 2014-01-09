@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using XInputDotNetPure;
 
 public class Jump : ActionBase {
@@ -23,6 +24,9 @@ public class Jump : ActionBase {
 
 	private float _distanceToGroundTolerance = 0.5f;
 
+	private AudioSource _jumpSource;
+    private List<AudioClip> _jumpClips;
+	
 	void Start () {
 		Avatar avatar = GetComponent<Avatar> ();
 		
@@ -46,12 +50,16 @@ public class Jump : ActionBase {
 				2,
 				WrapMode.Clamp
 			));
+        LoadSounds();
 	}
 	
 	public override void PerformAction()
 	{
 		if(onGround || _isJumping == false)
 		{
+			_jumpSource.clip = _jumpClips[new System.Random().Next(0, _jumpClips.Count)];
+            _jumpSource.Play();
+			
 			var velocity = rigidbody.velocity;
 			velocity.y = 0;
 			rigidbody.velocity = velocity;
@@ -63,6 +71,19 @@ public class Jump : ActionBase {
 			AnimationJump();
 		}
 	}
+	
+	private void LoadSounds()
+    {
+        _jumpSource = gameObject.AddComponent<AudioSource>();
+        _jumpSource.playOnAwake = false;
+        _jumpSource.minDistance = 200f;
+        _jumpSource.maxDistance = 250f;
+
+        string name = GetComponent<Avatar>().player.marauder;
+        _jumpClips = new List<AudioClip>();
+        _jumpClips.Add(Resources.Load<AudioClip>("Sounds/Characters/" + name + "/jump1"));
+        _jumpClips.Add(Resources.Load<AudioClip>("Sounds/Characters/" + name + "/jump2"));
+    }
 
 	private void AnimationStop()
 	{

@@ -20,6 +20,11 @@ public class Windsweep : SkillBase
 	{
 
 	}
+	
+	protected override void OnStart()
+    {
+
+    }
 
 	protected override void OnPerformAction()
 	{

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Dash : SkillBase
 {
 	//private Player _player;
-
+	private AudioSource _dashSource;
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
 		"Dash",
 		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
@@ -25,6 +25,15 @@ public class Dash : SkillBase
 			rigidbody.velocity = Vector3.zero;
 		});
 	}
+	
+	protected override void OnStart()
+    {
+        _dashSource = gameObject.AddComponent<AudioSource>();
+        _dashSource.clip = Resources.Load<AudioClip>("Sounds/Abilities/Dash");
+        _dashSource.playOnAwake = false;
+        _dashSource.minDistance = 200f;
+        _dashSource.maxDistance = 250f;
+    }
 
 	/*
 	void Start()
@@ -36,6 +45,7 @@ public class Dash : SkillBase
 
 	protected override void OnPerformAction()
 	{
+		_dashSource.Play();
 		_dashing.Start ();
     }
 

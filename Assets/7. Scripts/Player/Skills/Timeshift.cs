@@ -30,6 +30,11 @@ public class Timeshift : SkillBase
 		});
 	}
 	
+	protected override void OnStart()
+    {
+
+    }
+	
 	void Start()
 	{
 		//_player = GetComponent<Player> ();
