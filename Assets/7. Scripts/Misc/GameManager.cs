@@ -16,8 +16,6 @@ public class GameManager {
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<Player> playerRefs;
 
-    public List<Trophy> trophies;
-
 	public int timeSyncLimit;
 
 	public struct MatchSettings
@@ -44,11 +42,15 @@ public class GameManager {
 	{
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
-        trophies = new List<Trophy>();
-        trophies.Add(new LeastDeath());
-        trophies.Add(new MostKilled());
-        trophies.Add(new OwnedShrines());
+
+        TestEndGame();
 	}
+
+    private void TestEndGame()
+    {
+        EndGame eg = new EndGame();
+        eg.Calculate();
+    }
 
 	public void Start()
 	{   
