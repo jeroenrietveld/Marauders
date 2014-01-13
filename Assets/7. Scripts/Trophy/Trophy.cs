@@ -62,10 +62,7 @@ public class Trophy : ITrophy
 
         foreach (PlayerTest player in players)
         {
-
-            int playerWin = (int)player.GetType().GetProperty(name).GetValue(player, null);
-            Debug.Log("Hello");
-            Debug.Log(playerWin);
+            //int playerWin = (int)player.GetType().GetProperty(name).GetValue(player, null);
             
             /*
             if (playerWin > win)
