@@ -54,34 +54,33 @@ public class GameManager {
 
 	public void Start()
 	{   
-		Debug.Log ("Start()");
         if (matchSettings.level != null)
         {
 			Application.LoadLevel(matchSettings.level);
         } 
 	}
 
-    /// <summary>
-    /// Adds the player ref to the list. If the player already has a playerref in the list remove that one 
-    /// and add the new one.
-    /// </summary>
-    /// <param name="model"></param>
     public void AddPlayerRef(Player model)
     {
         playerRefs.RemoveAll(x => x.index.Equals(model.index));
-        playerRefs.Add(model);
+		
+		int index = 0;
+		while(index < playerRefs.Count && playerRefs[index].indexInt < model.indexInt) 
+		{
+			index++;
+		}
+		
+		playerRefs.Insert (index, model);
     }
 
     public void PauseGame()
     {
-		Debug.Log ("Paused");
         isPaused = true;
         Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
-		Debug.Log ("Resume");
         isPaused = false;
         Time.timeScale = 1f;
     }

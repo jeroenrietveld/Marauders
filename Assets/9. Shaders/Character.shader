@@ -14,7 +14,6 @@
 			
 			Lighting Off
 			Color [_PlayerColor]
-			
 		}
 	
 		Tags { "Queue"="AlphaTest+2" "RenderType"="Opaque" }

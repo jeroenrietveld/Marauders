@@ -65,6 +65,7 @@ public class Jump : ActionBase {
 			rigidbody.velocity = velocity;
 
 			rigidbody.AddForce(Vector3.up * jumpHeight);
+			rigidbody.AddForce(transform.forward * 10000f);
 
 			_isJumping = true;
 			
@@ -112,9 +113,9 @@ public class Jump : ActionBase {
 				}
 			}
 
-
 			_isJumping = false;
-		} else
+		}
+		else
 		{
 			if ( rigidbody.velocity.y < -5)
 			{
