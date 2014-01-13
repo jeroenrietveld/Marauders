@@ -311,12 +311,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreboardskin: {fileID: 11400000, guid: 84462713a5d063c44b5d32d934d77ca3, type: 2}
-  scoreboardRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+  horizontalOffset: 10
+  verticalOffset: 5
+  fontScale: .460000008
 --- !u!4 &1527606308
 Transform:
   m_ObjectHideFlags: 0

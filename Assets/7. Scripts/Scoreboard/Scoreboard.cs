@@ -21,19 +21,41 @@ public class Scoreboard : MonoBehaviour
 		_cells = new List<List<Cell>> ();
 	}
 
+    /// <summary>
+    /// This method will add a cell list to the end of the list
+    /// </summary>
+    /// <param name="list"></param>
 	public void AddCellList(List<Cell> list)
 	{
 		_cells.Add (list);
 	}   
+
+    /// <summary>
+    /// This method will add a custom cell just after the static cells.
+    /// </summary>
+    /// <param name="gameSpecificCell"></param>
+    public void AddGameSpecificCell(CustomCell gameSpecificCell)
+    {
+        //Iterate over the cells
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            for (int j = 0; j < _cells[i].Count; j++)
+            {
+                if (_cells[i][j].cellType != CellType.Static)
+                {
+                    //This spot is the first spot after the static cells
+                    _cells[i].Insert(j, gameSpecificCell);
+                    break;
+                }
+            }
+        }
+    }
 
     void Start()
     {      
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
         var player = new Player(PlayerIndex.One);
         List<Cell> addition = new List<Cell>();
-        scoreboard.AddCellList(addition);
-        scoreboard.AddCellList(addition);
-        scoreboard.AddCellList(addition);
         scoreboard.AddCellList(addition);
 
         addition.Add(new PlayerCell(player));
@@ -58,17 +80,16 @@ public class Scoreboard : MonoBehaviour
         addition.Add(eliminated);
         addition.Add(kills);
         addition.Add(heartstops);
-        addition.Add(hitratio);                          
+        addition.Add(hitratio);
+
+        scoreboard.AddGameSpecificCell(new CustomCell("Owned Shrines", CellType.Integer, 0, true));    
     }
 
    void OnGUI()
     {
        _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
        GUI.skin = scoreboardskin;
-       _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
-       
-      
-         
+       _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");                 
     }
 
    void DrawScoreboard(int windowID)
@@ -97,6 +118,17 @@ public class Scoreboard : MonoBehaviour
                    scoreboardskin.label.alignment = TextAnchor.UpperLeft;
                    //GUI.contentColor = Player.color;
                    GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth, cellHeight), _cells[i][j].GetContent());
+                   scoreboardskin.label.alignment = TextAnchor.UpperCenter;
+               } 
+               else if(_cells[i][j] is PlayerCell)
+               {
+                   GUI.Box(new Rect(j * cellwidth + cellTop, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth - 20, cellHeight - 20), "Texture");
+               } 
+               else if(_cells[i][j] is TimeSyncCell)
+               {
+                   //TimeSync texture here
+                   scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
+                   GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth, cellHeight - 20), "0%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 
