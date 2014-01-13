@@ -2,6 +2,7 @@
 	Properties {
 		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white" {}
 		playerColor ("Player Color", Color) = (1, 1, 1, 1)
+		health ("health", Float) = 1
 	}
 	SubShader {
 		Tags { "Queue"="AlphaTest" "RenderType"="Opaque" }

@@ -128,6 +128,8 @@ MonoBehaviour:
   heartbeatSpeed:
     rawValue: 90
   groundOffset: .100000001
+  damageScale: 2
+  damageAlphaScale: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

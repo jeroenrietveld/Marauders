@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Prototype for the heart beat, this indicates the player health.
 /// </summary>
-public class Heartbeat : MonoBehaviour {
+public class Heartbeat : Attackable {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 	public float groundOffset = 0.1f;
 
@@ -13,7 +13,6 @@ public class Heartbeat : MonoBehaviour {
 
 	private float _groundHeight;
 	private float _playerOffset;
-	private float _previousHealth;
 	private float _currentRotation;
 	
 	private GameObject _damage;
@@ -21,19 +20,56 @@ public class Heartbeat : MonoBehaviour {
 
 	private Timer _damageTimer;
 
+
+	private float _health = 1f;
+	public float health
+	{
+		get
+		{
+			return _health;
+		}
+		set
+		{
+			if(alive)
+			{
+				_health = Mathf.Clamp01(value);
+				
+				//controller.SetVibration(1, 1, .2f);
+			}
+		}
+	}
+	
+	public bool alive
+	{
+		get
+		{
+			return health > 0;
+		}
+	}
+	
+	private float _armorFactor = 0.1f;
+
 	void Start ()
 	{
 		_damage = transform.GetChild(0).gameObject;
 		_avatar = transform.parent.GetComponent<Avatar>();
-		_avatar.heartbeat = this;
 
 		renderer.material.SetColor("playerColor", _avatar.player.color);
 		_damage.renderer.material.SetColor("playerColor", _avatar.player.color);
 
 		_playerOffset = (int)_avatar.player.index * 0.01f;
-		_previousHealth = _avatar.health;
 
 		_damageTimer = new Timer(.35f);
+		_damageTimer.AddPhaseCallback (0, delegate {
+			_damage.renderer.enabled = true;
+		});
+		_damageTimer.AddPhaseCallback (delegate {
+			_damage.renderer.enabled = false;
+		});
+		_damageTimer.AddTickCallback (delegate {
+			_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
+			_damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
+		});
 	}
 
 	void FixedUpdate()
@@ -61,24 +97,42 @@ public class Heartbeat : MonoBehaviour {
 		_currentRotation = (_currentRotation + heartbeatSpeed * Time.deltaTime) % 360;
 		transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
-		float health = _avatar.health;
-		renderer.material.SetFloat ("health", health);
+		_damageTimer.Update();
+	}
 
-		if(!Mathf.Approximately(_previousHealth, health))
+	public override void OnAttack(Attack attacker)
+	{
+		var direction = attacker.transform.position - transform.position;
+		direction.y = 0;
+		direction.Normalize ();
+
+		float dot = Vector3.Dot(direction, transform.forward);
+		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+
+		var amount = attacker.weapon.damage;
+		
+		if(armorHit)
 		{
-			var material = _damage.renderer.material;
-
-			material.SetFloat("upperBound", _previousHealth);
-			material.SetFloat("lowerBound", health);
-
-			_previousHealth = health;
-			_damageTimer.Start();
+			amount = amount * _armorFactor;
 		}
 
-		_damageTimer.Update();
+		var previousHealth = health;
+		health = health - amount;
 
-		_damage.renderer.enabled = _damageTimer.running;
-		_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
-		_damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
+		_avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
+
+		renderer.material.SetFloat ("health", health);
+
+		var material = _damage.renderer.material;
+		material.SetFloat("upperBound", previousHealth);
+		material.SetFloat("lowerBound", health);
+		_damageTimer.Start();
+		
+		if(!alive) 
+		{
+			Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
+			
+			_avatar.player.StartSpawnProcedure();
+		}
 	}
 }

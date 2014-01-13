@@ -12,10 +12,14 @@ public class Attack : ActionBase {
 	public float comboKnockBackForce = 700;
 
 	private Weapon _weapon;
+	public Weapon weapon { get { return _weapon; } }
 	private TrailRenderer[] _trailRenderers;
 
 	// Current successive successful attacks
 	private int _comboCount;
+	public int comboCount { get { return _comboCount; }}
+	public bool isCombo { get { return _comboCount == _weapon.attacks.Count - 1; } }
+
 	// Maximum time between successful attacks until combo counter resets
 	private Timer _comboReset;
 	// Time until damage is applied after starting the attack
@@ -157,25 +161,26 @@ public class Attack : ActionBase {
 
 		foreach(Collider hit in colls) 
 		{
-			var avatar = hit.gameObject.GetComponent<Avatar>();
-			
 			// Get the correct attackswing clip using the combo count and play a random sound for that collection.
-            _attackSwingSource.clip = _attackSwingClips[_comboCount][new System.Random().Next(0, _attackSwingClips[_comboCount].Count)];
-            if (!_attackSwingSource.isPlaying) { _attackSwingSource.Play(); }
-			
-			if (avatar && avatar.gameObject != gameObject)
-			{ 
+			_attackSwingSource.clip = _attackSwingClips[_comboCount][new System.Random().Next(0, _attackSwingClips[_comboCount].Count)];
+			if (!_attackSwingSource.isPlaying) { _attackSwingSource.Play(); }
+
+			if (hit.gameObject != gameObject)
+			{
 				// Is this really neccessary? The physics check should suffice I think..
-				float dst = Vector3.Distance(avatar.transform.position, transform.position);
+				float dst = Vector3.Distance(hit.transform.position, transform.position);
 				
 				if (dst <= _weapon.range)
 				{
-					float angle = Mathf.Acos(Vector3.Dot (transform.forward, (avatar.transform.position - transform.position).normalized));
+					float angle = Mathf.Acos(Vector3.Dot (transform.forward, (hit.transform.position - transform.position).normalized));
 					
 					if (Mathf.Abs(angle / 0.0174532925f) < 45)
 					{
+						foreach(var attackable in hit.gameObject.GetComponentsInChildren<Attackable>())
+						{
+							attackable.OnAttack(this);
+						}
 						hasHit = true;
-						ApplyDamage(avatar, _comboCount < _weapon.attacks.Count - 1 ? standardKnockBackForce : comboKnockBackForce);
 						
 						// Get the correct heartbeat clip using the combo count and play the sound.
                         _heartBeatHitsSource.clip = _heartBeatClips[_comboCount];
@@ -193,13 +198,5 @@ public class Attack : ActionBase {
 		{
 			_comboCount = 0;
 		}
-	}
-	
-	private void ApplyDamage(Avatar avatar, float knockBackForce)
-	{
-		Vector3 attackDirection = (avatar.transform.position - transform.position).normalized;
-
-		avatar.ApplyDamage(-attackDirection, _weapon.damage, gameObject.GetComponent<Avatar>().player);
-		avatar.rigidbody.AddForce(attackDirection * knockBackForce, ForceMode.Impulse);
 	}
 }
