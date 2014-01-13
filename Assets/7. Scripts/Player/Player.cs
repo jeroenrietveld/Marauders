@@ -82,6 +82,7 @@ public class Player
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
 		avatar.AddComponent<AvatarGraphics>();
+		avatar.AddComponent<Slide> ();
 		
 		foreach(SkillType skillType in System.Enum.GetValues(typeof(SkillType)))
 		{
