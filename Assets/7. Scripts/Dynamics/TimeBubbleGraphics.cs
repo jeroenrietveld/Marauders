@@ -36,7 +36,10 @@ public class TimeBubbleGraphics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		_distortionTimer.Update ();
+		if (_distortionTimer != null)
+		{
+			_distortionTimer.Update ();
+		}
 
 		var movement = Vector4.Scale (offsetMovementSpeed, Vector4.one * Time.deltaTime);
 

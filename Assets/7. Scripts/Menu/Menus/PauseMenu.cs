@@ -10,7 +10,15 @@ public class PauseMenu : Menu {
 		{
 			//Making menu
 			menu = (Menu)gameObject.AddComponent("Menu");
-			menu.region = new Rect((Screen.width / 2) - 125, (Screen.height / 2) - 175, 250, 350);
+
+			//Calculating the new size of the pause menu
+			menu.scale = (float)Screen.height / 768f;
+			int menuHeight = (int)Math.Round(menu.scale * 350f);
+			int menuWidth = (int)Math.Round(menu.scale * 250f);
+		
+			//Positioning the menu
+			Debug.Log (Screen.width +  "; " + menuWidth);
+			menu.region = new Rect((Screen.width - menuWidth) / 2, (Screen.height - menuHeight) / 2, menuWidth, menuHeight);
 			menu.skin = MonoBehaviour.Instantiate(Resources.Load("UI/Skins/PauseMenuSkin")) as GUISkin;
 			
 			// Adding the items to the menu, resume, options and quit

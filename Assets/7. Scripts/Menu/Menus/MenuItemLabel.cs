@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XInputDotNetPure;
+using System;
  
 public class MenuItemLabel:MenuItem
 {
@@ -23,14 +24,17 @@ public class MenuItemLabel:MenuItem
 			color = ToHex(style.normal.textColor);
 		}
 
+		//Debug.Log(this.parent.scale);
 		//Draws a label, style is handled by the skin
+		string txt = "<size='"+ (int)( 48f * this.parent.scale ) + "'><color='" + color + "'>" + this.text + "</color></size>";
+		Debug.Log(txt);
 		GUI.Label(
 			new Rect(
 				0,
 				yLocation,
 				parent.region.width,
-				this.height),
-			"<color='" + color + "'>" + this.text + "</color>",
+				(int)Math.Round(this.height * parent.scale)),
+				txt,
 			style);	
 	
 	}

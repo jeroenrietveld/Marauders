@@ -32,9 +32,12 @@ public class RewardGraphics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(Timer timer in effectTimers)
+		if (effectTimers != null)
 		{
-			timer.Update();
+			foreach(Timer timer in effectTimers)
+			{
+				timer.Update();
+			}
 		}
 	}
 

@@ -18,6 +18,12 @@ public class Menu: MonoBehaviour
 	public GUISkin skin { get;set; }
 
 	/// <summary>
+	/// The scale factor to scale the menu with, default is 1
+	/// </summary>
+	/// <value>The scale.</value>
+	public float scale { get; set; }
+
+	/// <summary>
 	/// Sets the <see cref="Menu"/> with the specified i.
 	/// </summary>
 	/// <param name="i">The menuItem's index</param>
@@ -220,7 +226,7 @@ public class Menu: MonoBehaviour
 		foreach (MenuItem item in menuItems)
 		{
 			item.Draw (offset);
-			offset += item.height;
+			offset += (int)(item.height * this.scale);
 		}
 	}
 
