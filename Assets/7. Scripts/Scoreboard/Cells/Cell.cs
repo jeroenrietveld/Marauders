@@ -21,7 +21,7 @@ public abstract class Cell
 
     public bool trophysEnabled;
 
-    public CellType cellType;
+    protected CellType cellType;
 
     public abstract string GetContent();
 }
