@@ -134,8 +134,7 @@ public class Scoreboard : MonoBehaviour
                else 
                {
                    GUI.Label(new Rect(j * cellwidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellwidth, cellHeight), _cells[i][j].GetContent());
-               }
-               
+               }             
            }
        }  
    }
