@@ -55,8 +55,10 @@ public class Jump : ActionBase {
 	
 	public override void PerformAction()
 	{
-		if(onGround || _isJumping == false)
+		if(_isJumping == false)
 		{
+			_isJumping = true;
+
 			_jumpSource.clip = _jumpClips[new System.Random().Next(0, _jumpClips.Count)];
             _jumpSource.Play();
 			
@@ -65,9 +67,7 @@ public class Jump : ActionBase {
 			rigidbody.velocity = velocity;
 
 			rigidbody.AddForce(Vector3.up * jumpHeight);
-			rigidbody.AddForce(transform.forward * 10000f);
-
-			_isJumping = true;
+			//rigidbody.AddForce(transform.forward * 10000f);
 			
 			AnimationJump();
 		}
@@ -111,17 +111,20 @@ public class Jump : ActionBase {
 				{
 					AnimationStop();
 				}
+
+				//We've landed
+				_isJumping = false;
 			}
 
-			_isJumping = false;
+
 		}
-		else
+		/*else
 		{
-			if ( rigidbody.velocity.y < -5)
+			if (rigidbody.velocity.y < -5)
 			{
 				AnimationJump();
 			}
-		}
+		}*/
 	}
 
 	private void CalculateDistanceToGround()
