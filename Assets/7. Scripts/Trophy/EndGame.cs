@@ -10,18 +10,22 @@ public class EndGame
     private ICollection<PlayerTest> playerList;
     private List<Trophy> trophyList;
 
+    private PlayerTest p1 = new PlayerTest();
+    private PlayerTest p2 = new PlayerTest();
+
     public EndGame()
     {
         var resources = Resources.LoadAll(_resourcePath);
         this.playerList = new List<PlayerTest>();
         this.trophyList = new List<Trophy>();
 
-        PlayerTest p1 = new PlayerTest();
-        PlayerTest p2 = new PlayerTest();
-        p1.Deaths = 1;
-        p1.Kills = 22;
+        p1.Deaths = 2;
+        p1.Kills = 18;
+        p1.TimeSync = 97;
+
         p2.Deaths = 18;
-        p2.Kills = 3;
+        p2.Kills = 2;
+        p2.TimeSync = 47;
 
         p1.Name = "Ronald";
         p2.Name = "Noob";
@@ -40,8 +44,7 @@ public class EndGame
             t.Column = column;
             t.TrophyName = trophy;
             t.Title = title;
-            t.Condition = condition;
-            
+            t.Condition = condition;          
             
             trophyList.Add(t);
         }
@@ -57,19 +60,22 @@ public class EndGame
         {
             trophyDictionary.Add(trophy.CalculateTrophy(playerList), trophy);
         }
-        
-        // Read the dictionary with players and trophies for testing purpose
+
+        // showing the data for testing purposes
+        // Multiple players can get the same trophy
         foreach(KeyValuePair<List<PlayerTest>, Trophy> trophy in trophyDictionary)
         {
+            
             foreach (PlayerTest p in trophy.Key)
             {
-                //Debug.Log("Name: " + p.Name);
-                //Debug.Log("Kills: " + p.Kills);
-                //Debug.Log("Deaths: " +  p.Deaths);
+                Debug.Log("Name: " + p.Name);
+                Debug.Log("Deaths: " + p.Deaths);
+                Debug.Log("Kills: " + p.Kills);
             }
-            
-            //Debug.Log("TrophyTitle: " + trophy.Value.Title);
-            //Debug.Log("" + trophy.Value.TrophyName);
+            Debug.Log("Tropyname :" + trophy.Value.TrophyName);
+            Debug.Log("Title: " + trophy.Value.Title);
+            Debug.Log("");
         }
+         
     }
 }

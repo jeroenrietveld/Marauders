@@ -2,5 +2,5 @@
 	"column" : "LeastDeath",
 	"trophy" : "Eliminated",
 	"title" : "The Survivor",
-	"condition" : ">"
+	"condition" : "<"
 }
