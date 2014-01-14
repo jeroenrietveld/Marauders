@@ -19,7 +19,7 @@ public class Jump : ActionBase {
 		}
 	}
 
-	public float jumpHeight = 25000f;
+	public float jumpHeight = 30000f;
 	private bool _isJumping = false;
 
 	private float _distanceToGroundTolerance = 0.5f;
