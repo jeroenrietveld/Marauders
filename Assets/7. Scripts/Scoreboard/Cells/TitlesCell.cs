@@ -19,6 +19,6 @@ public class TitlesCell : Cell
     public override string GetContent()
     {
         return content.ToString();
-    } 
+    }
 }
 

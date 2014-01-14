@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class TimeSyncCell : Cell
 {
-    public TimeSyncCell()
+    public Player player;
+    public TimeSyncCell(Player player)
     {
         this.title = "Time Sync";
-        this.content = "timesync";
+        this.content = 0;
+        this.player = player;
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }
