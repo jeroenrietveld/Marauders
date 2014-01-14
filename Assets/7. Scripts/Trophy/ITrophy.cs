@@ -6,14 +6,9 @@ using System.Text;
 public interface ITrophy
 {
     /// <summary>
-    /// Column name
+    /// The column name of the Trophy
     /// </summary>
     string Column { get; set; }
-
-    /// <summary>
-    /// Gets the name of the Trophy.
-    /// </summary>
-    string TrophyName { get; set; }
 
     /// <summary>
     /// Gets the Title that is associated with the Trophy.

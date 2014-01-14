@@ -19,6 +19,7 @@ public class EndGame
         this.playerList = new List<PlayerTest>();
         this.trophyList = new List<Trophy>();
 
+        // testing data
         p1.Deaths = 2;
         p1.Kills = 18;
         p1.TimeSync = 97;
@@ -36,13 +37,11 @@ public class EndGame
         {
             var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
             string column = node["column"].Value;
-            string trophy = node["trophy"].Value;
             string title = node["title"].Value;
             string condition = node["condition"].Value;
 
             Trophy t = new Trophy();
             t.Column = column;
-            t.TrophyName = trophy;
             t.Title = title;
             t.Condition = condition;          
             
@@ -65,7 +64,7 @@ public class EndGame
         // Multiple players can get the same trophy
         foreach(KeyValuePair<Trophy, List<PlayerTest>> trophy in trophyDictionary)
         {
-            Debug.Log("Tropyname :" + trophy.Key.TrophyName);
+            Debug.Log("Tropyname :" + trophy.Key.Column);
             Debug.Log("Title: " + trophy.Key.Title);
 
             foreach (PlayerTest p in trophy.Value)
