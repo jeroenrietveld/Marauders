@@ -174,7 +174,7 @@ public class Attack : ActionBase {
 				{
 					float angle = Mathf.Acos(Vector3.Dot (transform.forward, (hit.transform.position - transform.position).normalized));
 					
-					if (Mathf.Abs(angle / 0.0174532925f) < 45)
+					if (Mathf.Abs(angle / 0.0174532925f) < 70)
 					{
 						foreach(var attackable in hit.gameObject.GetComponentsInChildren<Attackable>())
 						{
