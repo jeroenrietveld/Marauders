@@ -6,6 +6,7 @@ using UnityEngine;
  
 public class Scoreboard : MonoBehaviour
 {
+    private bool _visible;
 	private List<List<Cell>> _cells;
     public GUISkin scoreboardskin;
 
@@ -63,8 +64,10 @@ public class Scoreboard : MonoBehaviour
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
         _trophyTexture = Resources.Load("Textures/Utility_icon", typeof(Texture)) as Texture;
 
-        #region Test - all comments atm
+        _visible = false;
         
+        #region Test - all comments atm
+       
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
        
@@ -131,20 +134,27 @@ public class Scoreboard : MonoBehaviour
         scoreboard.AddGameSpecificCell(new CustomCell("Owned Shrines", CellType.Integer, 0, true));
         scoreboard.SetTrophy(PlayerIndex.One, "Heartstops", "Marauder");
         scoreboard.SetTrophy(PlayerIndex.Two, "Eliminaions", "Eliminator");
+
+        scoreboard.Show();
+
         #endregion
+       
     }
 
    void OnGUI()
     {
-       if(UnityEngine.Event.current.type != EventType.Repaint)
-       {
-           //This prevents the drawing in the 3D scape.
-           //Graphics.DrawTexture does this.
-           return;
-       }
-       _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
-       GUI.skin = scoreboardskin;
-       _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");                 
+        if (_visible)
+        {
+            if (UnityEngine.Event.current.type != EventType.Repaint)
+            {
+                //This prevents the drawing in the 3D scape.
+                //Graphics.DrawTexture does this.
+                return;
+            }
+            _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
+            GUI.skin = scoreboardskin;
+            _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
+        }
     }
 
    void DrawScoreboard(int windowID)
@@ -158,27 +168,35 @@ public class Scoreboard : MonoBehaviour
        float cellWidth = boxWidth/columns;
        float cellTop = boxHeight*0.1f;
        float cellHeight = boxHeight * 0.8f;
-              
+
+       float titleOffset = cellHeight * 0.25f;
+
+       float fontScale = Screen.width / 768f;
+
+       GUI.skin.label.fontSize = (int) (10 * fontScale);
        for (int i = 0; i < rows; i++)
        {
            GUI.Box(new Rect(horizontalOffset, verticalOffset + i * (boxHeight + verticalOffset * 2), boxWidth, boxHeight), "");
            for (int j = 0; j < columns; j++)
            {            
                //Draw the title
-               GUI.Label(new Rect(j * cellWidth, i * (boxHeight + verticalOffset*2) + cellTop, cellWidth, cellHeight), _cells[i][j].title);
+               GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset*2) + cellTop, cellWidth, cellHeight), _cells[i][j].title);
 
                //Draw the content
                if (_cells[i][j] is TitlesCell)
                {
                    scoreboardskin.label.alignment = TextAnchor.UpperLeft;
                    GUI.contentColor = _currentColor;
-                   GUI.Label(new Rect(j * cellWidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellWidth, cellHeight), _cells[i][j].GetContent());
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent());
                    GUI.contentColor = Color.white;
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                } 
                else if(_cells[i][j] is PlayerCell)
                {
-                   GUI.Box(new Rect(j * cellWidth + cellTop, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellWidth - 20, cellHeight - 20), _cells[i][j].content as Texture);
+                   float textureSize = Math.Min(cellWidth, cellHeight) - 20;
+                   float horizontalTextureOffset = (cellWidth - textureSize) / 2;
+                   float verticalTextureOffset = cellHeight * 0.1f;
+                   GUI.Box(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _cells[i][j].content as Texture);
                    _currentColor = ((PlayerCell)_cells[i][j]).player.color;
                } 
                else if(_cells[i][j] is TimeSyncCell)
@@ -187,23 +205,24 @@ public class Scoreboard : MonoBehaviour
                    float percentage = (int)_cells[i][j].content / 100f;
                    _material.SetFloat("phase", percentage);
                    _material.SetColor("playerColor", _currentColor);
-                   float matSize = Math.Min(cellWidth, cellHeight);
-                   float matOffset = (cellWidth - matSize) / 2f;
-                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + matOffset, i * (boxHeight + verticalOffset * 2) + cellTop + 25, matSize - 20, matSize - 20), _texture, _material);
+                   float matSize = Math.Min(cellWidth, cellHeight) - 20;
+                   float horizontalMatOffset = (cellWidth - matSize) / 2f;
+                   float verticalMatOffset = cellHeight * 0.15f;
+                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalMatOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalMatOffset, matSize, matSize), _texture, _material);
                    
                    scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
-                   GUI.Label(new Rect(j * cellWidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellWidth, cellHeight - 20), _cells[i][j].content + "%");
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight - 20), _cells[i][j].content + "%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 
                {
-                   GUI.Label(new Rect(j * cellWidth, i * (boxHeight + verticalOffset * 2) + cellTop + 25, cellWidth, cellHeight), _cells[i][j].GetContent());
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent());
                    if(_cells[i][j].HasTrophy())
                    {
                        float trophySize = Math.Min(cellWidth * 0.4f, cellHeight * 0.4f);
                        float horizontalTrophyOffset = (cellWidth - trophySize) / 2f;
                        float verticalTrophyOffset = cellHeight * 0.8f;
-                       Graphics.DrawTexture(new Rect(j * cellWidth + horizontalTrophyOffset, i * (boxHeight + verticalOffset * 2) + verticalTrophyOffset, trophySize, trophySize), _trophyTexture);
+                       Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTrophyOffset, i * (boxHeight + verticalOffset * 2) + verticalTrophyOffset, trophySize, trophySize), _trophyTexture);
                    }
                }             
            }
@@ -232,5 +251,43 @@ public class Scoreboard : MonoBehaviour
             }
         }
    }
+
+    public void SetTrophy(PlayerIndex playerIndex, Trophy trophy)
+    {
+        //Find the cell to set the trophy
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            //First, find the player
+            if (((PlayerCell)_cells[i][0]).player.index == playerIndex)
+            {
+                //We found the player, now find the cellname
+                for (int j = 0; j < _cells[i].Count; j++)
+                {
+                    if (_cells[i][j].title.Equals(trophy.Column))
+                    {
+                        //This is the cell we want to add the trophy to
+                        ((CustomCell)_cells[i][j]).hasTrophy = true;
+                        _cells[i][2].content += trophy.Title;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void Show()
+    {
+        _visible = true;
+    }
+
+    public void Hide()
+    {
+        _visible = false;
+    }
+
+    public bool IsVisible()
+    {
+        return _visible;
+    }
 }
 
