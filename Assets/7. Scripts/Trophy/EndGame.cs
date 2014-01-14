@@ -53,29 +53,28 @@ public class EndGame
     public void Calculate()
     {
         // Dictionary containing the players list as a key and the related Trophy as a value
-        Dictionary<List<PlayerTest>, Trophy> trophyDictionary = new Dictionary<List<PlayerTest>, Trophy>();
+        Dictionary<Trophy, List<PlayerTest>> trophyDictionary = new Dictionary<Trophy, List<PlayerTest>>();
 
         // Filling the Dicationary with the trophys
         foreach (Trophy trophy in this.trophyList)
         {
-            trophyDictionary.Add(trophy.CalculateTrophy(playerList), trophy);
+            trophyDictionary.Add(trophy, trophy.CalculateTrophy(playerList));
         }
 
         // showing the data for testing purposes
         // Multiple players can get the same trophy
-        foreach(KeyValuePair<List<PlayerTest>, Trophy> trophy in trophyDictionary)
+        foreach(KeyValuePair<Trophy, List<PlayerTest>> trophy in trophyDictionary)
         {
-            
-            foreach (PlayerTest p in trophy.Key)
+            Debug.Log("Tropyname :" + trophy.Key.TrophyName);
+            Debug.Log("Title: " + trophy.Key.Title);
+
+            foreach (PlayerTest p in trophy.Value)
             {
                 Debug.Log("Name: " + p.Name);
                 Debug.Log("Deaths: " + p.Deaths);
                 Debug.Log("Kills: " + p.Kills);
             }
-            Debug.Log("Tropyname :" + trophy.Value.TrophyName);
-            Debug.Log("Title: " + trophy.Value.Title);
             Debug.Log("");
         }
-         
     }
 }
