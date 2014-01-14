@@ -5,6 +5,7 @@ public class WeaponPrototype : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		PickupSpawner.SpawnPowerUp(new Vector3(0, 20, 0));
 		/*
 		GameObject katana1 = WeaponFactory.create ("Katana");
 		PickupSpawner.SpawnWeapon (katana1, new Vector3(0, 20, 0));

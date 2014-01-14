@@ -8,8 +8,11 @@ public class FlipPolygons : MonoBehaviour {
 	void Awake()
 	{
 		Mesh mesh = GetComponent<MeshCollider>().mesh;
-		int[] triangles = mesh.triangles;
-		Array.Reverse(triangles);
-		mesh.triangles = triangles;
+		if(mesh != null)
+		{
+			int[] triangles = mesh.triangles;
+			Array.Reverse(triangles);
+			mesh.triangles = triangles;
+		}
 	}
 }
