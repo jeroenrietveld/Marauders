@@ -88,7 +88,7 @@ public class Scoreboard : MonoBehaviour
         CustomCell heartstops = new CustomCell("Heartstops", CellType.Integer, 0, true);   
 
         //Testing timeSync
-        timeSync.content = 50;
+        timeSync.content = 0;
 
         //Add all cells to the list of cells
         addition.Add(timeSync);
@@ -118,7 +118,7 @@ public class Scoreboard : MonoBehaviour
         CustomCell heartstops2 = new CustomCell("Heartstops", CellType.Integer, 0, true);
 
         //Testing timeSync
-        timeSync2.content = 70;
+        timeSync2.content = 100;
 
         //Add all cells to the list of cells
         addition2.Add(timeSync2);
@@ -193,9 +193,9 @@ public class Scoreboard : MonoBehaviour
                } 
                else if(_cells[i][j] is PlayerCell)
                {
-                   float textureSize = Math.Min(cellWidth, cellHeight) - 20;
+                   float textureSize = Math.Min(cellWidth, cellHeight) * 0.8f;
                    float horizontalTextureOffset = (cellWidth - textureSize) / 2;
-                   float verticalTextureOffset = cellHeight * 0.1f;
+                   float verticalTextureOffset = cellHeight * 0.2f;
                    GUI.Box(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _cells[i][j].content as Texture);
                    _currentColor = ((PlayerCell)_cells[i][j]).player.color;
                } 
@@ -205,13 +205,13 @@ public class Scoreboard : MonoBehaviour
                    float percentage = (int)_cells[i][j].content / 100f;
                    _material.SetFloat("phase", percentage);
                    _material.SetColor("playerColor", _currentColor);
-                   float matSize = Math.Min(cellWidth, cellHeight) - 20;
+                   float matSize = Math.Min(cellWidth, cellHeight) * 0.75f;
                    float horizontalMatOffset = (cellWidth - matSize) / 2f;
-                   float verticalMatOffset = cellHeight * 0.15f;
+                   float verticalMatOffset = cellHeight * 0.2f;
                    Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalMatOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalMatOffset, matSize, matSize), _texture, _material);
                    
                    scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
-                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight - 20), _cells[i][j].content + "%");
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.5f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].content + "%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 
