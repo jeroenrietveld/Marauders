@@ -35,7 +35,7 @@ public abstract class GameMode
 
     public void InitializeScoreboard()
     {
-        scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
+        scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
         List<Cell> fieldNameList = new List<Cell>();
 
         foreach(var player in GameManager.Instance.playerRefs)

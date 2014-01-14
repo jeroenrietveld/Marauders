@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using XInputDotNetPure;
  
 public class Scoreboard : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class Scoreboard : MonoBehaviour
 	{
 		_cells = new List<List<Cell>> ();
 	}
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 
     /// <summary>
     /// This method will add a cell list to the end of the list
@@ -67,7 +73,7 @@ public class Scoreboard : MonoBehaviour
         _visible = false;
         
         #region Test - all comments atm
-       
+       /*
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
        
@@ -136,9 +142,17 @@ public class Scoreboard : MonoBehaviour
         scoreboard.SetTrophy(PlayerIndex.Two, "Eliminaions", "Eliminator");
 
         scoreboard.Show();
-
+        */
         #endregion
        
+    }
+
+    void Update()
+    {
+        if(ControllerInput.GetController(0).JustPressed(Button.Back))
+        {
+            _visible = !_visible;
+        }
     }
 
    void OnGUI()
