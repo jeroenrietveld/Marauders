@@ -102,6 +102,8 @@ public class Heartbeat : Attackable {
 
 	public override void OnAttack(Attack attacker)
 	{
+		if(!alive) return;
+
 		var direction = attacker.transform.position - transform.position;
 		direction.y = 0;
 		direction.Normalize ();
