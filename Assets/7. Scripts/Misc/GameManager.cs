@@ -16,7 +16,7 @@ public class GameManager {
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<Player> playerRefs;
 
-	public int timeSyncLimit;
+	public int timeSyncLimit = 1000;
 
 	public struct MatchSettings
 	{
