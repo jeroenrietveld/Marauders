@@ -131,8 +131,11 @@ public class Heartbeat : Attackable {
 		if(!alive) 
 		{
 			Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
-			
-			_avatar.player.StartSpawnProcedure();
+		}
+		else
+		{
+			var stun = _avatar.gameObject.AddComponent<Stun>();
+			Destroy(stun, attacker.GetStunTime());
 		}
 	}
 }

@@ -199,4 +199,9 @@ public class Attack : ActionBase {
 			_comboCount = 0;
 		}
 	}
+	
+	public float GetStunTime()
+	{
+		return _trailTimer.endTime;
+	}
 }
