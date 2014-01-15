@@ -5,7 +5,7 @@
 		_PlayerColor ("Player Color", Color) = (1, 1, 1, 1)
 		
 		_DeathPhase ("Death Phase", Float) = 0
-		_Shear ("Death Shear factor", Float) = 50
+		_Shear ("Death Shear factor", Float) = 300
 	}
 	SubShader {
 		Pass
@@ -19,10 +19,9 @@
 			Color [_PlayerColor]
 		}
 	
-		Tags { "Queue"="Transparent" "RenderType"="Opaque" }
+		Tags { "Queue"="AlphaTest+2" "RenderType"="Opaque" }
 		
 		Blend SrcAlpha OneMinusSrcAlpha
-		ZWrite Off
 		
 		CGPROGRAM
 		#pragma surface surf Lambert vertex:vert
@@ -36,19 +35,23 @@
 		struct Input
 		{
 			float2 uv_MainTex;
+			float3 pos;
 		};
 		
-		void vert(inout appdata_full input)
+		void vert(inout appdata_full input, out Input output)
 		{
 			input.vertex.x += input.vertex.z * _DeathPhase * _Shear;
 			input.vertex.z += input.vertex.z * _DeathPhase * _Shear;
+			
+			UNITY_INITIALIZE_OUTPUT(Input, output);
+			output.pos = input.vertex;
 		}
 		
 		void surf (Input input, inout SurfaceOutput output)
 		{
 			float3 c = tex2D(_MainTex, input.uv_MainTex).rgb * _Color.rgb;
-			output.Albedo = pow(c, 1 - _DeathPhase);
-			output.Alpha = saturate(1 - _DeathPhase);
+			output.Albedo = c;
+			output.Alpha = saturate(1 - _DeathPhase) * smoothstep(_Shear * 0.01 * _DeathPhase, _Shear * 0.02 * _DeathPhase, length(input.pos));
 		}
 		
 		ENDCG
