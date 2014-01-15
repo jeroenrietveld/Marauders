@@ -45,7 +45,6 @@ public class GameUI : MonoBehaviour {
 		for(int playerIndex = 0; playerIndex < playerRefs.Count; playerIndex++)
 		{
 			Player player = playerRefs[playerIndex];
-			Debug.Log (lightBulbColors[playerIndex]);
 			_lightbulbMat.SetColor("_Color", lightBulbColors[playerIndex]);
 			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][4], _lightbulbTex, _lightbulbMat); 
 

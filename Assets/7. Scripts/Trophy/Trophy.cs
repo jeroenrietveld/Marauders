@@ -8,7 +8,6 @@ using UnityEngine;
 public class Trophy : ITrophy
 {
     public string Column { get; set; }
-    public string TrophyName { get; set; }
     public string Title { get; set; }
     public string Condition { get; set; }
 
@@ -18,72 +17,80 @@ public class Trophy : ITrophy
     {
         playerTrophy = new List<PlayerTest>();
 
-        foreach (PlayerTest player in players)
+        if (Condition.Equals(">"))
         {
-            if (Condition.Equals(">"))
-            {
-                switch(TrophyName)
-                {
-                    case "Kills":
-                        GreatherThan(players, "Kills");
-                        break;
-                    case "Owned Shrines":
-                        GreatherThan(players, "Owned Shrines");
-                        break;
-                    case "Eliminated":
-                        GreatherThan(players, "Eliminated");
-                        break;
-                }
-            }
-            else if(Condition.Equals("<"))
-            {
-                switch (TrophyName)
-                {
-                    case "Kills":
-                        LessThan(players, "Kills");
-                        break;
-                    case "Owned Shrines":
-                        LessThan(players, "Owned Shrines");
-                        break;
-                    case "Eliminated":
-                        LessThan(players, "Eliminated");
-                        break;
-                }
-            }
-            
+            GreatherThan(players);
+        }
+        else if(Condition.Equals("<"))
+        {
+            LessThan(players);
         }
 
         return playerTrophy;
     }
 
-    private void GreatherThan(ICollection<PlayerTest> players, string name)
+    private void LessThan(ICollection<PlayerTest> players)
     {
-        int win = 0;
-
-        foreach (PlayerTest player in players)
+        if (Column == "Eliminated")
         {
-            //int playerWin = (int)player.GetType().GetProperty(name).GetValue(player, null);
-            
-            /*
-            if (playerWin > win)
+            int win = players.First().Deaths;
+
+            foreach (PlayerTest player in players)
             {
-                // Clear list and add player with highest deaths
-                // Set deaths variable to the current highest
-                playerTrophy.Clear();
-                playerTrophy.Add(player);
-                win = playerWin;
+                if (player.Deaths < win)
+                {
+                    win = player.Deaths;
+
+                    playerTrophy.Clear();
+                    playerTrophy.Add(player);
+                }
+                else if (player.Deaths == win)
+                {
+                    playerTrophy.Add(player);
+                }
             }
-            else if (playerWin == win)
-            {
-                // If two player have the highest score add the second player to the list
-                playerTrophy.Add(player);
-            }
-             */
         }
     }
 
-    private List<PlayerTest> LessThan(ICollection<PlayerTest> players, string name)
+    private void GreatherThan(ICollection<PlayerTest> players)
     {
-        return null;
+        if (Column == "Owned Shrines")
+        {
+            int win = 0;
+
+            foreach(PlayerTest player in players)
+            {
+                if (player.TimeSync > win)
+                {
+                    win = player.TimeSync;
+
+                    playerTrophy.Clear();
+                    playerTrophy.Add(player);
+                }
+                else if (player.TimeSync == win)
+                {
+                    playerTrophy.Add(player);
+                }
+            }
+        }
+        else if (Column == "Kills")
+        {
+            int win = 0;
+
+            foreach (PlayerTest player in players)
+            {
+                if (player.Kills > win)
+                {
+                    win = player.Kills;
+
+                    playerTrophy.Clear();
+                    playerTrophy.Add(player);
+                }
+                else if (player.Kills == win)
+                {
+                    playerTrophy.Add(player);
+                }
+            }
+        }
     }
 }

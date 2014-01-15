@@ -72,7 +72,6 @@ public class Player
 		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat_indicator")) as GameObject;
 		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
 
-
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
 		avatar.AddComponent<ControllerMapping> ();

@@ -1,6 +1,5 @@
 {
-	"column" : "MostKills",
-	"trophy" : "Kills",
-	"title" : "The Survivor",
+	"column" : "Kills",
+	"title" : "The Eliminator",
 	"condition" : ">"
 }

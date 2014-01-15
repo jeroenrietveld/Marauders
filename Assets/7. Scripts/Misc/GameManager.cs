@@ -42,15 +42,7 @@ public class GameManager {
 	{
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
-
-        TestEndGame();
 	}
-
-    private void TestEndGame()
-    {
-        EndGame eg = new EndGame();
-        eg.Calculate();
-    }
 
 	public void Start()
 	{   

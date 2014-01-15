@@ -7,10 +7,12 @@ public class Interactor : ActionBase {
 	public Interactable currentInteractable;
 	private Button interactButton = Button.LeftShoulder;
 
-
-	void Start()
+	void Update()
 	{
-		GetComponent<ControllerMapping>().AddAction(interactButton, this);
+		if(currentInteractable)
+		{
+			currentInteractable.OnInteract(gameObject);
+		}
 	}
 
 	public override void PerformAction()
@@ -18,14 +20,6 @@ public class Interactor : ActionBase {
 		if (currentInteractable)
 		{
 			currentInteractable.OnInteract(gameObject);
-		}
-	}
-
-	void OnGUI()
-	{
-		if (currentInteractable)
-		{
-			currentInteractable.ShowMessage(interactButton);
 		}
 	}
 }

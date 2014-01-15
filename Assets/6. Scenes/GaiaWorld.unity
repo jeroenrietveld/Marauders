@@ -10956,6 +10956,7 @@ GameObject:
   - 114: {fileID: 1068527388}
   - 114: {fileID: 1068527389}
   - 114: {fileID: 1068527390}
+  - 114: {fileID: 1068527391}
   m_Layer: 0
   m_Name: _GLOBAL
   m_TagString: Untagged
@@ -11054,6 +11055,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686b8517dcd4f4040968d6a07bc010f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1068527391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068527382}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76015ccd6e0aab24e8e646a6bededfa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreboardskin: {fileID: 11400000, guid: 84462713a5d063c44b5d32d934d77ca3, type: 2}
+  horizontalOffset: 10
+  verticalOffset: 5
+  fontScale: .828125
 --- !u!1 &1075792058
 GameObject:
   m_ObjectHideFlags: 0

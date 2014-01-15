@@ -20,6 +20,8 @@ public class CharacterSelectBlock : MonoBehaviour
 	public bool isConnected { get; set; }
     public bool isPlayerReady { get; set; }
     public bool isJoined { get; set; }
+    public bool isInSelection { get; set; }
+
 	private GamePad _controller;
 
     public SelectionBase _currentState;

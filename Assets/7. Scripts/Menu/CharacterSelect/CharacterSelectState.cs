@@ -55,6 +55,7 @@ public class CharacterSelectState : SelectionBase
 
         if (block._currentEnum == CharacterSelectBlockStates.StartState)
         {
+            block.isInSelection = false;
             block.isJoined = false;
             block.StartScreen.SetActive(true);
             block.marauderIndex = 0;

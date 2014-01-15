@@ -10,18 +10,23 @@ public class EndGame
     private ICollection<PlayerTest> playerList;
     private List<Trophy> trophyList;
 
+    private PlayerTest p1 = new PlayerTest();
+    private PlayerTest p2 = new PlayerTest();
+
     public EndGame()
     {
         var resources = Resources.LoadAll(_resourcePath);
         this.playerList = new List<PlayerTest>();
         this.trophyList = new List<Trophy>();
 
-        PlayerTest p1 = new PlayerTest();
-        PlayerTest p2 = new PlayerTest();
-        p1.Deaths = 1;
-        p1.Kills = 22;
+        // testing data
+        p1.Deaths = 2;
+        p1.Kills = 18;
+        p1.TimeSync = 97;
+
         p2.Deaths = 18;
-        p2.Kills = 3;
+        p2.Kills = 2;
+        p2.TimeSync = 47;
 
         p1.Name = "Ronald";
         p2.Name = "Noob";
@@ -32,16 +37,13 @@ public class EndGame
         {
             var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
             string column = node["column"].Value;
-            string trophy = node["trophy"].Value;
             string title = node["title"].Value;
             string condition = node["condition"].Value;
 
             Trophy t = new Trophy();
             t.Column = column;
-            t.TrophyName = trophy;
             t.Title = title;
-            t.Condition = condition;
-            
+            t.Condition = condition;          
             
             trophyList.Add(t);
         }
@@ -50,26 +52,28 @@ public class EndGame
     public void Calculate()
     {
         // Dictionary containing the players list as a key and the related Trophy as a value
-        Dictionary<List<PlayerTest>, Trophy> trophyDictionary = new Dictionary<List<PlayerTest>, Trophy>();
+        Dictionary<Trophy, List<PlayerTest>> trophyDictionary = new Dictionary<Trophy, List<PlayerTest>>();
 
         // Filling the Dicationary with the trophys
         foreach (Trophy trophy in this.trophyList)
         {
-            trophyDictionary.Add(trophy.CalculateTrophy(playerList), trophy);
+            trophyDictionary.Add(trophy, trophy.CalculateTrophy(playerList));
         }
-        
-        // Read the dictionary with players and trophies for testing purpose
-        foreach(KeyValuePair<List<PlayerTest>, Trophy> trophy in trophyDictionary)
+
+        // showing the data for testing purposes
+        // Multiple players can get the same trophy
+        foreach(KeyValuePair<Trophy, List<PlayerTest>> trophy in trophyDictionary)
         {
-            foreach (PlayerTest p in trophy.Key)
+            Debug.Log("Tropyname :" + trophy.Key.Column);
+            Debug.Log("Title: " + trophy.Key.Title);
+
+            foreach (PlayerTest p in trophy.Value)
             {
-                //Debug.Log("Name: " + p.Name);
-                //Debug.Log("Kills: " + p.Kills);
-                //Debug.Log("Deaths: " +  p.Deaths);
+                Debug.Log("Name: " + p.Name);
+                Debug.Log("Deaths: " + p.Deaths);
+                Debug.Log("Kills: " + p.Kills);
             }
-            
-            //Debug.Log("TrophyTitle: " + trophy.Value.Title);
-            //Debug.Log("" + trophy.Value.TrophyName);
+            Debug.Log("");
         }
     }
 }

@@ -13,7 +13,7 @@ public enum CellType
     Static
 }
 
-public abstract class Cell 
+public abstract class Cell
 {
     public String title;
 
@@ -21,7 +21,12 @@ public abstract class Cell
 
     public bool trophysEnabled;
 
-    protected CellType cellType;
+    public CellType cellType;
 
     public abstract string GetContent();
+
+    public virtual bool HasTrophy()
+    {
+        return trophysEnabled;
+    }
 }

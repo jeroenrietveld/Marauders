@@ -23,4 +23,19 @@ public static class PickupSpawner
 		weapon.transform.rotation = Quaternion.Euler(rotation);
 		pickup.GetComponent<WeaponInteractable> ().weaponObject = weapon;
 	}
+
+	public static void SpawnPowerUp(Vector3 position)
+	{	
+		GameObject powerUp = GameObject.Instantiate(Resources.Load("Prefabs/Interactables/PowerUps/PowerUp")) as GameObject;
+		GameObject pickup = GameObject.Instantiate (Resources.Load ("Prefabs/Interactables/PowerUpPickup")) as GameObject;
+
+		Vector3 rotation = powerUp.transform.rotation.eulerAngles;
+		rotation.Scale(new Vector3(0, 1, 0));
+
+		powerUp.transform.parent = pickup.transform;
+		pickup.transform.position = position;
+
+		powerUp.transform.localPosition = Vector3.zero;
+		powerUp.transform.rotation = Quaternion.Euler (rotation);
+	}
 }
