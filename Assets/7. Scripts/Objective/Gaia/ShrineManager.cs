@@ -13,7 +13,7 @@ public class ShrineManager : MonoBehaviour {
 	void Start () {
 		_shrines = GetComponentsInChildren<Shrine> ();
 
-		_activationTimer = new Timer (activationDelay);
+		_activationTimer = new Timer (activationDelay, Timer.WrapMode.LOOP);
 		_activationTimer.AddPhaseCallback (ActivateRandomShrine);
 
 		_activationTimer.Start ();
@@ -46,8 +46,6 @@ public class ShrineManager : MonoBehaviour {
 		{
 			ApplyReward();
 		}
-
-		_activationTimer.Start ();
 	}
 
 	private void ApplyReward()
@@ -66,7 +64,7 @@ public class ShrineManager : MonoBehaviour {
 		//TODO: make random
 		foreach(var shrine in _shrines)
 		{
-			if(!shrine.canBeCaptured)
+			if(!shrine.capturable)
 			{
 				shrine.Activate();
 				break;
