@@ -102,8 +102,6 @@ public class Heartbeat : Attackable {
 
 	public override void OnAttack(Attack attacker)
 	{
-		if(!alive) return;
-
 		var direction = attacker.transform.position - transform.position;
 		direction.y = 0;
 		direction.Normalize ();
@@ -133,6 +131,7 @@ public class Heartbeat : Attackable {
 		if(!alive) 
 		{
 			Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
+			Destroy(gameObject);
 		}
 		else
 		{

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class AvatarGraphics : MonoBehaviour {
 
 	private List<Material> _materials = new List<Material>();
+	private List<Renderer> _renderers = new List<Renderer>();
 
 	private Timer _deathTimer;
 
@@ -22,7 +23,7 @@ public class AvatarGraphics : MonoBehaviour {
 			m.SetColor("_PlayerColor", playerColor);
 		}
 
-		_deathTimer = new Timer (.4f);
+		_deathTimer = new Timer (.6f);
 		_deathTimer.AddPhaseCallback (_player.StartSpawnProcedure);
 		_deathTimer.AddTickCallback(delegate
 		{
@@ -50,6 +51,8 @@ public class AvatarGraphics : MonoBehaviour {
 		var r = transform.GetComponent<Renderer> ();
 		if (r)
 		{
+			bool any = false;
+
 			foreach(var m in r.materials)
 			{
 				if(m.shader.name != "Custom/Character")
@@ -60,8 +63,11 @@ public class AvatarGraphics : MonoBehaviour {
 				else
 				{
 					_materials.Add(m);
+					any = true;
 				}
 			}
+
+			if(any) _renderers.Add(r);
 		}
 
 		for (int i = 0; i < transform.childCount; ++i)
@@ -74,6 +80,16 @@ public class AvatarGraphics : MonoBehaviour {
 	{
 		if(evt.victim == _player)
 		{
+			foreach(var m in _materials)
+			{
+				var q = Quaternion.AngleAxis(Random.value * 360, Vector3.up);
+				m.SetVector("_ShearDirection", q * new Vector3(0, 0, 1));
+			}
+			foreach(var r in _renderers)
+			{
+				r.castShadows = false;
+			}
+
 			_deathTimer.Start();
 		}
 	}

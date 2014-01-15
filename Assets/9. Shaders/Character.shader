@@ -5,7 +5,8 @@
 		_PlayerColor ("Player Color", Color) = (1, 1, 1, 1)
 		
 		_DeathPhase ("Death Phase", Float) = 0
-		_Shear ("Death Shear factor", Float) = 300
+		_Shear ("Death Shear factor", Float) = 20
+		_ShearDirection ("Death Shear Direction", Vector) = (0, 0, 1, 0)
 	}
 	SubShader {
 		Pass
@@ -31,6 +32,7 @@
 		
 		float _DeathPhase;
 		float _Shear;
+		float3 _ShearDirection;
 		
 		struct Input
 		{
@@ -40,8 +42,8 @@
 		
 		void vert(inout appdata_full input, out Input output)
 		{
-			input.vertex.x += input.vertex.z * _DeathPhase * _Shear;
-			input.vertex.z += input.vertex.z * _DeathPhase * _Shear;
+			input.vertex.xyz *= 1 + _DeathPhase * 4;
+			input.vertex.xyz += _ShearDirection * _DeathPhase * _Shear;
 			
 			UNITY_INITIALIZE_OUTPUT(Input, output);
 			output.pos = input.vertex;
@@ -51,7 +53,11 @@
 		{
 			float3 c = tex2D(_MainTex, input.uv_MainTex).rgb * _Color.rgb;
 			output.Albedo = c;
-			output.Alpha = saturate(1 - _DeathPhase) * smoothstep(_Shear * 0.01 * _DeathPhase, _Shear * 0.02 * _DeathPhase, length(input.pos));
+			//output.Alpha = saturate(1 - _DeathPhase) * smoothstep(_Shear * 0.01 * _DeathPhase, _Shear * 0.02 * _DeathPhase, length(input.pos));
+			
+			float phase = smoothstep(0, 1, _DeathPhase);
+			output.Alpha = 1 - phase;
+			output.Emission = c * phase;
 		}
 		
 		ENDCG
