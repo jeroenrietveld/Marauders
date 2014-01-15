@@ -9,7 +9,7 @@ public class RewardGraphics : MonoBehaviour {
 	public int ellipseRadius = 4;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		effectTimers = new List<Timer> ();
 		GameUI gameUI = GetComponent<GameUI> ();
 
