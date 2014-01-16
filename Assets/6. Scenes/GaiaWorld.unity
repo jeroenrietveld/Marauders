@@ -9279,6 +9279,8 @@ GameObject:
   - 95: {fileID: 748046782}
   - 114: {fileID: 748046781}
   - 65: {fileID: 748046780}
+  - 114: {fileID: 748046784}
+  - 65: {fileID: 748046783}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -9376,6 +9378,29 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!65 &748046783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748046778}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: .5, z: 0}
+--- !u!114 &748046784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748046778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &750155267
 GameObject:
   m_ObjectHideFlags: 0
@@ -13944,6 +13969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5577a36d6dafb62479d965d7d4cd435c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 0}
 --- !u!114 &1068527385
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class en : Locale {
 		//Boosts
 		Translations["speedboost_pickup"] = "Pickup speedboost";
 
+		Translations["shrine_capture"] = "Combo to capture";
+
 	}
 
 	public override string GetLanguageCode ()
