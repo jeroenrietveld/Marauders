@@ -17563,6 +17563,8 @@ GameObject:
   - 95: {fileID: 1291448656}
   - 114: {fileID: 1291448655}
   - 65: {fileID: 1291448654}
+  - 114: {fileID: 1291448658}
+  - 65: {fileID: 1291448657}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -17660,6 +17662,29 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!65 &1291448657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291448652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: .5, z: 0}
+--- !u!114 &1291448658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291448652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299103334
 GameObject:
   m_ObjectHideFlags: 0
@@ -23326,9 +23351,9 @@ Transform:
   - {fileID: 1919082219}
   - {fileID: 1091280542}
   - {fileID: 1889009307}
+  - {fileID: 108239277}
   - {fileID: 1650915901}
   - {fileID: 415446458}
-  - {fileID: 108239277}
   - {fileID: 1385982797}
   - {fileID: 1394607089}
   - {fileID: 1357541738}
@@ -27511,6 +27536,8 @@ GameObject:
   - 95: {fileID: 1946634109}
   - 114: {fileID: 1946634108}
   - 65: {fileID: 1946634107}
+  - 114: {fileID: 1946634111}
+  - 65: {fileID: 1946634110}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -27608,6 +27635,29 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!65 &1946634110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946634105}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: .5, z: 0}
+--- !u!114 &1946634111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946634105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1949787377
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,11 +34,11 @@ public class WeaponInteractable : Interactable {
 		}
 	}
 	
-	public override void ShowMessage(Button interactButton)
+	public override void ShowMessage()
 	{
 		//Getting the cube's location on screen and storing it		 
 		Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-		GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), Images.Get(interactButton) );
+		//GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), Images.Get(interactButton) );
 		GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), Locale.Current["weapon_pickup"] + " " + weapon.name);
 	}
 }
