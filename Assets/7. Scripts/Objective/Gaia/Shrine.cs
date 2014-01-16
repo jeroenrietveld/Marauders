@@ -17,8 +17,8 @@ public struct ShrineCapturedEvent
 
 public class Shrine : Attackable {
 	private static Color
-		INACTIVE_COLOR = new Color(.5f, .5f, .5f),
-		CAPTURABLE_COLOR = new Color(1, 1, 1);
+		INACTIVE_COLOR = Color.black,
+		CAPTURABLE_COLOR = Color.white;
 
 
 	private bool _capturable;
@@ -31,7 +31,7 @@ public class Shrine : Attackable {
 		private set
 		{
 			_capturable = value;
-			SetColor(value ? CAPTURABLE_COLOR : INACTIVE_COLOR);
+			UpdateColor();
 		}
 	}
 
@@ -45,14 +45,7 @@ public class Shrine : Attackable {
 		private set
 		{
 			_owner = value;
-			if(value == null)
-			{
-				SetColor(capturable ? CAPTURABLE_COLOR : INACTIVE_COLOR);
-			}
-			else
-			{
-				SetColor(_owner.color);
-			}
+			UpdateColor();
 		}
 	}
 	
@@ -60,11 +53,35 @@ public class Shrine : Attackable {
 
 	private ShrineOrb[] _orbs;
 
+	private Color _previousLightColor;
+	private Color _targetLightColor;
+	private Timer _lightTimer;
+	private Light _light;
+
 	void Start()
 	{
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
+		_light = GetComponentInChildren<Light> ();
+
+		_lightTimer = new Timer (1);
+		_lightTimer.AddTickCallback(delegate
+		{
+			var color = Color.Lerp(_previousLightColor, _targetLightColor, _lightTimer.Phase());
+
+			_light.color = color;
+
+			foreach(var orb in _orbs)
+			{
+				orb.SetColor(color);
+			}
+		});
 
 		Reset ();
+	}
+
+	void Update()
+	{
+		_lightTimer.Update ();
 	}
 
 	public override void OnAttack(Attack attacker)
@@ -87,6 +104,7 @@ public class Shrine : Attackable {
 	{
 		capturable = false;
 		owner = null;
+		UpdateColor ();
 	}
 
 	public void Activate()
@@ -94,11 +112,17 @@ public class Shrine : Attackable {
 		capturable = true;
 	}
 
-	private void SetColor(Color color)
+	private void UpdateColor()
 	{
-		foreach(var orb in _orbs)
+		Color orbColor = INACTIVE_COLOR;
+
+		if(_capturable)
 		{
-			orb.SetColor(color);
+			orbColor = _owner != null ? _owner.color : CAPTURABLE_COLOR;
 		}
+
+		_previousLightColor = _light.color;
+		_targetLightColor = orbColor;
+		_lightTimer.Start ();
 	}
 }
