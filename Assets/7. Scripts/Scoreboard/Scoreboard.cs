@@ -266,13 +266,13 @@ public class Scoreboard : MonoBehaviour
         }
    }
 
-    public void SetTrophy(PlayerIndex playerIndex, Trophy trophy)
+    public void SetTrophy(PlayerIndex index, Trophy trophy)
     {
         //Find the cell to set the trophy
         for (int i = 0; i < _cells.Count; i++)
         {
             //First, find the player
-            if (((PlayerCell)_cells[i][0]).player.index == playerIndex)
+            if (((PlayerCell)_cells[i][0]).player.index == index)
             {
                 //We found the player, now find the cellname
                 for (int j = 0; j < _cells[i].Count; j++)
@@ -287,6 +287,51 @@ public class Scoreboard : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetContent(PlayerIndex index, string cellname, object content)
+    {
+        FindCell(index, cellname).content = content;
+    }
+
+    public void AddContent(PlayerIndex index, string cellname, object content)
+    {
+        Cell cell = FindCell(index, cellname);
+        switch(cell.cellType)
+        {           
+            case CellType.String:
+                string tempString = (string)cell.content;
+                tempString += (string)content;
+                cell.content = tempString;
+                break;
+            default:
+                int tempInt = (int)cell.content;
+                tempInt += (int)content;
+                cell.content = tempInt;
+                break;
+        }
+    }
+
+    public Cell FindCell(PlayerIndex index, string cellname)
+    {
+        //Find the cell to set the trophy
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            //First, find the player
+            if (((PlayerCell)_cells[i][0]).player.index == index)
+            {
+                //We found the player, now find the cellname
+                for (int j = 0; j < _cells[i].Count; j++)
+                {
+                    if (_cells[i][j].title.Equals(cellname))
+                    {
+                        return _cells[i][j];
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     public void Show()
