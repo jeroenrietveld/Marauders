@@ -15,6 +15,14 @@ public class Interactor : ActionBase {
 		}
 	}
 
+	void OnGUI()
+	{
+		if(currentInteractable)
+		{
+			currentInteractable.ShowMessage();
+		}
+	}
+
 	public override void PerformAction()
 	{
 		if (currentInteractable)

@@ -28,5 +28,5 @@ public abstract class Interactable : MonoBehaviour {
 
 	public abstract void OnInteract(GameObject obj);
 
-	public abstract void ShowMessage(Button interactButton);
+	public abstract void ShowMessage();
 }

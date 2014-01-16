@@ -11,6 +11,11 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
 
+    /// <summary>
+    /// The instance of the scoreboard
+    /// </summary>
+    public static Scoreboard scoreboard;
+
     public static bool isPaused = false;
 
 	//TODO: Remove Player list, rename playerRefs to players.
@@ -43,6 +48,7 @@ public class GameManager {
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
 		soundInGame = new SoundIngame();
+		scoreboard = new Scoreboard();
 	}
 
 	public void Start()
