@@ -24,6 +24,8 @@ public class Attack : ActionBase {
 	private Timer _comboReset;
 	// Time until damage is applied after starting the attack
 	private Timer _attackDelay;
+	// Time the current attack takes to perform
+	private Timer _attackCooldown;
 
 	private Timer _trailTimer;
 
@@ -56,6 +58,8 @@ public class Attack : ActionBase {
 		_attackDelay = new Timer(.5f);
 		_attackDelay.AddPhaseCallback (DoAttack);
 		_attackDelay.AddPhaseCallback (_trailTimer.Start);
+
+		_attackCooldown = new Timer (0);
 	}
 
 	void Start () {
@@ -85,13 +89,16 @@ public class Attack : ActionBase {
 
 	public override void PerformAction()
 	{
-		if (_weapon && !animation.IsPlaying(_weapon.attacks[_comboCount].animationName))
+		if (_weapon && !_attackCooldown.running)
 		{
 			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
 			_attackDelay.Start();
 			_comboReset.Start();
 
-			_trailTimer.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length - _attackDelay.endTime;
+			_attackCooldown.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length;
+			_attackCooldown.Start();
+
+			_trailTimer.endTime = _attackCooldown.endTime - _attackDelay.endTime;
 
 			animation.CrossFade(_weapon.attacks[_comboCount].animationName, 0.1f, PlayMode.StopSameLayer);
 		}
@@ -150,6 +157,7 @@ public class Attack : ActionBase {
 	void Update()
 	{
 		_attackDelay.Update ();
+		_attackCooldown.Update ();
 		_comboReset.Update ();
 		_trailTimer.Update ();
 	}
@@ -176,15 +184,20 @@ public class Attack : ActionBase {
 					
 					if (Mathf.Abs(angle / 0.0174532925f) < 70)
 					{
-						foreach(var attackable in hit.gameObject.GetComponentsInChildren<Attackable>())
+						var attackables = hit.gameObject.GetComponentsInChildren<Attackable>();
+
+						if(attackables.Length > 0)
 						{
-							attackable.OnAttack(this);
+							foreach(var attackable in attackables)
+							{
+								attackable.OnAttack(this);
+							}
+							hasHit = true;
+							
+							// Get the correct heartbeat clip using the combo count and play the sound.
+							_heartBeatHitsSource.clip = _heartBeatClips[_comboCount];
+							_heartBeatHitsSource.Play();
 						}
-						hasHit = true;
-						
-						// Get the correct heartbeat clip using the combo count and play the sound.
-                        _heartBeatHitsSource.clip = _heartBeatClips[_comboCount];
-                        _heartBeatHitsSource.Play();
 					}
 				}
 			}
