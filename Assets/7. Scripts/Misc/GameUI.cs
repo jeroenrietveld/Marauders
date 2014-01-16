@@ -51,6 +51,7 @@ public class GameUI : MonoBehaviour {
 			_material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.timeSyncLimit);
 			_material.SetColor("playerColor", player.color);
 			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][3], _texture, _material);
+			GUI.Label (_cooldownUIPositions[playerIndex][3], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 
 			for(int i = 0; i < player.skills.Length; i++)
 			{

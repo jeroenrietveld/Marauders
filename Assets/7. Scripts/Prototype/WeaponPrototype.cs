@@ -20,11 +20,10 @@ public class WeaponPrototype : MonoBehaviour {
 		PickupSpawner.SpawnWeapon (daggers, new Vector3(0, 20, 25));
 		*/
 
-		/*Player player1 = new Player (PlayerIndex.One);
+		Player player1 = new Player (PlayerIndex.One);
 		player1.marauder = "Thief";
 		player1.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player1);
-		*/
 
 		Player player2 = new Player (PlayerIndex.Two);
 		player2.marauder = "Samurai";
