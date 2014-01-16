@@ -24,11 +24,7 @@ Material:
       data:
         first:
           name: phase
-<<<<<<< HEAD
         second: 1.00076783
-=======
-        second: 1.0033859
->>>>>>> 5f5df053dcf953026846340f0cd523c6ad85bd91
     m_Colors:
       data:
         first:
