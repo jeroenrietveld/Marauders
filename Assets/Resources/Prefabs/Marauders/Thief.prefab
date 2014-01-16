@@ -8173,6 +8173,7 @@ Animation:
   - {fileID: 7400006, guid: aa9fbb9a6be4be744a9661097dad76db, type: 3}
   - {fileID: 7400002, guid: 386dfe5adf809914fa2016b879b395b4, type: 3}
   - {fileID: 7400004, guid: 386dfe5adf809914fa2016b879b395b4, type: 3}
+  - {fileID: 7400006, guid: 386dfe5adf809914fa2016b879b395b4, type: 3}
   - {fileID: 7400002, guid: 83360eb7f48269849a682d42cb9d8e78, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1

@@ -14,5 +14,10 @@
 			speed: 1.0,
 			timing: 0.15
 		}
+		{
+			animation: "Daggers3",
+			speed: 1.0,
+			timing: 0.15
+		}
 	]
 }
