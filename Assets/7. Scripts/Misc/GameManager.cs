@@ -11,11 +11,16 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
 
+    /// <summary>
+    /// The instance of the scoreboard
+    /// </summary>
+    public static Scoreboard scoreboard;
+
     public static bool isPaused = false;
 
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<Player> playerRefs;
-
+	public SoundIngame soundInGame;
 	public int timeSyncLimit = 1000;
 
 	public struct MatchSettings
@@ -42,6 +47,8 @@ public class GameManager {
 	{
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
+		soundInGame = new SoundIngame();
+		scoreboard = new Scoreboard();
 	}
 
 	public void Start()
@@ -76,4 +83,9 @@ public class GameManager {
         isPaused = false;
         Time.timeScale = 1f;
     }
+
+	public List<Player> playersByTimeSync()
+	{
+		return playerRefs.OrderBy (player => player.timeSync).ToList ();
+	}
 }

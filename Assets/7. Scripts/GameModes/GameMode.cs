@@ -17,8 +17,6 @@ public abstract class GameMode
 {
 	public readonly GameModeID id;
 
-    public Scoreboard scoreboard;
-
 	protected GameMode(GameModeID id)
 	{
 		this.id = id;
@@ -35,13 +33,12 @@ public abstract class GameMode
 
     public void InitializeScoreboard()
     {
-        scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
         List<Cell> fieldNameList = new List<Cell>();
 
         foreach(var player in GameManager.Instance.playerRefs)
         {
             List<Cell> addition = new List<Cell>();
-            scoreboard.AddCellList(addition);
+            GameManager.scoreboard.AddCellList(addition);
 
             addition.Add(new PlayerCell(player));
 

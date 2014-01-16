@@ -15,7 +15,9 @@ public class Windsweep : SkillBase
 		1,
 		WrapMode.Loop
 	);
-
+	
+	private AudioSource windsweepSource;
+	
 	public Windsweep() : base(5, _animationSettings)
 	{
 
@@ -23,11 +25,12 @@ public class Windsweep : SkillBase
 	
 	protected override void OnStart()
     {
-
+		windsweepSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject);
     }
 
 	protected override void OnPerformAction()
 	{
+		GameManager.Instance.soundInGame.PlaySound(windsweepSource, "Windsweep");
 		foreach(var player in GameManager.Instance.playerRefs)
 		{
 			var avatar = player.avatar;

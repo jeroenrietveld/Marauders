@@ -15,7 +15,7 @@ public class LoveCube : Interactable
 		Destroy(this.gameObject);
 	}
 
-	public override void ShowMessage(Button interactButton)
+	public override void ShowMessage()
 	{
 		//Getting the cube's location on screen and storing it		 
 		Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);	

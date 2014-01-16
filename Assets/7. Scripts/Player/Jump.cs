@@ -25,7 +25,6 @@ public class Jump : ActionBase {
 	private float _distanceToGroundTolerance = 0.5f;
 
 	private AudioSource _jumpSource;
-    private List<AudioClip> _jumpClips;
 	
 	void Start () {
 		Avatar avatar = GetComponent<Avatar> ();
@@ -50,7 +49,7 @@ public class Jump : ActionBase {
 				2,
 				WrapMode.Clamp
 			));
-        LoadSounds();
+        _jumpSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
 	}
 	
 	public override void PerformAction()
@@ -59,8 +58,7 @@ public class Jump : ActionBase {
 		{
 			_isJumping = true;
 
-			_jumpSource.clip = _jumpClips[new System.Random().Next(0, _jumpClips.Count)];
-            _jumpSource.Play();
+			GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump");
 			
 			var velocity = rigidbody.velocity;
 			velocity.y = 0;
@@ -72,19 +70,6 @@ public class Jump : ActionBase {
 			AnimationJump();
 		}
 	}
-	
-	private void LoadSounds()
-    {
-        _jumpSource = gameObject.AddComponent<AudioSource>();
-        _jumpSource.playOnAwake = false;
-        _jumpSource.minDistance = 200f;
-        _jumpSource.maxDistance = 250f;
-
-        string name = GetComponent<Avatar>().player.marauder;
-        _jumpClips = new List<AudioClip>();
-        _jumpClips.Add(Resources.Load<AudioClip>("Sounds/Characters/" + name + "/jump1"));
-        _jumpClips.Add(Resources.Load<AudioClip>("Sounds/Characters/" + name + "/jump2"));
-    }
 
 	private void AnimationStop()
 	{
