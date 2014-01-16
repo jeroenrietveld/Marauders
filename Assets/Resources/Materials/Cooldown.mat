@@ -24,12 +24,16 @@ Material:
       data:
         first:
           name: phase
+<<<<<<< HEAD
         second: 1.00076783
+=======
+        second: 1.0033859
+>>>>>>> 5f5df053dcf953026846340f0cd523c6ad85bd91
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: 0, b: 0, a: 1}
       data:
         first:
           name: playerColor

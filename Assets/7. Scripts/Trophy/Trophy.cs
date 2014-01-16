@@ -8,7 +8,6 @@ using UnityEngine;
 public class Trophy : ITrophy
 {
     public string Column { get; set; }
-    public string TrophyName { get; set; }
     public string Title { get; set; }
     public string Condition { get; set; }
 
@@ -32,7 +31,7 @@ public class Trophy : ITrophy
 
     private void LessThan(ICollection<PlayerTest> players)
     {
-        if (Column == "LeastDeath")
+        if (Column == "Eliminated")
         {
             int win = players.First().Deaths;
 
@@ -55,7 +54,7 @@ public class Trophy : ITrophy
 
     private void GreatherThan(ICollection<PlayerTest> players)
     {
-        if (Column == "OwnedShrines")
+        if (Column == "Owned Shrines")
         {
             int win = 0;
 
@@ -74,7 +73,7 @@ public class Trophy : ITrophy
                 }
             }
         }
-        else if (Column == "MostKills")
+        else if (Column == "Kills")
         {
             int win = 0;
 

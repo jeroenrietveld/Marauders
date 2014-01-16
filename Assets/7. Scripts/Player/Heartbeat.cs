@@ -7,141 +7,149 @@ using System.Collections;
 using System;
 
 
-public class Heartbeat : Attackable {
-	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
-	public float groundOffset = 0.1f;
+public class Heartbeat : Attackable
+{
+    public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
+    public float groundOffset = 0.1f;
 
-	public float damageScale = 1f;
-	public float damageAlphaScale = 4;
+    public float damageScale = 1f;
+    public float damageAlphaScale = 4;
 
-	private float _groundHeight;
-	private float _playerOffset;
-	private float _currentRotation;
-	private float _armorFactor = 0.5f;
-	
-	private GameObject _damage;
-	private Avatar _avatar;
+    private float _groundHeight;
+    private float _playerOffset;
+    private float _currentRotation;
+    private float _armorFactor = 0.5f;
 
-	public Player lastAttacker;
-	public DateTime lastAttackTime;
+    private GameObject _damage;
+    private Avatar _avatar;
 
-	private Timer _damageTimer;
+    public Player lastAttacker;
+    public DateTime lastAttackTime;
 
-
-	private float _health = 1f;
-	public float health
-	{
-		get
-		{
-			return _health;
-		}
-		set
-		{
-			if(alive)
-			{
-				_health = Mathf.Clamp01(value);
-			}
-		}
-	}
-	
-	public bool alive
-	{
-		get
-		{
-			return health > 0;
-		}
-	}
-	
+    private Timer _damageTimer;
 
 
-	void Start ()
-	{
-		_damage = transform.GetChild(0).gameObject;
-		_avatar = transform.parent.GetComponent<Avatar>();
+    private float _health = 1f;
+    public float health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            if (alive)
+            {
+                _health = Mathf.Clamp01(value);
+            }
+        }
+    }
 
-		renderer.material.SetColor("playerColor", _avatar.player.color);
-		_damage.renderer.material.SetColor("playerColor", _avatar.player.color);
+    public bool alive
+    {
+        get
+        {
+            return health > 0;
+        }
+    }
 
-		_playerOffset = (int)_avatar.player.index * 0.01f;
 
-		_damageTimer = new Timer(.35f);
-		_damageTimer.AddPhaseCallback (0, delegate {
-			_damage.renderer.enabled = true;
-		});
-		_damageTimer.AddPhaseCallback (delegate {
-			_damage.renderer.enabled = false;
-		});
-		_damageTimer.AddTickCallback (delegate {
-			_damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
-			_damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
-		});
-	}
 
-	void FixedUpdate()
-	{
-		var collisionResult = Physics.RaycastAll(_avatar.transform.position + Vector3.up, Vector3.down);
+    void Start()
+    {
+        _damage = transform.GetChild(0).gameObject;
+        _avatar = transform.parent.GetComponent<Avatar>();
 
-		float maxHeight = float.NegativeInfinity;
-		foreach (var result in collisionResult)
-		{
-			maxHeight = Mathf.Max(maxHeight, result.point.y);
-		}
+        renderer.material.SetColor("playerColor", _avatar.player.color);
+        _damage.renderer.material.SetColor("playerColor", _avatar.player.color);
 
-		if (!float.IsInfinity (maxHeight))
-		{
-			_groundHeight = maxHeight;
-		}
-	}
+        _playerOffset = (int)_avatar.player.index * 0.01f;
 
-	void Update ()
-	{
-		var position = transform.position;
-		position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset + _playerOffset;
-		transform.position = position;
+        _damageTimer = new Timer(.35f);
+        _damageTimer.AddPhaseCallback(0, delegate
+        {
+            _damage.renderer.enabled = true;
+        });
+        _damageTimer.AddPhaseCallback(delegate
+        {
+            _damage.renderer.enabled = false;
+        });
+        _damageTimer.AddTickCallback(delegate
+        {
+            _damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
+            _damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
+        });
+    }
 
-		_currentRotation = (_currentRotation + heartbeatSpeed * Time.deltaTime) % 360;
-		transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
+    void FixedUpdate()
+    {
+        var collisionResult = Physics.RaycastAll(_avatar.transform.position + Vector3.up, Vector3.down);
 
-		_damageTimer.Update();
-	}
+        float maxHeight = float.NegativeInfinity;
+        foreach (var result in collisionResult)
+        {
+            maxHeight = Mathf.Max(maxHeight, result.point.y);
+        }
 
-	public override void OnAttack(Attack attacker)
-	{
-		//Just to be clear; we are beeing hit
-		var direction = attacker.transform.position - transform.position;
-		direction.y = 0;
-		direction.Normalize ();
+        if (!float.IsInfinity(maxHeight))
+        {
+            _groundHeight = maxHeight;
+        }
+    }
 
-		//Saving the last attacker
-		lastAttacker = attacker.GetComponent<Avatar>().player;
-		lastAttackTime = DateTime.Now;
+    void Update()
+    {
+        var position = transform.position;
+        position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset + _playerOffset;
+        transform.position = position;
 
-		//Applying the damage
-		float dot = Vector3.Dot(direction, transform.forward);
-		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
-		var amount = attacker.weapon.damage;
-		if(armorHit)
-		{
-			amount = amount * _armorFactor;
-		}
-		var previousHealth = health;
-		health = health - amount;
+        _currentRotation = (_currentRotation + heartbeatSpeed * Time.deltaTime) % 360;
+        transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
-		//Applying Knockback
-		_avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
+        _damageTimer.Update();
+    }
 
-		//heartbeat effects etc
-		renderer.material.SetFloat ("health", health);
-		var material = _damage.renderer.material;
-		material.SetFloat("upperBound", previousHealth);
-		material.SetFloat("lowerBound", health);
-		_damageTimer.Start();
-		
-		if(!alive) 
-		{
-			Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
-			
-			_avatar.player.StartSpawnProcedure();
-		}
-	}
+    public override void OnAttack(Attack attacker)
+    {
+        //Just to be clear; we are beeing hit
+        var direction = attacker.transform.position - transform.position;
+        direction.y = 0;
+        direction.Normalize();
+
+        //Saving the last attacker
+        lastAttacker = attacker.GetComponent<Avatar>().player;
+        lastAttackTime = DateTime.Now;
+
+        //Applying the damage
+        float dot = Vector3.Dot(direction, transform.forward);
+        bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+        var amount = attacker.weapon.damage;
+        if (armorHit)
+        {
+            amount = amount * _armorFactor;
+        }
+        var previousHealth = health;
+        health = health - amount;
+
+        //Applying Knockback
+        _avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
+
+        //heartbeat effects etc
+        renderer.material.SetFloat("health", health);
+        var material = _damage.renderer.material;
+        material.SetFloat("upperBound", previousHealth);
+        material.SetFloat("lowerBound", health);
+        _damageTimer.Start();
+
+        if (!alive)
+        {
+            Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
+            Destroy(gameObject);
+        }
+        else
+        {
+            var stun = _avatar.gameObject.AddComponent<Stun>();
+            Destroy(stun, attacker.GetStunTime());
+        }
+    }
 }

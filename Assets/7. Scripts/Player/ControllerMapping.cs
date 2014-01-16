@@ -20,9 +20,20 @@ public class ControllerMapping : MonoBehaviour
 	}
 	private List<ActionPair> _actions = new List<ActionPair> ();
 
+	private Player _player;
+
 	void Start()
 	{
-		controller = GetComponent<Avatar> ().controller;
+		var avatar = GetComponent<Avatar> ();
+		controller = avatar.controller;
+		_player = avatar.player;
+
+		Event.register<AvatarDeathEvent> (OnAvatarDeath);
+	}
+
+	void OnDestroy()
+	{
+		Event.unregister<AvatarDeathEvent> (OnAvatarDeath);
 	}
 
 	void Update () {
@@ -38,5 +49,13 @@ public class ControllerMapping : MonoBehaviour
 	public void AddAction(Button button, ActionBase action)
 	{
 		_actions.Add (new ActionPair (button, action));
+	}
+
+	private void OnAvatarDeath(AvatarDeathEvent evt)
+	{
+		if(evt.victim == _player)
+		{
+			enabled = false;
+		}
 	}
 }

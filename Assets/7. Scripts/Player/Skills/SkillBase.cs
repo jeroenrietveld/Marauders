@@ -9,14 +9,15 @@ public enum SkillType
 {
 	Offensive,
 	Defensive,
-	Utility
+	Utility,
+	Movement
 }
 
 public abstract class SkillBase : ActionBase
 {
-	private static Button[] _buttonMapping = new []{ Button.X, Button.B, Button.Y };
+	private static Button[] _buttonMapping = new []{ Button.X, Button.B, Button.Y, Button.LeftThumb };
 
-	public SkillType skillType;
+	public SkillType skillType = SkillType.Movement;
 	public Timer cooldown { get; private set; }
 	public AnimationHandler.AnimationSettings animationSettings { get; private set; }
 

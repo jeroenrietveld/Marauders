@@ -99,7 +99,7 @@ public static class Event {
 
 		if(_listeners.ContainsKey(type))
 		{
-			_listeners[type].DynamicInvoke(evt);
+			((EventListener<T>)_listeners[type])(evt);
 		}
 	}
 }

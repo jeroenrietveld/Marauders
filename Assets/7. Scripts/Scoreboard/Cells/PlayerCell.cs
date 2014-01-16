@@ -12,7 +12,7 @@ public class PlayerCell : Cell
     {
         this.player = player;
         this.title = player.index.ToString();
-        this.content = /*Resources.Load(player.marauder) as Texture*/"image";
+        this.content = Resources.Load("Textures/Defensive_icon") as Texture;
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

@@ -5,6 +5,7 @@ using System.Text;
 
 public class CustomCell : Cell 
 {
+    public bool hasTrophy;
     public CustomCell(string title, CellType cellType, object content, bool trophysEnabled)
     {
         this.title = title;
@@ -22,8 +23,12 @@ public class CustomCell : Cell
                 result += "%";
                 break;
         }
-
         return result;
+    }
+
+    public override bool HasTrophy()
+    {
+        return hasTrophy && trophysEnabled;
     }
 }
 

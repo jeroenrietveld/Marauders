@@ -72,7 +72,6 @@ public class Player
 		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat_indicator")) as GameObject;
 		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
 
-
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();
 		avatar.AddComponent<ControllerMapping> ();
@@ -83,15 +82,16 @@ public class Player
 		avatar.AddComponent<Interactor> ();
 		avatar.AddComponent<AvatarGraphics>();
 		avatar.AddComponent<Slide> ();
+		avatar.AddComponent<Dash> ();
 		
-		foreach(SkillType skillType in System.Enum.GetValues(typeof(SkillType)))
+		for(int i = 0; i < skills.Length; ++i)
 		{
-			var skillName = skills[(int)skillType];
+			var skillName = skills[i];
 
 			if(skillName != null)
 			{
 				var skill = ((SkillBase)avatar.AddComponent(skillName));
-				if(skill) skill.skillType = skillType;
+				if(skill) skill.skillType = (SkillType)i;
 			}
 		}
 

@@ -16,22 +16,34 @@ public class StartState : SelectionBase
     {
         if (controllerOne.JustPressed(Button.B))
         {
-            GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
+            bool check = true;
+
+            foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
+            {
+                if (item.isInSelection)
+                {
+                    check = false;        
+                }
+            }
+
+            if (check)
+            {
+                GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
+            }
         }
         else if (controller.JustPressed(Button.A))
         {
             block.isJoined = true;
             block.ChangeState(CharacterSelectBlockStates.CharSelectState);
+            block.isInSelection = true;
         }
     }
 
     public override void OnActive()
     {
-     
     }
 
     public override void OnInActive()
     {
-
     }
 }

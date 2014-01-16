@@ -1,6 +1,5 @@
 {
-	"column" : "OwnedShrines",
-	"trophy" : "Owned Shrines",
+	"column" : "Owned Shrines",
 	"title" : "Gaian",
 	"condition" : ">"
 }

@@ -1,0 +1,8 @@
+{
+	"name":"PowerUp",
+	"prefab":"PowerUp",
+	"component":"Movement",
+	"field":"movementSpeed",
+	"factor":"2",
+	"time":"5"
+}
