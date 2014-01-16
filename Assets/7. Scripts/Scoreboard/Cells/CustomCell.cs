@@ -26,6 +26,8 @@ public class CustomCell : Cell
         return result;
     }
 
+
+
     public override bool HasTrophy()
     {
         return hasTrophy && trophysEnabled;

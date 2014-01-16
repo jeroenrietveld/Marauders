@@ -23,13 +23,17 @@ public class ScoreHandler : MonoBehaviour {
 		if(evt.offender != null) 
 		{
 			evt.offender.AddTimeSync (killScore);
+            GameManager.scoreboard.AddContent(evt.offender.index, "Eliminations", 1);
+            GameManager.scoreboard.AddContent(evt.offender.index, "Time Sync", killScore);
 		}
 
 		evt.victim.AddTimeSync (deathPenalty);
+        GameManager.scoreboard.AddContent(evt.victim.index, "Time Sync", deathPenalty);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
 	{
 		evt.avatar.player.AddTimeSync (deathPenalty);
+        GameManager.scoreboard.AddContent(evt.avatar.player.index, "Time Sync", deathPenalty);
 	}
 }
