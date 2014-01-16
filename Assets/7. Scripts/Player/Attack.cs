@@ -29,10 +29,8 @@ public class Attack : ActionBase {
 
 	private Timer _trailTimer;
 
-	private AudioSource _attackSwingSource;
-    private Dictionary<int, List<AudioClip>> _attackSwingClips;
-    private AudioSource _heartBeatHitsSource;
-    private List<AudioClip> _heartBeatClips;
+	private AudioSource swingSource;
+    private AudioSource heartbeatSource;
 	
 	public Attack()
 	{
@@ -65,27 +63,10 @@ public class Attack : ActionBase {
 	void Start () {
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.RightShoulder, this);
-        LoadSounds();
+        
+		heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        swingSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
 	}
-	
-	private void LoadSounds()
-    {
-        _heartBeatHitsSource = gameObject.AddComponent<AudioSource>();
-        _heartBeatClips = new List<AudioClip>();
-        _heartBeatClips.Add(Resources.Load<AudioClip>("Sounds/Combat/HeartbeatHits/Set 2/Hit1"));
-        _heartBeatClips.Add(Resources.Load<AudioClip>("Sounds/Combat/HeartbeatHits/Set 2/Hit2"));
-        _heartBeatClips.Add(Resources.Load<AudioClip>("Sounds/Combat/HeartbeatHits/Set 2/Hit3"));
-
-        _attackSwingSource = gameObject.AddComponent<AudioSource>();
-        _attackSwingClips = new Dictionary<int, List<AudioClip>>();
-        _attackSwingClips.Add(0, Resources.LoadAll<AudioClip>("Sounds/Combat/WeaponSwings/swingcombo1").ToList<AudioClip>());
-        _attackSwingClips.Add(1, Resources.LoadAll<AudioClip>("Sounds/Combat/WeaponSwings/swingcombo2").ToList<AudioClip>());
-        _attackSwingClips.Add(2, Resources.LoadAll<AudioClip>("Sounds/Combat/WeaponSwings/swingcombo3").ToList<AudioClip>());
-
-        _heartBeatHitsSource.playOnAwake = _attackSwingSource.playOnAwake = false;
-        _heartBeatHitsSource.minDistance = _attackSwingSource.minDistance = 200f;
-        _heartBeatHitsSource.maxDistance = _attackSwingSource.maxDistance = 250f;
-    }
 
 	public override void PerformAction()
 	{
@@ -166,13 +147,11 @@ public class Attack : ActionBase {
 	{
 		bool hasHit = false;
 		Collider[] colls = Physics.OverlapSphere(transform.position, _weapon.range);
-
+		
+		GameManager.Instance.soundInGame.PlaySoundIndex(swingSource, "Swing", _comboCount);
+		
 		foreach(Collider hit in colls) 
 		{
-			// Get the correct attackswing clip using the combo count and play a random sound for that collection.
-			_attackSwingSource.clip = _attackSwingClips[_comboCount][new System.Random().Next(0, _attackSwingClips[_comboCount].Count)];
-			if (!_attackSwingSource.isPlaying) { _attackSwingSource.Play(); }
-
 			if (hit.gameObject != gameObject)
 			{
 				// Is this really neccessary? The physics check should suffice I think..
@@ -194,9 +173,7 @@ public class Attack : ActionBase {
 							}
 							hasHit = true;
 							
-							// Get the correct heartbeat clip using the combo count and play the sound.
-							_heartBeatHitsSource.clip = _heartBeatClips[_comboCount];
-							_heartBeatHitsSource.Play();
+							GameManager.Instance.soundInGame.PlaySound(heartbeatSource, "Set2Hit" + _comboCount);
 						}
 					}
 				}

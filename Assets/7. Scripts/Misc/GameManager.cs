@@ -15,7 +15,7 @@ public class GameManager {
 
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<Player> playerRefs;
-
+	public SoundIngame soundInGame;
 	public int timeSyncLimit = 1000;
 
 	public struct MatchSettings
@@ -42,6 +42,7 @@ public class GameManager {
 	{
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
+		soundInGame = new SoundIngame();
 	}
 
 	public void Start()
