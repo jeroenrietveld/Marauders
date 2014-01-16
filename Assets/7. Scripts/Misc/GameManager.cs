@@ -76,4 +76,9 @@ public class GameManager {
         isPaused = false;
         Time.timeScale = 1f;
     }
+
+	public List<Player> playersByTimeSync()
+	{
+		return playerRefs.OrderBy (player => player.timeSync).ToList ();
+	}
 }
