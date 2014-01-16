@@ -57,26 +57,24 @@ public class TimeBubble : MonoBehaviour {
 
 		if(avatar)
 		{
-			Transform avatarTransform = avatar.transform.FindInChildren("Heartbeat_indicator");
-			
-			Debug.Log ("Logging: " + avatarTransform);
-			/*
-			Debug.Log (heartbeat);
+			Transform avatarTransform = avatar.transform.FindInChildren("Heartbeat_indicator(Clone)");
+
+			Heartbeat heartbeat = avatarTransform.GetComponent<Heartbeat>();
 
 			//Checking if we got killed
-			if ((DateTime.Now - heartbeat.lastAttackTime).TotalMilliseconds > 4000)
+			if ((DateTime.Now - heartbeat.lastAttackTime).TotalMilliseconds < 4000)
 			{
 				heartbeat.health = 0;
 
 				//After death respan
 				Event.dispatch(new AvatarDeathEvent(avatar.player, heartbeat.lastAttacker));
-				
-				avatar.player.StartSpawnProcedure();
+
+
 			} else
 			{
 				//Normal respawn
 				Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, respawnDelay));
-			}*/
+			}
 		}
 		else
 		{
