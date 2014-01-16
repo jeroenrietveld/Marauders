@@ -68,8 +68,8 @@ public class TimeBubble : MonoBehaviour {
 
 				//After death respan
 				Event.dispatch(new AvatarDeathEvent(avatar.player, heartbeat.lastAttacker));
-				
-				//avatar.player.StartSpawnProcedure();
+
+
 			} else
 			{
 				//Normal respawn

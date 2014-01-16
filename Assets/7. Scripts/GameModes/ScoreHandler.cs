@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ScoreHandler : MonoBehaviour {
 
-	public int killScore = 50;
-	public int deathPenalty = -25;
+	public int killScore = 5;
+	public int suicidePenalty = -5;
 
 	// Use this for initialization
 	void Start () {
@@ -25,11 +25,11 @@ public class ScoreHandler : MonoBehaviour {
 			evt.offender.AddTimeSync (killScore);
 		}
 
-		evt.victim.AddTimeSync (deathPenalty);
+		evt.victim.AddTimeSync (suicidePenalty);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
 	{
-		evt.avatar.player.AddTimeSync (deathPenalty);
+		evt.avatar.player.AddTimeSync (suicidePenalty);
 	}
 }
