@@ -24,7 +24,10 @@ public class en : Locale {
 		//Boosts
 		Translations["speedboost_pickup"] = "Pickup speedboost";
 
-		Translations["shrine_capture"] = "Combo to capture";
+		//Shrines
+		Translations["shrine_capturable"] = "Combo to capture this Shrine";
+		Translations["shrine_captured"] = "You already captured this Shrine";
+		Translations["shrine_locked"] = "Shrine can't be captured at this time";
 
 	}
 
