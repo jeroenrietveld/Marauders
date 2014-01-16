@@ -24,7 +24,11 @@ Material:
       data:
         first:
           name: phase
+<<<<<<< HEAD
         second: 1.00170076
+=======
+        second: 1.00063241
+>>>>>>> Working on the scoreboard initialization
     m_Colors:
       data:
         first:
