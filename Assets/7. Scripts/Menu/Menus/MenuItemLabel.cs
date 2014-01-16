@@ -2,7 +2,7 @@
 using XInputDotNetPure;
 using System;
  
-public class MenuItemLabel:MenuItem
+public class MenuItemLabel : MenuItem
 {
 	public event XboxPressedEventHandler xboxPressed;
 	
@@ -27,7 +27,6 @@ public class MenuItemLabel:MenuItem
 		//Debug.Log(this.parent.scale);
 		//Draws a label, style is handled by the skin
 		string txt = "<size='"+ (int)( 48f * this.parent.scale ) + "'><color='" + color + "'>" + this.text + "</color></size>";
-		Debug.Log(txt);
 		GUI.Label(
 			new Rect(
 				0,
@@ -41,9 +40,19 @@ public class MenuItemLabel:MenuItem
 
 	public override void HandleInput(GamePad controller)
 	{
-		if (controller.JustPressed(Button.A) || controller.JustPressed(Button.Start))
+		if (controller.JustPressed(Button.Start))
+		{
+			this.xboxPressed(this, Button.Start);
+		}
+
+		if (controller.JustPressed(Button.A))
 		{
 			this.xboxPressed(this, Button.A);
+		}
+
+		if (controller.JustPressed(Button.B))
+		{
+			this.xboxPressed(this, Button.B);
 		}
 	}
 }

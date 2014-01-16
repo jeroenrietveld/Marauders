@@ -4,6 +4,9 @@ using System.Collections;
 /// <summary>
 /// Prototype for the heart beat, this indicates the player health.
 /// </summary>
+using System;
+
+
 public class Heartbeat : Attackable {
 	public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
 	public float groundOffset = 0.1f;
@@ -14,9 +17,13 @@ public class Heartbeat : Attackable {
 	private float _groundHeight;
 	private float _playerOffset;
 	private float _currentRotation;
+	private float _armorFactor = 0.5f;
 	
 	private GameObject _damage;
 	private Avatar _avatar;
+
+	public Player lastAttacker;
+	public DateTime lastAttackTime;
 
 	private Timer _damageTimer;
 
@@ -33,8 +40,6 @@ public class Heartbeat : Attackable {
 			if(alive)
 			{
 				_health = Mathf.Clamp01(value);
-				
-				//controller.SetVibration(1, 1, .2f);
 			}
 		}
 	}
@@ -47,7 +52,7 @@ public class Heartbeat : Attackable {
 		}
 	}
 	
-	private float _armorFactor = 0.1f;
+
 
 	void Start ()
 	{
@@ -102,27 +107,31 @@ public class Heartbeat : Attackable {
 
 	public override void OnAttack(Attack attacker)
 	{
+		//Just to be clear; we are beeing hit
 		var direction = attacker.transform.position - transform.position;
 		direction.y = 0;
 		direction.Normalize ();
 
+		//Saving the last attacker
+		lastAttacker = attacker.GetComponent<Avatar>().player;
+		lastAttackTime = DateTime.Now;
+
+		//Applying the damage
 		float dot = Vector3.Dot(direction, transform.forward);
 		bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
-
 		var amount = attacker.weapon.damage;
-		
 		if(armorHit)
 		{
 			amount = amount * _armorFactor;
 		}
-
 		var previousHealth = health;
 		health = health - amount;
 
+		//Applying Knockback
 		_avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
 
+		//heartbeat effects etc
 		renderer.material.SetFloat ("health", health);
-
 		var material = _damage.renderer.material;
 		material.SetFloat("upperBound", previousHealth);
 		material.SetFloat("lowerBound", health);
