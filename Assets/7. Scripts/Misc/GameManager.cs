@@ -14,7 +14,6 @@ public class GameManager {
     /// <summary>
     /// The instance of the scoreboard
     /// </summary>
-<<<<<<< HEAD
     public static Scoreboard scoreboard;
 
     public static bool isPaused = false;
@@ -89,79 +88,4 @@ public class GameManager {
 	{
 		return playerRefs.OrderBy (player => player.timeSync).ToList ();
 	}
-=======
-    public static Scoreboard scoreboard;
-
-    public static bool isPaused = false;
-
-	//TODO: Remove Player list, rename playerRefs to players.
-	public List<Player> playerRefs;
-
-	public int timeSyncLimit = 1000;
-
-	public struct MatchSettings
-	{
-		public string level;
-		public GameMode gameMode;
-        public float timeSync;
-	}
-	public MatchSettings matchSettings;
-
-	public static GameManager Instance
-	{
-		get
-		{
-			if(_instance == null)
-			{
-				_instance = new GameManager();
-			}
-			return _instance;
-		}
-	}
-
-	private GameManager()
-	{
-        matchSettings = new MatchSettings();
-		playerRefs = new List<Player> ();
-        scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
-	}
-
-	public void Start()
-	{   
-        if (matchSettings.level != null)
-        {
-			Application.LoadLevel(matchSettings.level);
-        } 
-	}
-
-    public void AddPlayerRef(Player model)
-    {
-        playerRefs.RemoveAll(x => x.index.Equals(model.index));
-		
-		int index = 0;
-		while(index < playerRefs.Count && playerRefs[index].indexInt < model.indexInt) 
-		{
-			index++;
-		}
-		
-		playerRefs.Insert (index, model);
-    }
-
-    public void PauseGame()
-    {
-        isPaused = true;
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeGame()
-    {
-        isPaused = false;
-        Time.timeScale = 1f;
-    }
-
-	public List<Player> playersByTimeSync()
-	{
-		return playerRefs.OrderBy (player => player.timeSync).ToList ();
-	}
->>>>>>> Working on the scoreboard initialization
 }
