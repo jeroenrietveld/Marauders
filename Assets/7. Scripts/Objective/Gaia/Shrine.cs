@@ -62,8 +62,8 @@ public class Shrine : Attackable {
 
 	void Start()
 	{
-        shrineSourceActivated = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
-        shrineSourceHit = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        shrineSourceActivated = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
+        shrineSourceHit = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
 		_light = GetComponentInChildren<Light> ();
 

@@ -20,8 +20,8 @@ public class Movement : MonoBehaviour {
     private AudioSource movementSource;
 
 	void Start () {
-        movementSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
-        movementSource.loop = true;
+        movementSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volumemovement);
+
 		_avatar = GetComponent<Avatar> ();
 		_camera = Camera.main;
 
@@ -101,7 +101,7 @@ public class Movement : MonoBehaviour {
             // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
             if(GetComponent<Jump>().onGround)
             {
-                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, "leather-sole-wood-walk", false, 0.6f);
+                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, "leather-sole-wood-walk", false, 0.65f);
             }
 
             if(!animation.IsPlaying ("Walk"))

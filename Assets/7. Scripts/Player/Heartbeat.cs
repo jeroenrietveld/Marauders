@@ -58,7 +58,7 @@ public class Heartbeat : Attackable
 
     void Start()
     {
-        heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         _damage = transform.GetChild(0).gameObject;
         _avatar = transform.parent.GetComponent<Avatar>();
 

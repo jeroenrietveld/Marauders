@@ -5,14 +5,21 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+public enum SoundSettingTypes
+{
+    volume,
+    volumemovement,
+    minSoundDistance,
+    maxSoundDistance
+}
+
 public class SoundIngame
 {
     private List<AudioClip> _clips;
-    private float _volume;
+
     public SoundIngame()
     {
         _clips = Resources.LoadAll<AudioClip>("Sounds/").ToList();
-        _volume = GetVolume();
         //WriteVolume(0.333333f);
     }
 
@@ -34,15 +41,12 @@ public class SoundIngame
     }
 
     /// <summary>
-    /// Read the volume from the settings.json file.
+    /// Load the volumes from the settings.json file.
     /// </summary>
-    /// <returns>The volume defined in the settings.json file.</returns>
-    public float GetVolume()
+    public float LoadSpecificSoundSettings(SoundSettingTypes soundSettingToLoad)
     {
         SimpleJSON.JSONNode node = SimpleJSON.JSON.Parse(Resources.Load<TextAsset>("JSON/Settings/settings").text);
-        float volume = node["volume"].AsFloat;
-        Debug.Log("GetVolume: " + volume);
-        return volume; 
+        return node[soundSettingToLoad.ToString()].AsFloat;
     }
 
     /// <summary>
@@ -50,14 +54,15 @@ public class SoundIngame
     /// </summary>
     /// <param name="objectToAddTo"></param>
     /// <returns>Returns the audiosource which was added to the gameobject.</returns>
-    public AudioSource AddAndSetupAudioSource(GameObject objectToAddTo)
+    public AudioSource AddAndSetupAudioSource(GameObject objectToAddTo, SoundSettingTypes volumeSettingTypeToLoad)
     {
         AudioSource source = objectToAddTo.AddComponent<AudioSource>();
-        source.volume = _volume;
         source.loop = false;
         source.playOnAwake = false;
-        source.minDistance = 200f;
-        source.maxDistance = 250f;
+        source.minDistance = LoadSpecificSoundSettings(SoundSettingTypes.minSoundDistance);
+        source.maxDistance = LoadSpecificSoundSettings(SoundSettingTypes.maxSoundDistance);
+        float volumeLoaded = LoadSpecificSoundSettings(volumeSettingTypeToLoad);
+        source.volume = Mathf.Clamp(volumeLoaded, 0, 1f);
         return source;
     }
 
@@ -71,7 +76,6 @@ public class SoundIngame
     {
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
-            source.volume = _volume;
             source.clip = _clips.First(x => x.name == soundFilename);
             source.Play();
         }
@@ -89,7 +93,6 @@ public class SoundIngame
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-            source.volume = _volume;
             source.clip = list[new System.Random().Next(0, list.Count)];
             source.Play();
         }
@@ -107,7 +110,6 @@ public class SoundIngame
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-            source.volume = _volume;
             int indexClip = index >= 0 && index < list.Count ? index : 1;
             source.clip = list[indexClip];
             source.Play();
@@ -120,8 +122,8 @@ public class SoundIngame
         {
             if(source.time > endTime || source.time <= 0f)
             {
+                
                 List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-                source.volume = _volume;
                 source.loop = true;
                 source.clip = list[new System.Random().Next(0, list.Count)];
                 source.Play();
