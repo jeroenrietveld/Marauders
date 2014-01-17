@@ -36,7 +36,7 @@ public class ScoreHandler : MonoBehaviour {
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
 	{
-		var heartbeat = evt.avatar.GetComponentInChildren<Heartbeat> ();
+		var heartbeat = evt.avatar.GetComponentsInChildren<Heartbeat> (true)[0];
 
 		if(heartbeat.lastAttacker != null)
 		{
