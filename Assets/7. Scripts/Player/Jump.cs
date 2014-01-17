@@ -49,7 +49,7 @@ public class Jump : ActionBase {
 				2,
 				WrapMode.Clamp
 			));
-        _jumpSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        _jumpSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 	}
 	
 	public override void PerformAction()

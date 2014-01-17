@@ -62,8 +62,8 @@ public class Attack : ActionBase {
 	void Start () {
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.RightShoulder, this);
-        
-        swingSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+
+        swingSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 	}
 
 	public override void PerformAction()

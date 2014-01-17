@@ -27,7 +27,7 @@ public class Dash : SkillBase
 	
 	protected override void OnStart()
     {
-        dashSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject);
+        dashSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject, SoundSettingTypes.volume);
     }
 
 	/*

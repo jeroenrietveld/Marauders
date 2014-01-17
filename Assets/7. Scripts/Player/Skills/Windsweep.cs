@@ -25,7 +25,7 @@ public class Windsweep : SkillBase
 	
 	protected override void OnStart()
     {
-		windsweepSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject);
+		windsweepSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject, SoundSettingTypes.volume);
     }
 
 	protected override void OnPerformAction()
