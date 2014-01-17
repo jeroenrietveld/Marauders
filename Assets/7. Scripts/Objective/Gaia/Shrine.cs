@@ -21,7 +21,7 @@ public class Shrine : Attackable {
 		CAPTURABLE_COLOR = Color.white;
 
     private AudioSource shrineSourceHit;
-    private AudioSource shrineSourceActivated;
+    private AudioSource shrineActivatedConquered;
 
 	private bool _capturable;
 	public bool capturable
@@ -62,7 +62,7 @@ public class Shrine : Attackable {
 
 	void Start()
 	{
-        shrineSourceActivated = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
+        shrineActivatedConquered = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         shrineSourceHit = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
 		_light = GetComponentInChildren<Light> ();
@@ -90,19 +90,23 @@ public class Shrine : Attackable {
 
 	public override void OnAttack(Attack attacker)
 	{
-        GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", attacker.comboCount, false);
-		if (capturable && attacker.isCombo)
-		{
-			var player = attacker.GetComponent<Avatar>().player;
+        if(capturable)
+        {
+            GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", attacker.comboCount, false);
+            if (attacker.isCombo)
+            {
+                var player = attacker.GetComponent<Avatar>().player;
 
-			if(player != _owner)
-			{
-				var oldOwner = owner;
-				owner = player;
+                if (player != _owner)
+                {
+                    var oldOwner = owner;
+                    owner = player;
 
-				Event.dispatch(new ShrineCapturedEvent(this, player, oldOwner));
-			}
-		}
+                    Event.dispatch(new ShrineCapturedEvent(this, player, oldOwner));
+                    GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-conquered", true);
+                }
+            }
+        }
 	}
 	
 	public void Reset()
@@ -115,7 +119,7 @@ public class Shrine : Attackable {
 	public void Activate()
 	{
 		capturable = true;
-        GameManager.Instance.soundInGame.PlaySound(shrineSourceActivated, "Shrine-activated", true);
+        GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-activated", true);
 	}
 
 	private void UpdateColor()

@@ -62,7 +62,7 @@ public class SoundIngame
         source.minDistance = LoadSpecificSoundSettings(SoundSettingTypes.minSoundDistance);
         source.maxDistance = LoadSpecificSoundSettings(SoundSettingTypes.maxSoundDistance);
         float volumeLoaded = LoadSpecificSoundSettings(volumeSettingTypeToLoad);
-        source.volume = Mathf.Clamp(volumeLoaded, 0, 1f);
+        source.volume = Mathf.Clamp(volumeLoaded, 0.0f, 1.0f);
         return source;
     }
 

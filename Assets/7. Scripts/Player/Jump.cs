@@ -57,8 +57,7 @@ public class Jump : ActionBase {
 		if(_isJumping == false)
 		{
 			_isJumping = true;
-
-			GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump", true);
+            GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump", false);
 			
 			var velocity = rigidbody.velocity;
 			velocity.y = 0;
