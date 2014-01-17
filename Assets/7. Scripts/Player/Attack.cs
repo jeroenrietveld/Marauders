@@ -30,7 +30,6 @@ public class Attack : ActionBase {
 	private Timer _trailTimer;
 
 	private AudioSource swingSource;
-    private AudioSource heartbeatSource;
 	
 	public Attack()
 	{
@@ -64,7 +63,6 @@ public class Attack : ActionBase {
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.RightShoulder, this);
         
-		heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
         swingSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
 	}
 
@@ -148,7 +146,7 @@ public class Attack : ActionBase {
 		bool hasHit = false;
 		Collider[] colls = Physics.OverlapSphere(transform.position, _weapon.range);
 		
-		GameManager.Instance.soundInGame.PlaySoundIndex(swingSource, "Swing", _comboCount);
+		GameManager.Instance.soundInGame.PlaySoundIndex(swingSource, "Swing", _comboCount, false);
 		
 		foreach(Collider hit in colls) 
 		{
@@ -172,8 +170,6 @@ public class Attack : ActionBase {
 								attackable.OnAttack(this);
 							}
 							hasHit = true;
-							
-							GameManager.Instance.soundInGame.PlaySound(heartbeatSource, "Set2Hit" + _comboCount);
 						}
 					}
 				}

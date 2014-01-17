@@ -17,6 +17,8 @@ public class Heartbeat : Attackable
     private float _currentRotation;
     private float _armorFactor = 0.5f;
 
+    private AudioSource heartbeatSource;
+
     private GameObject _damage;
     private Avatar _avatar;
 
@@ -56,6 +58,7 @@ public class Heartbeat : Attackable
 
     void Start()
     {
+        heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
         _damage = transform.GetChild(0).gameObject;
         _avatar = transform.parent.GetComponent<Avatar>();
 
@@ -118,6 +121,8 @@ public class Heartbeat : Attackable
 
     public override void OnAttack(Attack attacker)
     {
+        GameManager.Instance.soundInGame.PlaySound(heartbeatSource, "Set2Hit" + attacker.comboCount, false);
+
         //Just to be clear; we are beeing hit
         var direction = attacker.transform.position - transform.position;
         direction.y = 0;

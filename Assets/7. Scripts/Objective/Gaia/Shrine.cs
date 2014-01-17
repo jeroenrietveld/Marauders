@@ -20,6 +20,8 @@ public class Shrine : Attackable {
 		INACTIVE_COLOR = Color.black,
 		CAPTURABLE_COLOR = Color.white;
 
+    private AudioSource shrineSourceHit;
+    private AudioSource shrineSourceActivated;
 
 	private bool _capturable;
 	public bool capturable
@@ -60,6 +62,8 @@ public class Shrine : Attackable {
 
 	void Start()
 	{
+        shrineSourceActivated = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        shrineSourceHit = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
 		_light = GetComponentInChildren<Light> ();
 
@@ -86,6 +90,7 @@ public class Shrine : Attackable {
 
 	public override void OnAttack(Attack attacker)
 	{
+        GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", attacker.comboCount, false);
 		if (capturable && attacker.isCombo)
 		{
 			var player = attacker.GetComponent<Avatar>().player;
@@ -110,6 +115,7 @@ public class Shrine : Attackable {
 	public void Activate()
 	{
 		capturable = true;
+        GameManager.Instance.soundInGame.PlaySound(shrineSourceActivated, "Shrine-activated", true);
 	}
 
 	private void UpdateColor()

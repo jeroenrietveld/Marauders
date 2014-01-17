@@ -40,7 +40,7 @@ public class Dash : SkillBase
 
 	protected override void OnPerformAction()
 	{
-		GameManager.Instance.soundInGame.PlaySound(dashSource, "Dash");
+		GameManager.Instance.soundInGame.PlaySound(dashSource, "Dash", true);
 		_dashing.Start ();
     }
 

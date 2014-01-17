@@ -66,9 +66,10 @@ public class SoundIngame
     /// </summary>
     /// <param name="source">The audiosource on which to play the sound.</param>
     /// <param name="soundFilename">The exact filename for the sounds which needs to be played.</param>
-    public void PlaySound(AudioSource source, string soundFilename)
+    /// <param name="shouldIsPlayingBeChecked">If true if will check if it is already playing a sound. If false it will ignore it.</param>
+    public void PlaySound(AudioSource source, string soundFilename, bool shouldIsPlayingBeChecked)
     {
-        if(!source.isPlaying || source.isPlaying)
+        if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             source.volume = _volume;
             source.clip = _clips.First(x => x.name == soundFilename);
@@ -82,9 +83,10 @@ public class SoundIngame
     /// </summary>
     /// <param name="source">The audiosource on which to play the sound.</param>
     /// <param name="prefixSoundPartFilename">The prefix which loads all of the audioclips which start with this value.</param>
-    public void PlaySoundRandom(AudioSource source, string prefixSoundPartFilename)
+    /// <param name="shouldIsPlayingBeChecked">If true if will check if it is already playing a sound. If false it will ignore it.</param>
+    public void PlaySoundRandom(AudioSource source, string prefixSoundPartFilename, bool shouldIsPlayingBeChecked)
     {
-        if (!source.isPlaying || source.isPlaying)
+        if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
             source.volume = _volume;
@@ -99,15 +101,31 @@ public class SoundIngame
     /// <param name="source">The audiosource on which to play the sound.</param>
     /// <param name="prefixSoundPartFilename">The prefix which loads all of the audioclips which start with this value.</param>
     /// <param name="index">The index used to play a audioclip from the resultlist.</param>
-    public void PlaySoundIndex(AudioSource source, string prefixSoundPartFilename, int index)
+    /// <param name="shouldIsPlayingBeChecked">If true if will check if it is already playing a sound. If false it will ignore it.</param>
+    public void PlaySoundIndex(AudioSource source, string prefixSoundPartFilename, int index, bool shouldIsPlayingBeChecked)
     {
-        if (!source.isPlaying || source.isPlaying)
+        if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
             source.volume = _volume;
             int indexClip = index >= 0 && index < list.Count ? index : 1;
             source.clip = list[indexClip];
             source.Play();
+        }
+    }
+
+    public void PlaySoundLoopAndEndtime(AudioSource source, string prefixSoundPartFilename, bool shouldIsPlayingBeChecked, float endTime)
+    {
+        if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
+        {
+            if(source.time > endTime || source.time <= 0f)
+            {
+                List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
+                source.volume = _volume;
+                source.loop = true;
+                source.clip = list[new System.Random().Next(0, list.Count)];
+                source.Play();
+            }
         }
     }
 

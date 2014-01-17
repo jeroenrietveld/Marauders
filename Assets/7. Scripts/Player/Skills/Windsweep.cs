@@ -30,7 +30,7 @@ public class Windsweep : SkillBase
 
 	protected override void OnPerformAction()
 	{
-		GameManager.Instance.soundInGame.PlaySound(windsweepSource, "Windsweep");
+		GameManager.Instance.soundInGame.PlaySound(windsweepSource, "Windsweep", true);
 		foreach(var player in GameManager.Instance.playerRefs)
 		{
 			var avatar = player.avatar;

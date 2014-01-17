@@ -58,7 +58,7 @@ public class Jump : ActionBase {
 		{
 			_isJumping = true;
 
-			GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump");
+			GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump", true);
 			
 			var velocity = rigidbody.velocity;
 			velocity.y = 0;
@@ -98,6 +98,8 @@ public class Jump : ActionBase {
 				}
 
 				//We've landed
+                // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
+                GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, "leather-sole-wood-land", true);
 				_isJumping = false;
 			}
 

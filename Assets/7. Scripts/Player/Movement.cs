@@ -17,7 +17,11 @@ public class Movement : MonoBehaviour {
 	private Vector3 _targetVelocity;
 	public Vector3 targetVelocity { get { return _targetVelocity; } }
 
+    private AudioSource movementSource;
+
 	void Start () {
+        movementSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject);
+        movementSource.loop = true;
 		_avatar = GetComponent<Avatar> ();
 		_camera = Camera.main;
 
@@ -89,19 +93,32 @@ public class Movement : MonoBehaviour {
 	{
 		if(targetVelocity < MAX_SPEED_IDLE)
 		{
+            GameManager.Instance.soundInGame.StopSound(movementSource);
 			animation.CrossFade("Idle", 0.3f, PlayMode.StopSameLayer);
 		}
 		else if(targetVelocity < MAX_SPEED_WALKING)
 		{
-			if(!animation.IsPlaying ("Walk"))
+            // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
+            if(GetComponent<Jump>().onGround)
+            {
+                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, "leather-sole-wood-walk", false, 0.6f);
+            }
+
+            if(!animation.IsPlaying ("Walk"))
 			{
-				animation.CrossFade("Walk", 0.3f, PlayMode.StopSameLayer);
+                animation.CrossFade("Walk", 0.3f, PlayMode.StopSameLayer);
 				animation["Walk"].speed = targetVelocity * 0.7f;
-			}
+            }
 		}
 		else
 		{
-			if (!animation.IsPlaying("Run"))
+            // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
+            if (GetComponent<Jump>().onGround)
+            {
+                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, "leather-sole-wood-run", false, 0.4f);
+            }
+            
+            if (!animation.IsPlaying("Run"))
 			{
 				animation.CrossFade("Run", 0.3f, PlayMode.StopSameLayer);
 				animation["Run"].speed = targetVelocity * 0.2f;
