@@ -17,7 +17,7 @@ public class GameUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
+		_material = Resources.Load("Materials/CooldownMat", typeof(Material)) as Material;
 		_texture = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
 
 		_lightbulbMat = Resources.Load ("Materials/Lightbulb", typeof(Material)) as Material;
@@ -46,9 +46,8 @@ public class GameUI : MonoBehaviour {
 		{
 			Player player = playerRefs[playerIndex];
 			_lightbulbMat.SetColor("_Color", lightBulbColors[playerIndex]);
-			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][4], _lightbulbTex, _lightbulbMat); 
-
-			_material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.timeSyncLimit);
+			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][4], _lightbulbTex, _lightbulbMat);
+			_material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
 			_material.SetColor("playerColor", player.color);
 			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][3], _texture, _material);
 			GUI.Label (_cooldownUIPositions[playerIndex][3], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());

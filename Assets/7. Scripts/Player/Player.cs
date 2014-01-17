@@ -111,11 +111,11 @@ public class Player
 	
 	public void AddTimeSync(int timeSync)
 	{
-		int timeSyncLimit = GameManager.Instance.timeSyncLimit;
+		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
 
 		this.timeSync = Mathf.Clamp(this.timeSync + timeSync, 0, timeSyncLimit);
 		
-		if (timeSync == timeSyncLimit)
+		if (timeSync >= timeSyncLimit)
 		{
 			Event.dispatch(new PlayerTimeSyncedEvent(this));
 		}

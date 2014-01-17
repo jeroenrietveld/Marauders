@@ -18,6 +18,6 @@ public class TimeSyncCell : Cell
 
     public override string GetContent()
     {
-        return content.ToString();
+        return (int)content > 0 ? (Mathf.Clamp(GameManager.Instance.matchSettings.timeSync / (int)(content), 0, 100)).ToString() : "0"; 
     }
 }

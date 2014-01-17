@@ -33,18 +33,16 @@ public class SettingsBlock : LevelSelectionBlockBase
 		}
         /// For BETA version no settings
             if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
-            {
+            {              
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
-                GameManager.Instance.matchSettings.timeSync = _timeSyncBar.GetPercentage();
+                GameManager.Instance.matchSettings.timeSync = (int)(_timeSyncBar.GetPercentage() * 1000);
 
                 // Get the selected game mode class by using the Activator
                 // Default Normal until new game modes are implemented.
                  var selectedGameMode = Activator.CreateInstance(null, "Normal");
                  GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();    
-
-				GameManager.Instance.timeSyncLimit = 100;
-                GameManager.Instance.Start();
+                 GameManager.Instance.Start();
             }
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {

@@ -12,6 +12,7 @@ public class ScoreHandler : MonoBehaviour {
 	void Start () {
 		Event.register<AvatarDeathEvent>(OnAvatarDeath);
 		Event.register<TimeBubbleAvatarExitEvent>(OnTimeBubbleExit);
+        Event.register<PlayerTimeSyncedEvent>(OnTimeSynced);
 	}
 
 	void OnDisable()
@@ -51,4 +52,9 @@ public class ScoreHandler : MonoBehaviour {
 			GameManager.scoreboard.AddContent(evt.avatar.player.index, "Time Sync", suicidePenalty);
 		}
 	}
+
+    void OnTimeSynced(PlayerTimeSyncedEvent evt)
+    {
+        GameManager.Instance.StopGame();
+    }
 }

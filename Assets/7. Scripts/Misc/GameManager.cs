@@ -21,13 +21,12 @@ public class GameManager {
 	//TODO: Remove Player list, rename playerRefs to players.
 	public List<Player> playerRefs;
 	public SoundIngame soundInGame;
-	public int timeSyncLimit = 1000;
 
 	public struct MatchSettings
 	{
 		public string level;
 		public GameMode gameMode;
-        public float timeSync;
+        public int timeSync;
 	}
 	public MatchSettings matchSettings;
 
@@ -48,7 +47,7 @@ public class GameManager {
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
 		soundInGame = new SoundIngame();
-		scoreboard = new Scoreboard();
+        scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
 	}
 
 	public void Start()
@@ -88,4 +87,10 @@ public class GameManager {
 	{
 		return playerRefs.OrderBy (player => player.timeSync).ToList ();
 	}
+
+    public void StopGame()
+    {
+        scoreboard.Show();
+        PauseGame();
+    }
 }

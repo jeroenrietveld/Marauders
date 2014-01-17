@@ -66,14 +66,14 @@ public class Scoreboard : MonoBehaviour
 
     void Start()
     {      
-        _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
+        _material = Resources.Load("Materials/CooldownMat", typeof(Material)) as Material;
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
-        _trophyTexture = Resources.Load("Textures/Utility_icon", typeof(Texture)) as Texture;
+        _trophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
 
         _visible = false;
         
         #region Test - all comments atm
-       /*
+        /*
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
        
@@ -142,7 +142,7 @@ public class Scoreboard : MonoBehaviour
         scoreboard.SetTrophy(PlayerIndex.Two, "Eliminaions", "Eliminator");
 
         scoreboard.Show();
-        */
+         */
         #endregion
        
     }
@@ -157,17 +157,20 @@ public class Scoreboard : MonoBehaviour
 
    void OnGUI()
     {
-        if (_visible)
+        if (_cells.Count > 0)
         {
-            if (UnityEngine.Event.current.type != EventType.Repaint)
+            if (_visible)
             {
-                //This prevents the drawing in the 3D scape.
-                //Graphics.DrawTexture does this.
-                return;
+                if (UnityEngine.Event.current.type != EventType.Repaint)
+                {
+                    //This prevents the drawing in the 3D scape.
+                    //Graphics.DrawTexture does this.
+                    return;
+                }
+                _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
+                GUI.skin = scoreboardskin;
+                _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
             }
-            _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
-            GUI.skin = scoreboardskin;
-            _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
         }
     }
 
@@ -187,6 +190,8 @@ public class Scoreboard : MonoBehaviour
 
        float fontScale = Screen.width / 768f;
 
+       GUI.contentColor = Color.black;
+
        GUI.skin.label.fontSize = (int) (10 * fontScale);
        for (int i = 0; i < rows; i++)
        {
@@ -202,7 +207,7 @@ public class Scoreboard : MonoBehaviour
                    scoreboardskin.label.alignment = TextAnchor.UpperLeft;
                    GUI.contentColor = _currentColor;
                    GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent());
-                   GUI.contentColor = Color.white;
+                   GUI.contentColor = Color.black;
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                } 
                else if(_cells[i][j] is PlayerCell)
@@ -210,7 +215,7 @@ public class Scoreboard : MonoBehaviour
                    float textureSize = Math.Min(cellWidth, cellHeight) * 0.8f;
                    float horizontalTextureOffset = (cellWidth - textureSize) / 2;
                    float verticalTextureOffset = cellHeight * 0.2f;
-                   GUI.Box(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _cells[i][j].content as Texture);
+                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _cells[i][j].content as Texture);
                    _currentColor = ((PlayerCell)_cells[i][j]).player.color;
                } 
                else if(_cells[i][j] is TimeSyncCell)
