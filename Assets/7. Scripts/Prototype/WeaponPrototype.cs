@@ -5,7 +5,7 @@ public class WeaponPrototype : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		PickupSpawner.SpawnPowerUp(new Vector3(0, 20, 0));
+		//PickupSpawner.SpawnPowerUp(new Vector3(0, 20, 0));
 		/*
 		GameObject katana1 = WeaponFactory.create ("Katana");
 		PickupSpawner.SpawnWeapon (katana1, new Vector3(0, 20, 0));
@@ -20,21 +20,19 @@ public class WeaponPrototype : MonoBehaviour {
 		PickupSpawner.SpawnWeapon (daggers, new Vector3(0, 20, 25));
 		*/
 
-        /*
-        Fixed some bugs and updated SpectatorCamera.
+		/*
 		Player player1 = new Player (PlayerIndex.One);
 		player1.marauder = "Samurai";
 		player1.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player1);
-        */
 
-		/*
-        Fixed some bugs and updated SpectatorCamera.
+
+
 		Player player2 = new Player (PlayerIndex.Two);
 		player2.marauder = "Samurai";
 		player2.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player2);
-		
+		*/
 		/*
 		PlayerRef player3 = new PlayerRef (PlayerIndex.Three);
 		player3.marauder = "Samurai";
