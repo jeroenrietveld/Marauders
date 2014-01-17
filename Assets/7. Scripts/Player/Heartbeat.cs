@@ -4,9 +4,6 @@ using System.Collections;
 /// <summary>
 /// Prototype for the heart beat, this indicates the player health.
 /// </summary>
-using System;
-
-
 public class Heartbeat : Attackable
 {
     public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
@@ -23,8 +20,10 @@ public class Heartbeat : Attackable
     private GameObject _damage;
     private Avatar _avatar;
 
-    public Player lastAttacker;
-    public DateTime lastAttackTime;
+    private Player _lastAttacker;
+	public Player lastAttacker { get { return _lastAttacker; } }
+
+	private Timer _lastAttackerTimer;
 
     private Timer _damageTimer;
 
@@ -79,6 +78,12 @@ public class Heartbeat : Attackable
             _damage.transform.localScale = Vector3.one * (1 + _damageTimer.Phase() * damageScale);
             _damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
         });
+
+		_lastAttackerTimer = new Timer(4);
+		_lastAttackerTimer.AddPhaseCallback (delegate
+		{
+			_lastAttacker = null;
+		});
     }
 
     void FixedUpdate()
@@ -107,6 +112,8 @@ public class Heartbeat : Attackable
         transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
         _damageTimer.Update();
+
+		_lastAttackerTimer.Update ();
     }
 
     public override void OnAttack(Attack attacker)
@@ -117,8 +124,8 @@ public class Heartbeat : Attackable
         direction.Normalize();
 
         //Saving the last attacker
-        lastAttacker = attacker.GetComponent<Avatar>().player;
-        lastAttackTime = DateTime.Now;
+        _lastAttacker = attacker.GetComponent<Avatar>().player;
+		_lastAttackerTimer.Start ();
 
         //Applying the damage
         float dot = Vector3.Dot(direction, transform.forward);

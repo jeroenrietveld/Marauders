@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public struct TimeBubbleEnterEvent
 {
@@ -57,24 +56,7 @@ public class TimeBubble : MonoBehaviour {
 
 		if(avatar)
 		{
-			Transform avatarTransform = avatar.transform.FindInChildren("Heartbeat_indicator(Clone)");
-
-			Heartbeat heartbeat = avatarTransform.GetComponent<Heartbeat>();
-
-			//Checking if we got killed
-			if ((DateTime.Now - heartbeat.lastAttackTime).TotalMilliseconds < 4000)
-			{
-				heartbeat.health = 0;
-
-				//After death respan
-				Event.dispatch(new AvatarDeathEvent(avatar.player, heartbeat.lastAttacker));
-
-
-			} else
-			{
-				//Normal respawn
-				Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, respawnDelay));
-			}
+			Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, respawnDelay));
 		}
 		else
 		{
