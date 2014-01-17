@@ -18,7 +18,7 @@ public abstract class Cell
     public String title;
 
     public object content;
-
+            
     public bool trophysEnabled;
 
     public CellType cellType;

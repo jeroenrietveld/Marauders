@@ -36,7 +36,6 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
     public override void Update(GamePad controller)
 	{
-
 		int index = _currentIndex;
         _time -= Time.deltaTime;
 
@@ -50,7 +49,7 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 			_currentIndex--;
             _time = _resetTime;
 		}
-        if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
+        if (controller.JustPressed(Button.A))
 		{
 			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}

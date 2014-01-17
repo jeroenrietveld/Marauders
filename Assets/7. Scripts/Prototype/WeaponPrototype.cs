@@ -19,12 +19,23 @@ public class WeaponPrototype : MonoBehaviour {
 		GameObject daggers = WeaponFactory.create ("Daggers");
 		PickupSpawner.SpawnWeapon (daggers, new Vector3(0, 20, 25));
 		*/
+<<<<<<< HEAD
         
+=======
+
+        /*
+>>>>>>> Fixed some bugs and updated SpectatorCamera.
 		Player player1 = new Player (PlayerIndex.One);
 		player1.marauder = "Samurai";
 		player1.skills = new []{"Dash", "Dash", "Dash"};
 		GameManager.Instance.AddPlayerRef(player1);
+<<<<<<< HEAD
 		
+=======
+        */
+
+		/*
+>>>>>>> Fixed some bugs and updated SpectatorCamera.
 		Player player2 = new Player (PlayerIndex.Two);
 		player2.marauder = "Samurai";
 		player2.skills = new []{"Dash", "Dash", "Dash"};

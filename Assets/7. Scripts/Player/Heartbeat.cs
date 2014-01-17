@@ -156,7 +156,6 @@ public class Heartbeat : Attackable
         if (!alive)
         {
             Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
-            Destroy(gameObject);
         }
         else
         {

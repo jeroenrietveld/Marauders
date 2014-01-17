@@ -3,10 +3,10 @@ using System.Collections;
 
 public class ScoreHandler : MonoBehaviour {
 
-	public int killReward = 5;
-	public int suicidePenalty = -5;
-	public int smackedOutPenalty = -5;
-	public int smackOutReward = 5;
+	public int killReward = 50;
+	public int suicidePenalty = -50;
+	public int smackedOutPenalty = -50;
+	public int smackOutReward = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +26,7 @@ public class ScoreHandler : MonoBehaviour {
 		if(evt.offender != null) 
 		{
 			evt.offender.AddTimeSync (killReward);
-            GameManager.scoreboard.AddContent(evt.offender.index, "Eliminations", 1);
+            GameManager.scoreboard.AddContent(evt.offender.index, "Kills", 1);
             GameManager.scoreboard.AddContent(evt.offender.index, "Time Sync", killReward);
 		}
 
@@ -42,9 +42,11 @@ public class ScoreHandler : MonoBehaviour {
 		{
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
 			GameManager.scoreboard.AddContent(evt.avatar.player.index, "Time Sync", smackedOutPenalty);
+            GameManager.scoreboard.AddContent(evt.avatar.player.index, "Eliminated", 1);
 
 			heartbeat.lastAttacker.AddTimeSync(smackOutReward);
 			GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Time Sync", smackOutReward);
+            GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Eliminations", 1);
 		}
 		else
 		{

@@ -221,7 +221,7 @@ public class Scoreboard : MonoBehaviour
                else if(_cells[i][j] is TimeSyncCell)
                {
                    //TimeSync texture here
-                   float percentage = (int)_cells[i][j].content / 100f;
+                   float percentage = (int)_cells[i][j].content / (float)GameManager.Instance.matchSettings.timeSync;
                    _material.SetFloat("phase", percentage);
                    _material.SetColor("playerColor", _currentColor);
                    float matSize = Math.Min(cellWidth, cellHeight) * 0.75f;
@@ -230,7 +230,7 @@ public class Scoreboard : MonoBehaviour
                    Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalMatOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalMatOffset, matSize, matSize), _texture, _material);
                    
                    scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
-                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.5f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].content + "%");
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.5f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent() + "%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 

@@ -115,7 +115,7 @@ public class Player
 
 		this.timeSync = Mathf.Clamp(this.timeSync + timeSync, 0, timeSyncLimit);
 		
-		if (timeSync >= timeSyncLimit)
+		if (this.timeSync >= timeSyncLimit)
 		{
 			Event.dispatch(new PlayerTimeSyncedEvent(this));
 		}

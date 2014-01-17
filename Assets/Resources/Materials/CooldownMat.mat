@@ -24,7 +24,11 @@ Material:
       data:
         first:
           name: phase
+<<<<<<< HEAD
         second: 1.00051236
+=======
+        second: 0
+>>>>>>> Fixed some bugs and updated SpectatorCamera.
     m_Colors:
       data:
         first:
