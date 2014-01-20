@@ -29,18 +29,18 @@ public class en : Locale {
 		Translations["shrine_locked"] = "Shrine can't be captured at this time";
 
 		//Ability descriptions - offensive
-		Translations["ability_windsweep"] = "Strike with wind, causing damage and knockback";
-		Translations["ability_obliterate"] = "Spin around fiercely, damaging nearby enemies";
-		Translations["ability_sunderstrike"] = "Strike the enemy, piercing through all defenses";
+		Translations["ability_windsweep"] = "Strike with wind, causing \ndamage and knockback";
+        Translations["ability_obliterate"] = "Spin around fiercely, \ndamaging nearby enemies";
+        Translations["ability_sunderstrike"] = "Strike the enemy, piercing\n through all defenses";
 
 		//Ability descriptions - defensive
-		Translations["ability_destabilize"] = "Fade out to avoid all incoming damage";
-		Translations["ability_riposte"] = "Counter the next incoming attack";
-		Translations["ability_bulwark"] = "Take reduced damage for a short time";
+        Translations["ability_destabilize"] = "Fade out to avoid \nall incoming damage";
+        Translations["ability_riposte"] = "Counter the next \nincoming attack";
+        Translations["ability_bulwark"] = "Take reduced damage \nfor a short time";
 
 		//Ability descriptions - Utility
-		Translations["ability_dash"] = "Quickly dash several feet forward";
-		Translations["ability_timestamp"] = "Leave a expiring time copy behind to travel back through time";
+        Translations["ability_dash"] = "Quickly dash several \nfeet forward";
+        Translations["ability_timestamp"] = "Leave a expiring time copy \nbehind to travel back through time";
 
 		//World descriptions
 		Translations["world_gaia"] = "Far from the lands of war, death and suffering an old forest stands, energetic and wise. Spreading vastly over miles of land, It is no ordinary place. Blessed by the god of nature, trees tower over a 100 meters above the rich and lush forest including a variety of wild and plantlife.";
