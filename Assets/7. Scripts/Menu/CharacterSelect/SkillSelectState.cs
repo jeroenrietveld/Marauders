@@ -28,7 +28,7 @@ public class SkillSelectState : SelectionBase
     private Dictionary<int, SkillSelection> list;
 
     private int currentSkillCategory;
-    private bool canContinue = true;
+    private int playersReady = 0;
 
     public SkillSelectState(CharacterSelectBlock block)
     {
@@ -84,12 +84,14 @@ public class SkillSelectState : SelectionBase
 				playerRef.skills[(int)SkillType.Utility] = list[2].active;
                 GameManager.Instance.AddPlayerRef(playerRef);
 
-                // after player is ready we check if everyone is ready
+                playersReady++;
                 CheckPlayersReady();
             }
         }
         if (controller.JustPressed(Button.B))
         {
+            playersReady--;
+
             if(block.isPlayerReady)
             {
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
@@ -104,18 +106,21 @@ public class SkillSelectState : SelectionBase
 
     private void CheckPlayersReady()
     {
+        int count = 0;
         foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
         {
-            if (!item.isPlayerReady && item.isJoined)
+            if (item.isPlayerReady && item.isJoined)
             {
-                canContinue = false;
+                count++;
                 break;
             }
         }
-        if (canContinue)
+
+        if (playersReady == count)
         {
             GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
         }
+        count = 0;
     }
 
     private int cal(float axis, int dpad, int count, int currentIndex, bool isCategory)
