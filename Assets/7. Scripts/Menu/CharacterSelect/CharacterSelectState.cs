@@ -30,7 +30,7 @@ public class CharacterSelectState : SelectionBase
 			block.changeMarauder(GetMarauderIndex(block.marauderIndex, direction, block.marauders.Count, timer));
         }
 
-        if(controller.JustPressed(Button.A))
+        if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
 			block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }

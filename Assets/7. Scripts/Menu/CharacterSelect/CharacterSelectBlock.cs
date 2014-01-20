@@ -82,14 +82,14 @@ public class CharacterSelectBlock : MonoBehaviour
 
             if (!isConnected && _controller.connected)
             {
-                //when a controller was not previously connected, but it is now, call a controller connect function
                 OnControllerConnect();
             }
+
             else if (isConnected && !_controller.connected)
             {
                 OnControllerDisConnect();
             }
-
+            
             if (isConnected && _controller.connected)
             {
                 if (_currentState != null)

@@ -14,7 +14,7 @@ public class StartState : SelectionBase
 
     public override void OnUpdate(GamePad controller)
     {
-        if (controllerOne.JustPressed(Button.B))
+        if (controllerOne.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             bool check = true;
 
@@ -22,7 +22,7 @@ public class StartState : SelectionBase
             {
                 if (item.isInSelection)
                 {
-                    check = false;        
+                    check = false;
                 }
             }
 
@@ -31,7 +31,8 @@ public class StartState : SelectionBase
                 GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
             }
         }
-        else if (controller.JustPressed(Button.A))
+            
+        else if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
             block.isJoined = true;
             block.ChangeState(CharacterSelectBlockStates.CharSelectState);

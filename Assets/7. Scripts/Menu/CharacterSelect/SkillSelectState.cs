@@ -25,9 +25,10 @@ public class SkillSelectState : SelectionBase
 {
     private GameObject arrow;
     private GameObject bottom;
+    private Dictionary<int, SkillSelection> list;
 
     private int currentSkillCategory;
-    private Dictionary<int, SkillSelection> list;
+    private bool canContinue = true;
 
     public SkillSelectState(CharacterSelectBlock block)
     {
@@ -67,7 +68,8 @@ public class SkillSelectState : SelectionBase
             }
         }
 
-        if(controller.JustPressed(Button.A))
+
+        if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
             if(!block.isPlayerReady)
             {
@@ -81,23 +83,9 @@ public class SkillSelectState : SelectionBase
 				playerRef.skills[(int)SkillType.Defensive] = list[1].active;
 				playerRef.skills[(int)SkillType.Utility] = list[2].active;
                 GameManager.Instance.AddPlayerRef(playerRef);
-            }
-            else if(block.player == PlayerIndex.One)
-            {
-                bool canContinue = true;
-                foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
-                {
-                    if (!item.isPlayerReady && item.isJoined)
-                    {
-                        canContinue = false;
-                        break;
-                    }
-                }
 
-                if (canContinue)
-                {
-                    GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
-                }
+                // after player is ready we check if everyone is ready
+                CheckPlayersReady();
             }
         }
         if (controller.JustPressed(Button.B))
@@ -111,6 +99,22 @@ public class SkillSelectState : SelectionBase
             {
                 block.ChangeState(CharacterSelectBlockStates.CharSelectState);
             }
+        }
+    }
+
+    private void CheckPlayersReady()
+    {
+        foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
+        {
+            if (!item.isPlayerReady && item.isJoined)
+            {
+                canContinue = false;
+                break;
+            }
+        }
+        if (canContinue)
+        {
+            GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
         }
     }
 
