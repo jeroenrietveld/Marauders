@@ -34,7 +34,7 @@ public class SkillSelectState : SelectionBase
     {
         this.block = block;
         list = new Dictionary<int, SkillSelection>();
-        list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", new List<string>() {"Attack 1" }));
+        list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", new List<string>() {"Windsweep" }));
         list.Add(1, new SkillSelection("SkillDefense", "SkillSelectorDefense", new List<string>() { "Defense 1"}));
         list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", new List<string>() { "Dash", "Windsweep" }));
         // temp
@@ -81,7 +81,6 @@ public class SkillSelectState : SelectionBase
                 playerRef.marauder = block.marauderNames[block.marauderIndex];
 				playerRef.skills[(int)SkillType.Offensive] = list[0].active;
 				playerRef.skills[(int)SkillType.Defensive] = list[1].active;
-				playerRef.skills[(int)SkillType.Utility] = list[2].active;
                 GameManager.Instance.AddPlayerRef(playerRef);
 
                 playersReady++;

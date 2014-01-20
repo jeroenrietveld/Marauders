@@ -1,8 +1,8 @@
 ﻿Shader "Custom/Heartbeat" {
 	Properties {
 		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white" {}
-		playerColor ("Player Color", Color) = (1, 1, 1, 1)
-		health ("health", Float) = 1
+		_color ("Color", Color) = (1, 1, 1, 1)
+		_phase ("phase", Float) = 1
 	}
 	SubShader {
 		Tags { "Queue"="AlphaTest" "RenderType"="Opaque" }
@@ -21,8 +21,8 @@
 			#include "UnityCG.cginc"
 
 			sampler2D _MainTex;
-			half3 playerColor;
-			half health;
+			half3 _color;
+			half _phase;
 
 			struct FragInput {
 				float4 position : SV_POSITION;
@@ -43,7 +43,7 @@
 				
 				half damageAlpha = .25;
 				
-				return half4(playerColor, (damageAlpha + (c.a < health) * (1 - damageAlpha)) * c.r);
+				return half4(_color, (damageAlpha + (c.a < _phase) * (1 - damageAlpha)) * c.r);
 			}
 			ENDCG
 		}

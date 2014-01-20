@@ -26,7 +26,7 @@ public class Player
 		}
 	}
     public string footsole { get; private set; }
-	public string[] skills = new string[3];
+	public string[] skills = new string[2];
 	public GamePad controller;
 
 	public GameObject avatar { get; private set; }
@@ -70,7 +70,7 @@ public class Player
 		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
 		avatar.transform.position = initialPosition;
 
-		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat_indicator")) as GameObject;
+		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat")) as GameObject;
 		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
 
 		avatar.AddComponent<CameraTracking> ();

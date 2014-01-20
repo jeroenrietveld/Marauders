@@ -1978,23 +1978,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100262
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400248}
-  - 33: {fileID: 3300014}
-  - 23: {fileID: 2300014}
-  m_Layer: 0
-  m_Name: Direction_indication
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,7 +2330,6 @@ Transform:
   - {fileID: 400214}
   - {fileID: 400264}
   - {fileID: 400018}
-  - {fileID: 400248}
   - {fileID: 400132}
   m_Father: {fileID: 0}
 --- !u!4 &400048
@@ -3533,17 +3515,6 @@ Transform:
   m_Children:
   - {fileID: 400068}
   m_Father: {fileID: 400122}
---- !u!4 &400248
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100262}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 4.07855172e-09, y: .00999999046, z: .635144472}
-  m_LocalScale: {x: .0450000018, y: .0299999993, z: .0299999993}
-  m_Children: []
-  m_Father: {fileID: 400046}
 --- !u!4 &400250
 Transform:
   m_ObjectHideFlags: 1
@@ -3816,27 +3787,6 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
---- !u!23 &2300014
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100262}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 6dee7ce9e7bdc7f4a85b5c2a51f1cc1c, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -3879,13 +3829,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100218}
   m_Mesh: {fileID: 4300014, guid: 5f2444d1345d6be498b30e13261ce753, type: 3}
---- !u!33 &3300014
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100262}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1

@@ -7,13 +7,9 @@ using System.Collections;
 public class Heartbeat : Attackable
 {
     public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
-    public float groundOffset = 0.1f;
 
     public float damageScale = 1f;
     public float damageAlphaScale = 4;
-
-    private float _groundHeight;
-    private float _playerOffset;
     private float _currentRotation;
     private float _armorFactor = 0.5f;
 
@@ -43,7 +39,7 @@ public class Heartbeat : Attackable
             if (alive)
             {
                 _health = Mathf.Clamp01(value);
-				renderer.material.SetFloat("health", health);
+				renderer.material.SetFloat("_phase", health);
             }
         }
     }
@@ -62,12 +58,10 @@ public class Heartbeat : Attackable
     {
         heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         _damage = transform.GetChild(0).gameObject;
-        _avatar = transform.parent.GetComponent<Avatar>();
+        _avatar = transform.root.GetComponent<Avatar>();
 
-        renderer.material.SetColor("playerColor", _avatar.player.color);
+        renderer.material.SetColor("_color", _avatar.player.color);
         _damage.renderer.material.SetColor("playerColor", _avatar.player.color);
-
-        _playerOffset = (int)_avatar.player.index * 0.01f;
 
         _damageTimer = new Timer(.35f);
         _damageTimer.AddPhaseCallback(0, delegate
@@ -92,29 +86,12 @@ public class Heartbeat : Attackable
     }
 
     void FixedUpdate()
-    {
-        var collisionResult = Physics.RaycastAll(_avatar.transform.position + Vector3.up, Vector3.down);
-
+	{
 		if(alive) health += _regen * Time.deltaTime;
-
-        float maxHeight = float.NegativeInfinity;
-        foreach (var result in collisionResult)
-        {
-            maxHeight = Mathf.Max(maxHeight, result.point.y);
-        }
-
-        if (!float.IsInfinity(maxHeight))
-        {
-            _groundHeight = maxHeight;
-        }
-    }
+	}
 
     void Update()
     {
-        var position = transform.position;
-        position.y = Mathf.Min(_groundHeight, _avatar.transform.position.y) + groundOffset + _playerOffset;
-        transform.position = position;
-
         _currentRotation = (_currentRotation + heartbeatSpeed * Time.deltaTime) % 360;
         transform.rotation = Quaternion.AngleAxis(_currentRotation, Vector3.up);
 
