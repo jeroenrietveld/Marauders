@@ -1,5 +1,6 @@
 {
 	"name": "Thief",
 	"prefab": "Thief",
-	"weapon": "Daggers"
+	"weapon": "Daggers",
+	"footsole": "hard-sole"
 }

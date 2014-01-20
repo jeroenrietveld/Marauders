@@ -1,5 +1,6 @@
 {
 	"name": "Samurai",
 	"prefab": "Samurai",
-	"weapon": "Katana"
+	"weapon": "Katana",
+	"footsole": "leather-sole"
 }

@@ -25,7 +25,7 @@ public class Player
 			return _colors[indexInt];
 		}
 	}
-
+    public string footsole { get; private set; }
 	public string[] skills = new string[3];
 	public GamePad controller;
 
@@ -65,6 +65,7 @@ public class Player
 	private GameObject CreateAvatar(Vector3 initialPosition)
 	{
 		var node = ResourceCache.json (_marauderDataPath + marauder);
+        footsole = node["footsole"].Value;
 
 		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
 		avatar.transform.position = initialPosition;

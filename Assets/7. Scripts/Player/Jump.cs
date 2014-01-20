@@ -25,9 +25,10 @@ public class Jump : ActionBase {
 	private float _distanceToGroundTolerance = 0.5f;
 
 	private AudioSource _jumpSource;
+    private Avatar _avatar;
 	
 	void Start () {
-		Avatar avatar = GetComponent<Avatar> ();
+		_avatar = GetComponent<Avatar> ();
 		
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.A, this);
@@ -57,7 +58,7 @@ public class Jump : ActionBase {
 		if(_isJumping == false)
 		{
 			_isJumping = true;
-            GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, GetComponent<Avatar>().player.marauder + "-jump", false);
+            GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, _avatar.player.marauder + "-jump", false);
 			
 			var velocity = rigidbody.velocity;
 			velocity.y = 0;
@@ -98,7 +99,7 @@ public class Jump : ActionBase {
 
 				//We've landed
                 // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
-                GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, "leather-sole-wood-land", true);
+                GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, _avatar.player.footsole + "-wood-land", true);
 				_isJumping = false;
 			}
 
