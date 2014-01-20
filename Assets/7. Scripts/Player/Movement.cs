@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour {
 	const float MAX_SPEED_RUNNING = 5.0f;
 
 	public float maxMagnetDistance = 5f;
-	public float magnetAngle = 35f;
+	public float magnetAngle = 140f;
 
 	public DecoratableFloat movementSpeed = new DecoratableFloat (5.0f);
 	public float turnSmoothing = 15f;
@@ -70,12 +70,15 @@ public class Movement : MonoBehaviour {
 
 				Vector3 difference = avatar.transform.position - myAvatar.transform.position;
 				difference.y = 0;
+				float distance = difference.magnitude;
 
-				if(difference.magnitude < maxMagnetDistance)
+				if(distance < maxMagnetDistance)
 				{
 					difference = difference.normalized;
 
-					if(Mathf.Acos(Vector3.Dot(myAvatar.transform.forward, difference)) < magnetAngle * Mathf.Deg2Rad)
+					float factor = 1-(distance / maxMagnetDistance);
+
+					if(Mathf.Acos(Vector3.Dot(_targetVelocity.normalized, difference)) < (factor * magnetAngle) * Mathf.Deg2Rad)
 					{
 						_targetVelocity = difference * _targetVelocity.magnitude;
 						
@@ -99,9 +102,9 @@ public class Movement : MonoBehaviour {
 			Vector3 moveDirection = targetVelocity.normalized;
 
 			Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-			Quaternion newRotation = Quaternion.Lerp(rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
+			//Quaternion newRotation = Quaternion.Lerp(rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
 			
-			rigidbody.MoveRotation(newRotation);
+			rigidbody.MoveRotation(targetRotation);
 		}
 	}
 
