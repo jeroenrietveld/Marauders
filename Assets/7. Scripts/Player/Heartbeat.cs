@@ -21,6 +21,7 @@ public class Heartbeat : Attackable
 
     private GameObject _damage;
     private Avatar _avatar;
+	private float _regen = 0.01f;
 
     private Player _lastAttacker;
 	public Player lastAttacker { get { return _lastAttacker; } }
@@ -42,6 +43,7 @@ public class Heartbeat : Attackable
             if (alive)
             {
                 _health = Mathf.Clamp01(value);
+				renderer.material.SetFloat("health", health);
             }
         }
     }
@@ -61,6 +63,7 @@ public class Heartbeat : Attackable
         heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         _damage = transform.GetChild(0).gameObject;
         _avatar = transform.parent.GetComponent<Avatar>();
+
 
         renderer.material.SetColor("playerColor", _avatar.player.color);
         _damage.renderer.material.SetColor("playerColor", _avatar.player.color);
@@ -92,6 +95,8 @@ public class Heartbeat : Attackable
     void FixedUpdate()
     {
         var collisionResult = Physics.RaycastAll(_avatar.transform.position + Vector3.up, Vector3.down);
+		if(
+			alive) health += _regen * Time.deltaTime;
 
         float maxHeight = float.NegativeInfinity;
         foreach (var result in collisionResult)
@@ -147,7 +152,7 @@ public class Heartbeat : Attackable
         _avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
 
         //heartbeat effects etc
-        renderer.material.SetFloat("health", health);
+        
         var material = _damage.renderer.material;
         material.SetFloat("upperBound", previousHealth);
         material.SetFloat("lowerBound", health);

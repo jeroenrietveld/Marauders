@@ -15,7 +15,7 @@ public enum SkillType
 
 public abstract class SkillBase : ActionBase
 {
-	private static Button[] _buttonMapping = new []{ Button.X, Button.B, Button.Y, Button.LeftThumb };
+	private static Button[] _buttonMapping = new []{ Button.X, Button.B, Button.Y, Button.LeftShoulder };
 
 	public SkillType skillType = SkillType.Movement;
 	public Timer cooldown { get; private set; }
