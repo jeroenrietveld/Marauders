@@ -45,7 +45,7 @@ public abstract class GameMode
             //Declare all cells
             TimeSyncCell timeSync = new TimeSyncCell(player);
             CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
-            CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 10, true);
+            CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
             CustomCell suicides = new CustomCell("Suicides", CellType.Integer, 0, true);
             CustomCell kills = new CustomCell("Kills", CellType.Integer, 0 , true);
             CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);

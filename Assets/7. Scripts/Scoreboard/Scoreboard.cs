@@ -345,5 +345,16 @@ public class Scoreboard : MonoBehaviour
     {
         return _visible;
     }
+
+    void Update()
+    {
+        if(GameManager.Instance.gameEnded)
+        {
+            if (ControllerInput.GetController(PlayerIndex.One).JustPressed(Button.A))
+            {
+                Application.LoadLevel("Menu");
+            }
+        }
+    }
 }
 

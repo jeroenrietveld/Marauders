@@ -22,6 +22,8 @@ public class GameManager {
 	public List<Player> playerRefs;
 	public SoundIngame soundInGame;
 
+    public bool gameEnded = false;
+
 	public struct MatchSettings
 	{
 		public string level;
@@ -51,9 +53,10 @@ public class GameManager {
 	}
 
 	public void Start()
-	{   
+	{
         if (matchSettings.level != null)
         {
+            gameEnded = false;
 			Application.LoadLevel(matchSettings.level);
         } 
 	}
@@ -92,5 +95,6 @@ public class GameManager {
     {
         scoreboard.Show();
         PauseGame();
+        gameEnded = true;
     }
 }

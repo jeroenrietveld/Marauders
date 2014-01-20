@@ -27,11 +27,9 @@ public class ScoreHandler : MonoBehaviour {
 		{
 			evt.offender.AddTimeSync (killReward);
             GameManager.scoreboard.AddContent(evt.offender.index, "Kills", 1);
-            GameManager.scoreboard.AddContent(evt.offender.index, "Time Sync", killReward);
 		}
 
 		evt.victim.AddTimeSync (suicidePenalty);
-        GameManager.scoreboard.AddContent(evt.victim.index, "Time Sync", suicidePenalty);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)

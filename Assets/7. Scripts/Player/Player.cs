@@ -114,7 +114,8 @@ public class Player
 		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
 
 		this.timeSync = Mathf.Clamp(this.timeSync + timeSync, 0, timeSyncLimit);
-		
+
+        Debug.Log(this.timeSync);
 		if (this.timeSync >= timeSyncLimit)
 		{
 			Event.dispatch(new PlayerTimeSyncedEvent(this));
