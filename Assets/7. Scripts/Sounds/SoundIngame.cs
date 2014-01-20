@@ -59,6 +59,7 @@ public class SoundIngame
         AudioSource source = objectToAddTo.AddComponent<AudioSource>();
         source.loop = false;
         source.playOnAwake = false;
+        source.dopplerLevel = 0f;
         source.minDistance = LoadSpecificSoundSettings(SoundSettingTypes.minSoundDistance);
         source.maxDistance = LoadSpecificSoundSettings(SoundSettingTypes.maxSoundDistance);
         float volumeLoaded = LoadSpecificSoundSettings(volumeSettingTypeToLoad);

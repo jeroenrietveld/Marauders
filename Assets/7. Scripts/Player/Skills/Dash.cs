@@ -15,7 +15,7 @@ public class Dash : SkillBase
 	);
 
 	private Timer _dashing;
-	private AudioSource dashSource;
+
 	public Dash() : base(5, _animationSettings)
 	{
 		_dashing = new Timer (0.3f);
@@ -27,7 +27,7 @@ public class Dash : SkillBase
 	
 	protected override void OnStart()
     {
-        dashSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(this.gameObject, SoundSettingTypes.volume);
+        
     }
 
 	/*
@@ -40,7 +40,7 @@ public class Dash : SkillBase
 
 	protected override void OnPerformAction()
 	{
-		GameManager.Instance.soundInGame.PlaySound(dashSource, "Dash", true);
+		GameManager.Instance.soundInGame.PlaySound(skillAudioSource, "Dash", true);
 		_dashing.Start ();
     }
 

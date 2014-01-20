@@ -24,7 +24,9 @@ public abstract class SkillBase : ActionBase
 	protected abstract void OnPerformAction();
 	protected abstract void OnUpdate();
 	protected abstract void OnStart();
-	
+
+    protected AudioSource skillAudioSource;
+
 	protected SkillBase(float cooldownTime, AnimationHandler.AnimationSettings animationSettings)
 	{
 		cooldown = new Timer(cooldownTime);
@@ -48,6 +50,7 @@ public abstract class SkillBase : ActionBase
 		GetComponent<ControllerMapping>().AddAction(_buttonMapping[(int)skillType], this);
 		GetComponent<AnimationHandler>().AddAnimation(animationSettings);
 		OnStart();
+        skillAudioSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 	}
 
 	void Update()
