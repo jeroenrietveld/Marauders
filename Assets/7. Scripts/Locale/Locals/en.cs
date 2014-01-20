@@ -5,7 +5,6 @@ public class en : Locale {
 
 	public en()
 	{
-
 		//General
 		Translations["weapon_pickup"] = "Pickup";
 
@@ -29,6 +28,28 @@ public class en : Locale {
 		Translations["shrine_captured"] = "You already captured this Shrine";
 		Translations["shrine_locked"] = "Shrine can't be captured at this time";
 
+		//Ability descriptions - offensive
+		Translations["ability_windsweep"] = "Create a gust of wind, damaging and knocking back enemies";
+		Translations["ability_obliterate"] = "Spin around fiercely, damaging all nearby enemies";
+		Translations["ability_sunderstrike"] = "Strike the enemy, piercing through all defenses";
+
+		//Ability descriptions - defensive
+		Translations["ability_destabilize"] = "Fade out to avoid all incoming damage";
+		Translations["ability_riposte"] = "Counter the next incoming attack";
+		Translations["ability_bulwark"] = "Take reduced damage for a small period of time";
+
+		//Ability descriptions - Utility
+		Translations["ability_dash"] = "Quickly dash several feet forward";
+		Translations["ability_timestamp"] = "Leave a expiring time copy behind to travel back through time";
+
+		//World descriptions
+		Translations["world_gaia"] = "Far from the lands of war, death and suffering an old forest stands, energetic and wise. Spreading vastly over miles of land, It is no ordinary place. Blessed by the god of nature, trees tower over a 100 meters above the rich and lush forest including a variety of wild and plantlife.";
+		Translations["world_synchronization"] = "The amount of synchronization a player needs to acquire before claiming the world. Increasing or decreasing the amount of synchronization required influences the length of the game.";
+
+		//Character descriptions
+		Translations["character_samurai"] = "Yuro - A young and solitary samurai, determined to serve his deceased landlord and reclaiming his family’s honour. Gracefully wielding his katana with deadly intent.";
+		Translations["character_thief"] = "Xero - A mysterious and acrobatic thief, seeking to steal all he lays his eyes on. Wielding dual daggers, his attacks are swift and efficient.";
+		Translations["character_juggernaut"] = "Juggernaut - A fierce and crude enforcer of the law, on a neverending quest to reunite himself with his long lost wife. Wielding a massive hammer and shield, obliterating all in his way.";
 	}
 
 	public override string GetLanguageCode ()
