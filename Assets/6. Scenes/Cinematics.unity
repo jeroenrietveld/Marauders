@@ -17628,7 +17628,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 938d6b456c0c17142bf90ac09b13a0ad, type: 2}
+  - {fileID: 2100000, guid: 1c08b1bfe4fc437478ab7cc310bfd2e5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -34762,6 +34762,9 @@ GameObject:
   - 95: {fileID: 748046782}
   - 114: {fileID: 748046781}
   - 65: {fileID: 748046780}
+  - 114: {fileID: 748046785}
+  - 65: {fileID: 748046784}
+  - 114: {fileID: 748046783}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -34777,7 +34780,7 @@ Transform:
   m_GameObject: {fileID: 748046778}
   m_LocalRotation: {x: 0, y: .171194479, z: 0, w: .9852373}
   m_LocalPosition: {x: -4.79755878, y: 2.99604893, z: 21.4113464}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1007790833}
   - {fileID: 390196627}
@@ -34830,7 +34833,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .400000006, y: .5, z: .400000006}
+  m_Size: {x: .600000024, y: .600000024, z: .600000024}
   m_Center: {x: .0199999996, y: .25, z: .100000001}
 --- !u!114 &748046781
 MonoBehaviour:
@@ -34844,6 +34847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bacf82dc9ac5074bb5b2013f3161b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttackable: 1
 --- !u!95 &748046782
 Animator:
   serializedVersion: 2
@@ -34859,6 +34863,43 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &748046783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400060, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1173427206}
+  m_GameObject: {fileID: 748046778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &748046784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1173427206}
+  m_GameObject: {fileID: 748046778}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: .25, z: 1}
+  m_Center: {x: 0, y: .170000002, z: 0}
+--- !u!114 &748046785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400058, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1173427206}
+  m_GameObject: {fileID: 748046778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &748914684
 GameObject:
   m_ObjectHideFlags: 0
@@ -48969,8 +49010,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7645d931d2d6104cb4dfa0d3ea62d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killScore: 50
-  deathPenalty: -25
+  killReward: 100
+  suicidePenalty: -100
+  smackedOutPenalty: -100
+  smackOutReward: 100
 --- !u!114 &1068527390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58876,6 +58919,9 @@ GameObject:
   - 95: {fileID: 1291448656}
   - 114: {fileID: 1291448655}
   - 65: {fileID: 1291448654}
+  - 114: {fileID: 1291448659}
+  - 65: {fileID: 1291448658}
+  - 114: {fileID: 1291448657}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -58891,7 +58937,7 @@ Transform:
   m_GameObject: {fileID: 1291448652}
   m_LocalRotation: {x: 0, y: .624124706, z: 0, w: .781324804}
   m_LocalPosition: {x: 17.3280277, y: 2.99604893, z: 18.2761593}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 915030640}
   - {fileID: 997408073}
@@ -58944,7 +58990,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .400000006, y: .5, z: .400000006}
+  m_Size: {x: .600000024, y: .600000024, z: .600000024}
   m_Center: {x: .0199999996, y: .25, z: .100000001}
 --- !u!114 &1291448655
 MonoBehaviour:
@@ -58958,6 +59004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bacf82dc9ac5074bb5b2013f3161b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttackable: 1
 --- !u!95 &1291448656
 Animator:
   serializedVersion: 2
@@ -58973,6 +59020,43 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &1291448657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400060, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341071841}
+  m_GameObject: {fileID: 1291448652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1291448658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341071841}
+  m_GameObject: {fileID: 1291448652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: .25, z: 1}
+  m_Center: {x: 0, y: .170000002, z: 0}
+--- !u!114 &1291448659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400058, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341071841}
+  m_GameObject: {fileID: 1291448652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1291780987
 GameObject:
   m_ObjectHideFlags: 0
@@ -75794,6 +75878,7 @@ GameObject:
   - 81: {fileID: 1626496024}
   - 114: {fileID: 1626496029}
   - 82: {fileID: 1626496030}
+  - 114: {fileID: 1626496031}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -75936,6 +76021,20 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1626496031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1626496023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e72a0f84060d76489f2234804379880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 4
+  panSpeed: 4
+  zoomSpeed: 4
 --- !u!1 &1627054603
 GameObject:
   m_ObjectHideFlags: 0
@@ -77432,7 +77531,7 @@ Transform:
   m_PrefabInternal: {fileID: 1173427206}
   m_GameObject: {fileID: 1657214286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00651672902, y: .537234306, z: .0647145361}
+  m_LocalPosition: {x: .00651681982, y: .574576855, z: .064714402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 748046779}
@@ -77495,7 +77594,7 @@ Transform:
   m_PrefabInternal: {fileID: 2029406668}
   m_GameObject: {fileID: 1658181484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00651672902, y: .537234306, z: .0647145361}
+  m_LocalPosition: {x: .00651681982, y: .574576855, z: .064714402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1946634106}
@@ -92196,6 +92295,9 @@ GameObject:
   - 95: {fileID: 1946634109}
   - 114: {fileID: 1946634108}
   - 65: {fileID: 1946634107}
+  - 114: {fileID: 1946634112}
+  - 65: {fileID: 1946634111}
+  - 114: {fileID: 1946634110}
   m_Layer: 0
   m_Name: GaiaStatue
   m_TagString: Untagged
@@ -92264,7 +92366,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .400000006, y: .5, z: .400000006}
+  m_Size: {x: .600000024, y: .600000024, z: .600000024}
   m_Center: {x: .0199999996, y: .25, z: .100000001}
 --- !u!114 &1946634108
 MonoBehaviour:
@@ -92278,6 +92380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bacf82dc9ac5074bb5b2013f3161b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttackable: 1
 --- !u!95 &1946634109
 Animator:
   serializedVersion: 2
@@ -92293,6 +92396,43 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &1946634110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400060, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 2029406668}
+  m_GameObject: {fileID: 1946634105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1946634111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 2029406668}
+  m_GameObject: {fileID: 1946634105}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: .25, z: 1}
+  m_Center: {x: 0, y: .170000002, z: 0}
+--- !u!114 &1946634112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400058, guid: 7dbf80670671a7c40bd7e0ee1d747f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 2029406668}
+  m_GameObject: {fileID: 1946634105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1947693170
 GameObject:
   m_ObjectHideFlags: 0
@@ -94987,7 +95127,7 @@ Transform:
   m_PrefabInternal: {fileID: 1341071841}
   m_GameObject: {fileID: 2010356424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00651672902, y: .537234306, z: .0647145361}
+  m_LocalPosition: {x: .00651681982, y: .574576855, z: .064714402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1291448653}
