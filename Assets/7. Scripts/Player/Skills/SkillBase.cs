@@ -23,9 +23,8 @@ public abstract class SkillBase : ActionBase
 
 	protected abstract void OnPerformAction();
 	protected abstract void OnUpdate();
-	protected abstract void OnStart();
-
     protected AudioSource skillAudioSource;
+	protected virtual void OnStart() {}
 
 	protected SkillBase(float cooldownTime, AnimationHandler.AnimationSettings animationSettings)
 	{
@@ -42,7 +41,6 @@ public abstract class SkillBase : ActionBase
 			cooldown.Start ();
 			OnPerformAction ();
 		}
-
 	}
 
 	void Start()

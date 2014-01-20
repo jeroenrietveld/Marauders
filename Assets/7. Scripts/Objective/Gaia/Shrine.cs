@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public struct ShrineCapturedEvent
@@ -88,7 +88,7 @@ public class Shrine : Attackable {
 		_lightTimer.Update ();
 	}
 
-	public override void OnAttack(Attack attacker)
+	protected override void ApplyAttack(Attack attacker)
 	{
         if(capturable)
         {

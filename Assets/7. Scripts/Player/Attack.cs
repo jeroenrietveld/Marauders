@@ -167,7 +167,7 @@ public class Attack : ActionBase {
 						{
 							foreach(var attackable in attackables)
 							{
-								attackable.OnAttack(this);
+								attackable.DoAttack(this);
 							}
 							hasHit = true;
 						}

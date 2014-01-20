@@ -93,4 +93,43 @@ public class AvatarGraphics : MonoBehaviour {
 			_deathTimer.Start();
 		}
 	}
+
+	public void ApplySkillMaterial(Transform transform, Material mat)
+	{
+		var r = transform.GetComponent<Renderer> ();
+
+		if (r)
+		{
+			if(r.material.shader.name == "Custom/Character")
+			{
+				r.material = mat;
+			}
+		}
+		
+		for (int i = 0; i < transform.childCount; ++i)
+		{
+			ApplySkillMaterial(transform.GetChild(i), mat);
+		}
+	}
+
+	public void ApplyDefaultMaterial(Transform transform)
+	{
+		var r = transform.GetComponent<Renderer> ();
+
+		/*if(r)
+		{
+			foreach(var mat in _materials)
+			{
+				if(mat.name == r.material.name)
+				{
+					r.material = mat;
+				}
+			}
+		}*/
+
+		for (int i = 0; i < transform.childCount; ++i)
+		{
+			ApplyDefaultMaterial(transform.GetChild(i));
+		}
+	}
 }
