@@ -22,7 +22,7 @@ public class TimeSyncBar : MonoBehaviour
     /// <param name="addition"></param>
     public void Add(float addition)
     {
-        _percentage = Mathf.Clamp(_percentage + addition, 0, 1);
+        _percentage = Mathf.Clamp(_percentage + addition, 0.1f, 1);
     }
 
     public float GetPercentage()

@@ -29,6 +29,7 @@ public class SettingsBlock : LevelSelectionBlockBase
 		}
         if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
+            if(_timeSyncBar)
             _timeSyncBar.Add(-0.1f);
 		}
         /// For BETA version no settings

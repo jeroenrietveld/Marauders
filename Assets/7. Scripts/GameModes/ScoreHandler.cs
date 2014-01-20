@@ -3,10 +3,10 @@ using System.Collections;
 
 public class ScoreHandler : MonoBehaviour {
 
-	public int killReward = 50;
-	public int suicidePenalty = -50;
-	public int smackedOutPenalty = -50;
-	public int smackOutReward = 50;
+	public int killReward = 100;
+	public int suicidePenalty = -100;
+	public int smackedOutPenalty = -100;
+	public int smackOutReward = 100;
 
 	// Use this for initialization
 	void Start () {
