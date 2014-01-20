@@ -16,6 +16,9 @@ public class en : Locale {
         Translations["text_defense"] = "Defense";
         Translations["text_offense"] = "Offense";
         Translations["text_utility"] = "Utility";
+        Translations["text_select"] = "select";
+        Translations["text_back"] = "back";
+        Translations["select_your_marauder"] = "SELECT YOUR MARAUDER";
 		
 		//CTF gametype
 		Translations["flag"] = "flag";
@@ -31,7 +34,7 @@ public class en : Locale {
 		//Ability descriptions - offensive
 		Translations["ability_windsweep"] = "Strike with wind, causing \ndamage and knockback";
         Translations["ability_obliterate"] = "Spin around fiercely, \ndamaging nearby enemies";
-        Translations["ability_sunderstrike"] = "Strike the enemy, piercing\n through all defenses";
+        Translations["ability_sunderstrike"] = "Strike the enemy, piercing \nthrough all defenses";
 
 		//Ability descriptions - defensive
         Translations["ability_destabilize"] = "Fade out to avoid \nall incoming damage";
