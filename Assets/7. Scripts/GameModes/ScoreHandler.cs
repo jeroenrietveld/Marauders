@@ -41,22 +41,25 @@ public class ScoreHandler : MonoBehaviour {
 		if(heartbeat.lastAttacker != null)
 		{
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
-			GameManager.scoreboard.AddContent(evt.avatar.player.index, "Time Sync", smackedOutPenalty);
             GameManager.scoreboard.AddContent(evt.avatar.player.index, "Eliminated", 1);
 
 			heartbeat.lastAttacker.AddTimeSync(smackOutReward);
-			GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Time Sync", smackOutReward);
+			
             GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Eliminations", 1);
 		}
 		else
 		{
+            GameManager.scoreboard.AddContent(evt.avatar.player.index, "Suicides", 1);
 			evt.avatar.player.AddTimeSync (suicidePenalty);
-			GameManager.scoreboard.AddContent(evt.avatar.player.index, "Time Sync", suicidePenalty);
 		}
 	}
 
     void OnTimeSynced(PlayerTimeSyncedEvent evt)
     {
+        foreach(Player player in GameManager.Instance.playerRefs)
+        {
+            GameManager.scoreboard.AddContent(player.index, "Time Sync", player.timeSync);
+        }
         GameManager.Instance.StopGame();
     }
 }
