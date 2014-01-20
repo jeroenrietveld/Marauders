@@ -147,14 +147,6 @@ public class Scoreboard : MonoBehaviour
        
     }
 
-    void Update()
-    {
-        if(ControllerInput.GetController(0).JustPressed(Button.Back))
-        {
-            _visible = !_visible;
-        }
-    }
-
    void OnGUI()
     {
         if (_cells.Count > 0)
