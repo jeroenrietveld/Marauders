@@ -8,6 +8,9 @@ public class Movement : MonoBehaviour {
 	const float MAX_SPEED_WALKING = 3.0f;
 	const float MAX_SPEED_RUNNING = 5.0f;
 
+	public float maxMagnetDistance = 5f;
+	public float magnetAngle = 35f;
+
 	public DecoratableFloat movementSpeed = new DecoratableFloat (5.0f);
 	public float turnSmoothing = 15f;
 
@@ -43,6 +46,7 @@ public class Movement : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
+
 		_targetVelocity = GetTargetVelocity();
 		
 		if (targetVelocity.sqrMagnitude > 0)
@@ -50,6 +54,36 @@ public class Movement : MonoBehaviour {
 			Rotating();
 			
 			rigidbody.MovePosition(rigidbody.position + targetVelocity * Time.deltaTime);
+			MagnetAim ();
+		}
+	}
+
+	void MagnetAim()
+	{
+		Avatar myAvatar = GetComponent<Avatar> ();
+
+		foreach(Player player in GameManager.Instance.playerRefs)
+		{
+			if(player != myAvatar.player)
+			{
+				GameObject avatar = player.avatar;
+
+				Vector3 difference = avatar.transform.position - myAvatar.transform.position;
+				difference.y = 0;
+
+				if(difference.magnitude < maxMagnetDistance)
+				{
+					difference = difference.normalized;
+
+					if(Mathf.Acos(Vector3.Dot(myAvatar.transform.forward, difference)) < magnetAngle * Mathf.Deg2Rad)
+					{
+						_targetVelocity = difference * _targetVelocity.magnitude;
+						
+						Quaternion targetRotation = Quaternion.LookRotation(_targetVelocity, Vector3.up);
+						rigidbody.MoveRotation(targetRotation);
+					}
+				}
+			}
 		}
 	}
 

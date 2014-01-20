@@ -81,7 +81,7 @@ public class Player
 		avatar.AddComponent<Attack> ();
 		avatar.AddComponent<Jump> ();
 		avatar.AddComponent<Interactor> ();
-		avatar.AddComponent<AvatarGraphics>();
+		avatar.AddComponent<AvatarGraphics> ();
 		avatar.AddComponent<Slide> ();
 		avatar.AddComponent<Dash> ();
 		
