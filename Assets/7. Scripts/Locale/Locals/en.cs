@@ -29,14 +29,14 @@ public class en : Locale {
 		Translations["shrine_locked"] = "Shrine can't be captured at this time";
 
 		//Ability descriptions - offensive
-		Translations["ability_windsweep"] = "Create a gust of wind, damaging and knocking back enemies";
-		Translations["ability_obliterate"] = "Spin around fiercely, damaging all nearby enemies";
+		Translations["ability_windsweep"] = "Strike with wind, causing damage and knockback";
+		Translations["ability_obliterate"] = "Spin around fiercely, damaging nearby enemies";
 		Translations["ability_sunderstrike"] = "Strike the enemy, piercing through all defenses";
 
 		//Ability descriptions - defensive
 		Translations["ability_destabilize"] = "Fade out to avoid all incoming damage";
 		Translations["ability_riposte"] = "Counter the next incoming attack";
-		Translations["ability_bulwark"] = "Take reduced damage for a small period of time";
+		Translations["ability_bulwark"] = "Take reduced damage for a short time";
 
 		//Ability descriptions - Utility
 		Translations["ability_dash"] = "Quickly dash several feet forward";
@@ -50,6 +50,7 @@ public class en : Locale {
 		Translations["character_samurai"] = "Yuro - A young and solitary samurai, determined to serve his deceased landlord and reclaiming his family’s honour. Gracefully wielding his katana with deadly intent.";
 		Translations["character_thief"] = "Xero - A mysterious and acrobatic thief, seeking to steal all he lays his eyes on. Wielding dual daggers, his attacks are swift and efficient.";
 		Translations["character_juggernaut"] = "Juggernaut - A fierce and crude enforcer of the law, on a neverending quest to reunite himself with his long lost wife. Wielding a massive hammer and shield, obliterating all in his way.";
+		Translations["character_shaman"] = "Shaman - A strong and independant shamaness, with an unquenchable thirst for proving herself in battle. Furiously wielding an Daibo to her hearts content.";
 	}
 
 	public override string GetLanguageCode ()
