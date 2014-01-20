@@ -90,7 +90,6 @@ public class GameManager {
 
     public void StopGame()
     {
-        Debug.Log("Stopped game");
         scoreboard.Show();
         PauseGame();
     }

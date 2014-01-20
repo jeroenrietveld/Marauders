@@ -88,17 +88,20 @@ public class PauseMenu : Menu {
 		{
 			if ((DateTime.Now - lastOpened).TotalMilliseconds > 100)
 			{
-				for (int i = 0; i < 4; i++)
-				{
-					if (ControllerInput.GetController(i).JustPressed(Button.Start))
-					{
-						BuildMain();
-						menu.controllers.Clear ();
-						menu.controllers.Add (ControllerInput.GetController(i));
-						Show ();
-						return;
-					}
-				}
+                if (!GameManager.isPaused)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (ControllerInput.GetController(i).JustPressed(Button.Start))
+                        {
+                            BuildMain();
+                            menu.controllers.Clear();
+                            menu.controllers.Add(ControllerInput.GetController(i));
+                            Show();
+                            return;
+                        }
+                    }
+                }
 			}
 		}
 	}

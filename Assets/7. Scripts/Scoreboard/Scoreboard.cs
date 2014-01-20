@@ -66,7 +66,7 @@ public class Scoreboard : MonoBehaviour
 
     void Start()
     {      
-        _material = Resources.Load("Materials/CooldownMat", typeof(Material)) as Material;
+        _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
         _trophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
 

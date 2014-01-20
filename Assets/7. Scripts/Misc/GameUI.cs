@@ -17,7 +17,7 @@ public class GameUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_material = Resources.Load("Materials/CooldownMat", typeof(Material)) as Material;
+		_material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
 		_texture = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
 
 		_lightbulbMat = Resources.Load ("Materials/Lightbulb", typeof(Material)) as Material;
