@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class AvatarGraphics : MonoBehaviour {
 
-	private List<Material> _materials = new List<Material>();
+	private Dictionary<GameObject, Material> _materials = new Dictionary<GameObject, Material>();
 	private List<Renderer> _renderers = new List<Renderer>();
 
 	private Timer _deathTimer;
 
 	private Player _player;
+
+	public int materialStack = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +20,7 @@ public class AvatarGraphics : MonoBehaviour {
 		var playerColor = avatar.player.color;
 		_player = avatar.player;
 
-		foreach (var m in _materials)
+		foreach (var m in _materials.Values)
 		{
 			m.SetColor("_PlayerColor", playerColor);
 		}
@@ -27,7 +29,7 @@ public class AvatarGraphics : MonoBehaviour {
 		_deathTimer.AddPhaseCallback (_player.StartSpawnProcedure);
 		_deathTimer.AddTickCallback(delegate
 		{
-			foreach(var m in _materials)
+			foreach(var m in _materials.Values)
 			{
 				m.SetFloat("_DeathPhase", _deathTimer.Phase());
 			}
@@ -62,7 +64,7 @@ public class AvatarGraphics : MonoBehaviour {
 				}
 				else
 				{
-					_materials.Add(m);
+					_materials.Add(transform.gameObject, m);
 					any = true;
 				}
 			}
@@ -80,7 +82,7 @@ public class AvatarGraphics : MonoBehaviour {
 	{
 		if(evt.victim == _player)
 		{
-			foreach(var m in _materials)
+			foreach(var m in _materials.Values)
 			{
 				var q = Quaternion.AngleAxis(Random.value * 360, Vector3.up);
 				m.SetVector("_ShearDirection", q * new Vector3(0, 0, 1));
@@ -94,42 +96,51 @@ public class AvatarGraphics : MonoBehaviour {
 		}
 	}
 
-	public void ApplySkillMaterial(Transform transform, Material mat)
+	public void AddMaterial(Material mat)
 	{
-		var r = transform.GetComponent<Renderer> ();
-
-		if (r)
+		foreach(var r in _renderers)
 		{
-			if(r.material.shader.name == "Custom/Character")
+			if(materialStack < 1)
 			{
-				r.material = mat;
+				r.material = mat; 
+			} 
+			else 
+			{
+				List<Material> list = new List<Material>(r.materials);
+				list.Add(mat);
+
+				r.materials = list.ToArray();
 			}
 		}
-		
-		for (int i = 0; i < transform.childCount; ++i)
-		{
-			ApplySkillMaterial(transform.GetChild(i), mat);
-		}
+
+		materialStack++;
 	}
 
-	public void ApplyDefaultMaterial(Transform transform)
+	public void RemoveMaterial(Material mat)
 	{
-		var r = transform.GetComponent<Renderer> ();
-
-		/*if(r)
+		foreach(var r in _renderers)
 		{
-			foreach(var mat in _materials)
+			List<Material> list = new List<Material>();
+
+			foreach(Material m in r.materials)
 			{
-				if(mat.name == r.material.name)
+				if(m.shader != mat.shader)
 				{
-					r.material = mat;
+					list.Add(m);
 				}
 			}
-		}*/
 
-		for (int i = 0; i < transform.childCount; ++i)
+			r.materials = list.ToArray();
+		}
+
+		materialStack--;
+
+		if(materialStack == 0)
 		{
-			ApplyDefaultMaterial(transform.GetChild(i));
+			foreach(var pair in _materials)
+			{
+				pair.Key.renderer.material = pair.Value;
+			}
 		}
 	}
 }

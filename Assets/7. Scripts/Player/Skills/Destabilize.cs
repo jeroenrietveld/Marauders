@@ -15,15 +15,17 @@ public class Destabilize : SkillBase
 
 	public Destabilize() : base(1, _animationSettings)
 	{
+		Material mat = (Material)Resources.Load ("Materials/Destabilize");
+
 		_destabilize = new Timer (1f);
 		_destabilize.AddCallback (0f, delegate {
 			GetComponentInChildren<Attackable>().isAttackable = false;
-			GetComponent<AvatarGraphics>().ApplySkillMaterial(transform, (Material)Resources.Load("Materials/Destabilize"));
+			GetComponent<AvatarGraphics>().AddMaterial(mat);
 		});
 
 		_destabilize.AddCallback (_destabilize.endTime, delegate {
 			GetComponentInChildren<Attackable>().isAttackable = true;
-			GetComponent<AvatarGraphics>().ApplyDefaultMaterial(transform);
+			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
 		});
 	}
 
