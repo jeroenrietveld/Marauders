@@ -18,6 +18,8 @@ public class Attack : ActionBase {
 	// Current successive successful attacks
 	private int _comboCount;
 	public int comboCount { get { return _comboCount; }}
+	public int nextComboCount { get { return (_comboCount + 1) % _weapon.attacks.Count; } }
+
 	public bool isCombo { get { return _comboCount == _weapon.attacks.Count - 1; } }
 
 	// Maximum time between successful attacks until combo counter resets
@@ -178,7 +180,7 @@ public class Attack : ActionBase {
 
 		if (hasHit)
 		{
-			_comboCount = (_comboCount + 1) % _weapon.attacks.Count;
+			_comboCount = nextComboCount;
 		}
 		else
 		{
@@ -188,6 +190,6 @@ public class Attack : ActionBase {
 	
 	public float GetStunTime()
 	{
-		return _trailTimer.endTime;
+		return _trailTimer.endTime + _weapon.attacks[nextComboCount].timing;
 	}
 }
