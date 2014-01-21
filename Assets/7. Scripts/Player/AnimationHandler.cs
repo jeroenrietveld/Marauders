@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class AnimationHandler : MonoBehaviour 
 {
 	public Transform lowerBody;
 	public Transform upperBody;
+
+	private Dictionary<String, AnimationState> _animations = new Dictionary<string, AnimationState>();
 
 	public struct AnimationSettings
 	{
@@ -37,6 +40,11 @@ public class AnimationHandler : MonoBehaviour
 
 	public void AddAnimation(AnimationSettings settings)
 	{
+		if(_animations.ContainsKey(settings.animationName))
+		{
+			return;
+		}
+
 		animation [settings.animationName].wrapMode = settings.wrapMode;
 		animation [settings.animationName].layer = settings.layer;
 
@@ -47,6 +55,24 @@ public class AnimationHandler : MonoBehaviour
 		if((settings.mixTransform & MixTransforms.Upperbody) == MixTransforms.Upperbody)
 		{
 			animation[settings.animationName].AddMixingTransform(upperBody);
+		}
+
+		_animations.Add (settings.animationName, animation [settings.animationName]);
+	}
+
+	public void Pause()
+	{
+		foreach(AnimationState animation in _animations.Values)
+		{
+			animation.speed = 0f;
+		}
+	}
+
+	public void UnPause()
+	{
+		foreach(AnimationState animation in _animations.Values)
+		{
+			animation.speed = 1f;
 		}
 	}
 }

@@ -46,20 +46,15 @@ public class GameUI : MonoBehaviour {
 		{
 			Player player = playerRefs[playerIndex];
 			_lightbulbMat.SetColor("_Color", lightBulbColors[playerIndex]);
-			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][4], _lightbulbTex, _lightbulbMat);
+
+			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][1], _lightbulbTex, _lightbulbMat);
+
 			_material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
 			_material.SetColor("playerColor", player.color);
-			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][3], _texture, _material);
-			GUI.Label (_cooldownUIPositions[playerIndex][3], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 
-			for(int i = 0; i < player.skills.Length; i++)
-			{
-				SkillBase skillBase = (SkillBase) player.avatar.GetComponent(player.skills[i]);
-				_material.SetFloat("phase", (skillBase == null) ? 1 : skillBase.cooldown.Phase());
-				_material.SetColor("playerColor", _skillColors[i]);
-				Graphics.DrawTexture(_cooldownUIPositions[playerIndex][i], _texture, _material);
-				Graphics.DrawTexture(_cooldownUIPositions[playerIndex][i], _skillIcons[i]);
-			}
+			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][0], _texture, _material);
+
+			GUI.Label (_cooldownUIPositions[playerIndex][0], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 		}
 	}
 
@@ -68,34 +63,22 @@ public class GameUI : MonoBehaviour {
 		_cooldownUIPositions = new List<List<Rect>> ();
 		List<Rect> positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (80, 10, 40, 40));
-		positions.Add (new Rect (60, 60, 40, 40));
-		positions.Add (new Rect (10, 80, 40, 40));
-		positions.Add (new Rect (10, 10, 50, 50));
+		positions.Add (new Rect (10, 10, 100, 100));
 		positions.Add (new Rect (0 - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 120, 10, 40, 40));
-		positions.Add (new Rect (Screen.width - 100, 60, 40, 40));
-		positions.Add (new Rect (Screen.width - 50, 80, 40, 40));
-		positions.Add (new Rect (Screen.width - 60, 10, 50, 50));
+		positions.Add (new Rect (Screen.width - 110, 10, 100, 100));
 		positions.Add (new Rect (Screen.width - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (80, Screen.height - 50, 40, 40));
-		positions.Add (new Rect (60, Screen.height - 100, 40, 40));
-		positions.Add (new Rect (10, Screen.height - 120, 40, 40));
-		positions.Add (new Rect (10, Screen.height - 60, 50, 50));
+		positions.Add (new Rect (10, Screen.height - 110, 100, 100));
 		positions.Add (new Rect (0 - 225, Screen.height - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 120, Screen.height - 50, 40, 40));
-		positions.Add (new Rect (Screen.width - 100, Screen.height - 100, 40, 40));
-		positions.Add (new Rect (Screen.width - 50, Screen.height - 120, 40, 40));
-		positions.Add (new Rect (Screen.width - 60, Screen.height - 60, 50, 50));
+		positions.Add (new Rect (Screen.width - 110, Screen.height - 60, 100, 100));
 		positions.Add (new Rect (Screen.width - 225, Screen.height - 225, 450, 450));
 	}
 }

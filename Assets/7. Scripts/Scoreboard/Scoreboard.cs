@@ -22,7 +22,11 @@ public class Scoreboard : MonoBehaviour
 
     private Material _material;
     private Texture _texture;
-    private Texture _trophyTexture;
+    private Texture _redTrophyTexture;
+    private Texture _blueTrophyTexture;
+    private Texture _purpleTrophyTexture;
+    private Texture _greenTrophyTexture;
+    private Texture _currentTrophyTexture;
 
     public Scoreboard()
 	{
@@ -48,7 +52,7 @@ public class Scoreboard : MonoBehaviour
     /// </summary>
     /// <param name="gameSpecificCell"></param>
     public void AddGameSpecificCell(CustomCell gameSpecificCell)
-    {
+    {        
         //Iterate over the cells
         for (int i = 0; i < _cells.Count; i++)
         {
@@ -56,8 +60,10 @@ public class Scoreboard : MonoBehaviour
             {
                 if (_cells[i][j].cellType != CellType.Static)
                 {
+                    CustomCell addition = new CustomCell();
+                    addition = gameSpecificCell;
                     //This spot is the first spot after the static cells
-                    _cells[i].Insert(j, gameSpecificCell);
+                    _cells[i].Insert(j, addition);
                     break;
                 }
             }
@@ -68,7 +74,10 @@ public class Scoreboard : MonoBehaviour
     {      
         _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
-        _trophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
+        _redTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
+        _blueTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_blue", typeof(Texture)) as Texture;
+        _greenTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_green", typeof(Texture)) as Texture;
+        _purpleTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_purple", typeof(Texture)) as Texture;
 
         _visible = false;
         
@@ -230,10 +239,17 @@ public class Scoreboard : MonoBehaviour
                    GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + cellTop + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent());
                    if(_cells[i][j].HasTrophy())
                    {
+                       switch(((PlayerCell)_cells[i][0]).player.index)
+                       {
+                           case PlayerIndex.One: _currentTrophyTexture = _redTrophyTexture; break;
+                           case PlayerIndex.Two: _currentTrophyTexture = _blueTrophyTexture; break;
+                           case PlayerIndex.Three: _currentTrophyTexture = _greenTrophyTexture; break;
+                           case PlayerIndex.Four: _currentTrophyTexture = _purpleTrophyTexture; break;
+                       }
                        float trophySize = Math.Min(cellWidth * 0.4f, cellHeight * 0.4f);
                        float horizontalTrophyOffset = (cellWidth - trophySize) / 2f;
                        float verticalTrophyOffset = cellHeight * 0.8f;
-                       Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTrophyOffset, i * (boxHeight + verticalOffset * 2) + verticalTrophyOffset, trophySize, trophySize), _trophyTexture);
+                       Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTrophyOffset, i * (boxHeight + verticalOffset * 2) + verticalTrophyOffset, trophySize, trophySize), _currentTrophyTexture);
                    }
                }             
            }
@@ -341,6 +357,11 @@ public class Scoreboard : MonoBehaviour
         _visible = false;
     }
 
+    public void Clear()
+    {
+        _cells.Clear();
+    }
+
     public bool IsVisible()
     {
         return _visible;
@@ -352,6 +373,8 @@ public class Scoreboard : MonoBehaviour
         {
             if (ControllerInput.GetController(PlayerIndex.One).JustPressed(Button.A))
             {
+                this.Hide();
+                this.Clear();
                 Application.LoadLevel("Menu");
             }
         }
