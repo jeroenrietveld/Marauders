@@ -49,6 +49,7 @@ public class Scoreboard : MonoBehaviour
     /// <param name="gameSpecificCell"></param>
     public void AddGameSpecificCell(CustomCell gameSpecificCell)
     {
+        CustomCell addition = gameSpecificCell;
         //Iterate over the cells
         for (int i = 0; i < _cells.Count; i++)
         {
@@ -57,7 +58,7 @@ public class Scoreboard : MonoBehaviour
                 if (_cells[i][j].cellType != CellType.Static)
                 {
                     //This spot is the first spot after the static cells
-                    _cells[i].Insert(j, gameSpecificCell);
+                    _cells[i].Insert(j, addition);
                     break;
                 }
             }
@@ -352,6 +353,7 @@ public class Scoreboard : MonoBehaviour
         {
             if (ControllerInput.GetController(PlayerIndex.One).JustPressed(Button.A))
             {
+                this.Hide();
                 Application.LoadLevel("Menu");
             }
         }
