@@ -64,8 +64,11 @@ public class AvatarGraphics : MonoBehaviour {
 				}
 				else
 				{
-					_materials.Add(transform.gameObject, m);
-					any = true;
+					if(!_materials.ContainsKey(transform.gameObject))
+					{
+						_materials.Add(transform.gameObject, m);
+						any = true;
+					}
 				}
 			}
 
