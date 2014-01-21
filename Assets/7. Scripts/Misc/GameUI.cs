@@ -63,22 +63,22 @@ public class GameUI : MonoBehaviour {
 		_cooldownUIPositions = new List<List<Rect>> ();
 		List<Rect> positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (10, 10, 100, 100));
+		positions.Add (new Rect (25, 25, 100, 100));
 		positions.Add (new Rect (0 - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 110, 10, 100, 100));
+		positions.Add (new Rect (Screen.width - 125, 25, 100, 100));
 		positions.Add (new Rect (Screen.width - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (10, Screen.height - 110, 100, 100));
+		positions.Add (new Rect (25, Screen.height - 125, 100, 100));
 		positions.Add (new Rect (0 - 225, Screen.height - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 110, Screen.height - 60, 100, 100));
+		positions.Add (new Rect (Screen.width - 125, Screen.height - 125, 100, 100));
 		positions.Add (new Rect (Screen.width - 225, Screen.height - 225, 450, 450));
 	}
 }

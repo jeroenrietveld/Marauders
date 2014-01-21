@@ -28,7 +28,10 @@ public class Destabilize : SkillBase
 			Destroy (stun, _duration);
 
 			GetComponent<AnimationHandler>().Pause();
-			animation.Stop();
+		});
+
+		_destabilize.AddCallback (0.1f, delegate {
+			GetComponent<AnimationHandler>().Pause();
 		});
 
 		_destabilize.AddCallback (_destabilize.endTime, delegate {
@@ -36,7 +39,6 @@ public class Destabilize : SkillBase
 			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
 			
 			GetComponent<AnimationHandler>().UnPause();
-			//animation.Play();
 		});
 	}
 

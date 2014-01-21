@@ -7,9 +7,7 @@ public class AnimationHandler : MonoBehaviour
 {
 	public Transform lowerBody;
 	public Transform upperBody;
-
-	private Dictionary<String, AnimationState> _animations = new Dictionary<string, AnimationState>();
-
+	
 	public struct AnimationSettings
 	{
 		public string animationName;
@@ -40,11 +38,6 @@ public class AnimationHandler : MonoBehaviour
 
 	public void AddAnimation(AnimationSettings settings)
 	{
-		if(_animations.ContainsKey(settings.animationName))
-		{
-			return;
-		}
-
 		animation [settings.animationName].wrapMode = settings.wrapMode;
 		animation [settings.animationName].layer = settings.layer;
 
@@ -56,23 +49,21 @@ public class AnimationHandler : MonoBehaviour
 		{
 			animation[settings.animationName].AddMixingTransform(upperBody);
 		}
-
-		_animations.Add (settings.animationName, animation [settings.animationName]);
 	}
 
 	public void Pause()
 	{
-		foreach(AnimationState animation in _animations.Values)
+		foreach(AnimationState animState in GetComponent<Animation>())
 		{
-			animation.speed = 0f;
+			animState.enabled = false;
 		}
 	}
 
 	public void UnPause()
 	{
-		foreach(AnimationState animation in _animations.Values)
+		foreach(AnimationState animState in GetComponent<Animation>())
 		{
-			animation.speed = 1f;
+			animState.enabled = true;
 		}
 	}
 }
