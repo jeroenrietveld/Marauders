@@ -102,7 +102,7 @@ public class Heartbeat : Attackable
 
 	protected override void ApplyAttack(Attack attacker)
     {
-        GameManager.Instance.soundInGame.PlaySound(heartbeatSource, "Set2Hit" + attacker.comboCount, false);
+        GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
 
         //Just to be clear; we are beeing hit
         var direction = attacker.transform.position - transform.position;
