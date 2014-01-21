@@ -99,7 +99,7 @@ public class Jump : ActionBase {
 
 				//We've landed
                 // Make the type of sound to play dynamic. Instead of always leather and wood sound types.
-                GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, _avatar.player.footsole + "-wood-land", true);
+                GameManager.Instance.soundInGame.PlaySoundRandom(_jumpSource, _avatar.player.footsole + "-" + GameManager.Instance.matchSettings.groundType + "-land", true);
 				_isJumping = false;
 			}
 

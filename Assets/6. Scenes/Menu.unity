@@ -7571,7 +7571,7 @@ GameObject:
   - 4: {fileID: 1652126863}
   - 114: {fileID: 1652126862}
   m_Layer: 0
-  m_Name: _GLOBAL
+  m_Name: _MENUGLOBAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

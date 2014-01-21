@@ -123,7 +123,6 @@ public class SoundIngame
         {
             if(source.time > endTime || source.time <= 0f)
             {
-                
                 List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
                 source.loop = true;
                 source.clip = list[new System.Random().Next(0, list.Count)];

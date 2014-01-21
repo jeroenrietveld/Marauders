@@ -41,7 +41,8 @@ public class SettingsBlock : LevelSelectionBlockBase
                 // Get the selected game mode class by using the Activator
                 // Default Normal until new game modes are implemented.
                  var selectedGameMode = Activator.CreateInstance(null, "Normal");
-                 GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();    
+                 GameManager.Instance.matchSettings.gameMode = (GameMode)selectedGameMode.Unwrap();
+                 GameManager.Instance.matchSettings.groundType = LevelSelectionBlock.current.groundType;
                  GameManager.Instance.Start();
             }
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
