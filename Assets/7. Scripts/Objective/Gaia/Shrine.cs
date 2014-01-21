@@ -102,6 +102,10 @@ public class Shrine : Attackable {
                     var oldOwner = owner;
                     owner = player;
 
+					GameObject Global = GameObject.Find("_GLOBAL");
+					Announcer announcer = Global.GetComponent<Announcer>();
+					announcer.Announce(AnnouncementType.ShrineCapture, "Shrine has been captured");
+
                     Event.dispatch(new ShrineCapturedEvent(this, player, oldOwner));
                     GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-conquered", true);
                 }
@@ -118,6 +122,10 @@ public class Shrine : Attackable {
 
 	public void Activate()
 	{
+		GameObject Global = GameObject.Find("_GLOBAL");
+		Announcer announcer = Global.GetComponent<Announcer>();
+		announcer.Announce(AnnouncementType.ShrineCapture, "Shrine can be captured");
+
 		capturable = true;
         GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-activated", true);
 	}

@@ -9,6 +9,7 @@ public class ShrineMessage : Interactable
 	}	
 
 	private string message;
+	private GUIStyle style;
 
 	public override void ShowMessage ()
 	{
@@ -30,8 +31,20 @@ public class ShrineMessage : Interactable
 			}
 
 			//Drawing the msg
-			GUI.Label (new Rect (screenPoint.x, (Screen.height - screenPoint.y), 250, 50), message);
+			GUI.Label (
+						new Rect (screenPoint.x, (Screen.height - screenPoint.y), 250, 50), 
+			           "<color='#ffffffff'><size='" + (int)(20f * ( (float)Screen.height / 700f )) + "'>" + message + "</size></color>",
+			           style);
 
 		}
+	}
+
+	public void Start()
+	{
+		this.style = new GUIStyle();
+		this.style.alignment = TextAnchor.MiddleCenter;
+		this.style.font = (Font)Resources.Load ("Textures/WorldSelect/BankGothic/BankGothicCMdBT-Medium", typeof(Font)); 
+		this.style.fontStyle = FontStyle.Bold;
+		this.style.richText = true;
 	}
 }
