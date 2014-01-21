@@ -855,6 +855,10 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: -34.103199
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: audioSourceArmory
+      value: 
+      objectReference: {fileID: 517819383}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_RootGameObject: {fileID: 2098273775}
@@ -1485,6 +1489,7 @@ MonoBehaviour:
   - Thief
   - Samurai
   _currentEnum: 0
+  audioSourceArmory: {fileID: 517819383}
 --- !u!1 &271313040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2237,7 @@ MonoBehaviour:
   - Thief
   - Samurai
   _currentEnum: 0
+  audioSourceArmory: {fileID: 517819383}
 --- !u!1 &443680851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,6 +2628,7 @@ GameObject:
   - 81: {fileID: 517819377}
   - 114: {fileID: 517819382}
   - 82: {fileID: 517819383}
+  - 82: {fileID: 517819384}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2725,6 +2732,64 @@ AudioSource:
   BypassEffects: 1
   BypassListenerEffects: 1
   BypassReverbZones: 1
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &517819384
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 517819376}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 100
+  DopplerLevel: 0
+  MinDistance: 200
+  MaxDistance: 250
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -3766,6 +3831,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: .709999979
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: audioSourceArmory
+      value: 
+      objectReference: {fileID: 517819383}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
   m_RootGameObject: {fileID: 432956648}
@@ -4198,6 +4267,10 @@ Prefab:
     - target: {fileID: 400058, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
       propertyPath: m_LocalScale.x
       value: .714999974
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: audioSourceArmory
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
@@ -6849,7 +6922,7 @@ GameObject:
   - 4: {fileID: 1652126863}
   - 114: {fileID: 1652126862}
   m_Layer: 0
-  m_Name: _GLOBAL
+  m_Name: _MENUGLOBAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7180,6 +7253,7 @@ MonoBehaviour:
   - Thief
   - Samurai
   _currentEnum: 0
+  audioSourceArmory: {fileID: 0}
 --- !u!1 &1752302893
 GameObject:
   m_ObjectHideFlags: 0
@@ -7295,6 +7369,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: audioSourceArmory
+      value: 
+      objectReference: {fileID: 517819383}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
   m_RootGameObject: {fileID: 259218389}
@@ -8842,6 +8920,7 @@ MonoBehaviour:
   - Thief
   - Samurai
   _currentEnum: 0
+  audioSourceArmory: {fileID: 517819383}
 --- !u!1 &2100865299
 GameObject:
   m_ObjectHideFlags: 0

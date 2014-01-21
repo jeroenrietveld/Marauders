@@ -142,18 +142,21 @@ public class SkillSelectState : SelectionBase
         Locale locale = new en();
         offensiveSkillsDescription.Add(locale["ability_windsweep"]);
         offensiveSkills.Add("Windsweep");
+        // Uncomment the skills when they are implemented.
+        /*
         offensiveSkillsDescription.Add(locale["ability_obliterate"]);
         offensiveSkills.Add("Obliterate");
         offensiveSkillsDescription.Add(locale["ability_sunderstrike"]);
         offensiveSkills.Add("Sunderstrike");
-
+        */
         defensiveSkillsDescription.Add(locale["ability_destabilize"]);
         defensiveSkills.Add("Destabilize");
+        /*
         defensiveSkillsDescription.Add(locale["ability_riposte"]);
         defensiveSkills.Add("Riposte");
         defensiveSkillsDescription.Add(locale["ability_bulwark"]);
         defensiveSkills.Add("Bulwark");
-
+        */
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/xButton"));
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/yButton"));
     }

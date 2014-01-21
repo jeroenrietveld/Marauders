@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Collections;
 using XInputDotNetPure;
 
@@ -32,7 +34,8 @@ public class CharacterSelectState : SelectionBase
 
         if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
-			block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
+            GameManager.Instance.soundInGame.PlaySound(block.audioSourceArmory, block.marauderNames[block.marauderIndex] + "-selected", true);
+            block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }
         else if (controller.JustPressed(Button.B))
         {
