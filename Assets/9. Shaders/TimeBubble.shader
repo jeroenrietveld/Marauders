@@ -18,7 +18,7 @@
 		Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 		
 		Pass {
-			Blend One One
+			Blend One OneMinusSrcColor
 			Cull Off
 			ZWrite Off
 		
