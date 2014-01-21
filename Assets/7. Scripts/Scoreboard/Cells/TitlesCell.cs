@@ -7,7 +7,6 @@ public class TitlesCell : Cell
     {
         this.title = "Titles";
         this.content = "";
-        this.initialContent = "";
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

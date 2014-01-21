@@ -358,17 +358,7 @@ public class Scoreboard : MonoBehaviour
 
     public void Clear()
     {
-        for(int i = 0; i < _cells.Count; i++)
-        {
-            for(int j = 0; j < _cells[i].Count; j++)
-            {
-                _cells[i][j].content = _cells[i][j].initialContent;
-                if(_cells[i][j].HasTrophy() && _cells[i][j] is CustomCell)
-                {
-                    ((CustomCell)_cells[i][j]).hasTrophy = false;
-                }
-            }
-        }
+        _cells.Clear();
     }
 
     public bool IsVisible()
