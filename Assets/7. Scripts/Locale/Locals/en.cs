@@ -43,7 +43,6 @@ public class en : Locale {
 
 		//Ability descriptions - Utility
         Translations["ability_dash"] = "Quickly dash several \nfeet forward";
-        Translations["ability_timestamp"] = "Leave a expiring time copy \nbehind to travel back through time";
 
 		//World descriptions
 		Translations["world_gaia"] = "Far from the lands of war, death and suffering an old forest stands, energetic and wise. Spreading vastly over miles of land, It is no ordinary place. Blessed by the god of nature, trees tower over a 100 meters above the rich and lush forest including a variety of wild and plantlife.";

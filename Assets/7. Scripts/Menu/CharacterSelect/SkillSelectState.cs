@@ -10,14 +10,18 @@ public class SkillSelection
     public string baseCategory { get; set; }
     public string category { get; set; }
     public List<string> skills { get; set; }
+    public List<string> description { get; set; }
     public string active { get; set; }
+    public string activeDescription { get; set; }
 
-    public SkillSelection(string _base, string _category, List<string> listSkills)
+    public SkillSelection(string _base, string _category, List<string> skillName, List<string> skillDescription)
     {
-        baseCategory = _base;
-        category = _category;
-        skills = listSkills;
-        active = listSkills[0];
+        this.baseCategory = _base;
+        this.category = _category;
+        this.skills = skillName;
+        this.active = skillName[0];
+        this.description = skillDescription;
+        this.activeDescription = skillDescription[0];
     }
 }
 
@@ -27,19 +31,31 @@ public class SkillSelectState : SelectionBase
     private GameObject bottom;
     private Dictionary<int, SkillSelection> list;
 
-    private int currentSkillCategory;
-    private int playersReady = 0;
+    private List<string> offensiveSkills;
+    private List<string> defensiveSkills;
+    private List<string> utilitySkills;
+    private List<string> offensiveSkillsDescription;
+    private List<string> defensiveSkillsDescription;
+    private List<string> utilitySkillsDescription;
+    private List<Material> xBoxImages = new List<Material>();
+
+    private int currentCategory = 0;
 
     public SkillSelectState(CharacterSelectBlock block)
     {
         this.block = block;
         list = new Dictionary<int, SkillSelection>();
-        list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", new List<string>() {"Windsweep" }));
-        list.Add(1, new SkillSelection("SkillDefense", "SkillSelectorDefense", new List<string>() { "Defense 1"}));
-        list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", new List<string>() { "Dash", "Windsweep" }));
-        // temp
-        currentSkillCategory = 2;
+
+        AddSkills();
+
+        list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", offensiveSkills, offensiveSkillsDescription));
+        list.Add(1, new SkillSelection("SkillDefense", "SkillSelectorDefense", defensiveSkills, defensiveSkillsDescription));
+        list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", utilitySkills, utilitySkillsDescription));
+
+        // Set the text to the first item
+        this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[0].description[0];
     }
+
 
     public override void OnUpdate(GamePad controller)
     {
@@ -48,30 +64,35 @@ public class SkillSelectState : SelectionBase
         int dPadVertical = (-1 * Convert.ToInt32(controller.JustPressed(Button.DPadUp))) + Convert.ToInt32(controller.JustPressed(Button.DPadDown));
         int dPadHorizontal = (-1 * Convert.ToInt32(controller.JustPressed(Button.DPadLeft))) + Convert.ToInt32(controller.JustPressed(Button.DPadRight));
 
-        if(!block.isPlayerReady)
+        if (!block.isPlayerReady)
         {
-            // temp because attack and defense skills are not available.
-            arrow.gameObject.transform.position = bottom.transform.FindChild("SkillUtility").transform.FindChild("SkillSelectorUtility").transform.position;
             if (((vertical > 0.7f || vertical < -0.7f) && GetTimer()) || dPadVertical != 0)
             {
-                //int newIndex = cal(vertical, dPadVertical, list.Count, currentSkillCategory, true);
-                //currentSkillCategory = newIndex;
-                //arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentSkillCategory].baseCategory).transform.FindChild(list[currentSkillCategory].category).transform.position;
+                int newIndex = cal(vertical, dPadVertical, list.Count, currentCategory, true);
+                currentCategory = newIndex;
+
+                arrow.gameObject.transform.position = bottom.transform.FindChild(list[newIndex].baseCategory).transform.FindChild(list[newIndex].category).transform.position;
+                this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[newIndex].activeDescription;
+                this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[newIndex];
             }
 
             if (((horizontal > 0.7f || horizontal < -0.7f) && GetTimer()) || dPadHorizontal != 0)
             {
-                int newIndex = cal(horizontal, dPadHorizontal, list[currentSkillCategory].skills.Count, list[currentSkillCategory].skills.IndexOf(list[currentSkillCategory].active), false);
+                int newIndex = cal(horizontal, dPadHorizontal, list[currentCategory].skills.Count, list[currentCategory].skills.IndexOf(list[currentCategory].active), false);
 
-                list[currentSkillCategory].active = list[currentSkillCategory].skills[newIndex];
-                bottom.transform.FindChild(list[currentSkillCategory].baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = list[currentSkillCategory].active;
+                list[currentCategory].active = list[currentCategory].skills[newIndex];
+                list[currentCategory].activeDescription = list[currentCategory].description[newIndex];
+
+                bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = list[currentCategory].active;
+                this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
             }
+
+           
         }
 
-
-        if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
+        if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
-            if(!block.isPlayerReady)
+            if (!block.isPlayerReady)
             {
                 block.isPlayerReady = true;
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
@@ -79,19 +100,30 @@ public class SkillSelectState : SelectionBase
                 // Add selected marauder and skills to the gamemanager.
                 Player playerRef = new Player(block.player);
                 playerRef.marauder = block.marauderNames[block.marauderIndex];
-				playerRef.skills[(int)SkillType.Offensive] = list[0].active;
-				playerRef.skills[(int)SkillType.Defensive] = list[1].active;
+                playerRef.skills[(int)SkillType.Offensive] = list[0].active;
+                playerRef.skills[(int)SkillType.Defensive] = list[1].active;
                 GameManager.Instance.AddPlayerRef(playerRef);
-
-                playersReady++;
-                CheckPlayersReady();
             }
+           
+            bool canContinue = true;
+            foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
+            {
+                if (!item.isPlayerReady && item.isJoined)
+                {
+                    canContinue = false;
+                    break;
+                }
+            }
+
+            if (canContinue)
+            {
+                GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
+            }
+            
         }
         if (controller.JustPressed(Button.B))
         {
-            playersReady--;
-
-            if(block.isPlayerReady)
+            if (block.isPlayerReady)
             {
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                 block.isPlayerReady = false;
@@ -103,23 +135,36 @@ public class SkillSelectState : SelectionBase
         }
     }
 
-    private void CheckPlayersReady()
+    public void AddSkills()
     {
-        int count = 0;
-        foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
-        {
-            if (item.isPlayerReady && item.isJoined)
-            {
-                count++;
-                break;
-            }
-        }
+        offensiveSkills = new List<string>();
+        defensiveSkills = new List<string>();
+        utilitySkills = new List<string>();
+        offensiveSkillsDescription = new List<string>();
+        defensiveSkillsDescription = new List<string>();
+        utilitySkillsDescription = new List<string>();
 
-        if (playersReady == count)
-        {
-            GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
-        }
-        count = 0;
+        Locale locale = new en();
+        offensiveSkillsDescription.Add(locale["ability_windsweep"]);
+        offensiveSkills.Add("WindSweep");
+        offensiveSkillsDescription.Add(locale["ability_obliterate"]);
+        offensiveSkills.Add("Obliterate");
+        offensiveSkillsDescription.Add(locale["ability_sunderstrike"]);
+        offensiveSkills.Add("Sunderstrike");
+
+        defensiveSkillsDescription.Add(locale["ability_destabilize"]);
+        defensiveSkills.Add("Destabilize");
+        defensiveSkillsDescription.Add(locale["ability_riposte"]);
+        defensiveSkills.Add("Riposte");
+        defensiveSkillsDescription.Add(locale["ability_bulwark"]);
+        defensiveSkills.Add("Bulwark");
+
+        utilitySkillsDescription.Add(locale["ability_dash"]);
+        utilitySkills.Add("Dash");
+
+        xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/bButton"));
+        xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/xButton"));
+        xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/yButton"));
     }
 
     private int cal(float axis, int dpad, int count, int currentIndex, bool isCategory)
@@ -131,7 +176,7 @@ public class SkillSelectState : SelectionBase
         }
         else
         {
-            if(isCategory)
+            if (isCategory)
             {
                 dir = axis > 0 ? -1 : 1;
             }
@@ -166,16 +211,16 @@ public class SkillSelectState : SelectionBase
         arrow = bottom.transform.FindChild("SkillArrows").gameObject;
         arrow.transform.position = bottom.transform.FindChild("SkillAttack").transform.FindChild("SkillSelectorAttack").transform.position;
 
-        foreach (KeyValuePair<int, SkillSelection>  item in list)
+        foreach (KeyValuePair<int, SkillSelection> item in list)
         {
-            bottom.transform.FindChild(item.Value.baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = item.Value.active;                
+            bottom.transform.FindChild(item.Value.baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = item.Value.active;
         }
     }
 
     public override void OnInActive()
     {
         block.SkillSelect.SetActive(false);
-        foreach (KeyValuePair<int, SkillSelection>  item in list)
+        foreach (KeyValuePair<int, SkillSelection> item in list)
         {
             item.Value.active = item.Value.skills[0];
         }
