@@ -835,6 +835,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300050, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200018, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4291467333
+      objectReference: {fileID: 0}
+    - target: {fileID: 400068, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.61461687
+      objectReference: {fileID: 0}
+    - target: {fileID: 400068, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 18.7587357
+      objectReference: {fileID: 0}
+    - target: {fileID: 400068, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -34.103199
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_RootGameObject: {fileID: 2098273775}
@@ -2039,7 +2059,7 @@ Transform:
   m_PrefabInternal: {fileID: 123562513}
   m_GameObject: {fileID: 417558557}
   m_LocalRotation: {x: 0, y: 1.8946236e-15, z: 0, w: 1}
-  m_LocalPosition: {x: 1.54742706, y: 18.7587318, z: -34.1031876}
+  m_LocalPosition: {x: 1.61461687, y: 18.7587357, z: -34.103199}
   m_LocalScale: {x: .400000006, y: .400000006, z: 1}
   m_Children: []
   m_Father: {fileID: 83345725}
@@ -2064,7 +2084,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: abaae8b45b2a9b54da2c84bdf68dbfa6, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294901822
+    rgba: 4291467333
 --- !u!23 &417558560
 Renderer:
   m_ObjectHideFlags: 0
