@@ -44,11 +44,11 @@
 			{
 				float4 fractal = tex2D(FractalLayer, input.texCoord);
 				
-				float localPhase = (fractal.a - RipplePhase) * RippleCompression;
+				float localPhase = (fractal.a - RipplePhase) * fractal.g * RippleCompression;
 				if(localPhase <= 0 || localPhase > 1) discard;
 				
 				//return tex2D(LookupTable, float2(1 - fractal.a, 0.5)) * fractal.g;
-				return float4(tex2D(LookupTable, float2(localPhase, 0.5)).rgb * fractal.g, 1.0);
+				return float4(tex2D(LookupTable, float2(localPhase, 0.5)).rgb, 1.0);
 			}
 			ENDCG
 		}
