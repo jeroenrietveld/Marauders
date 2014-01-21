@@ -30,6 +30,17 @@ public class en : Locale {
 		Translations["shrine_capturable"] = "Combo to capture this Shrine";
 		Translations["shrine_captured"] = "You already captured this Shrine";
 		Translations["shrine_locked"] = "Shrine can't be captured at this time";
+		Translations["shrine_pointsgiven"] = "Last shrine was capturedtimesync reward will be given";
+
+		//Shrine announcements
+		Translations["shrine_announcement_capturable"] = "Shrine can now be captured";
+		Translations["shrine_subannouncement_capturable"] = "Attack to capture shrine";
+		Translations["shrine_announcement_captured"] = "Player {0} has captured a shrine"; //Player x has captured a shrine
+		Translations["shrine_subannouncement_captured"] = "";
+		Translations["shrine_announcement_capturable_last"] = "Last shrine can now be captured";
+		Translations["shrine_subannouncement_capturable_last"] = "Timesync will be rewarded when captured";
+		Translations["shrine_announcement_rewards"] = "Last shrine has been captured";
+		Translations["shrine_subannouncement_rewards"] = "Timesync has been rewarded";
 
 		//Ability descriptions - offensive
 		Translations["ability_windsweep"] = "Strike with wind, causing \ndamage and knockback";

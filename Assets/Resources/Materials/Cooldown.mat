@@ -33,4 +33,4 @@ Material:
       data:
         first:
           name: playerColor
-        second: {r: 0, g: 1, b: 0, a: 1}
+        second: {r: .811764717, g: .0313725509, b: .129411772, a: 1}

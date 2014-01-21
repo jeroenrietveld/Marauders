@@ -53,12 +53,17 @@ public class Announcer : MonoBehaviour {
 
 	public void Announce(AnnouncementType type, string text)
 	{
-		this.Announce ( new Announcement(type, text, ""));
+		this.Announce ( new Announcement(type, text, "", ""));
 	}
 
-	public void Announce(AnnouncementType type, string text, string voiceUrl)
+	public void Announce(AnnouncementType type, string text, string subtext)
 	{
-		this.Announce ( new Announcement(type, text, voiceUrl));
+		this.Announce ( new Announcement(type, text, subtext, ""));
+	}
+
+	public void Announce(AnnouncementType type, string text, string subtext, string voiceUrl)
+	{
+		this.Announce ( new Announcement(type, text, subtext, voiceUrl));
 	}
 
 	public void Announce(Announcement announcement)
@@ -130,11 +135,20 @@ public class Announcer : MonoBehaviour {
 	{
 		if (_currentAnnouncement != null)
 		{
+			//Displaying the text
 			GUI.Label (
 				new Rect(0, 0, Screen.width, Screen.height),
 				"<color='#FFFFFF" + this._currentAnnouncementOpacity.ToString("D2") + "'><size='" + (int)(40f * ( (float)Screen.height / 700f )) + "'>" + this._currentAnnouncement.text + "</size></color>",
 				this.announcementStyle);
-			Debug.Log ("<color='#FFFFFF" + this._currentAnnouncementOpacity.ToString("D2") + "'>Opacity: " + this._currentAnnouncementOpacity.ToString("D2") + "</color>");
+
+			//Displaying subtext
+			if (this._currentAnnouncement.subtext != "")
+			{
+				GUI.Label (
+					new Rect(0, 0, Screen.width, Screen.height),
+					"<color='#FFFFFF" + this._currentAnnouncementOpacity.ToString("D2") + "'><size='" + (int)(30f * ( (float)Screen.height / 700f )) + "'>" + this._currentAnnouncement.subtext + "</size></color>",
+					this.announcementStyle);
+			}
 		}
 	}
 }
@@ -146,15 +160,17 @@ public enum AnnouncementType
 
 public class Announcement
 {
-	public Announcement(AnnouncementType type, string text, string voiceUrl)
+	public Announcement(AnnouncementType type, string text, string subtext, string voiceUrl)
 	{
 		this.type = type;
-		this.text = text;
+		this.text = text + ((subtext != "") ? "\n" : "");
+		this.subtext = "\n" + subtext;
 		this.voiceUrl = voiceUrl;
 	}
 
 	public AnnouncementType type;
 	public string text;
+	public string subtext;
 	public string voiceUrl;
 }
 

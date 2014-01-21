@@ -12,6 +12,7 @@ public class ShrineManager : MonoBehaviour {
 	private List<Shrine> _inactiveShrines;
 	private Timer _activationTimer;
 	private Timer _rewardDelay;
+	private Announcer _announcer;
 
 	void Start () {
 		_shrines = GetComponentsInChildren<Shrine> ();
@@ -25,6 +26,9 @@ public class ShrineManager : MonoBehaviour {
 		_rewardDelay = new Timer (2);
 		_rewardDelay.AddPhaseCallback (0, _activationTimer.Stop);
 		_rewardDelay.AddPhaseCallback (ApplyReward);
+
+		GameObject Global = GameObject.Find("_GLOBAL");
+		_announcer = Global.GetComponent<Announcer>();
 	}
 
 	void OnEnable()
@@ -53,7 +57,13 @@ public class ShrineManager : MonoBehaviour {
 		if (allCaptured)
 		{
 			_rewardDelay.Start();
+		} else
+		{
+			//Player X has captured a shrine
+			_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_captured"].Replace("{0}", (evt.newOwner.indexInt + 1).ToString()), Locale.Current["shrine_subannouncement_captured"]);
 		}
+
+
 	}
 
 	private void ApplyReward()
@@ -64,6 +74,8 @@ public class ShrineManager : MonoBehaviour {
             GameManager.scoreboard.AddContent(shrine.owner.index, "Owned Shrines", 1);
 			shrine.Reset();
 		}
+
+		_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_rewards"].Replace("{0}", (evt.newOwner.indexInt + 1).ToString()), Locale.Current["shrine_subannouncement_captured"]);
 
 		_activationTimer.Start ();
 		_inactiveShrines.AddRange (_shrines);
@@ -77,5 +89,15 @@ public class ShrineManager : MonoBehaviour {
 		_inactiveShrines.Remove (shrine);
 
 		shrine.Activate ();
+
+
+		if (_inactiveShrines.Count == 0)
+		{
+			_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_capturable_last"], Locale.Current["shrine_subannouncement_capturable_last"]);
+		} 
+		else
+		{
+			_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_capturable"], Locale.Current["shrine_subannouncement_capturable"]);
+		}		
 	}
 }
