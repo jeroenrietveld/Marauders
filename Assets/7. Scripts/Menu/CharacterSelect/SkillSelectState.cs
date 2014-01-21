@@ -33,10 +33,8 @@ public class SkillSelectState : SelectionBase
 
     private List<string> offensiveSkills;
     private List<string> defensiveSkills;
-    private List<string> utilitySkills;
     private List<string> offensiveSkillsDescription;
     private List<string> defensiveSkillsDescription;
-    private List<string> utilitySkillsDescription;
     private List<Material> xBoxImages = new List<Material>();
 
     private int currentCategory = 0;
@@ -50,7 +48,6 @@ public class SkillSelectState : SelectionBase
 
         list.Add(0, new SkillSelection("SkillAttack", "SkillSelectorAttack", offensiveSkills, offensiveSkillsDescription));
         list.Add(1, new SkillSelection("SkillDefense", "SkillSelectorDefense", defensiveSkills, defensiveSkillsDescription));
-        list.Add(2, new SkillSelection("SkillUtility", "SkillSelectorUtility", utilitySkills, utilitySkillsDescription));
 
         // Set the text to the first item
         this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[0].description[0];
@@ -139,10 +136,8 @@ public class SkillSelectState : SelectionBase
     {
         offensiveSkills = new List<string>();
         defensiveSkills = new List<string>();
-        utilitySkills = new List<string>();
         offensiveSkillsDescription = new List<string>();
         defensiveSkillsDescription = new List<string>();
-        utilitySkillsDescription = new List<string>();
 
         Locale locale = new en();
         offensiveSkillsDescription.Add(locale["ability_windsweep"]);
@@ -159,10 +154,6 @@ public class SkillSelectState : SelectionBase
         defensiveSkillsDescription.Add(locale["ability_bulwark"]);
         defensiveSkills.Add("Bulwark");
 
-        utilitySkillsDescription.Add(locale["ability_dash"]);
-        utilitySkills.Add("Dash");
-
-        xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/bButton"));
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/xButton"));
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/yButton"));
     }
