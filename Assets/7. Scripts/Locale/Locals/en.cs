@@ -32,7 +32,7 @@ public class en : Locale {
 		Translations["shrine_locked"] = "Shrine can't be captured at this time";
 		Translations["shrine_pointsgiven"] = "Last shrine was capturedtimesync reward will be given";
 
-		//Shrine announcements
+		//Shrine announcements 
 		Translations["shrine_announcement_capturable"] = "Shrine can now be captured";
 		Translations["shrine_subannouncement_capturable"] = "Attack to capture shrine";
 		Translations["shrine_announcement_captured"] = "Player {0} has captured a shrine"; //Player x has captured a shrine

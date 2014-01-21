@@ -107,7 +107,7 @@ public class Shrine : Attackable {
                 }
             }
         }
-	}
+	} 
 	
 	public void Reset()
 	{

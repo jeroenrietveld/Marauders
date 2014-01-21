@@ -75,7 +75,7 @@ public class ShrineManager : MonoBehaviour {
 			shrine.Reset();
 		}
 
-		_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_rewards"].Replace("{0}", (evt.newOwner.indexInt + 1).ToString()), Locale.Current["shrine_subannouncement_captured"]);
+		_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_rewards"], Locale.Current["shrine_subannouncement_captured"]);
 
 		_activationTimer.Start ();
 		_inactiveShrines.AddRange (_shrines);
