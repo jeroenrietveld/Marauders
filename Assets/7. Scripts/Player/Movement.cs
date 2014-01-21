@@ -138,7 +138,7 @@ public class Movement : MonoBehaviour {
             // Make the type of sound to play dynamic. Instead of always wood sound types.
             if(GetComponent<Jump>().onGround)
             {
-                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, _avatar.player.footsole + "-wood-walk", false, 0.65f);
+                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, _avatar.player.footsole + "-" + GameManager.Instance.matchSettings.groundType +"-walk", false, 0.65f);
             }
 
             if(!animation.IsPlaying ("Walk"))
@@ -152,7 +152,7 @@ public class Movement : MonoBehaviour {
             // Make the type of sound to play dynamic. Instead of always wood sound types.
             if (GetComponent<Jump>().onGround)
             {
-                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, _avatar.player.footsole + "-wood-run", false, 0.4f);
+                GameManager.Instance.soundInGame.PlaySoundLoopAndEndtime(movementSource, _avatar.player.footsole + "-" + GameManager.Instance.matchSettings.groundType + "-run", false, 0.4f);
             }
             
             if (!animation.IsPlaying("Run"))

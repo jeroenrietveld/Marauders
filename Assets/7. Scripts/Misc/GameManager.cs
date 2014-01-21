@@ -29,6 +29,7 @@ public class GameManager {
 		public string level;
 		public GameMode gameMode;
         public int timeSync;
+        public string groundType;
 	}
 	public MatchSettings matchSettings;
 
