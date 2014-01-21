@@ -13,6 +13,7 @@ public class PlayerCell : Cell
         this.player = player;
         this.title = player.index.ToString();
         this.content = Resources.Load("Textures/Defensive_icon") as Texture;
+        this.initialContent = null;
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

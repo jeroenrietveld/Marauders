@@ -12,6 +12,7 @@ public class TimeSyncCell : Cell
     {
         this.title = "Time Sync";
         this.content = 0;
+        this.initialContent = 0;
         this.player = player;
         this.trophysEnabled = false;
         this.cellType = CellType.Static;

@@ -6,11 +6,12 @@ using System.Text;
 public class CustomCell : Cell 
 {
     public bool hasTrophy;
-    public CustomCell(string title, CellType cellType, object content, bool trophysEnabled)
+    public CustomCell(string title, CellType cellType, object initialContent, bool trophysEnabled)
     {
         this.title = title;
         this.trophysEnabled = trophysEnabled;
-        this.content = content;
+        this.content = initialContent;
+        this.initialContent = initialContent;
         this.cellType = cellType;       
     }
 

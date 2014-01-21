@@ -18,6 +18,8 @@ public abstract class Cell
     public String title;
 
     public object content;
+
+    public object initialContent;
             
     public bool trophysEnabled;
 
