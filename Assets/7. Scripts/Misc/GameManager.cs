@@ -94,6 +94,7 @@ public class GameManager {
 
     public void StopGame()
     {
+<<<<<<< HEAD
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 
 		//Dirty but it works; TODO add juggernaut sounds
@@ -102,6 +103,9 @@ public class GameManager {
 		}catch
 		{
 				}
+=======
+        scoreboard.CalculateTrophys();
+>>>>>>> Trophy's should work now
         scoreboard.Show();
         PauseGame();
         gameEnded = true;

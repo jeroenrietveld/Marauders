@@ -33,8 +33,6 @@ public abstract class GameMode
 
     public void InitializeScoreboard()
     {
-        List<Cell> fieldNameList = new List<Cell>();
-
         foreach(var player in GameManager.Instance.playerRefs)
         {
             List<Cell> addition = new List<Cell>();
@@ -57,6 +55,23 @@ public abstract class GameMode
             addition.Add(suicides);
             addition.Add(kills);
             addition.Add(hitratio);          
+        }
+
+        var resources = Resources.LoadAll("JSON/Trophy");
+
+        foreach (object resource in resources)
+        {
+            var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
+            string column = node["column"].Value;
+            string title = node["title"].Value;
+            string condition = node["condition"].Value;
+
+            Trophy t = new Trophy();
+            t.Column = column;
+            t.Title = title;
+            t.Condition = condition;
+
+            GameManager.scoreboard.trophyList.Add(t);
         }
     }
    
