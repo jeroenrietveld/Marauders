@@ -51,21 +51,15 @@ public class Scoreboard : MonoBehaviour
     /// This method will add a custom cell just after the static cells.
     /// </summary>
     /// <param name="gameSpecificCell"></param>
-    public void AddGameSpecificCell(CustomCell gameSpecificCell)
-    {        
-        //Iterate over the cells
-        for (int i = 0; i < _cells.Count; i++)
+    public void AddGameSpecificCell(int index, CustomCell gameSpecificCell)
+    {                
+        for (int j = 0; j < _cells[index].Count; j++)
         {
-            for (int j = 0; j < _cells[i].Count; j++)
+            if (_cells[index][j].cellType != CellType.Static)
             {
-                if (_cells[i][j].cellType != CellType.Static)
-                {
-                    CustomCell addition = new CustomCell();
-                    addition = gameSpecificCell;
-                    //This spot is the first spot after the static cells
-                    _cells[i].Insert(j, addition);
-                    break;
-                }
+                //This spot is the first spot after the static cells
+                _cells[index].Insert(j, gameSpecificCell);
+                break;
             }
         }
     }
