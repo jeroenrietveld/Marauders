@@ -53,7 +53,8 @@ public class Scoreboard : MonoBehaviour
     /// <param name="gameSpecificCell"></param>
     public void AddGameSpecificCell(CustomCell gameSpecificCell)
     {
-        CustomCell addition = gameSpecificCell;
+        CustomCell addition = new CustomCell();
+        addition = gameSpecificCell;
         //Iterate over the cells
         for (int i = 0; i < _cells.Count; i++)
         {

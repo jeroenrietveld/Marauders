@@ -14,6 +14,12 @@ public class CustomCell : Cell
         this.cellType = cellType;       
     }
 
+    public CustomCell()
+    {
+        //creates an empty CustomCell
+    }
+
+
     public override string GetContent()
     {
         string result = content.ToString();
