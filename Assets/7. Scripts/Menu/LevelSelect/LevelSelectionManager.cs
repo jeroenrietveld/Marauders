@@ -29,7 +29,7 @@ public class LevelSelectionManager : MonoBehaviour {
 			var gameModes = node["gamemodes"].AsArray;
 			var previewImagePath = node["previewImagePath"].Value;
 			var levelInfo = node["levelinfo"].Value;
-				
+            var groundtype = node["groundType"].Value;
 			//the gameModes array is still a JSONArray. SimpleJSON does not support easy 
 			//conversion to normal string arrays, therefore we need to do it the ugly way.
 			string[] actualGameModes = new string[gameModes.Count];
@@ -40,7 +40,7 @@ public class LevelSelectionManager : MonoBehaviour {
 			Texture2D previewImage = (Texture2D) Resources.Load(previewImagePath);
 				
 			//Finally, add the level with its info to the level list.
-			levels.Add(new Level(levelName, actualGameModes, previewImage , levelInfo));
+			levels.Add(new Level(levelName, actualGameModes, previewImage , levelInfo, groundtype));
 		}
 		
 		selectionBlocks.Add (LevelSelectionState.LevelSelection, new LevelSelectionBlock ());
