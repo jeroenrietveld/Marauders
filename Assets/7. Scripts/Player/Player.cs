@@ -7,7 +7,9 @@ public class Player
 	private static string _marauderDataPath = "Marauders/";
 	private static string _marauderPrefabPath = "Prefabs/Marauders/";
 
-	private static Color[] _colors = new []{Color.red, Color.green, Color.blue, Color.yellow};
+	private static Color[] _colors = new []
+	{new Color(207/255f, 8/255f, 33/255f), new Color(58/255f, 174/255f, 223/255f), 
+		new Color(20/255f, 171/255f, 87/255f), new Color(150/255f, 65/255f, 150/255f)};
 
     public string marauder { get; set; }
 	public PlayerIndex index;

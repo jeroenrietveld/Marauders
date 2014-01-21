@@ -24,8 +24,9 @@ public class Destabilize : SkillBase
 			GetComponentInChildren<Attackable>().isAttackable = false;
 			GetComponent<AvatarGraphics>().AddMaterial(mat);
 
-			Stun stun = gameObject.AddComponent<Stun>();
-			Destroy (stun, _duration);
+			GetComponent<Movement>().enabled = false;
+			GetComponent<Jump>().enabled = false;
+			GetComponent<Attack>().enabled = false;
 
 			GetComponent<AnimationHandler>().Pause();
 		});
@@ -37,7 +38,11 @@ public class Destabilize : SkillBase
 		_destabilize.AddCallback (_destabilize.endTime, delegate {
 			GetComponentInChildren<Attackable>().isAttackable = true;
 			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
-			
+
+			GetComponent<Movement>().enabled = true;
+			GetComponent<Jump>().enabled = true;
+			GetComponent<Attack>().enabled = true;
+
 			GetComponent<AnimationHandler>().UnPause();
 		});
 	}

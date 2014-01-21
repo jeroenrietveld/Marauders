@@ -102,8 +102,6 @@ public class Heartbeat : Attackable
 
 	protected override void ApplyAttack(Attack attacker)
     {
-        GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
-
         //Just to be clear; we are beeing hit
         var direction = attacker.transform.position - transform.position;
         direction.y = 0;
@@ -120,6 +118,13 @@ public class Heartbeat : Attackable
         if (armorHit)
         {
             amount = amount * _armorFactor;
+            // Play armor hit sounds.
+            GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "armorhit", false);
+        }
+        else
+        {
+            // Play heartbeat hit sounds.
+            GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
         }
         var previousHealth = health;
         health = health - amount;

@@ -26,25 +26,25 @@ public class WeaponPrototype : MonoBehaviour {
 
 			Player player1 = new Player (PlayerIndex.One);
 			player1.marauder = "Samurai";
-			player1.skills = new []{"Dash", "Destabilize", "Dash"};
+			player1.skills = new []{"Dash", "Destabilize"};
 			GameManager.Instance.AddPlayerRef(player1);
 
 
 			Player player2 = new Player (PlayerIndex.Two);
 			player2.marauder = "Samurai";
-			player2.skills = new []{"Dash", "Destabilize", "Dash"};
+			player2.skills = new []{"Dash", "Destabilize"};
 			GameManager.Instance.AddPlayerRef(player2);
 
 			/*
 			PlayerRef player3 = new PlayerRef (PlayerIndex.Three);
 			player3.marauder = "Samurai";
-			player3.skills = new []{"Dash", "Dash", "Dash"};
+			player3.skills = new []{"Dash", "Dash"};
 			GameManager.Instance.AddPlayerRef(player3);
 
 			/*
 			PlayerRef player4 = new PlayerRef (PlayerIndex.Four);
 			player4.marauder = "Samurai";
-			player4.skills = new []{"Dash", "Dash", "Dash"};
+			player4.skills = new []{"Dash", "Dash"};
 			GameManager.Instance.AddPlayerRef(player4);
 			*/
 		}
