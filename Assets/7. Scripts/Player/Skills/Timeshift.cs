@@ -7,7 +7,7 @@ using UnityEngine;
 public class Timeshift : SkillBase
 {
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
-		"Timeshift",
+		new AttackInfo("Timeshift", 1.0f, -1f),
 		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
 		1,
 		WrapMode.Loop

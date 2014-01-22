@@ -28,17 +28,23 @@ public class Movement : MonoBehaviour {
 		_avatar = GetComponent<Avatar> ();
 		_camera = Camera.main;
 
+		//Will only look at the attack info name
+		AttackInfo info = new AttackInfo("Walk", 1.0f, -1f);
+
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
-				"Walk",
+				info,
 				AnimationHandler.MixTransforms.Lowerbody,
 				1,
 				WrapMode.Once
 			));
 	
+
+		//Will only look at the attack info name
+		info = new AttackInfo("Run", 1.0f, -1f);
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
-				"Run",
+				info,
 				AnimationHandler.MixTransforms.Lowerbody,
 				1,
 				WrapMode.Loop

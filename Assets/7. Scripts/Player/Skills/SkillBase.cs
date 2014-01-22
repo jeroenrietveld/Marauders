@@ -36,7 +36,7 @@ public abstract class SkillBase : ActionBase
 	{
 		if (!cooldown.running)
 		{
-			animation.Play(animationSettings.animationName);
+			animation.Play(animationSettings.attackInfo.animationName);
 			cooldown.Start ();
 			OnPerformAction ();
 		}
