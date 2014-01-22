@@ -791,6 +791,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 239622502}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauders.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauderNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.64364815
@@ -859,6 +867,14 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauders.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauderNames.Array.data[2]
+      value: Juggernaut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_RootGameObject: {fileID: 2098273775}
@@ -1485,9 +1501,11 @@ MonoBehaviour:
   marauders:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
   - Samurai
+  - Juggernaut
   _currentEnum: 0
   audioSourceArmory: {fileID: 517819383}
 --- !u!1 &271313040
@@ -2233,9 +2251,11 @@ MonoBehaviour:
   marauders:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
   - Samurai
+  - Juggernaut
   _currentEnum: 0
   audioSourceArmory: {fileID: 517819383}
 --- !u!1 &443680851
@@ -3759,6 +3779,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 239622502}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauders.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauderNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
       propertyPath: m_LocalPosition.x
       value: -13.3696003
@@ -3835,6 +3863,14 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauders.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauderNames.Array.data[2]
+      value: Juggernaut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
   m_RootGameObject: {fileID: 432956648}
@@ -4196,6 +4232,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 239622502}
     m_Modifications:
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauders.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauderNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 13.5595598
@@ -4271,6 +4315,14 @@ Prefab:
     - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
       propertyPath: audioSourceArmory
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauders.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauderNames.Array.data[2]
+      value: Juggernaut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
@@ -7249,9 +7301,11 @@ MonoBehaviour:
   marauders:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
   - Samurai
+  - Juggernaut
   _currentEnum: 0
   audioSourceArmory: {fileID: 0}
 --- !u!1 &1752302893
@@ -7333,6 +7387,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 239622502}
     m_Modifications:
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauders.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauderNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
       propertyPath: m_LocalPosition.x
       value: -4.41213179
@@ -7373,6 +7435,14 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauders.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauderNames.Array.data[2]
+      value: Juggernaut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
   m_RootGameObject: {fileID: 259218389}
@@ -8916,9 +8986,11 @@ MonoBehaviour:
   marauders:
   - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
   - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
   - Samurai
+  - Juggernaut
   _currentEnum: 0
   audioSourceArmory: {fileID: 517819383}
 --- !u!1 &2100865299

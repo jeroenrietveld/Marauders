@@ -94,8 +94,13 @@ public class SoundIngame
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-            source.clip = list[new System.Random().Next(0, list.Count)];
-            source.Play();
+            
+			//This check
+			if (list.Count > 0)
+			{
+				source.clip = list[new System.Random().Next(0, list.Count)];
+            	source.Play();
+			}
         }
     }
 
