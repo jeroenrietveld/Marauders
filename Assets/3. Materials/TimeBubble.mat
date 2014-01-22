@@ -79,7 +79,7 @@ Material:
       data:
         first:
           name: DistortionColor1
-        second: {r: 0, g: 1, b: 0, a: .196078435}
+        second: {r: 0, g: 1, b: 0, a: .501960814}
       data:
         first:
           name: DistortionColor2

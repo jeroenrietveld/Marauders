@@ -14,11 +14,13 @@ public struct TimeBubbleEnterEvent
 public struct TimeBubbleObjectExitEvent
 {
 	public GameObject obj;
+	public Vector3 exitPosition;
 	public float respawnDelay;
 
-	public TimeBubbleObjectExitEvent(GameObject obj, float respawnDelay) 
+	public TimeBubbleObjectExitEvent(GameObject obj, Vector3 exitPosition, float respawnDelay) 
 	{
 		this.obj = obj;
+		this.exitPosition = exitPosition;
 		this.respawnDelay = respawnDelay;
 	}
 }
@@ -26,11 +28,13 @@ public struct TimeBubbleObjectExitEvent
 public struct TimeBubbleAvatarExitEvent
 {
 	public Avatar avatar;
+	public Vector3 exitPosition;
 	public float respawnDelay;
 	
-	public TimeBubbleAvatarExitEvent(Avatar avatar, float respawnDelay) 
+	public TimeBubbleAvatarExitEvent(Avatar avatar, Vector3 exitPosition, float respawnDelay) 
 	{
 		this.avatar = avatar;
+		this.exitPosition = exitPosition;
 		this.respawnDelay = respawnDelay;
 	}
 }
@@ -41,7 +45,8 @@ public class TimeBubble : MonoBehaviour {
 
 	void OnTriggerExit(Collider collider)
 	{
-		var exitDirection = collider.transform.position - transform.position;
+		var exitPosition = collider.transform.position;
+		var exitDirection = exitPosition - transform.position;
 		var spawnPoint = GetSpawnPoint (-exitDirection);
 
 		ObjectSpawner.Create (
@@ -56,11 +61,11 @@ public class TimeBubble : MonoBehaviour {
 
 		if(avatar)
 		{
-			Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, respawnDelay));
+			Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, exitPosition, respawnDelay));
 		}
 		else
 		{
-			Event.dispatch (new TimeBubbleObjectExitEvent (collider.gameObject, respawnDelay));
+			Event.dispatch (new TimeBubbleObjectExitEvent (collider.gameObject, exitPosition, respawnDelay));
 		}
 	}
 

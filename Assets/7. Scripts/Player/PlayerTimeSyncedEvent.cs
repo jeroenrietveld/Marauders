@@ -8,7 +8,7 @@ public struct PlayerTimeSyncEvent
 	public int amount;
 	public Vector3 worldSpacePosition;
 
-	public bool hasPosition { get { return float.IsNaN(worldSpacePosition.sqrMagnitude); } }
+	public bool hasPosition { get { return !float.IsNaN(worldSpacePosition.sqrMagnitude); } }
 
 	public PlayerTimeSyncEvent(Player player, int amount, Vector3 worldSpacePosition)
 	{

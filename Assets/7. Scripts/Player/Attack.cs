@@ -59,6 +59,7 @@ public class Attack : ActionBase {
 		_attackDelay.AddPhaseCallback (_trailTimer.Start);
 
 		_attackCooldown = new Timer (0);
+		_attackCooldown.AddPhaseCallback(_comboReset.Start);
 	}
 
 	void Start () {
@@ -74,7 +75,7 @@ public class Attack : ActionBase {
 		{
 			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
 			_attackDelay.Start();
-			_comboReset.Start();
+			_comboReset.Stop();
 
 			_attackCooldown.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length;
 			_attackCooldown.Start();

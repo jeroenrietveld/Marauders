@@ -70,7 +70,7 @@ public class ShrineManager : MonoBehaviour {
 	{
 		foreach (var shrine in _shrines)
 		{
-			shrine.owner.AddTimeSync(timeSyncPerShrine);
+			shrine.owner.AddTimeSync(timeSyncPerShrine, shrine.transform.position);
             GameManager.scoreboard.AddContent(shrine.owner.index, "Owned Shrines", 1);
 			shrine.Reset();
 		}
