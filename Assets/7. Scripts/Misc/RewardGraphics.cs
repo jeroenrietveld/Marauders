@@ -39,7 +39,12 @@ public class RewardGraphics : MonoBehaviour {
 			effectTimers.Add(timer);
 		}
 
-		Event.register<AvatarDeathEvent> (AvatarDeath);
+		Event.register<PlayerTimeSyncEvent> (OnPlayerTimeSync);
+	}
+
+	void OnDestroy()
+	{
+		Event.unregister<PlayerTimeSyncEvent> (OnPlayerTimeSync);
 	}
 
 	private float halfEllipse(float x, float radius)
@@ -61,13 +66,11 @@ public class RewardGraphics : MonoBehaviour {
 		}
 	}
 
-	private void AvatarDeath(AvatarDeathEvent evt)
+	private void OnPlayerTimeSync(PlayerTimeSyncEvent evt)
 	{
-		Player offender = evt.offender;
-
-		if(offender != null)
+		if(evt.amount > 0)
 		{
-			Timer timer = effectTimers[offender.indexInt];
+			Timer timer = effectTimers[evt.player.indexInt];
 			timer.Start();
 		}
 	}
