@@ -60,7 +60,7 @@ public class AvatarGraphics : MonoBehaviour {
 				if(m.shader.name != "Custom/Character")
 				{
 					// Uncomment when adding a new character, useful for finding all materials
-					Debug.Log(transform.GetPath() + " does not use the custom Character shader.");
+					//Debug.Log(transform.GetPath() + " does not use the custom Character shader.");
 				}
 				else
 				{
