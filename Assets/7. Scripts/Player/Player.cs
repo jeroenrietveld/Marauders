@@ -111,14 +111,18 @@ public class Player
 	{
 		GameObject.Destroy (avatar);
 	}
-	
+
 	public void AddTimeSync(int timeSync)
 	{
-		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
+		AddTimeSync (timeSync, new Vector3 (float.NaN, float.NaN, float.NaN));
+	}
 
+	public void AddTimeSync(int timeSync, Vector3 position)
+	{
+		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
 		this.timeSync = Mathf.Clamp(this.timeSync + timeSync, 0, timeSyncLimit);
 
-        Debug.Log(this.timeSync);
+		Event.dispatch(new PlayerTimeSyncEvent(player, timeSync, position));
 		if (this.timeSync >= timeSyncLimit)
 		{
 			Event.dispatch(new PlayerTimeSyncedEvent(this));

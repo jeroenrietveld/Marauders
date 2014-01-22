@@ -18,7 +18,7 @@ public class GameUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
-		_texture = Resources.Load ("Textures/Cooldown", typeof(Texture)) as Texture;
+		_texture = Resources.Load ("Textures/TimeSyncIndicator", typeof(Texture)) as Texture;
 
 		_lightbulbMat = Resources.Load ("Materials/Lightbulb", typeof(Material)) as Material;
 		_lightbulbTex = Resources.Load ("Textures/GUI_lightbulb", typeof(Texture)) as Texture;
@@ -63,22 +63,22 @@ public class GameUI : MonoBehaviour {
 		_cooldownUIPositions = new List<List<Rect>> ();
 		List<Rect> positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (25, 25, 100, 100));
+		positions.Add (new Rect (25, 25, 128, 128));
 		positions.Add (new Rect (0 - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 125, 25, 100, 100));
+		positions.Add (new Rect (Screen.width - 153, 25, 128, 128));
 		positions.Add (new Rect (Screen.width - 225, 0 - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (25, Screen.height - 125, 100, 100));
+		positions.Add (new Rect (25, Screen.height - 153, 128, 128));
 		positions.Add (new Rect (0 - 225, Screen.height - 225, 450, 450));
 		
 		positions = new List<Rect> ();
 		_cooldownUIPositions.Add (positions);
-		positions.Add (new Rect (Screen.width - 125, Screen.height - 125, 100, 100));
+		positions.Add (new Rect (Screen.width - 153, Screen.height - 153, 128, 128));
 		positions.Add (new Rect (Screen.width - 225, Screen.height - 225, 450, 450));
 	}
 }

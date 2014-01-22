@@ -46,7 +46,7 @@ public class Attack : ActionBase {
 		{
 			if(_trailRenderers != null)
 			{
-				var trailTime = (1 - Mathf.Pow(_trailTimer.Phase(), 3)) * .1f;
+				var trailTime = (1 - Mathf.Pow(_trailTimer.Phase(), 3)) * .2f;
 				foreach(var renderer in _trailRenderers)
 				{
 					renderer.time = trailTime;
