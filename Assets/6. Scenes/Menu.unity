@@ -875,6 +875,14 @@ Prefab:
       propertyPath: marauderNames.Array.data[2]
       value: Juggernaut
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauders.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+    - target: {fileID: 11400000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: marauders.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_RootGameObject: {fileID: 2098273775}
@@ -1499,8 +1507,8 @@ MonoBehaviour:
   SkillSelect: {fileID: 0}
   player: 2
   marauders:
-  - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
-  - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
   - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
@@ -2249,8 +2257,8 @@ MonoBehaviour:
   SkillSelect: {fileID: 0}
   player: 3
   marauders:
-  - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
-  - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
   - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
@@ -2713,7 +2721,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517819376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 20, z: -54.0237389}
+  m_LocalPosition: {x: 15, y: 20, z: -95.0237427}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2100865300}
@@ -3871,6 +3879,14 @@ Prefab:
       propertyPath: marauderNames.Array.data[2]
       value: Juggernaut
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauders.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+    - target: {fileID: 11400000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: marauders.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
   m_RootGameObject: {fileID: 432956648}
@@ -4324,6 +4340,14 @@ Prefab:
       propertyPath: marauderNames.Array.data[2]
       value: Juggernaut
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauders.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+    - target: {fileID: 11400000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: marauders.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
   m_RootGameObject: {fileID: 1736606336}
@@ -7299,8 +7323,8 @@ MonoBehaviour:
   SkillSelect: {fileID: 0}
   player: 0
   marauders:
-  - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
-  - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
   - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
@@ -7443,6 +7467,14 @@ Prefab:
       propertyPath: marauderNames.Array.data[2]
       value: Juggernaut
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauders.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+    - target: {fileID: 11400000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: marauders.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
   m_RootGameObject: {fileID: 259218389}
@@ -8984,8 +9016,8 @@ MonoBehaviour:
   SkillSelect: {fileID: 0}
   player: 1
   marauders:
-  - {fileID: 2100000, guid: 6f6356676f1677b4cbca6fc07ff54da5, type: 2}
-  - {fileID: 2100000, guid: 89fa0631977ada442bf33b748bd2f06a, type: 2}
+  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
+  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
   - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief
