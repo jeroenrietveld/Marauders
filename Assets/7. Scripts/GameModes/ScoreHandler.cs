@@ -25,11 +25,9 @@ public class ScoreHandler : MonoBehaviour {
 	{
 		if(evt.offender != null) 
 		{
-			evt.offender.AddTimeSync (killReward);
+			evt.offender.AddTimeSync (killReward, evt.victim.avatar.transform.position);
             GameManager.scoreboard.AddContent(evt.offender.index, "Kills", 1);
 		}
-
-		evt.victim.AddTimeSync (suicidePenalty);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
@@ -41,8 +39,7 @@ public class ScoreHandler : MonoBehaviour {
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
             GameManager.scoreboard.AddContent(evt.avatar.player.index, "Eliminated", 1);
 
-			heartbeat.lastAttacker.AddTimeSync(smackOutReward);
-			
+			heartbeat.lastAttacker.AddTimeSync(smackOutReward, evt.exitPosition);
             GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Eliminations", 1);
 		}
 		else

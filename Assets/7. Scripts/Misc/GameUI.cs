@@ -5,34 +5,28 @@ using System.Collections.Generic;
 public class GameUI : MonoBehaviour {
 	
 	public List<Color> lightBulbColors = new List<Color> ();
+	public List<Vector2> timeSyncSliceOffsets = new List<Vector2>();
+	public List<Vector2> timeSyncSliceBounds = new List<Vector2>();
+	public List<float> timeSyncSliceAlphas = new List<float> ();
+	public List<int> shownTimeSync = new List<int> ();
 
-	private Material _material;
-	private Texture _texture;
-	private Material _lightbulbMat;
-	private Texture _lightbulbTex;
+	public Material timeSyncMaterial;
+	public Material timeSyncSliceMaterial;
+	public Texture timeSyncTexture;
+	public Material lightbulbMat;
+	public Texture lightbulbTex;
 
 	private List<List<Rect>> _cooldownUIPositions;
-	private Color[] _skillColors = new Color[]{Color.red, Color.blue, Color.yellow};
-	private Texture[] _skillIcons;
 
 	// Use this for initialization
 	void Start () {
-		_material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
-		_texture = Resources.Load ("Textures/TimeSyncIndicator", typeof(Texture)) as Texture;
-
-		_lightbulbMat = Resources.Load ("Materials/Lightbulb", typeof(Material)) as Material;
-		_lightbulbTex = Resources.Load ("Textures/GUI_lightbulb", typeof(Texture)) as Texture;
-
-		_skillIcons = new Texture[]
-		{
-			Resources.Load ("Textures/Offensive_icon", typeof(Texture)) as Texture,
-			Resources.Load ("Textures/Defensive_icon", typeof(Texture)) as Texture,
-			Resources.Load ("Textures/Utility_icon", typeof(Texture)) as Texture
-		};
-
 		foreach (Player player in GameManager.Instance.playerRefs) 
 		{
 			lightBulbColors.Add(new Color(0.5f, 0.5f, 0.5f, 0.5f));
+			timeSyncSliceOffsets.Add(new Vector2(0, 0));
+			timeSyncSliceBounds.Add(new Vector2(0, 0));
+			timeSyncSliceAlphas.Add(0);
+			shownTimeSync.Add(0);
 		}
 
 		FillPositions ();
@@ -45,14 +39,30 @@ public class GameUI : MonoBehaviour {
 		for(int playerIndex = 0; playerIndex < playerRefs.Count; playerIndex++)
 		{
 			Player player = playerRefs[playerIndex];
-			_lightbulbMat.SetColor("_Color", lightBulbColors[playerIndex]);
+			lightbulbMat.SetColor("_Color", lightBulbColors[playerIndex]);
+			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][1], lightbulbTex, lightbulbMat);
 
-			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][1], _lightbulbTex, _lightbulbMat);
+			timeSyncMaterial.SetFloat("phase", shownTimeSync[player.indexInt] / (float)GameManager.Instance.matchSettings.timeSync);
+			timeSyncMaterial.SetColor("playerColor", player.color);
+			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][0], timeSyncTexture, timeSyncMaterial);
 
-			_material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
-			_material.SetColor("playerColor", player.color);
+			if(timeSyncSliceAlphas[playerIndex] > 0)
+			{
+				timeSyncSliceMaterial.SetFloat("upperBound", timeSyncSliceBounds[playerIndex].y);
+				timeSyncSliceMaterial.SetFloat("lowerBound", timeSyncSliceBounds[playerIndex].x);
+				timeSyncSliceMaterial.SetFloat("alpha", timeSyncSliceAlphas[playerIndex]);
+				timeSyncSliceMaterial.SetColor("playerColor", player.color);
 
-			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][0], _texture, _material);
+				var rect = _cooldownUIPositions[playerIndex][0];
+				var center = rect.center += timeSyncSliceOffsets[playerIndex];
+
+				var scale = 1 + timeSyncSliceOffsets[playerIndex].magnitude / 100;
+				rect.width *= scale;
+				rect.height *= scale;
+				rect.center = center;
+
+				Graphics.DrawTexture(rect, timeSyncTexture, timeSyncSliceMaterial);
+			}
 
 			GUI.Label (_cooldownUIPositions[playerIndex][0], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 		}
@@ -80,5 +90,10 @@ public class GameUI : MonoBehaviour {
 		_cooldownUIPositions.Add (positions);
 		positions.Add (new Rect (Screen.width - 153, Screen.height - 153, 128, 128));
 		positions.Add (new Rect (Screen.width - 225, Screen.height - 225, 450, 450));
+	}
+
+	public Vector2 ToPlayerLocalScreenSpace(Vector2 v, Player p)
+	{
+		return v - _cooldownUIPositions[p.indexInt][0].center;
 	}
 }
