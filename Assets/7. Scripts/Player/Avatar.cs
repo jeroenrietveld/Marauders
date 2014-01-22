@@ -10,9 +10,13 @@ public class Avatar : MonoBehaviour
 	public Player player { get; private set; }
 
 	void Start () {
+
+		//Will only look at the attack info name
+		AttackInfo info = new AttackInfo("Idle", 1.0f, -1f);
+
 		GetComponent<AnimationHandler>().AddAnimation(
 			new AnimationHandler.AnimationSettings(
-				"Idle",
+				info,
 				AnimationHandler.MixTransforms.Lowerbody,
 				1,
 				WrapMode.Loop

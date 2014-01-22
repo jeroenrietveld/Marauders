@@ -127,7 +127,7 @@ public class Attack : ActionBase {
 		{	
 			animationHandler.AddAnimation(
 				new AnimationHandler.AnimationSettings(
-				attackInfo.animationName,
+				attackInfo,
 				AnimationHandler.MixTransforms.Upperbody,
 				3,
 				WrapMode.Once
@@ -190,6 +190,6 @@ public class Attack : ActionBase {
 	
 	public float GetStunTime()
 	{
-		return _trailTimer.endTime + _weapon.attacks[nextComboCount].timing;
+		return _trailTimer.endTime + (_weapon.attacks[nextComboCount].timing / _weapon.attacks[nextComboCount].speed);
 	}
 }

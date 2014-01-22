@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class Dash : SkillBase
 {
+
 	//private Player _player;
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
-		"Dash",
+		new AttackInfo("Dash", 1.0f, -1f),
 		AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
 		1,
 		WrapMode.Loop

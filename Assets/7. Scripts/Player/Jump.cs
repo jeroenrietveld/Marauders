@@ -35,17 +35,23 @@ public class Jump : ActionBase {
 		
 		AnimationHandler animationHandler = GetComponent<AnimationHandler> ();
 
+		//Will only look at the attack info and speed
+		AttackInfo info = new AttackInfo("Jump", 1.0f, -1f);
+
 		animationHandler.AddAnimation(
 			new AnimationHandler.AnimationSettings(
-				"Jump",
+				info,
 				AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
 				2,
 				WrapMode.ClampForever
 			));
 
+		//Will only look at the attack info and speed
+		info = new AttackInfo("Jump Land", 1.0f, -1f);
+
 		animationHandler.AddAnimation(
 			new AnimationHandler.AnimationSettings(
-				"Jump Land",
+				info,
 				AnimationHandler.MixTransforms.Lowerbody | AnimationHandler.MixTransforms.Upperbody,
 				2,
 				WrapMode.Clamp
