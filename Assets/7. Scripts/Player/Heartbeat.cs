@@ -19,13 +19,10 @@ public class Heartbeat : Attackable
     private Avatar _avatar;
 	private float _regen = 0.01f;
 
-    private Player _lastAttacker;
-	public Player lastAttacker { get { return _lastAttacker; } }
-
-	private Timer _lastAttackerTimer;
+	public Player lastAttacker {get;set;}
+	public Timer lastAttackerTimer;
 
     private Timer _damageTimer;
-
 
     private float _health = 1f;
     public float health
@@ -52,8 +49,6 @@ public class Heartbeat : Attackable
         }
     }
 
-
-
     void Start()
     {
         heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
@@ -78,10 +73,11 @@ public class Heartbeat : Attackable
             _damage.renderer.material.SetFloat("alpha", Mathf.Clamp01(damageAlphaScale - _damageTimer.Phase() * damageAlphaScale));
         });
 
-		_lastAttackerTimer = new Timer(4);
-		_lastAttackerTimer.AddPhaseCallback (delegate
-		{
-			_lastAttacker = null;
+		//Initializing the last attack timer
+		lastAttackerTimer = new Timer(2.0f);
+		lastAttackerTimer.AddPhaseCallback (delegate
+		{		
+			//Resetting has changed and moved to Jump, this still needs to be there to check if 2 seconds have past.
 		});
     }
 
@@ -97,7 +93,7 @@ public class Heartbeat : Attackable
 
         _damageTimer.Update();
 
-		_lastAttackerTimer.Update ();
+		lastAttackerTimer.Update ();
     }
 
 	protected override void ApplyAttack(Attack attacker)
@@ -120,8 +116,8 @@ public class Heartbeat : Attackable
 
 	public void ApplyDamage(DamageSource source)
 	{
-		this._lastAttacker = source.inflicter;
-		_lastAttackerTimer.Start ();
+		this.lastAttacker = source.inflicter;
+		this.lastAttackerTimer.Start ();
 
 		if(source.amount > 0)
 		{

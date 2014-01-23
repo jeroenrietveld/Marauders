@@ -8,7 +8,7 @@ public class Avatar : MonoBehaviour
 	public GamePad controller;
 
 	public Player player { get; private set; }
-
+	
 	void Start () {
 
 		//Will only look at the attack info name
@@ -21,6 +21,8 @@ public class Avatar : MonoBehaviour
 				1,
 				WrapMode.Loop
 			));
+
+
 	}
 	
 	public void Initialize(Player player)

@@ -31,7 +31,7 @@ public class Player
 	public int kills { get; set; }
 	public int deaths { get; set; }
 	public int timeSync { get; set; }
-
+	
     public string marauder { get; set; }
 	public GameObject avatar { get; private set; }
 

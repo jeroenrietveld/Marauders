@@ -109,15 +109,16 @@ public class Jump : ActionBase {
 				_isJumping = false;
 			}
 
+			//Resetting last attacker
+			var heartbeat = _avatar.GetComponentsInChildren<Heartbeat> (true)[0];
+
+			//Resetting last attacker
+			if (heartbeat.lastAttackerTimer.running == false)
+			{
+				heartbeat.lastAttacker = null;
+			}
 
 		}
-		/*else
-		{
-			if (rigidbody.velocity.y < -5)
-			{
-				AnimationJump();
-			}
-		}*/
 	}
 
 	private void CalculateDistanceToGround()
