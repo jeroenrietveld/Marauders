@@ -13,21 +13,27 @@ public class SettingsBlock : LevelSelectionBlockBase
     private int _currentIndex;
 	private GameObject _levelDescription;
     private TimeSyncBar _timeSyncBar;
+    private GameObject _timeSync;
+    private GameObject _timeSyncArrows;
+    private float _timer = 0f;
+    private float _defaultTimeValue = 0.15f;
 
 	public SettingsBlock()
 	{
         _levelDescription = GameObject.Find("LevelScreen/LevelDescription");
         _timeSyncBar = GameObject.Find("TimeSyncBar").GetComponent<TimeSyncBar>();
         _timeSyncBar.Add(0.5f);
+        _timeSync = GameObject.Find("TimeSyncText");
+        _timeSyncArrows = GameObject.Find("ArrowsTimeSync");
 	}
 
 	public override void Update(GamePad controller)
 	{
-        if (controller.JustPressed(Button.DPadRight) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizontal) > 0.7f && GetTimer()) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
             _timeSyncBar.Add(0.1f);
 		}
-        if (controller.JustPressed(Button.DPadLeft) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizontal) < -0.7f && GetTimer()) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             _timeSyncBar.Add(-0.1f);
 		}
@@ -47,7 +53,28 @@ public class SettingsBlock : LevelSelectionBlockBase
             }
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
+            _timeSync.renderer.material.color = Color.gray;
+
+            MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
+            _timeSyncBar.renderer.enabled = false;
+            for (int i = 0; i < mesh.Count(); i++)
+            {
+                mesh[i].enabled = false;
+            }
+
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
         }
-	}   	
+	}
+
+    public bool GetTimer()
+    {
+        _timer -= Time.deltaTime;
+
+        if (_timer <= 0f)
+        {
+            _timer = _defaultTimeValue;
+            return true;
+        }
+        return false;
+    }
 }
