@@ -7,6 +7,7 @@ public class Windsweep : SkillBase
 	public float angle = 100 * Mathf.Deg2Rad;
 	public float range = 5;
 	public float force = 750;
+	public float damage = .1f;
 
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
 		//TODO: Use correct animation
@@ -36,10 +37,22 @@ public class Windsweep : SkillBase
 
 			if(ValidTarget(avatar))
 			{
-				avatar.rigidbody.AddForce(
-					(avatar.transform.position - transform.position).normalized * force,
-					ForceMode.Impulse
-				);
+				var heartbeat = avatar.GetComponentInChildren<Heartbeat>();
+
+				var direction = transform.position - avatar.transform.position;
+				direction.y = 0;
+				direction.Normalize();
+
+				var source = new DamageSource(
+					GetComponent<Avatar>().player,
+					direction,
+					-direction * force,
+					damage,
+					0,
+					false
+					);
+
+				heartbeat.ApplyDamage(source);
 			}
 		}
 	}
