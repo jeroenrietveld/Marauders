@@ -120,7 +120,7 @@ public class Heartbeat : Attackable
 
 	public void ApplyDamage(DamageSource source)
 	{
-		_lastAttacker = source.inflicter;
+		this._lastAttacker = source.inflicter;
 		_lastAttackerTimer.Start ();
 
 		if(source.amount > 0)
