@@ -32,6 +32,7 @@ public class Scoreboard : MonoBehaviour
 
     public Scoreboard()
 	{
+        trophyList = new List<Trophy>();
 		_cells = new List<List<Cell>> ();
 	}
 
