@@ -34,6 +34,8 @@ public class ScoreHandler : MonoBehaviour {
 	{
 		var heartbeat = evt.avatar.GetComponentsInChildren<Heartbeat> (true)[0];
 
+		heartbeat.health = 1f;
+
 		if(heartbeat.lastAttacker != null)
 		{
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
@@ -46,8 +48,6 @@ public class ScoreHandler : MonoBehaviour {
 		{
             GameManager.scoreboard.AddContent(evt.avatar.player.index, "Suicides", 1);
 			evt.avatar.player.AddTimeSync (suicidePenalty);
-
-			heartbeat.health = 1f;
 		}
 	}
 
