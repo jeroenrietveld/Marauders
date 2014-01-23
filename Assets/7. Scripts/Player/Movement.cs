@@ -64,10 +64,20 @@ public class Movement : MonoBehaviour {
 		layerMask = ~layerMask;
 		
 		RaycastHit hit;
-		
-		if(Physics.Raycast(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized, out hit, 1, layerMask))
+
+		if (!GetComponent<Jump>().onGround)
 		{
-			// Decrease Y velocity?
+			if(Physics.Raycast(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized, out hit, 1, layerMask))
+			{
+				// Decrease Y velocity?
+			}
+			else if (targetVelocity.sqrMagnitude > 0)
+			{
+				Rotating();
+				
+				rigidbody.MovePosition(rigidbody.position + targetVelocity * Time.deltaTime);
+				MagnetAim ();
+			}
 		}
 		else if (targetVelocity.sqrMagnitude > 0)
 		{
