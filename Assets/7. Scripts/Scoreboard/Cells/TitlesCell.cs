@@ -5,7 +5,7 @@ public class TitlesCell : Cell
 {
     public TitlesCell()
     {
-        this.title = "Titles";
+        this.title = Locale.Current["scoreboard_titles"];
         this.content = "";
         this.trophysEnabled = false;
         this.cellType = CellType.Static;

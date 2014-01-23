@@ -22,11 +22,20 @@ public class Scoreboard : MonoBehaviour
 
     private Material _material;
     private Texture _texture;
+
+    //Trophytextures
     private Texture _redTrophyTexture;
     private Texture _blueTrophyTexture;
     private Texture _purpleTrophyTexture;
     private Texture _greenTrophyTexture;
     private Texture _currentTrophyTexture;
+
+    //Placetextures
+    private Texture _firstPlaceTexture;
+    private Texture _secondPlaceTexture;
+    private Texture _thirdPlaceTexture;
+    private Texture _fourthPlaceTexture;
+    private Texture _currentPlaceTexture;
 
     public List<Trophy> trophyList;
 
@@ -71,21 +80,30 @@ public class Scoreboard : MonoBehaviour
     {      
         _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
+
         _redTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
         _blueTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_blue", typeof(Texture)) as Texture;
         _greenTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_green", typeof(Texture)) as Texture;
         _purpleTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_purple", typeof(Texture)) as Texture;
 
+        _firstPlaceTexture = Resources.Load("Textures/Scoreboard/place_1st", typeof(Texture)) as Texture;
+        _secondPlaceTexture = Resources.Load("Textures/Scoreboard/place_2nd", typeof(Texture)) as Texture;
+        _thirdPlaceTexture = Resources.Load("Textures/Scoreboard/place_3rd", typeof(Texture)) as Texture;
+        _fourthPlaceTexture = Resources.Load("Textures/Scoreboard/place_4th", typeof(Texture)) as Texture;
+
+        trophyList = new List<Trophy>();
         _visible = false;
         
         #region Test - all comments atm
         /*
+        GameManager.Instance.matchSettings.timeSync = 100;
+        
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
-       
         #region Player 1
         var player = new Player(PlayerIndex.One);
         List<Cell> addition = new List<Cell>();
+        player.timeSync = 23;
         scoreboard.AddCellList(addition);
 
         addition.Add(new PlayerCell(player));
@@ -93,11 +111,9 @@ public class Scoreboard : MonoBehaviour
         //Declare all cells
         TimeSyncCell timeSync = new TimeSyncCell(player);
         TitlesCell titleCell = new TitlesCell();
-        CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
-        CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
-        CustomCell kills = new CustomCell("Kills", CellType.Integer, 0, true);
-        CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);
-        CustomCell heartstops = new CustomCell("Heartstops", CellType.Integer, 0, true);   
+        CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 10, true);
+        CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 9, true);
+        CustomCell suicides = new CustomCell("Suicides", CellType.Integer, 1, true);
 
         //Testing timeSync
         timeSync.content = 0;
@@ -107,14 +123,13 @@ public class Scoreboard : MonoBehaviour
         addition.Add(titleCell);
         addition.Add(eliminations);
         addition.Add(eliminated);
-        addition.Add(kills);
-        addition.Add(heartstops);
-        addition.Add(hitratio);
+        addition.Add(suicides);
 
         #endregion
-
+    
         #region Player 2
         var player2 = new Player(PlayerIndex.Two);
+        player2.timeSync = 26;
         List<Cell> addition2 = new List<Cell>();
         scoreboard.AddCellList(addition2);
 
@@ -123,31 +138,75 @@ public class Scoreboard : MonoBehaviour
         //Declare all cells
         TimeSyncCell timeSync2 = new TimeSyncCell(player2);
         TitlesCell titleCell2 = new TitlesCell();
-        CustomCell eliminations2 = new CustomCell("Eliminations", CellType.Integer, 0, true);
-        CustomCell eliminated2 = new CustomCell("Eliminated", CellType.Integer, 0, true);
-        CustomCell kills2 = new CustomCell("Kills", CellType.Integer, 0, true);
-        CustomCell hitratio2 = new CustomCell("Hitratio", CellType.Percentage, 0, true);
-        CustomCell heartstops2 = new CustomCell("Heartstops", CellType.Integer, 0, true);
-
-        //Testing timeSync
-        timeSync2.content = 100;
+        CustomCell eliminations2 = new CustomCell("Eliminations", CellType.Integer, 7, true);
+        CustomCell eliminated2 = new CustomCell("Eliminated", CellType.Integer, 5, true);
+        CustomCell suicides2 = new CustomCell("Suicides", CellType.Integer, 7, true);
 
         //Add all cells to the list of cells
         addition2.Add(timeSync2);
         addition2.Add(titleCell2);
         addition2.Add(eliminations2);
         addition2.Add(eliminated2);
-        addition2.Add(kills2);
-        addition2.Add(heartstops2);
-        addition2.Add(hitratio2);
+        addition2.Add(suicides2);
 
         #endregion
-        
-        scoreboard.AddGameSpecificCell(new CustomCell("Owned Shrines", CellType.Integer, 0, true));
-        scoreboard.SetTrophy(PlayerIndex.One, "Heartstops", "Marauder");
-        scoreboard.SetTrophy(PlayerIndex.Two, "Eliminaions", "Eliminator");
+
+        #region Player 3
+        var player3 = new Player(PlayerIndex.Three);
+        player3.timeSync = 20;
+        List<Cell> addition3 = new List<Cell>();
+        scoreboard.AddCellList(addition3);
+
+        addition3.Add(new PlayerCell(player3));
+
+        //Declare all cells
+        TimeSyncCell timeSync3 = new TimeSyncCell(player3);
+        TitlesCell titleCell3 = new TitlesCell();
+        CustomCell eliminations3 = new CustomCell("Eliminations", CellType.Integer, 7, true);
+        CustomCell eliminated3 = new CustomCell("Eliminated", CellType.Integer, 5, true);
+        CustomCell suicides3 = new CustomCell("Suicides", CellType.Integer, 7, true);
+
+        //Add all cells to the list of cells
+        addition3.Add(timeSync3);
+        addition3.Add(titleCell3);
+        addition3.Add(eliminations3);
+        addition3.Add(eliminated3);
+        addition3.Add(suicides3);
+
+        #endregion
+
+        for (int i = 0; i < 3; i++)
+        {
+            scoreboard.AddGameSpecificCell(i, new CustomCell("Owned Shrines", CellType.Integer, 0, true));
+        }
+
+        var resources = Resources.LoadAll("JSON/Trophy");
+
+        foreach (object resource in resources)
+        {
+            var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
+            string column = node["column"].Value;
+            string title = node["title"].Value;
+            string condition = node["condition"].Value;
+
+            Trophy t = new Trophy();
+            t.Column = column;
+            t.Title = title;
+            t.Condition = condition;
+
+            trophyList.Add(t);
+        }
+        GameManager.Instance.AddPlayerRef(player);
+        GameManager.Instance.AddPlayerRef(player2);
+        GameManager.Instance.AddPlayerRef(player3);
+
+        scoreboard.AddContent(PlayerIndex.Three, Locale.Current["scoreboard_ownedshrines"], 3);
+        scoreboard.AddContent(PlayerIndex.One, Locale.Current["scoreboard_timesync"], player.timeSync);
+        scoreboard.AddContent(PlayerIndex.Two, Locale.Current["scoreboard_timesync"], player2.timeSync);
+        scoreboard.AddContent(PlayerIndex.Three, Locale.Current["scoreboard_timesync"], player3.timeSync);
 
         scoreboard.Show();
+        scoreboard.CalculateTrophys();
          */
         #endregion
        
@@ -191,6 +250,8 @@ public class Scoreboard : MonoBehaviour
        GUI.contentColor = Color.black;
 
        GUI.skin.label.fontSize = (int) (10 * fontScale);
+
+       List<Player> playersByTimeSync = GameManager.Instance.playersByTimeSync();
        for (int i = 0; i < rows; i++)
        {
            GUI.Box(new Rect(horizontalOffset, verticalOffset + i * (boxHeight + verticalOffset * 2), boxWidth, boxHeight), "");
@@ -198,7 +259,6 @@ public class Scoreboard : MonoBehaviour
            {            
                //Draw the title
                GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset*2) + cellTop, cellWidth, cellHeight), _cells[i][j].title);
-
                //Draw the content
                if (_cells[i][j] is TitlesCell)
                {
@@ -212,8 +272,17 @@ public class Scoreboard : MonoBehaviour
                {
                    float textureSize = Math.Min(cellWidth, cellHeight) * 0.8f;
                    float horizontalTextureOffset = (cellWidth - textureSize) / 2;
-                   float verticalTextureOffset = cellHeight * 0.2f;
-                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _cells[i][j].content as Texture);
+                   float verticalTextureOffset = cellHeight * 0.15f;
+                   int index = playersByTimeSync.IndexOf(((PlayerCell)_cells[i][j]).player);
+                   switch(index)
+                   {
+                       case 0: _currentPlaceTexture = _firstPlaceTexture; break;
+                       case 1: _currentPlaceTexture = _secondPlaceTexture; break;
+                       case 2: _currentPlaceTexture = _thirdPlaceTexture; break;
+                       case 3: _currentPlaceTexture = _fourthPlaceTexture; break;
+                       default: _currentPlaceTexture = _firstPlaceTexture; break;
+                   }
+                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _currentPlaceTexture);
                    _currentColor = ((PlayerCell)_cells[i][j]).player.color;
                } 
                else if(_cells[i][j] is TimeSyncCell)
@@ -258,30 +327,64 @@ public class Scoreboard : MonoBehaviour
        foreach(Trophy trophy in trophyList)
        {
            int index = _cells[0].IndexOf(FindCell(PlayerIndex.One, trophy.Column));
-           int winnerIndex = 0;
-           for(int i = 0; i < _cells.Count; i++)
+
+           //Make a list to hold multiple winners
+           List<int> winnerIndexes = new List<int>();
+
+
+           if (index != -1)
            {
-               if(_cells[i][index].cellType == CellType.Integer)
+               for (int i = 0; i < _cells.Count; i++)
                {
-                   switch(trophy.Condition)
+
+                   if (_cells[i][index].cellType == CellType.Integer)
                    {
-                       case "<": 
-                           if((int)_cells[i][index].content <= (int)_cells[winnerIndex][index].content)
-                           {
-                               winnerIndex = i;
-                           }
-                           break;
-                       case ">":
-                           if ((int)_cells[i][index].content >= (int)_cells[winnerIndex][index].content)
-                           {
-                               winnerIndex = i;
-                           }
-                           break;
+                       switch (trophy.Condition)
+                       {
+                           case "<":
+                               if(winnerIndexes.Count == 0)
+                               {
+                                   winnerIndexes.Add(i);
+                                   break;
+                               }
+                               if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
+                               {
+                                   winnerIndexes.Add(i);
+                               }
+                               if ((int)_cells[i][index].content < (int)_cells[winnerIndexes[0]][index].content)
+                               {
+                                   winnerIndexes.Clear();
+                                   winnerIndexes.Add(i);
+                               }
+                               break;
+                           case ">":
+                               if (winnerIndexes.Count == 0)
+                               {
+                                   winnerIndexes.Add(i);
+                                   break;
+                               }
+                               if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
+                               {
+                                   winnerIndexes.Add(i);
+                               }
+                               if ((int)_cells[i][index].content > (int)_cells[winnerIndexes[0]][index].content)
+                               {
+                                   winnerIndexes.Clear();
+                                   winnerIndexes.Add(i);
+                               }
+                               break;
+                       }
                    }
-               }           
+               }
+               foreach (int winner in winnerIndexes)
+               {
+                   ((CustomCell)_cells[winner][index]).hasTrophy = true;
+                   ((TitlesCell)_cells[winner][2]).AddTitle(trophy.Title);                 
+               }
+
+               //Clear the list for the next trophy calculation
+               winnerIndexes.Clear();
            }
-           ((CustomCell)_cells[winnerIndex][index]).hasTrophy = true;
-           ((TitlesCell)_cells[winnerIndex][2]).AddTitle(trophy.Title);
        }
     }
 

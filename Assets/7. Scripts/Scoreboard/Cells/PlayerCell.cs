@@ -11,8 +11,8 @@ public class PlayerCell : Cell
 	public PlayerCell(Player player)
     {
         this.player = player;
-        this.title = player.index.ToString();
-        this.content = Resources.Load("Textures/Defensive_icon") as Texture;
+        this.title = Locale.Current["scoreboard_player_" + player.index.ToString()];
+        this.content = "";
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

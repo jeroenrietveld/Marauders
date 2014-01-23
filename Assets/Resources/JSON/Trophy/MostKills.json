@@ -1,5 +1,5 @@
 {
-	"column" : "Kills",
+	"column" : "Eliminations",
 	"title" : "The Eliminator",
 	"condition" : ">"
 }
