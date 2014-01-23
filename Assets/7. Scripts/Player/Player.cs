@@ -31,7 +31,7 @@ public class Player
 	public int kills { get; set; }
 	public int deaths { get; set; }
 	public int timeSync { get; set; }
-
+	
     public string marauder { get; set; }
 	public GameObject avatar { get; private set; }
 
@@ -90,6 +90,8 @@ public class Player
 		avatar.AddComponent<AvatarGraphics> ();
 		avatar.AddComponent<Slide> ();
 		avatar.AddComponent<Dash> ();
+		avatar.AddComponent<Stun> ();
+		avatar.AddComponent<Notification> ();
 		
 		for(int i = 0; i < skills.Length; ++i)
 		{

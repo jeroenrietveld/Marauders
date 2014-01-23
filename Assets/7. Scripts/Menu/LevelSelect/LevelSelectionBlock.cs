@@ -17,6 +17,9 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private GameObject _levelSelectUp;
 	private GameObject _levelSelectDown;
 	private GameObject _levelDescription;
+    private GameObject _timeSync;
+    private GameObject _timeSyncArrows;
+    private GameObject _timeSyncBar;
     private TextMesh _levelName;
 	private TextMesh _levelInfoText;
     private float _time = 0.2f;
@@ -29,6 +32,9 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _levelSelectUp = GameObject.Find("LevelSelectUp");
         _levelSelectDown = GameObject.Find("LevelSelectDown");
         _levelDescription = GameObject.Find("LevelDescription");
+        _timeSync = GameObject.Find("TimeSyncText");
+        _timeSyncArrows = GameObject.Find("ArrowsTimeSync");
+        _timeSyncBar = GameObject.Find("TimeSyncBar");
         _levelName = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Name").gameObject.GetComponent<TextMesh>();
         _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
         SetLevel(_currentIndex);
@@ -51,10 +57,29 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 		}
         if (controller.JustPressed(Button.A))
 		{
-			LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
+            _timeSync.renderer.material.color = Color.black;
+
+            MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
+            _timeSyncBar.renderer.enabled = true;
+            for (int i = 0; i < mesh.Count(); i++)
+            {
+                mesh[i].enabled = true;
+            }
+
+            LevelSelectionManager.ChangeState(LevelSelectionState.SettingSelection);
 		}
         if (controller.JustPressed(Button.B))
         {
+            _timeSync.renderer.material.color = Color.gray;
+
+            MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
+            _timeSyncBar.renderer.enabled = false;
+
+            for (int i = 0; i < mesh.Count(); i++)
+            {
+                mesh[i].enabled = false;
+            }
+
             LevelSelectionManager.ChangeState(LevelSelectionState.NotSelecting);
         }
 
@@ -66,7 +91,6 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 
 	public void SetLevel(int index)
 	{
-
 		if(index > (LevelSelectionManager.levels.Count - 1))
 		{
 			_currentIndex = 0;
