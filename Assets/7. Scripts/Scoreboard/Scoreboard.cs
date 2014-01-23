@@ -28,8 +28,11 @@ public class Scoreboard : MonoBehaviour
     private Texture _greenTrophyTexture;
     private Texture _currentTrophyTexture;
 
+    public List<Trophy> trophyList;
+
     public Scoreboard()
 	{
+        trophyList = new List<Trophy>();
 		_cells = new List<List<Cell>> ();
 	}
 
@@ -248,6 +251,38 @@ public class Scoreboard : MonoBehaviour
                }             
            }
        }  
+    }
+
+    public void CalculateTrophys()
+    {
+       foreach(Trophy trophy in trophyList)
+       {
+           int index = _cells[0].IndexOf(FindCell(PlayerIndex.One, trophy.Column));
+           int winnerIndex = 0;
+           for(int i = 0; i < _cells.Count; i++)
+           {
+               if(_cells[i][index].cellType == CellType.Integer)
+               {
+                   switch(trophy.Condition)
+                   {
+                       case "<": 
+                           if((int)_cells[i][index].content <= (int)_cells[winnerIndex][index].content)
+                           {
+                               winnerIndex = i;
+                           }
+                           break;
+                       case ">":
+                           if ((int)_cells[i][index].content >= (int)_cells[winnerIndex][index].content)
+                           {
+                               winnerIndex = i;
+                           }
+                           break;
+                   }
+               }           
+           }
+           ((CustomCell)_cells[winnerIndex][index]).hasTrophy = true;
+           ((TitlesCell)_cells[winnerIndex][2]).AddTitle(trophy.Title);
+       }
     }
 
     public void SetTrophy(PlayerIndex playerIndex, string cellName, string title)

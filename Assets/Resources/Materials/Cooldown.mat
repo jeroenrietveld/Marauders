@@ -24,7 +24,7 @@ Material:
       data:
         first:
           name: phase
-        second: .899999976
+        second: 0
     m_Colors:
       data:
         first:

@@ -102,50 +102,66 @@ public class Heartbeat : Attackable
 
 	protected override void ApplyAttack(Attack attacker)
     {
-        //Just to be clear; we are beeing hit
-        var direction = attacker.transform.position - transform.position;
-        direction.y = 0;
-        direction.Normalize();
+		var direction = attacker.transform.position - transform.position;
+		direction.y = 0;
+		direction.Normalize();
 
-        //Saving the last attacker
-        _lastAttacker = attacker.GetComponent<Avatar>().player;
+		var source = new DamageSource (
+			attacker.GetComponent<Avatar>().player,
+			direction,
+			-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce),
+			attacker.weapon.damage,
+			attacker.GetStunTime(),
+			false
+		);
+
+		ApplyDamage (source);
+    }
+
+	public void ApplyDamage(DamageSource source)
+	{
+		this._lastAttacker = source.inflicter;
 		_lastAttackerTimer.Start ();
 
-        //Applying the damage
-        float dot = Vector3.Dot(direction, transform.forward);
-        bool armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
-        var amount = attacker.weapon.damage;
-        if (armorHit)
-        {
-            amount = amount * _armorFactor;
-            // Play armor hit sounds.
-            GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "armorhit", false);
-        }
-        else
-        {
-            // Play heartbeat hit sounds.
-            GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
-        }
-        var previousHealth = health;
-        health = health - amount;
+		if(source.amount > 0)
+		{
+			bool armorHit = false;
+			
+			if(!source.piercing)
+			{
+				float dot = Vector3.Dot(source.direction, transform.forward);
+				armorHit = (Mathf.Acos(dot) / Mathf.PI) > health;
+			}
+			
+			if (armorHit)
+			{
+				source.amount *= _armorFactor;
+				GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "armorhit", false);
+			}
+			else
+			{
+				GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
+			}
+			var previousHealth = health;
+			health = health - source.amount;
 
-        //Applying Knockback
-        _avatar.rigidbody.AddForce(-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce), ForceMode.Impulse);
+			var material = _damage.renderer.material;
+			material.SetFloat("upperBound", previousHealth);
+			material.SetFloat("lowerBound", health);
+			_damageTimer.Start();
 
-        //heartbeat effects etc
-        var material = _damage.renderer.material;
-        material.SetFloat("upperBound", previousHealth);
-        material.SetFloat("lowerBound", health);
-        _damageTimer.Start();
+			if (!alive)
+			{
+				Event.dispatch(new AvatarDeathEvent(_avatar.player, source.inflicter));
+			}
+		}
 
-        if (!alive)
-        {
-            Event.dispatch(new AvatarDeathEvent(_avatar.player, attacker.GetComponent<Avatar>().player));
-        }
-        else
-        {
-            var stun = _avatar.gameObject.AddComponent<Stun>();
-            Destroy(stun, attacker.GetStunTime());
-        }
-    }
+		_avatar.rigidbody.AddForce (source.force, ForceMode.Impulse);
+		
+		if(source.stunTime > 0)
+		{
+			var stun = _avatar.gameObject.AddComponent<Stun>();
+			Destroy(stun, source.stunTime);
+		}
+	}
 }

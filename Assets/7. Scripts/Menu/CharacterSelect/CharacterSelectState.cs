@@ -34,9 +34,7 @@ public class CharacterSelectState : SelectionBase
 
         if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
-			//Disabled due to missing juggernaut sound
-            //GameManager.Instance.soundInGame.PlaySound(block.audioSourceArmory, block.marauderNames[block.marauderIndex] + "-selected", true);
-            block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
+			block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }
         else if (controller.JustPressed(Button.B))
         {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Central event dispatching mechanism. Listeners for a particular Event type are registered with this class, 
@@ -99,7 +100,17 @@ public static class Event {
 
 		if(_listeners.ContainsKey(type))
 		{
-			((EventListener<T>)_listeners[type])(evt);
+			foreach(EventListener<T> dg in _listeners[type].GetInvocationList())
+			{
+				try
+				{
+					dg(evt);
+				}
+				catch(Exception ex)
+				{
+					Debug.LogError(ex);
+				}
+			}
 		}
 	}
 }

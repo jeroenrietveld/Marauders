@@ -94,6 +94,9 @@ public class SkillSelectState : SelectionBase
                 block.isPlayerReady = true;
                 block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
 
+                //Disabled due to missing juggernaut sound
+                //GameManager.Instance.soundInGame.PlaySound(block.audioSourceArmory, block.marauderNames[block.marauderIndex] + "-selected", true);
+
                 // Add selected marauder and skills to the gamemanager.
                 Player playerRef = new Player(block.player);
                 playerRef.marauder = block.marauderNames[block.marauderIndex];
