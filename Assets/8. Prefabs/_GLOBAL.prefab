@@ -35,7 +35,6 @@ GameObject:
   - 20: {fileID: 2000000}
   - 124: {fileID: 12400000}
   - 92: {fileID: 9200000}
-  - 81: {fileID: 8100000}
   m_Layer: 8
   m_Name: GUI_Camera
   m_TagString: Untagged
@@ -95,13 +94,6 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
---- !u!81 &8100000
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -174,7 +166,7 @@ MonoBehaviour:
   timeSyncSliceMaterial: {fileID: 2100000, guid: 9d14382833da8814fa1abd47b1e2edaa,
     type: 2}
   timeSyncTexture: {fileID: 2800000, guid: d464df78658298a41b91a2ee64910bf8, type: 3}
-  lightbulbMat: {fileID: 2100000, guid: 73bb20a915e114a4993a6572f252ac66, type: 2}
+  lightbulbMat: {fileID: 0}
   lightbulbTex: {fileID: 2800000, guid: 63e1edd1ec8951749a731831678991f8, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
