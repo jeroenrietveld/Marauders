@@ -15,11 +15,11 @@ public class Notification : MonoBehaviour {
 	void Start () {
 		_notificationTimer = new Timer (1.5f);
 
-		_notificationTimer.AddCallback (_notificationTimer.startTime, delegate() {
+		_notificationTimer.AddCallback (0f, delegate() {
 			_active = true;
 		});
 
-		_notificationTimer.AddCallback (_notificationTimer.endTime, delegate() {
+		_notificationTimer.AddCallback (delegate() {
 			_active = false;
 		});
 

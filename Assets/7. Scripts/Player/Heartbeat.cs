@@ -156,8 +156,7 @@ public class Heartbeat : Attackable
 		
 		if(source.stunTime > 0)
 		{
-			var stun = _avatar.gameObject.AddComponent<Stun>();
-			Destroy(stun, source.stunTime);
+			_avatar.gameObject.GetComponent<Stun>().SetStunTime(source.stunTime);
 		}
 	}
 }
