@@ -47,7 +47,7 @@ public class TimeBubble : MonoBehaviour {
 	{
 		var exitPosition = collider.transform.position;
 		var exitDirection = exitPosition - transform.position;
-		var spawnPoint = GetSpawnPoint (-exitDirection);
+		var spawnPoint = GetSpawnPoint (Quaternion.AngleAxis(Random.value * 360, Vector3.up) * new Vector3(0, 5, 1));
 
 		ObjectSpawner.Create (
 			collider.gameObject,
