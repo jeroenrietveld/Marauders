@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 
@@ -91,7 +91,7 @@ public class Player
 		avatar.AddComponent<Slide> ();
 		avatar.AddComponent<Dash> ();
 		avatar.AddComponent<Stun> ();
-		avatar.AddComponent<Notification> ();
+		avatar.AddComponent<PlayerNotification> ();
 		
 		for(int i = 0; i < skills.Length; ++i)
 		{

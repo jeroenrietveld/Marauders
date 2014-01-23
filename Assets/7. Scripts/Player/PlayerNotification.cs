@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Notification : MonoBehaviour {
+public class PlayerNotification : MonoBehaviour {
 
 	private string _notification;
 	private Timer _notificationTimer;
