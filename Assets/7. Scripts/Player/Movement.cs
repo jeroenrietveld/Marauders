@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour {
 	private Avatar _avatar;
 	private Camera _camera;
 
+	public bool isTeleporting;
+
 	private Vector3 _targetVelocity;
 	public Vector3 targetVelocity { get { return _targetVelocity; } }
 
