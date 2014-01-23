@@ -13,6 +13,7 @@ public enum PlayerIndex
 public class ControllerInput : MonoBehaviour {
 
 	private static GamePad[] controllers;
+	private static float lastUpdateTime;
 
 	static ControllerInput()
 	{
@@ -25,9 +26,12 @@ public class ControllerInput : MonoBehaviour {
 	}
 		
 	void Update () {
-		foreach(GamePad controller in controllers)
+		float delta = Time.realtimeSinceStartup - lastUpdateTime;
+		lastUpdateTime = Time.realtimeSinceStartup;
+
+		foreach(var controller in controllers)
 		{
-			controller.Update(Time.deltaTime);
+			controller.Update(delta);
 		}
 	}
 

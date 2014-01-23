@@ -24,24 +24,16 @@ public class Destabilize : SkillBase
 			GetComponentInChildren<Attackable>().isAttackable = false;
 			GetComponent<AvatarGraphics>().AddMaterial(mat);
 
-			GetComponent<Movement>().enabled = false;
-			GetComponent<Jump>().enabled = false;
-			GetComponent<Attack>().enabled = false;
-
-			GetComponent<AnimationHandler>().Pause();
+			GetComponent<Stun>().SetStunTime(_duration);
 		});
 
 		_destabilize.AddCallback (0.1f, delegate {
 			GetComponent<AnimationHandler>().Pause();
 		});
 
-		_destabilize.AddCallback (_destabilize.endTime, delegate {
+		_destabilize.AddCallback (delegate {
 			GetComponentInChildren<Attackable>().isAttackable = true;
 			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
-
-			GetComponent<Movement>().enabled = true;
-			GetComponent<Jump>().enabled = true;
-			GetComponent<Attack>().enabled = true;
 
 			GetComponent<AnimationHandler>().UnPause();
 		});

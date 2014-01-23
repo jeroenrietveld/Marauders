@@ -170,6 +170,11 @@ public class Attack : ActionBase {
 						{
 							foreach(var attackable in attackables)
 							{
+								GetComponent<Notification>().Notify(
+									Resources.Load("Materials/UI/Notification", typeof(Material)) as Material,
+									Resources.Load("Textures/UI/Combo_1", typeof(Texture)) as Texture,
+									Camera.main.WorldToScreenPoint(transform.position));
+
 								attackable.DoAttack(this);
 							}
 							hasHit = true;
