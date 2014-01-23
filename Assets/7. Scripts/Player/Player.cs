@@ -90,6 +90,8 @@ public class Player
 		avatar.AddComponent<AvatarGraphics> ();
 		avatar.AddComponent<Slide> ();
 		avatar.AddComponent<Dash> ();
+		avatar.AddComponent<Stun> ();
+		avatar.AddComponent<Notification> ();
 		
 		for(int i = 0; i < skills.Length; ++i)
 		{
