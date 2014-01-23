@@ -17,6 +17,7 @@ public class Heartbeat : Attackable
 
     private GameObject _damage;
     private Avatar _avatar;
+	private ParticleSystem _hitEmitter;
 	private float _regen = 0.01f;
 
 	public Player lastAttacker {get;set;}
@@ -54,6 +55,7 @@ public class Heartbeat : Attackable
         heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         _damage = transform.GetChild(0).gameObject;
         _avatar = transform.root.GetComponent<Avatar>();
+		_hitEmitter = _avatar.GetComponentInChildren<ParticleSystem> ();
 
         renderer.material.SetColor("_color", _avatar.player.color);
         _damage.renderer.material.SetColor("playerColor", _avatar.player.color);
@@ -145,6 +147,10 @@ public class Heartbeat : Attackable
 			material.SetFloat("upperBound", previousHealth);
 			material.SetFloat("lowerBound", health);
 			_damageTimer.Start();
+
+			_hitEmitter.startColor = source.inflicter.color;
+			_hitEmitter.transform.rotation = Quaternion.LookRotation(-source.direction);
+			_hitEmitter.Play ();
 
 			if (!alive)
 			{
