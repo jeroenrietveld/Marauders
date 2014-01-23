@@ -21,6 +21,8 @@ public class Movement : MonoBehaviour {
 
 	private Vector3 _targetVelocity;
 	public Vector3 targetVelocity { get { return _targetVelocity; } }
+	
+	private Vector3 _rigidbodyYAxis = new Vector3(0, 0.75f, 0);
 
     private AudioSource movementSource;
 
@@ -56,8 +58,30 @@ public class Movement : MonoBehaviour {
 	void FixedUpdate () {
 
 		_targetVelocity = GetTargetVelocity();
+
+		//Debug.DrawRay(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized * (1), Color.green);
 		
-		if (targetVelocity.sqrMagnitude > 0)
+		// If you don't want a gameobject to collide with a raycast, select the "Ignore Raycast" layer via the Unity Inspector.
+		int layerMask = 1 << 2;
+		layerMask = ~layerMask;
+		
+		RaycastHit hit;
+
+		if (!GetComponent<Jump>().onGround)
+		{
+			if(Physics.Raycast(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized, out hit, 1, layerMask))
+			{
+				// Decrease Y velocity?
+			}
+			else if (targetVelocity.sqrMagnitude > 0)
+			{
+				Rotating();
+				
+				rigidbody.MovePosition(rigidbody.position + targetVelocity * Time.deltaTime);
+				MagnetAim ();
+			}
+		}
+		else if (targetVelocity.sqrMagnitude > 0)
 		{
 			Rotating();
 			

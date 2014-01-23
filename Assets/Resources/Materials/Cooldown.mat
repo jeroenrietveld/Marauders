@@ -24,7 +24,7 @@ Material:
       data:
         first:
           name: phase
-        second: 0
+        second: .5
     m_Colors:
       data:
         first:
@@ -33,4 +33,4 @@ Material:
       data:
         first:
           name: playerColor
-        second: {r: .811764717, g: .0313725509, b: .129411772, a: 1}
+        second: {r: .0784313753, g: .670588255, b: .34117648, a: 1}

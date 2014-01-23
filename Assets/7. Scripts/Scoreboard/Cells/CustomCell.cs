@@ -8,7 +8,13 @@ public class CustomCell : Cell
     public bool hasTrophy;
     public CustomCell(string title, CellType cellType, object content, bool trophysEnabled)
     {
-        this.title = title;
+        if (Locale.Current["scoreboard_" + title.ToLower().Replace(" ", string.Empty)] != null)
+        {
+            this.title = Locale.Current["scoreboard_" + title.ToLower().Trim().Replace(" ", string.Empty)];
+        } else
+        {
+            this.title = title;
+        }
         this.trophysEnabled = trophysEnabled;
         this.content = content;
         this.cellType = cellType;       

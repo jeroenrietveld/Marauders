@@ -6,6 +6,8 @@
 	SubShader {
 		Pass {
 			Tags { "RenderType"="Opaque" }
+			
+			AlphaTest Greater 0.5
 		
 			CGPROGRAM
 			#pragma vertex vert 
@@ -33,11 +35,7 @@
 			{
 				half4 c = tex2D (_MainTex, input.uv_MainTex);
 
-				if(c.a == 0) {
-					discard;
-				}
-
-				return _Color;
+				return c * _Color;
 			}
 			ENDCG
 		}

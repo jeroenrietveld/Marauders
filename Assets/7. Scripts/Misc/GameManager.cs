@@ -89,7 +89,9 @@ public class GameManager {
 
 	public List<Player> playersByTimeSync()
 	{
-		return playerRefs.OrderBy (player => player.timeSync).ToList ();
+		List<Player> res = playerRefs.OrderBy (player => player.timeSync).ToList ();
+        res.Reverse();
+        return res;
 	}
 
     public void StopGame()

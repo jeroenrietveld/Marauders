@@ -42,19 +42,17 @@ public abstract class GameMode
 
             //Declare all cells
             TimeSyncCell timeSync = new TimeSyncCell(player);
+            TitlesCell titles = new TitlesCell();
             CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
             CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
             CustomCell suicides = new CustomCell("Suicides", CellType.Integer, 0, true);
-            CustomCell kills = new CustomCell("Kills", CellType.Integer, 0 , true);
-            CustomCell hitratio = new CustomCell("Hitratio", CellType.Percentage, 0, true);
 
             //Add all cells to the list of cells
             addition.Add(timeSync);
+            addition.Add(titles);
             addition.Add(eliminations);
             addition.Add(eliminated);
-            addition.Add(suicides);
-            addition.Add(kills);
-            addition.Add(hitratio);          
+            addition.Add(suicides);   
         }
 
         var resources = Resources.LoadAll("JSON/Trophy");

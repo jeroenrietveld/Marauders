@@ -10,7 +10,7 @@ public class TimeSyncCell : Cell
 
     public TimeSyncCell(Player player)
     {
-        this.title = "Time Sync";
+        this.title = Locale.Current["scoreboard_timesync"];
         this.content = 0;
         this.player = player;
         this.trophysEnabled = false;
@@ -23,6 +23,6 @@ public class TimeSyncCell : Cell
         {
             content = (int)Mathf.Clamp((int)content, 0, (float)GameManager.Instance.matchSettings.timeSync);
         }
-        return ((int)content / (float)GameManager.Instance.matchSettings.timeSync*100f).ToString(); 
+        return Math.Round((((int)content / (float)GameManager.Instance.matchSettings.timeSync)*100f)).ToString(); 
     }
 }

@@ -64,6 +64,22 @@ public class en : Locale {
 		Translations["character_thief"] = "Xero - A mysterious and acrobatic thief, seeking to steal all he lays his eyes on. Wielding dual daggers, his attacks are swift and efficient.";
 		Translations["character_juggernaut"] = "Juggernaut - A fierce and crude enforcer of the law, on a neverending quest to reunite himself with his long lost wife. Wielding a massive hammer and shield, obliterating all in his way.";
 		Translations["character_shaman"] = "Shaman - A strong and independant shamaness, with an unquenchable thirst for proving herself in battle. Furiously wielding an Daibo to her hearts content.";
+
+        //Scoreboard titles
+        //Players
+        Translations["scoreboard_player_One"] = "Player 1";
+        Translations["scoreboard_player_Two"] = "Player 2";
+        Translations["scoreboard_player_Three"] = "Player 3";
+        Translations["scoreboard_player_Four"] = "Player 4";
+
+        //Other cells
+        Translations["scoreboard_timesync"] = "Synchronisation";
+        Translations["scoreboard_titles"] = "Titles";
+        Translations["scoreboard_eliminations"] = "Eliminations";
+        Translations["scoreboard_eliminated"] = "Eliminated";
+        Translations["scoreboard_suicides"] = "Suicides";
+        Translations["scoreboard_ownedshrines"] = "Owned Shrines";
+
 	}
 
 	public override string GetLanguageCode ()

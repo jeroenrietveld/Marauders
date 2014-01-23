@@ -26,27 +26,27 @@ public class ScoreHandler : MonoBehaviour {
 		if(evt.offender != null) 
 		{
 			evt.offender.AddTimeSync (killReward, evt.victim.avatar.transform.position);
-            GameManager.scoreboard.AddContent(evt.offender.index, "Kills", 1);
+            GameManager.scoreboard.AddContent(evt.offender.index, Locale.Current["scoreboard_eliminations"], 1);
 		}
+       
+        GameManager.scoreboard.AddContent(evt.victim.index, Locale.Current["scoreboard_eliminated"], 1);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
 	{
 		var heartbeat = evt.avatar.GetComponentsInChildren<Heartbeat> (true)[0];
 
-		heartbeat.health = 1f;
-
 		if(heartbeat.lastAttacker != null)
 		{
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
-            GameManager.scoreboard.AddContent(evt.avatar.player.index, "Eliminated", 1);
+            GameManager.scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_eliminated"], 1);
 
 			heartbeat.lastAttacker.AddTimeSync(smackOutReward, evt.exitPosition);
-            GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, "Eliminations", 1);
+            GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, Locale.Current["scoreboard_eliminations"], 1);
 		}
 		else
 		{
-            GameManager.scoreboard.AddContent(evt.avatar.player.index, "Suicides", 1);
+            GameManager.scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_suicides"], 1);
 			evt.avatar.player.AddTimeSync (suicidePenalty);
 		}
 	}
@@ -55,7 +55,7 @@ public class ScoreHandler : MonoBehaviour {
     {
         foreach(Player player in GameManager.Instance.playerRefs)
         {
-            GameManager.scoreboard.AddContent(player.index, "Time Sync", player.timeSync);
+            GameManager.scoreboard.AddContent(player.index, Locale.Current["scoreboard_timesync"], player.timeSync);
         }
         GameManager.Instance.StopGame();
     }

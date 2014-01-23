@@ -240,7 +240,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 512973688}
   m_GameObject: {fileID: 19715626}
-  m_Text: "Attack your oponent with \r\n a sliding attack."
+  m_Text: "Attack your opponent\r\nwith a sliding attack"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1764,6 +1764,58 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 3.09086232e-08
       objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .706974566
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.706974447
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0136786345
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -.0136786364
+      objectReference: {fileID: 0}
+    - target: {fileID: 400046, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.927758098
+      objectReference: {fileID: 0}
+    - target: {fileID: 400046, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25.9107742
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.12339067
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 12.9173441
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25.0628166
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300046, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69e53bec8b90a0944807e48a8b7a9a62, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
   m_RootGameObject: {fileID: 1736606336}
@@ -2439,7 +2491,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 599199333}
   m_GameObject: {fileID: 508166586}
-  m_Text: "Attack your oponent with \r\n a sliding attack."
+  m_Text: "Attack your opponent\r\nwith a sliding attack"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -2514,6 +2566,46 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 100058, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0136786345
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .706974566
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.706974447
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -.0136786364
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.2520082
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 12.9640493
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25.0883732
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200006, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
+      propertyPath: m_Text
+      value: "Attack your opponent\r\nwith a sliding attack"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
   m_RootGameObject: {fileID: 432956648}
@@ -2728,7 +2820,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517819376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 20, z: -54.0237389}
+  m_LocalPosition: {x: 15, y: 20, z: -94.0237427}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2100865300}
@@ -3026,7 +3118,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 1297892233}
   m_GameObject: {fileID: 549723108}
-  m_Text: "Attack your oponent with \r\n a sliding attack."
+  m_Text: "Attack your opponent\r\nwith a sliding attack"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -3390,6 +3482,34 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 100058, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100050, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0136786345
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .706974566
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.706974447
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -.0136786364
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200006, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
+      propertyPath: m_Text
+      value: "Attack your opponent\r\nwith a sliding attack"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_RootGameObject: {fileID: 2098273775}
@@ -3490,8 +3610,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400004, guid: 30636c83d167e8144862804a752f6e5d, type: 2}
   m_PrefabInternal: {fileID: 512973688}
   m_GameObject: {fileID: 654345094}
-  m_LocalRotation: {x: .707106829, y: 1.67497557e-15, z: 1.67497557e-15, w: -.707106829}
-  m_LocalPosition: {x: -3.25138664, y: 12.9635248, z: -25.0806179}
+  m_LocalRotation: {x: -.0136786345, y: .706974566, z: -.706974447, w: -.0136786364}
+  m_LocalPosition: {x: -3.2520082, y: 12.9640493, z: -25.0883732}
   m_LocalScale: {x: .1150456, y: 1.27828503, z: .1150456}
   m_Children: []
   m_Father: {fileID: 1612151544}
@@ -4234,7 +4354,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400004, guid: 880bb7f80c3180b44a3443519af7fe53, type: 2}
   m_PrefabInternal: {fileID: 599199333}
   m_GameObject: {fileID: 936332797}
-  m_LocalRotation: {x: .707106829, y: 1.67497557e-15, z: 1.67497557e-15, w: -.707106829}
+  m_LocalRotation: {x: -.0136786345, y: .706974566, z: -.706974447, w: -.0136786364}
   m_LocalPosition: {x: -2.52636552, y: 12.9309235, z: -25.1032257}
   m_LocalScale: {x: .1150456, y: 1.27828503, z: .1150456}
   m_Children: []
@@ -5841,6 +5961,46 @@ Prefab:
       propertyPath: audioSourceArmory
       value: 
       objectReference: {fileID: 517819383}
+    - target: {fileID: 100010, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0136786345
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .706974566
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.706974447
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -.0136786364
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.8929472
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 12.9605427
+      objectReference: {fileID: 0}
+    - target: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -25.0862274
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200012, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
+      propertyPath: m_Text
+      value: "Attack your opponent\r\nwith a sliding attack"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
   m_RootGameObject: {fileID: 259218389}
@@ -6505,8 +6665,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400064, guid: e4e9164c6d4e35244a98ca5274d060e2, type: 2}
   m_PrefabInternal: {fileID: 1297892233}
   m_GameObject: {fileID: 1484514219}
-  m_LocalRotation: {x: .707106829, y: 1.67497557e-15, z: 1.67497557e-15, w: -.707106829}
-  m_LocalPosition: {x: -2.88961506, y: 12.9605417, z: -25.0002136}
+  m_LocalRotation: {x: -.0136786345, y: .706974566, z: -.706974447, w: -.0136786364}
+  m_LocalPosition: {x: -2.8929472, y: 12.9605427, z: -25.0862274}
   m_LocalScale: {x: .1150456, y: 1.27828503, z: .1150456}
   m_Children: []
   m_Father: {fileID: 1162229431}
@@ -7227,7 +7387,7 @@ Transform:
   m_PrefabInternal: {fileID: 355007045}
   m_GameObject: {fileID: 1752302893}
   m_LocalRotation: {x: 0, y: 7.10542651e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -.827977002, y: 13.5631886, z: -25.9107666}
+  m_LocalPosition: {x: -.927758098, y: 13.5631886, z: -25.9107742}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 2000847013}
@@ -7977,8 +8137,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400064, guid: acf1eb5d0bb19aa4ba439f712e68fc6f, type: 2}
   m_PrefabInternal: {fileID: 355007045}
   m_GameObject: {fileID: 1894765366}
-  m_LocalRotation: {x: .707106829, y: 1.67497557e-15, z: 1.67497557e-15, w: -.707106829}
-  m_LocalPosition: {x: -1.98105752, y: 12.9173431, z: -25.0683193}
+  m_LocalRotation: {x: -.0136786345, y: .706974566, z: -.706974447, w: -.0136786364}
+  m_LocalPosition: {x: -2.12339067, y: 12.9173441, z: -25.0628166}
   m_LocalScale: {x: .1150456, y: 1.27828503, z: .1150456}
   m_Children: []
   m_Father: {fileID: 2000847013}
@@ -7995,7 +8155,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: fec6393fb235f0241864f7902d82ca01, type: 2}
+  - {fileID: 2100000, guid: 69e53bec8b90a0944807e48a8b7a9a62, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
