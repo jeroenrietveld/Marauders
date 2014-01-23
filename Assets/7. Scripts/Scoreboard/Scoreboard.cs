@@ -95,7 +95,7 @@ public class Scoreboard : MonoBehaviour
         _visible = false;
         
         #region Test - all comments atm
-        /*
+        /*         
         GameManager.Instance.matchSettings.timeSync = 100;
         
         Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
@@ -153,7 +153,7 @@ public class Scoreboard : MonoBehaviour
 
         #region Player 3
         var player3 = new Player(PlayerIndex.Three);
-        player3.timeSync = 20;
+        player3.timeSync = 50;
         List<Cell> addition3 = new List<Cell>();
         scoreboard.AddCellList(addition3);
 
@@ -293,11 +293,11 @@ public class Scoreboard : MonoBehaviour
                    _material.SetColor("playerColor", _currentColor);
                    float matSize = Math.Min(cellWidth, cellHeight) * 0.75f;
                    float horizontalMatOffset = (cellWidth - matSize) / 2f;
-                   float verticalMatOffset = cellHeight * 0.2f;
+                   float verticalMatOffset = cellHeight * 0.15f;
                    Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalMatOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalMatOffset, matSize, matSize), _texture, _material);
                    
                    scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
-                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.5f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent() + "%");
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.20f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent() + "%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 
@@ -314,7 +314,7 @@ public class Scoreboard : MonoBehaviour
                        }
                        float trophySize = Math.Min(cellWidth * 0.4f, cellHeight * 0.4f);
                        float horizontalTrophyOffset = (cellWidth - trophySize) / 2f;
-                       float verticalTrophyOffset = cellHeight * 0.8f;
+                       float verticalTrophyOffset = cellHeight * 0.70f;
                        Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTrophyOffset, i * (boxHeight + verticalOffset * 2) + verticalTrophyOffset, trophySize, trophySize), _currentTrophyTexture);
                    }
                }             
