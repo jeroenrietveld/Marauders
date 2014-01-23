@@ -94,18 +94,14 @@ public class GameManager {
 
     public void StopGame()
     {
-<<<<<<< HEAD
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 
 		//Dirty but it works; TODO add juggernaut sounds
-		try {
+		try 
+        {
         	this.soundInGame.PlaySound(s, playersByTimeSync()[0].marauder + "-victory" , true);
-		}catch
-		{
-				}
-=======
+		}catch{}
         scoreboard.CalculateTrophys();
->>>>>>> Trophy's should work now
         scoreboard.Show();
         PauseGame();
         gameEnded = true;
