@@ -27,7 +27,7 @@ public class Normal : GameMode
             t.Title = title;
             t.Condition = condition;
 
-            GameManager.scoreboard.trophyList.Add(t);
+            //GameManager.scoreboard.trophyList.Add(t);
         }
         //No addition to the list
         //No addition to the gamemode

@@ -46,6 +46,8 @@ public class ScoreHandler : MonoBehaviour {
 		{
             GameManager.scoreboard.AddContent(evt.avatar.player.index, "Suicides", 1);
 			evt.avatar.player.AddTimeSync (suicidePenalty);
+
+			heartbeat.health = 1f;
 		}
 	}
 
