@@ -322,7 +322,7 @@ public class Scoreboard : MonoBehaviour
     {
        foreach(Trophy trophy in trophyList)
        {
-           int index = _cells[0].IndexOf(FindCell(PlayerIndex.One, trophy.Column));
+           int index = _cells[0].IndexOf(FindCell(GameManager.Instance.playerRefs[0].index, trophy.Column));
 
            //Make a list to hold multiple winners
            List<int> winnerIndexes = new List<int>();
@@ -493,7 +493,7 @@ public class Scoreboard : MonoBehaviour
     {
         if(GameManager.Instance.gameEnded)
         {
-            if (ControllerInput.GetController(PlayerIndex.One).JustPressed(Button.A))
+            if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A))
             {
                 Destroy(this.gameObject);
                 Application.LoadLevel("Menu");
