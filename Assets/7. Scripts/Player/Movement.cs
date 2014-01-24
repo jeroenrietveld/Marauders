@@ -6,12 +6,12 @@ public class Movement : MonoBehaviour {
 
 	const float MAX_SPEED_IDLE = 0.3f;
 	const float MAX_SPEED_WALKING = 3.0f;
-	const float MAX_SPEED_RUNNING = 5.0f;
+	const float MAX_SPEED_RUNNING = 7.0f;
 
 	public float maxMagnetDistance = 5f;
 	public float magnetAngle = 140f;
 
-	public DecoratableFloat movementSpeed = new DecoratableFloat (5.0f);
+	public DecoratableFloat movementSpeed = new DecoratableFloat (7.0f);
 	public float turnSmoothing = 15f;
 
 	private Avatar _avatar;
@@ -160,10 +160,14 @@ public class Movement : MonoBehaviour {
 
 	protected void AnimationMovement(float targetVelocity)
 	{
+		animation["Walk"].speed = targetVelocity * 0.7f;
+		animation["Run"].speed = targetVelocity * 0.2f;
+
 		if(targetVelocity < MAX_SPEED_IDLE)
 		{
             GameManager.Instance.soundInGame.StopSound(movementSource);
 			animation.CrossFade("Idle", 0.3f, PlayMode.StopSameLayer);
+
 		}
 		else if(targetVelocity < MAX_SPEED_WALKING)
 		{
@@ -176,7 +180,6 @@ public class Movement : MonoBehaviour {
             if(!animation.IsPlaying ("Walk"))
 			{
                 animation.CrossFade("Walk", 0.3f, PlayMode.StopSameLayer);
-				animation["Walk"].speed = targetVelocity * 0.7f;
             }
 		}
 		else
@@ -190,7 +193,6 @@ public class Movement : MonoBehaviour {
             if (!animation.IsPlaying("Run"))
 			{
 				animation.CrossFade("Run", 0.3f, PlayMode.StopSameLayer);
-				animation["Run"].speed = targetVelocity * 0.2f;
 			}
 		}
 	}
