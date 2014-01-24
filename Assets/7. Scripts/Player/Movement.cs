@@ -59,16 +59,16 @@ public class Movement : MonoBehaviour {
 
 		_targetVelocity = GetTargetVelocity();
 
-		//Debug.DrawRay(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized * (1), Color.green);
-		
-		// If you don't want a gameobject to collide with a raycast, select the "Ignore Raycast" layer via the Unity Inspector.
-		int layerMask = 1 << 2;
-		layerMask = ~layerMask;
-		
-		RaycastHit hit;
-
 		if (!GetComponent<Jump>().onGround)
 		{
+			//Debug.DrawRay(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized * (1), Color.green);
+			
+			// If you don't want a gameobject to collide with a raycast, select the "Ignore Raycast" layer via the Unity Inspector.
+			int layerMask = 1 << 2;
+			layerMask = ~layerMask;
+			
+			RaycastHit hit;
+
 			if(Physics.Raycast(rigidbody.position + _rigidbodyYAxis, _targetVelocity.normalized, out hit, 1, layerMask))
 			{
 				// Decrease Y velocity?
