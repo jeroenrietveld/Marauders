@@ -6,12 +6,12 @@ public class Movement : MonoBehaviour {
 
 	const float MAX_SPEED_IDLE = 0.3f;
 	const float MAX_SPEED_WALKING = 3.0f;
-	const float MAX_SPEED_RUNNING = 7.0f;
+	const float MAX_SPEED_RUNNING = 6.0f;
 
 	public float maxMagnetDistance = 5f;
 	public float magnetAngle = 140f;
 
-	public DecoratableFloat movementSpeed = new DecoratableFloat (7.0f);
+	public DecoratableFloat movementSpeed = new DecoratableFloat (6.0f);
 	public float turnSmoothing = 15f;
 
 	private Avatar _avatar;
