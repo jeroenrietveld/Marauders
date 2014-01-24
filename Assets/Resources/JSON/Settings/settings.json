@@ -2,5 +2,5 @@
 	"minSoundDistance" : "200",
 	"maxSoundDistance" : "250",
 	"volume" : "1",
-	"volumemovement" : "0.8"
+	"volumemovement" : "0.6"
 }
