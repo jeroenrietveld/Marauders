@@ -43,7 +43,6 @@ public class Scoreboard : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        trophyList = new List<Trophy>();
         _cells = new List<List<Cell>>();
     }
 
@@ -499,9 +498,9 @@ public class Scoreboard : MonoBehaviour
         {
             if (ControllerInput.GetController(PlayerIndex.One).JustPressed(Button.A))
             {
-                this.Hide();
-                this.Clear();
+                Destroy(this.gameObject);
                 Application.LoadLevel("Menu");
+                GameManager.Instance.gameEnded = false;
             }
         }
     }

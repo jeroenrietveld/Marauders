@@ -12,7 +12,7 @@ public class Normal : GameMode
         {
             GameManager.scoreboard.AddGameSpecificCell(i, new CustomCell("Owned Shrines", CellType.Integer, 0, true));
         }
-
+        /*
         var resources = Resources.LoadAll("JSON/Trophy/Normal");
 
         foreach (object resource in resources)
@@ -29,6 +29,7 @@ public class Normal : GameMode
 
             //GameManager.scoreboard.trophyList.Add(t);
         }
+         */
         //No addition to the list
         //No addition to the gamemode
     }

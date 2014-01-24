@@ -69,7 +69,7 @@ public abstract class GameMode
             t.Title = title;
             t.Condition = condition;
 
-            //GameManager.scoreboard.trophyList.Add(t);
+            GameManager.scoreboard.trophyList.Add(t);
         }
     }
    

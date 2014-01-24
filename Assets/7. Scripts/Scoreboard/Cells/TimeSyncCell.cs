@@ -23,6 +23,6 @@ public class TimeSyncCell : Cell
         {
             content = (int)Mathf.Clamp((int)content, 0, (float)GameManager.Instance.matchSettings.timeSync);
         }
-        return Math.Round((((int)content / (float)GameManager.Instance.matchSettings.timeSync)*100f)).ToString(); 
+        return ((int)(((int)content / (float)GameManager.Instance.matchSettings.timeSync)*100f)).ToString(); 
     }
 }
