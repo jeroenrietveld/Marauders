@@ -75,10 +75,14 @@ public class SoundIngame
     /// <param name="shouldIsPlayingBeChecked">If true if will check if it is already playing a sound. If false it will ignore it.</param>
     public void PlaySound(AudioSource source, string soundFilename, bool shouldIsPlayingBeChecked)
     {
-        if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
+		if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
-            source.clip = _clips.First(x => x.name == soundFilename);
-            source.Play();
+            AudioClip clip = _clips.FirstOrDefault(x => x.name == soundFilename);
+            if(clip != null)
+            {
+                source.clip = clip;
+                source.Play();
+            }
         }
     }
 
@@ -94,9 +98,7 @@ public class SoundIngame
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-            
-			//This check
-			if (list.Count > 0)
+            if (list.Count > 0)
 			{
 				source.clip = list[new System.Random().Next(0, list.Count)];
             	source.Play();
@@ -116,9 +118,12 @@ public class SoundIngame
         if (!shouldIsPlayingBeChecked || (shouldIsPlayingBeChecked && !source.isPlaying))
         {
             List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-            int indexClip = index >= 0 && index < list.Count ? index : 1;
-            source.clip = list[indexClip];
-            source.Play();
+            if(list.Count > 0)
+            {
+                int indexClip = index >= 0 && index < list.Count ? index : 1;
+                source.clip = list[indexClip];
+                source.Play();
+            }
         }
     }
 
@@ -129,9 +134,12 @@ public class SoundIngame
             if(source.time > endTime || source.time <= 0f)
             {
                 List<AudioClip> list = _clips.Where(x => x.name.StartsWith(prefixSoundPartFilename)).ToList<AudioClip>();
-                source.loop = true;
-                source.clip = list[new System.Random().Next(0, list.Count)];
-                source.Play();
+                if(list.Count > 0)
+                {
+                    source.loop = true;
+                    source.clip = list[new System.Random().Next(0, list.Count)];
+                    source.Play();
+                }
             }
         }
     }
