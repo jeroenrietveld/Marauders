@@ -18,7 +18,9 @@ public class Heartbeat : Attackable
     private GameObject _damage;
     private Avatar _avatar;
 	private ParticleSystem _hitEmitter;
-	private float _regen = 0.01f;
+	
+	private float _regen = 0.05f;
+	private Timer _regenDelay;
 
 	public Player lastAttacker {get;set;}
 	public Timer lastAttackerTimer;
@@ -81,11 +83,13 @@ public class Heartbeat : Attackable
 		{		
 			//Resetting has changed and moved to Jump, this still needs to be there to check if 2 seconds have past.
 		});
+
+		_regenDelay = new Timer (5);
     }
 
     void FixedUpdate()
 	{
-		if(alive) health += _regen * Time.deltaTime;
+		if(alive && !_regenDelay.running) health += _regen * Time.deltaTime;
 	}
 
     void Update()
@@ -156,6 +160,8 @@ public class Heartbeat : Attackable
 			{
 				Event.dispatch(new AvatarDeathEvent(_avatar.player, source.inflicter));
 			}
+
+			_regenDelay.Start();
 		}
 
 		_avatar.rigidbody.AddForce (source.force, ForceMode.Impulse);
