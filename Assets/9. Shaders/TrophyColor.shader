@@ -5,9 +5,10 @@
 	}
 	SubShader {
 		Pass {
-			Tags { "RenderType"="Opaque" }
+			Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 			
-			AlphaTest Greater 0.5
+			AlphaTest Greater 0
+			Blend SrcAlpha OneMinusSrcAlpha
 		
 			CGPROGRAM
 			#pragma vertex vert 

@@ -4,6 +4,7 @@ using System.Collections;
 public class Notification : MonoBehaviour {
 
 	private Timer _notificationTimer;
+	private Vector3 _initialPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,8 @@ public class Notification : MonoBehaviour {
 		_notificationTimer.AddCallback (delegate() {
 			Destroy (this.gameObject);
 		});
+
+		_initialPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +23,9 @@ public class Notification : MonoBehaviour {
 		_notificationTimer.Update ();
 
 		Vector3 pos = transform.position;
-		pos.y = _notificationTimer.Phase () * 0.05f;
-		transform.position = pos;
+		transform.position = _initialPosition + Vector3.up * _notificationTimer.Phase () * 0.5f;
+		Color color = renderer.material.GetColor ("_Color");
+		color.a = 1 - _notificationTimer.Phase ();
+		renderer.material.SetColor ("_Color", color);
 	}
 }

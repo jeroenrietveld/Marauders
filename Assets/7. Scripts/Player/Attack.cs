@@ -170,9 +170,11 @@ public class Attack : ActionBase {
 						{
 							foreach(var attackable in attackables)
 							{
-								GameObject notification = GameObject.Instantiate(Resources.Load("Resources/Prefabs/GUI/Combo1")) as GameObject;
+								String path = "Prefabs/GUI/Combo" + (_comboCount + 1).ToString();
+								GameObject notification = GameObject.Instantiate(Resources.Load(path)) as GameObject;
 								notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
-								notification.transform.position = transform.position;
+
+								notification.transform.position = CameraSettings.cameraSettings.PointToWorldPoint(transform.position + Vector3.up * 2);
 
 								attackable.DoAttack(this);
 							}
