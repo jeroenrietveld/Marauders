@@ -165,9 +165,9 @@ MonoBehaviour:
   timeSyncMaterial: {fileID: 2100000, guid: 4e857a0a0d1cede419a5845601263697, type: 2}
   timeSyncSliceMaterial: {fileID: 2100000, guid: 9d14382833da8814fa1abd47b1e2edaa,
     type: 2}
-  timeSyncTexture: {fileID: 2800000, guid: d464df78658298a41b91a2ee64910bf8, type: 3}
-  lightbulbMat: {fileID: 0}
-  lightbulbTex: {fileID: 2800000, guid: 63e1edd1ec8951749a731831678991f8, type: 3}
+  timeSyncTexture: {fileID: 2800000, guid: fab99db1975ed124a8cefb7f7386a2f0, type: 3}
+  lightbulbMat: {fileID: 2100000, guid: 3233b82770d342c419ab307a99a6b7ef, type: 2}
+  lightbulbTex: {fileID: 2800000, guid: b35720076e006a04ea5e9b807dcb84b2, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
