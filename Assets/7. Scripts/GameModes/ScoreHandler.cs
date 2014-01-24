@@ -57,6 +57,9 @@ public class ScoreHandler : MonoBehaviour {
         {
             GameManager.scoreboard.AddContent(player.index, Locale.Current["scoreboard_timesync"], player.timeSync);
         }
-        GameManager.Instance.StopGame();
+        if (!GameManager.Instance.gameEnded)
+        {
+            GameManager.Instance.StopGame();
+        }
     }
 }

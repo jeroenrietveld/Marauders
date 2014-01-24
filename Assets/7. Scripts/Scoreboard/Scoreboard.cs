@@ -332,7 +332,6 @@ public class Scoreboard : MonoBehaviour
            {
                for (int i = 0; i < _cells.Count; i++)
                {
-
                    if (_cells[i][index].cellType == CellType.Integer)
                    {
                        switch (trophy.Condition)
@@ -341,13 +340,12 @@ public class Scoreboard : MonoBehaviour
                                if(winnerIndexes.Count == 0)
                                {
                                    winnerIndexes.Add(i);
-                                   break;
                                }
-                               if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
+                               else if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
                                {
                                    winnerIndexes.Add(i);
                                }
-                               if ((int)_cells[i][index].content < (int)_cells[winnerIndexes[0]][index].content)
+                               else if ((int)_cells[i][index].content < (int)_cells[winnerIndexes[0]][index].content)
                                {
                                    winnerIndexes.Clear();
                                    winnerIndexes.Add(i);
@@ -357,13 +355,12 @@ public class Scoreboard : MonoBehaviour
                                if (winnerIndexes.Count == 0)
                                {
                                    winnerIndexes.Add(i);
-                                   break;
                                }
-                               if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
+                               else if ((int)_cells[i][index].content == (int)_cells[winnerIndexes[0]][index].content)
                                {
                                    winnerIndexes.Add(i);
                                }
-                               if ((int)_cells[i][index].content > (int)_cells[winnerIndexes[0]][index].content)
+                               else if ((int)_cells[i][index].content > (int)_cells[winnerIndexes[0]][index].content)
                                {
                                    winnerIndexes.Clear();
                                    winnerIndexes.Add(i);
