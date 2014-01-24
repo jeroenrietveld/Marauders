@@ -11,10 +11,8 @@ public class Notification : MonoBehaviour {
 		_notificationTimer.Start ();
 
 		_notificationTimer.AddCallback (delegate() {
-			Destroy (this);
+			Destroy (this.gameObject);
 		});
-
-		//renderer.material.SetColor("_MainTex", 
 	}
 	
 	// Update is called once per frame
@@ -22,7 +20,7 @@ public class Notification : MonoBehaviour {
 		_notificationTimer.Update ();
 
 		Vector3 pos = transform.position;
-		pos.y = _notificationTimer.Phase () * 2;
+		pos.y = _notificationTimer.Phase () * 0.05;
 		transform.position = pos;
 	}
 }

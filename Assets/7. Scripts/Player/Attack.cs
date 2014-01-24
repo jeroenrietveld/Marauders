@@ -172,6 +172,7 @@ public class Attack : ActionBase {
 							{
 								GameObject notification = GameObject.Instantiate(Resources.Load("Resources/Prefabs/GUI/Combo1")) as GameObject;
 								notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
+								notification.transform.position = transform.position;
 
 								attackable.DoAttack(this);
 							}
