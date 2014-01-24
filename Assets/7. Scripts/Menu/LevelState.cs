@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using XInputDotNetPure;
 
@@ -18,6 +19,7 @@ public class LevelState : MenuStateBase
 	{
         if (LevelSelectionManager.currentState != null)
         {
+            _controller = GameManager.Instance.playerRefs.OrderBy(x => x.indexInt).First().controller;
             LevelSelectionManager.currentState.Update(_controller);
         }
 

@@ -109,11 +109,18 @@ public class CharacterSelectBlock : MonoBehaviour
     {
         isJoined = false;
         isConnected = false;
+        isInSelection = false;
         _currentState = null;
         SkillSelect.SetActive(false);
         MarauderSelect.SetActive(false);
         StartScreen.SetActive(true);
         StartScreen.transform.FindChild("ControllerText").gameObject.GetComponent<TextMesh>().text = "Connect \n Controller";
+        GameManager manager = GameManager.Instance;
+        Player p = manager.playerRefs.FirstOrDefault(x => x.index == player);
+        if (p != null)
+        {
+            manager.playerRefs.Remove(p);
+        }
     }
 
     private void OnControllerConnect()

@@ -57,6 +57,12 @@ public class CharacterSelectState : SelectionBase
 
         if (block._currentEnum == CharacterSelectBlockStates.StartState)
         {
+            GameManager manager = GameManager.Instance;
+            Player p = manager.playerRefs.FirstOrDefault(x => x.index == block.player);
+            if(p != null)
+            {
+                manager.playerRefs.Remove(p);
+            }
             block.isInSelection = false;
             block.isJoined = false;
             block.StartScreen.SetActive(true);

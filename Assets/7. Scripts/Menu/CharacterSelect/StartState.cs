@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using XInputDotNetPure;
 
 public class StartState : SelectionBase
 {
-    private GamePad controllerOne;
+    //private GamePad controllerOne;
 
     public StartState(CharacterSelectBlock block)
     {
         this.block = block;
-        controllerOne = ControllerInput.GetController(PlayerIndex.One);
+        //controllerOne = ControllerInput.GetController(PlayerIndex.One);
     }
 
     public override void OnUpdate(GamePad controller)
     {
-        if (controllerOne.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
+        if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             bool check = true;
 
@@ -35,8 +36,8 @@ public class StartState : SelectionBase
         else if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
             block.isJoined = true;
-            block.ChangeState(CharacterSelectBlockStates.CharSelectState);
             block.isInSelection = true;
+            block.ChangeState(CharacterSelectBlockStates.CharSelectState);
         }
     }
 
