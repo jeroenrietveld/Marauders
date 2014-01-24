@@ -89,6 +89,7 @@ public class Heartbeat : Attackable
 
     void FixedUpdate()
 	{
+		_regenDelay.Update ();
 		if(alive && !_regenDelay.running) health += _regen * Time.deltaTime;
 	}
 
