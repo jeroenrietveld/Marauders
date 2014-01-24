@@ -170,8 +170,8 @@ public class Attack : ActionBase {
 						{
 							foreach(var attackable in attackables)
 							{
-								//GameObject notification = GameObject.Instantiate(Resources.Load("Resources/Prefabs/GUI/Combo1")) as GameObject;
-								//notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
+								GameObject notification = GameObject.Instantiate(Resources.Load("Resources/Prefabs/GUI/Combo1")) as GameObject;
+								notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
 
 								attackable.DoAttack(this);
 							}
