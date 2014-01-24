@@ -2,5 +2,5 @@
 	"name": "Thief",
 	"prefab": "Thief",
 	"weapon": "Daggers",
-	"footsole": "hard-sole"
+	"footsole": "leather-sole"
 }
