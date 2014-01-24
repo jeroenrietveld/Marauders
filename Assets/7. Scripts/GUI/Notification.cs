@@ -20,7 +20,7 @@ public class Notification : MonoBehaviour {
 		_notificationTimer.Update ();
 
 		Vector3 pos = transform.position;
-		pos.y = _notificationTimer.Phase () * 0.05;
+		pos.y = _notificationTimer.Phase () * 0.05f;
 		transform.position = pos;
 	}
 }
