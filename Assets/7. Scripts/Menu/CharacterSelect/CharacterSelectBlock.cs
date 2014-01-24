@@ -35,7 +35,8 @@ public class CharacterSelectBlock : MonoBehaviour
 
     void Start()
 	{
-        audioSourceArmory = Camera.main.GetComponents<AudioSource>().First(x => x.priority == 100);
+        audioSourceArmory = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
+
         marauderIndex = 0;
         cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
 
