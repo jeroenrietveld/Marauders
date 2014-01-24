@@ -22,7 +22,7 @@ public class GameManager {
 	public List<Player> playerRefs;
 	public SoundIngame soundInGame;
 
-    public bool gameEnded = false;
+    public bool gameEnded;
 
 	public struct MatchSettings
 	{
@@ -51,6 +51,7 @@ public class GameManager {
 		playerRefs = new List<Player> ();
 		soundInGame = new SoundIngame();
         scoreboard = GameObject.Find("_MENUGLOBAL").GetComponent<Scoreboard>();
+        gameEnded = false;
 	}
 
 	public void Start()

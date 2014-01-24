@@ -39,15 +39,12 @@ public class Scoreboard : MonoBehaviour
 
     public List<Trophy> trophyList;
 
-    public Scoreboard()
-	{
-        trophyList = new List<Trophy>();
-		_cells = new List<List<Cell>> ();
-	}
 
     void Awake()
     {
         DontDestroyOnLoad(this);
+        trophyList = new List<Trophy>();
+        _cells = new List<List<Cell>>();
     }
 
     /// <summary>
@@ -388,6 +385,7 @@ public class Scoreboard : MonoBehaviour
        }
     }
 
+    [Obsolete("Use CalculateTrophys() instead.")]
     public void SetTrophy(PlayerIndex playerIndex, string cellName, string title)
     {
         //Find the cell to set the trophy
@@ -411,6 +409,7 @@ public class Scoreboard : MonoBehaviour
         }
    }
 
+    [Obsolete("Use CalculateTrophy() instead.")]
     public void SetTrophy(PlayerIndex index, Trophy trophy)
     {
         //Find the cell to set the trophy
@@ -432,11 +431,6 @@ public class Scoreboard : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SetContent(PlayerIndex index, string cellname, object content)
-    {
-        FindCell(index, cellname).content = content;
     }
 
     public void AddContent(PlayerIndex index, string cellname, object content)
