@@ -24,7 +24,14 @@ public class MenuManager : MonoBehaviour {
 		states.Add(MenuStates.ArmoryState, new ArmoryState());
         states.Add(MenuStates.LevelState, new LevelState());
 
-		ChangeState(MenuStates.SplashState);
+        if (GameManager.Instance.gameEnded)
+        {
+            ChangeState(MenuStates.ArmoryState);
+        }
+        else
+        {
+            ChangeState(MenuStates.SplashState);
+        }
 
         primaryController = ControllerInput.GetController(PlayerIndex.One);
 	}
