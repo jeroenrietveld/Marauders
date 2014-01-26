@@ -39,7 +39,7 @@ public class ControllerMapping : MonoBehaviour
 	void Update () {
 		foreach(ActionPair pair in _actions)
 		{
-			if(controller.JustPressed(pair.button))
+			if(controller.JustPressed(pair.button) && pair.action.enabled)
 			{
 				pair.action.PerformAction();
 			}
