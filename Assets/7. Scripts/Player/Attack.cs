@@ -78,11 +78,11 @@ public class Attack : ActionBase {
 	{
 		if (_weapon && !_attackCooldown.running)
 		{
-			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
+			_attackDelay.endTime = _weapon.attacks[_comboCount].timing / _weapon.attacks[_comboCount].speed;
 			_attackDelay.Start();
 			_comboReset.Stop();
 
-			_attackCooldown.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length;
+			_attackCooldown.endTime = animation.GetClip(_weapon.attacks[_comboCount].animationName).length / _weapon.attacks[_comboCount].speed;
 			_attackCooldown.Start();
 
 			_trailTimer.endTime = _attackCooldown.endTime - _attackDelay.endTime;
