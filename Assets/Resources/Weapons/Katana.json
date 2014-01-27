@@ -6,18 +6,18 @@
 	"attacks": [
 		{
 			animation: "Katana1",
-			speed: 1.3,
-			timing: 0.15
+			speed: 1.51,
+			timing: 0.125
 		},
 		{
 			animation: "Katana2",
-			speed: 1.0,
-			timing: 0.34
+			speed: 1.25,
+			timing: 0.23
 		},		
 		{
 			animation: "Katana3",
-			speed: 1.0,
-			timing: 0.63
+			speed: 1.25,
+			timing: 0.3
 		}
 	]
 }

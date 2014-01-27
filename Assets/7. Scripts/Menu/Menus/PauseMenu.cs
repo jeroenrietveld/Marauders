@@ -157,8 +157,7 @@ public class PauseMenu : Menu {
     {
 		if (button == Button.A)
 		{
-			GameManager.Instance.ResumeGame();
-        	Application.LoadLevel(0);
+            RestartManager.Restart();
 			return;
 		}
 
