@@ -2,5 +2,6 @@
 	"name": "Thief",
 	"prefab": "Thief",
 	"weapon": "Daggers",
-	"footsole": "leather-sole"
+	"footsole": "leather-sole",
+	"text_charselect" : "Xero - A mysterious and \nacrobatic thief, seeking \nto steal all he lays his \neyes on. Wielding \ndual daggers, his attacks \nare swift and efficient."
 }

@@ -206,7 +206,7 @@ public class SkillSelectState : SelectionBase
         bottom = block.SkillSelect.transform.FindChild("Bottom").gameObject;
         arrow = bottom.transform.FindChild("SkillArrows").gameObject;
         arrow.transform.position = bottom.transform.FindChild("SkillAttack").transform.FindChild("SkillSelectorAttack").transform.position;
-
+        
         foreach (KeyValuePair<int, SkillSelection> item in list)
         {
             bottom.transform.FindChild(item.Value.baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = item.Value.active;

@@ -52,7 +52,7 @@ public abstract class GameMode
             addition.Add(titles);
             addition.Add(eliminations);
             addition.Add(eliminated);
-            addition.Add(suicides);   
+            addition.Add(suicides);
         }
 
         var resources = Resources.LoadAll("JSON/Trophy");

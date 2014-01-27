@@ -2,5 +2,6 @@
 	"name": "Juggernaut",
 	"prefab": "Juggernaut",
 	"weapon": "Hammer",
-	"footsole": "hard-sole"
+	"footsole": "hard-sole",
+	"text_charselect" : "Juggernaut - A fierce and \n crude enforcer of the law, \n on a neverending quest to \nreunite himself with his long \nlost wife. Wielding a \nmassive hammer and shield, \nobliterating all in his way."
 }

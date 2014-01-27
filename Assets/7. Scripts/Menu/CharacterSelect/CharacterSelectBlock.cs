@@ -10,28 +10,27 @@ public class CharacterSelectBlock : MonoBehaviour
     public GameObject StartScreen;
     public GameObject MarauderSelect;
     public GameObject SkillSelect;
-	
+    public SelectionBase _currentState;
+    public CharacterSelectBlockStates _currentEnum;
     public PlayerIndex player;
     
     // These list should later be filled dynamicly.
     public List<Material> marauders;
     public List<Material> maraudersSmall;
     public List<string> marauderNames;
-
 	public int marauderIndex { get; set; }
 	public bool isConnected { get; set; }
     public bool isPlayerReady { get; set; }
     public bool isJoined { get; set; }
     public bool isInSelection { get; set; }
+    public Dictionary<string, string> marauderTexts;
 
 	private GamePad _controller;
 
-    public SelectionBase _currentState;
     private IDictionary<CharacterSelectBlockStates, SelectionBase> _list;
-    public CharacterSelectBlockStates _currentEnum;
     private MenuCameraMovement cameraMovement;
     private bool zoomedIn = true;
-
+    private TextMesh _textCharselect;
     public AudioSource audioSourceArmory;
 
     void Start()
@@ -45,6 +44,8 @@ public class CharacterSelectBlock : MonoBehaviour
         _list.Add(CharacterSelectBlockStates.CharSelectState, new CharacterSelectState(this));
         _list.Add(CharacterSelectBlockStates.SkillSelectState, new SkillSelectState(this));
         _list.Add(CharacterSelectBlockStates.StartState, new StartState(this));
+        marauderTexts = new Dictionary<string, string>();
+        FillMarauderTextsFromJSON();
 
 		_currentState = null;
 		_controller = ControllerInput.GetController (player);
@@ -53,8 +54,23 @@ public class CharacterSelectBlock : MonoBehaviour
         StartScreen = transform.FindChild("Start").gameObject;
         MarauderSelect = transform.FindChild("MarauderSelect").gameObject;
         SkillSelect = transform.FindChild("SkillSelect").gameObject;
+        _textCharselect = MarauderSelect.transform.FindChild("TextCharselect").gameObject.GetComponent<TextMesh>();
 
         ChangeState(CharacterSelectBlockStates.StartState);
+    }
+
+    private void FillMarauderTextsFromJSON()
+    {
+        var resources = Resources.LoadAll("Marauders/");
+
+        foreach (object resource in resources)
+        {
+            var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
+            string name = node["name"].Value;
+            string text = node["text_charselect"].Value;
+
+            marauderTexts.Add(name, text);
+        }
     }
 
     public void ChangeState(CharacterSelectBlockStates state)
@@ -135,5 +151,7 @@ public class CharacterSelectBlock : MonoBehaviour
 		marauderIndex = index;
 		MarauderSelect.transform.FindChild("MarauderModel").gameObject.renderer.material = marauders[marauderIndex];
         MarauderSelect.transform.FindChild("MauraderSelectNameText").GetComponent<TextMesh>().text = marauderNames[marauderIndex];
+
+        _textCharselect.text = marauderTexts[marauderNames[marauderIndex]];
 	}
 }
