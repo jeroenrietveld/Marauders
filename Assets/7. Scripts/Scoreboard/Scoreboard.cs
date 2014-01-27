@@ -525,7 +525,6 @@ public class Scoreboard : MonoBehaviour
                 }
             }
         }
-
         return null;
     }
 
@@ -541,6 +540,10 @@ public class Scoreboard : MonoBehaviour
 
     public void Clear()
     {
+        for (int i = 0; i < _cells.Count; i ++ )
+        {
+            _cells[i].Clear();
+        }
         _cells.Clear();
     }
 
