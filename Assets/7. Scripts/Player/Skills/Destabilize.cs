@@ -7,6 +7,8 @@ public class Destabilize : SkillBase
 
 	private float _duration = 3f;
 
+	private Vector3 _velocity;
+
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
 		//TODO: Use correct animation
 		new AttackInfo("Dash", 1.0f, -1f),
@@ -25,6 +27,10 @@ public class Destabilize : SkillBase
 			GetComponent<AvatarGraphics>().AddMaterial(mat);
 
 			GetComponent<Stun>().SetStunTime(_duration);
+
+			_velocity = rigidbody.velocity;
+
+			rigidbody.isKinematic = true;
 		});
 
 		_destabilize.AddCallback (0.1f, delegate {
@@ -36,6 +42,10 @@ public class Destabilize : SkillBase
 			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
 
 			GetComponent<AnimationHandler>().UnPause();
+
+			rigidbody.isKinematic = false;
+
+			rigidbody.velocity = _velocity;
 		});
 	}
 

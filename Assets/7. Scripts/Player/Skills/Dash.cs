@@ -21,7 +21,6 @@ public class Dash : SkillBase
 	{
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (delegate {
-			//_player.animation.Stop();
 			rigidbody.velocity = Vector3.zero;
 		});
 	}
@@ -31,30 +30,11 @@ public class Dash : SkillBase
         
     }
 
-	/*
-	void Start()
-	{
-		_player = GetComponent<Player> ();
-		initializeAnimation ();
-	}
-	*/
-
 	protected override void OnPerformAction()
 	{
 		GameManager.Instance.soundInGame.PlaySound(skillAudioSource, "Dash", true);
 		_dashing.Start ();
     }
-
-	/*
-	public void initializeAnimation()
-	{
-		Animation animation = _player.animation;
-
-		animation[animationName].speed = 1.0f;
-		animation[animationName].wrapMode = WrapMode.Loop;
-		animation[animationName].layer = 2;
-	}
-	*/
 
 	protected override void OnUpdate()
 	{
