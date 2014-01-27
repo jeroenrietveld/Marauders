@@ -11,9 +11,6 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
 
-    /// <summary>
-    /// The instance of the scoreboard
-    /// </summary>
     public static Scoreboard scoreboard;
 
     public static bool isPaused = false;
@@ -22,7 +19,7 @@ public class GameManager {
 	public List<Player> playerRefs;
 	public SoundIngame soundInGame;
 
-    public bool gameEnded;
+    public bool gameEnded = false;
 
 	public struct MatchSettings
 	{
@@ -50,10 +47,6 @@ public class GameManager {
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
 		soundInGame = new SoundIngame();
-        if (scoreboard == null)
-        {
-            scoreboard = GameObject.Find("_STATICGLOBAL").GetComponent<Scoreboard>();
-        }
         gameEnded = false;
 	}
 
@@ -102,7 +95,6 @@ public class GameManager {
     {
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 		this.soundInGame.PlaySoundRandom(s, playersByTimeSync()[0].marauder + "-victory" , true);
-
         scoreboard.CalculateTrophys();
         scoreboard.Show();
         PauseGame();

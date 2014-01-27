@@ -8,7 +8,7 @@ public class LevelInit : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_game = GameManager.Instance;
-
+        GameManager.scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
 		SpawnMarauders ();
 	}
 

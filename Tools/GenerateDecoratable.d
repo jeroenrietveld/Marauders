@@ -10,8 +10,9 @@ void main()
 	
 	outputFile.writeln("// GENERATED CODE, DO NOT MODIFY. MODIFY TOOLS/DECORATABLETEMPLATE.CS INSTEAD");
 	outputFile.writeln("using UnityEngine;");
+	outputFile.writeln("using System.Collections.Generic;");
 	
-	foreach(t; ["float", "Vector3"])
+	foreach(t; ["float", "Vector3", "DamageSource"])
 	{
 		auto generatedCode = classTemplate.
 			replace("##type##", t).

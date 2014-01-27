@@ -10,7 +10,7 @@ public class Normal : GameMode
     {
         for (int i = 0; i < GameManager.Instance.playerRefs.Count; i++)
         {
-            GameManager.scoreboard.AddGameSpecificCell(i, new CustomCell("Owned Shrines", CellType.Integer, 0, true));
+            
         }
         /*
         var resources = Resources.LoadAll("JSON/Trophy/Normal");

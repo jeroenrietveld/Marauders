@@ -32,11 +32,11 @@ public class Attack : ActionBase {
 
 	private AudioSource swingSource;
 
-	public DamageSource damageSource;
+	public DecoratableDamagesource damageSource;
 	
 	public Attack()
 	{
-		damageSource = new DamageSource(null);
+		damageSource = new DecoratableDamagesource(new DamageSource(null));
 
 		//TODO: Combo reset weapon / player dependent?
 		_comboReset = new Timer (1);
@@ -66,7 +66,7 @@ public class Attack : ActionBase {
 	}
 
 	void Start () {
-		damageSource.inflicter = GetComponent<Avatar> ().player;
+		damageSource.rawValue.inflicter = GetComponent<Avatar> ().player;
 
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.B, this);
@@ -140,8 +140,8 @@ public class Attack : ActionBase {
 			));
 		}
 
-		damageSource.amount = _weapon.damage;
-		damageSource.totalAttacks = _weapon.attacks.Count;
+		damageSource.rawValue.amount = _weapon.damage;
+		damageSource.rawValue.totalAttacks = _weapon.attacks.Count;
 	}
 
 	void Update()
@@ -158,7 +158,9 @@ public class Attack : ActionBase {
 		Collider[] colls = Physics.OverlapSphere(transform.position, _weapon.range);
 		
 		GameManager.Instance.soundInGame.PlaySoundIndex(swingSource, "Swing", _comboCount, false);
-		
+
+		DamageSource dmgSource = damageSource;
+
 		foreach(Collider hit in colls) 
 		{
 			if (hit.gameObject != gameObject)
@@ -176,11 +178,10 @@ public class Attack : ActionBase {
 
 						if(attackables.Length > 0)
 						{
-							var damageSource = this.damageSource;
-							damageSource.comboCount = _comboCount;
-							damageSource.direction = (transform.position - hit.transform.position).normalized;
-							damageSource.force = -damageSource.direction * (isCombo ? comboKnockBackForce : standardKnockBackForce);
-							damageSource.stunTime = GetStunTime();
+							dmgSource.comboCount = _comboCount;
+							dmgSource.direction = (transform.position - hit.transform.position).normalized;
+							dmgSource.force = -dmgSource.direction * (isCombo ? comboKnockBackForce : standardKnockBackForce);
+							dmgSource.stunTime = GetStunTime();
 
 							foreach(var attackable in attackables)
 							{
@@ -190,7 +191,7 @@ public class Attack : ActionBase {
 
 								notification.transform.position = CameraSettings.cameraSettings.PointToWorldPoint(transform.position + Vector3.up * 2);
 
-								attackable.DoAttack(damageSource);
+								attackable.DoAttack(dmgSource);
 							}
 							hasHit = true;
 						}
@@ -212,5 +213,12 @@ public class Attack : ActionBase {
 	public float GetStunTime()
 	{
 		return _trailTimer.endTime + (_weapon.attacks[nextComboCount].timing / _weapon.attacks[nextComboCount].speed);
+	}
+
+	public void SetCombo()
+	{
+		_comboCount = _weapon.attacks.Count - 1;
+
+		_attackCooldown.Stop ();
 	}
 }

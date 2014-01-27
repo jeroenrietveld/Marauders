@@ -143,7 +143,9 @@ public class SkillSelectState : SelectionBase
 
         Locale locale = new en();
         offensiveSkillsDescription.Add(locale["ability_windsweep"]);
-        offensiveSkills.Add("Windsweep");
+		offensiveSkills.Add("Windsweep");
+		offensiveSkillsDescription.Add(locale["ability_sunderstrike"]);
+		offensiveSkills.Add("Sunderstrike");
         // Uncomment the skills when they are implemented.
         /*
         offensiveSkillsDescription.Add(locale["ability_obliterate"]);

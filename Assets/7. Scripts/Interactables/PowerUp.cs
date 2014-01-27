@@ -39,14 +39,14 @@ public class PowerUp : MonoBehaviour
 	{
 		Component buffedComponent = avatar.GetComponent(component);
 		DecoratableFloat buffedField = (DecoratableFloat) buffedComponent.GetType().GetField(field).GetValue(buffedComponent);
-		buffedField.filters += ModulateDR;
+		buffedField.AddFilter (ModulateDR);
 	}
 
 	void removePowerUp()
 	{
 		Component buffedComponent = avatar.GetComponent(component);
 		DecoratableFloat buffedField = (DecoratableFloat) buffedComponent.GetType().GetField(field).GetValue(buffedComponent);
-		buffedField.filters -= ModulateDR;
+		buffedField.RemoveFilter (ModulateDR);
 	}
 
 	float ModulateDR(float dr)
