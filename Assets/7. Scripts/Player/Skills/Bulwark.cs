@@ -23,7 +23,9 @@ public class Bulwark : SkillBase
         WrapMode.Once
         );
 
+    private Stun stunObject;
     private DecoratableFloat _movementSpeedReduction;
+    private DecoratableFloat _damageDone;
 
     public Bulwark()
         : base(6, _animationSettingsStart, _animationSettingsEnd)
@@ -31,8 +33,14 @@ public class Bulwark : SkillBase
         _bulwark = new Timer(_duration);
         _bulwark.AddCallback(0f, delegate
         {
+            // While this ability is active disable stun ability.
+            stunObject = GetComponent<Stun>();
+            // Disable stun for the duration of the ability.
+            stunObject.DisableStunTime(_duration);
             _movementSpeedReduction = GetComponent<Movement>().movementSpeed;
-            _movementSpeedReduction.filters += ModulateDRMovement;
+            _movementSpeedReduction.AddFilter(ModulateDRMovement);
+            _damageDone = GetComponentInChildren<Heartbeat>().damageMultiplier;
+            _damageDone.AddFilter(ModulateDRDamage);
         });
 
         _bulwark.AddCallback(2.6f, delegate
@@ -46,7 +54,8 @@ public class Bulwark : SkillBase
 
         _bulwark.AddCallback(delegate
         {
-            _movementSpeedReduction.filters -= ModulateDRMovement;
+            _movementSpeedReduction.RemoveFilter(ModulateDRMovement);
+            _damageDone.RemoveFilter(ModulateDRDamage);
             // Reset the animation to the start animation.
             animationSettings = _animationSettingsStart;
             animation[animationSettings.attackInfo.animationName].weight = 0.6f;

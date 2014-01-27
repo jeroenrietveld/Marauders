@@ -7,6 +7,8 @@ using System.Collections;
 public class Heartbeat : Attackable
 {
     public DecoratableFloat heartbeatSpeed = new DecoratableFloat(90);
+    // Used for Bulwark.
+    public DecoratableFloat damageMultiplier = new DecoratableFloat(1);
 
     public float damageScale = 1f;
     public float damageAlphaScale = 4;
@@ -113,7 +115,9 @@ public class Heartbeat : Attackable
 		if(source.amount > 0)
 		{
 			bool armorHit = false;
-			
+
+            source.amount *= damageMultiplier;
+
 			if(!source.piercing)
 			{
 				float dot = Vector3.Dot(source.direction, transform.forward);
@@ -129,6 +133,7 @@ public class Heartbeat : Attackable
 			{
 				GameManager.Instance.soundInGame.PlaySoundRandom(heartbeatSource, "heartbeathit", false);
 			}
+            
 			var previousHealth = health;
 			health = health - source.amount;
 

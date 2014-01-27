@@ -6,6 +6,7 @@ public class Stun : MonoBehaviour {
 
 	private List<MonoBehaviour> _disabledComponents = new List<MonoBehaviour>();
 	private float _stunTimeRemaining;
+    private float _disabledStunTimeRemaining;
 
 	// Use this for initialization
 	void Start ()
@@ -17,23 +18,42 @@ public class Stun : MonoBehaviour {
 
 	void Update()
 	{
-		if(_stunTimeRemaining > 0)
-		{
-			_stunTimeRemaining -= Time.deltaTime;
+        if(_disabledStunTimeRemaining > 0)
+        {
+            _disabledStunTimeRemaining -= Time.deltaTime;
+        }
+		else
+        {
+            if (_stunTimeRemaining > 0)
+            {
+                _stunTimeRemaining -= Time.deltaTime;
 
-			if(_stunTimeRemaining <= 0)
-			{
-				EnableComponents();
-			}
-		}
+                if (_stunTimeRemaining <= 0)
+                {
+                    EnableComponents();
+                }
+            }
+        }    
 	}
 
 	public void SetStunTime(float time)
 	{
-		_stunTimeRemaining = Mathf.Max (_stunTimeRemaining, time);
+        // Make sure that the stun can only be set when the disabledstuntime is active.
+        if(_disabledStunTimeRemaining <= 0)
+        {
+            _stunTimeRemaining = Mathf.Max(_stunTimeRemaining, time);
 
-		DisableComponents ();
+            DisableComponents();
+        }	
 	}
+
+    public void DisableStunTime(float time)
+    {
+        _disabledStunTimeRemaining = Mathf.Max(_disabledStunTimeRemaining, time);
+        // Enable all components and reset the stuntimeremaining.
+        _stunTimeRemaining = 0;
+        EnableComponents();
+    }
 
 	private void DisableComponents()
 	{
