@@ -7,17 +7,17 @@
 		{
 			animation: "Hammer1",
 			speed: 1.75,
-			timing: 0.125                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              .4125
+			timing: 0.35                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              .4125
 		},
 		{
 			animation: "Hammer2",
 			speed: 1.25,
-			timing: 0.3
+			timing: 0.5
 		},		
 		{
 			animation: "Hammer3",
 			speed: 1.25,
-			timing: 0.45
+			timing: 0.75
 		}
 	]
 }

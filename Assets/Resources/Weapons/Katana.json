@@ -7,17 +7,17 @@
 		{
 			animation: "Katana1",
 			speed: 1.51,
-			timing: 0.125
+			timing: 0.302
 		},
 		{
 			animation: "Katana2",
 			speed: 1.25,
-			timing: 0.23
+			timing: 0.25
 		},		
 		{
 			animation: "Katana3",
 			speed: 1.25,
-			timing: 0.3
+			timing: 0.375
 		}
 	]
 }
