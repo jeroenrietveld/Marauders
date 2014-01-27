@@ -5,12 +5,9 @@ using XInputDotNetPure;
 
 public class StartState : SelectionBase
 {
-    //private GamePad controllerOne;
-
     public StartState(CharacterSelectBlock block)
     {
         this.block = block;
-        //controllerOne = ControllerInput.GetController(PlayerIndex.One);
     }
 
     public override void OnUpdate(GamePad controller)

@@ -15,6 +15,7 @@ public class CharacterSelectBlock : MonoBehaviour
     
     // These list should later be filled dynamicly.
     public List<Material> marauders;
+    public List<Material> maraudersSmall;
     public List<string> marauderNames;
 
 	public int marauderIndex { get; set; }

@@ -856,8 +856,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
-  m_LocalRotation: {x: .707106829, y: 1.67497557e-15, z: 1.67497557e-15, w: -.707106829}
-  m_LocalPosition: {x: -2.88961506, y: 12.9605417, z: -25.0002136}
+  m_LocalRotation: {x: -.0136786345, y: .706974566, z: -.706974447, w: -.0136786364}
+  m_LocalPosition: {x: -2.8929472, y: 12.9605427, z: -25.0862274}
   m_LocalScale: {x: .1150456, y: 1.27828503, z: .1150456}
   m_Children: []
   m_Father: {fileID: 400060}
@@ -1604,7 +1604,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100046}
-  m_Text: "Attack your oponent with \r\n a sliding attack."
+  m_Text: "Attack your opponent\r\nwith a sliding attack"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1657,6 +1657,10 @@ MonoBehaviour:
   marauders:
   - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
   - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
+  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  maraudersSmall:
+  - {fileID: 2100000, guid: b38f16c028074ca4d82fc388c210fe5f, type: 2}
+  - {fileID: 2100000, guid: 75c5c0d8757989e449375f62c59457ff, type: 2}
   - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
   marauderNames:
   - Thief

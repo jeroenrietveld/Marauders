@@ -201,7 +201,7 @@ public class SkillSelectState : SelectionBase
     public override void OnActive()
     {
         block.SkillSelect.SetActive(true);
-        block.SkillSelect.transform.FindChild("Top").transform.FindChild("MarauderModelSkill").renderer.material = block.marauders[block.marauderIndex];
+        block.SkillSelect.transform.FindChild("Top").transform.FindChild("MarauderModelSkill").renderer.material = block.maraudersSmall[block.marauderIndex];
         block.SkillSelect.transform.FindChild("Top").transform.FindChild("MauraderNameSkillText").GetComponent<TextMesh>().text = block.marauderNames[block.marauderIndex];
         bottom = block.SkillSelect.transform.FindChild("Bottom").gameObject;
         arrow = bottom.transform.FindChild("SkillArrows").gameObject;
