@@ -20,15 +20,20 @@ public class RestartManager : MonoBehaviour
         {
             if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A))
             {
-                Debug.Log("Game restarted");
-                GameManager.scoreboard.Hide();
-                GameManager.scoreboard.Clear();
-                Application.LoadLevel("Menu");
-                GameManager.Instance.gameEnded = false;
-                GameManager.Instance.ResumeGame();
-                restarted = true;
+                Restart();
             }
         }
+    }
+
+    public static void Restart()
+    {
+        Debug.Log("Game restarted");
+        GameManager.scoreboard.Hide();
+        GameManager.scoreboard.Clear();
+        Application.LoadLevel("Menu");
+        GameManager.Instance.gameEnded = false;
+        GameManager.Instance.ResumeGame();
+        restarted = true;
     }
 }
 
