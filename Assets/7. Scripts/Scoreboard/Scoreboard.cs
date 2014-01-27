@@ -327,7 +327,6 @@ public class Scoreboard : MonoBehaviour
            //Make a list to hold multiple winners
            List<int> winnerIndexes = new List<int>();
 
-
            if (index != -1)
            {
                for (int i = 0; i < _cells.Count; i++)
@@ -497,7 +496,6 @@ public class Scoreboard : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 Application.LoadLevel("Menu");
-                GameManager.Instance.gameEnded = false;
             }
         }
     }

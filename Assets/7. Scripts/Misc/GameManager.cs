@@ -50,7 +50,10 @@ public class GameManager {
         matchSettings = new MatchSettings();
 		playerRefs = new List<Player> ();
 		soundInGame = new SoundIngame();
-        scoreboard = GameObject.Find("_MENUGLOBAL").GetComponent<Scoreboard>();
+        if (scoreboard == null)
+        {
+            scoreboard = GameObject.Find("_MENUGLOBAL").GetComponent<Scoreboard>();
+        }
         gameEnded = false;
 	}
 

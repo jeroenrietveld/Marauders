@@ -18,7 +18,10 @@ public class MenuManager : MonoBehaviour {
 	{
 		states = new Dictionary<MenuStates, MenuStateBase>();
 
-		cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
+        if (cameraMovement == null)
+        {
+            cameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MenuCameraMovement>();
+        }
 
 		states.Add(MenuStates.SplashState, new SplashState());
 		states.Add(MenuStates.ArmoryState, new ArmoryState());
@@ -26,7 +29,10 @@ public class MenuManager : MonoBehaviour {
 
         if (GameManager.Instance.gameEnded)
         {
+            Debug.Log("Came here.");
+            ChangeState(MenuStates.SplashState);
             ChangeState(MenuStates.ArmoryState);
+            GameManager.Instance.gameEnded = false;
         }
         else
         {
@@ -50,6 +56,7 @@ public class MenuManager : MonoBehaviour {
 
 	public void ChangeState(MenuStates state)
 	{
+        Debug.Log("Changed state to " + state.ToString());
         var previousState = currentState;
 
 		if (previousState != null) 
