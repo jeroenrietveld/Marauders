@@ -5,7 +5,7 @@ public class Destabilize : SkillBase
 {
 	private Timer _destabilize;
 
-	private float _duration = 3f;
+	private float _duration = 1f;
 
 	private Vector3 _velocity;
 
