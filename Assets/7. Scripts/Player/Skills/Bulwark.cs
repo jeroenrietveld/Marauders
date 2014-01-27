@@ -5,7 +5,8 @@ public class Bulwark : SkillBase
 {
     private Timer _bulwark;
 
-    private float _duration = 4.5f;
+    // The duration time is depended on the combined length of the two animations.
+    private float _duration = 2.667f;
     private float _factorMoveSpeedReduction = 0.5f;
     private float _factorDamageReduction = 0.5f;
 
@@ -28,22 +29,22 @@ public class Bulwark : SkillBase
     private DecoratableFloat _damageDone;
 
     public Bulwark()
-        : base(6, _animationSettingsStart, _animationSettingsEnd)
-    {           
+        : base(10, _animationSettingsStart, _animationSettingsEnd)
+    {
         _bulwark = new Timer(_duration);
         _bulwark.AddCallback(0f, delegate
         {
-            // While this ability is active disable stun ability.
             stunObject = GetComponent<Stun>();
-            // Disable stun for the duration of the ability.
             stunObject.DisableStunTime(_duration);
+
             _movementSpeedReduction = GetComponent<Movement>().movementSpeed;
             _movementSpeedReduction.AddFilter(ModulateDRMovement);
+            
             _damageDone = GetComponentInChildren<Heartbeat>().damageMultiplier;
             _damageDone.AddFilter(ModulateDRDamage);
         });
-
-        _bulwark.AddCallback(2.6f, delegate
+        // When the first animation has ended, start the second.
+        _bulwark.AddCallback(0.792f, delegate
         {
             // Start animation has ended. Switch to the end animation.
             animationSettings = _animationSettingsEnd;
@@ -51,7 +52,7 @@ public class Bulwark : SkillBase
             animation[animationSettings.attackInfo.animationName].weight = 0.6f;
             animation.Blend(animationSettings.attackInfo.animationName, 0.6f, 0.2f);
         });
-
+        // Remove and reset the filters and animation.
         _bulwark.AddCallback(delegate
         {
             _movementSpeedReduction.RemoveFilter(ModulateDRMovement);
