@@ -39,12 +39,12 @@ public class Speedboost : MonoBehaviour {
 
 	void OnEnable()
 	{
-		GetComponent<Movement>().movementSpeed.filters += Apply;
+		GetComponent<Movement>().movementSpeed.AddFilter(Apply);
 	}
 
 	void OnDisable()
 	{
-		GetComponent<Movement>().movementSpeed.filters -= Apply;
+		GetComponent<Movement>().movementSpeed.RemoveFilter(Apply);
 	}
 
 }

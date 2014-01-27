@@ -44,7 +44,19 @@ public class Decoratable##Type##
 	/// <summary>
 	/// Filters currently affecting the value. Add / remove your filters to this member.
 	/// </summary>
-	public Filter filters;
+	public List<FilterPair> filters = new List<FilterPair>();
+
+	public struct FilterPair
+	{
+		public Filter filter;
+		public bool once;
+
+		public FilterPair(Filter filter, bool once)
+		{
+			this.filter = filter;
+			this.once = once;
+		}
+	}
 
 	/// <summary>
 	/// Getter and Setter for the value this Decoratable wraps. Getting the value passes the value 
@@ -63,12 +75,20 @@ public class Decoratable##Type##
 		{
 			var val = rawValue;
 
-			if(filters != null)
+			for(int i = 0; i < filters.Count;)
 			{
-				foreach(var filter in filters.GetInvocationList())
+				var pair = filters[i];
+
+				if(pair.once)
 				{
-					val = ((Filter)filter)(val);
+					filters.RemoveAt(i);
 				}
+				else 
+				{
+					i++;
+				}
+
+				val = pair.filter(val);
 			}
 
 			return val;
@@ -81,10 +101,8 @@ public class Decoratable##Type##
 	/// </summary>
     public ##type## rawValue;
 
-
 	public Decoratable##Type##(##type## v)
 	{
-        filters = null;
 		rawValue = v;
 	}
 
@@ -94,5 +112,17 @@ public class Decoratable##Type##
 	public static implicit operator ##type##(Decoratable##Type## d)
 	{
 		return d.value;
+	}
+
+	public void AddFilter(Filter filter, bool once = false)
+	{
+		filters.Add(new FilterPair(filter, once));
+	}
+
+	public void RemoveFilter(Filter filter)
+	{
+		filters.RemoveAll(delegate(FilterPair pair){
+			return pair.filter == filter;
+		});
 	}
 }

@@ -13,12 +13,17 @@ public class Sunderstrike : SkillBase {
 	
 	public Sunderstrike() : base(5, _animationSettings)
 	{
-		
 	}
 	
 	protected override void OnPerformAction()
 	{
-
+		Attack attack = (Attack)GetComponent<Attack> ();
+		attack.damageSource.AddFilter (delegate(DamageSource value) {
+				value.piercing = true;
+				return value;
+		}, true);
+		attack.SetCombo ();
+		attack.PerformAction ();
 	}
 
 	protected override void OnUpdate() {}
