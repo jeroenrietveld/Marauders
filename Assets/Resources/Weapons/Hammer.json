@@ -2,22 +2,22 @@
 	"name":"Hammer",
 	"prefabs":["Hammer", "Hammer_shield"],
 	"range": 3,
-	"damage": 0.15,
+	"damage": 0.25,
 	"attacks": [
 		{
 			animation: "Hammer1",
-			speed: 1.4,
-			timing: 0.4125
+			speed: 1.5,
+			timing: 0.15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              .4125
 		},
 		{
 			animation: "Hammer2",
 			speed: 1.0,
-			timing: 0.375
+			timing: 0.4
 		},		
 		{
 			animation: "Hammer3",
-			speed: 1.5,
-			timing: 0.6
+			speed: 1.0,
+			timing: 0.6 
 		}
 	]
 }

@@ -6,17 +6,17 @@
 	"attacks": [
 		{
 			animation: "Daggers1",
-			speed: 1.0,
-			timing: 0.2
+			speed: 1.7,
+			timing: 0.15
 		},
 		{
 			animation: "Daggers2",
-			speed: 1.0,
+			speed: 1.4,
 			timing: 0.15
 		}
 		{
 			animation: "Daggers3",
-			speed: 1.0,
+			speed: 1.4,
 			timing: 0.15
 		}
 	]
