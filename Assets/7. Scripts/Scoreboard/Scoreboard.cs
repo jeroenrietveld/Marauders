@@ -42,8 +42,61 @@ public class Scoreboard : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
         _cells = new List<List<Cell>>();
+        trophyList = new List<Trophy>();
+
+        Initialize();
+    }
+
+    private void Initialize() 
+    {
+        //Set the scoreboard
+        //Add the main cells.
+        foreach (var player in GameManager.Instance.playerRefs)
+        {
+            List<Cell> addition = new List<Cell>();
+            AddCellList(addition);
+
+            addition.Add(new PlayerCell(player));
+
+            //Declare all cells
+            TimeSyncCell timeSync = new TimeSyncCell(player);
+            TitlesCell titles = new TitlesCell();
+            CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 0, true);
+            CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 0, true);
+            CustomCell suicides = new CustomCell("Suicides", CellType.Integer, 0, true);
+
+            //Add all cells to the list of cells
+            addition.Add(timeSync);
+            addition.Add(titles);
+            addition.Add(eliminations);
+            addition.Add(eliminated);
+            addition.Add(suicides);
+
+            //Add the game specific cells
+            switch(GameManager.Instance.matchSettings.gameMode.id)
+            {
+                case GameModeID.Normal: AddGameSpecificCell(player.index, new CustomCell("Owned Shrines", CellType.Integer, 0, true)); break;
+            }
+        }
+        
+        var resources = Resources.LoadAll("JSON/Trophy");
+
+        foreach (object resource in resources)
+        {
+            var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
+            string column = node["column"].Value;
+            string title = node["title"].Value;
+            string condition = node["condition"].Value;
+
+            Trophy t = new Trophy();
+            t.Column = column;
+            t.Title = title;
+            t.Condition = condition;
+            Debug.Log(t);
+            trophyList.Add(t);
+        }
+
     }
 
     /// <summary>
@@ -59,8 +112,16 @@ public class Scoreboard : MonoBehaviour
     /// This method will add a custom cell just after the static cells.
     /// </summary>
     /// <param name="gameSpecificCell"></param>
-    public void AddGameSpecificCell(int index, CustomCell gameSpecificCell)
-    {                
+    public void AddGameSpecificCell(PlayerIndex playerIndex, CustomCell gameSpecificCell)
+    {
+        int index = 0;
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            if (((PlayerCell)_cells[i][0]).player.index == playerIndex)
+            {
+                index = i;
+            }
+        }
         for (int j = 0; j < _cells[index].Count; j++)
         {
             if (_cells[index][j].cellType != CellType.Static)
@@ -87,7 +148,6 @@ public class Scoreboard : MonoBehaviour
         _thirdPlaceTexture = Resources.Load("Textures/Scoreboard/place_3rd", typeof(Texture)) as Texture;
         _fourthPlaceTexture = Resources.Load("Textures/Scoreboard/place_4th", typeof(Texture)) as Texture;
 
-        trophyList = new List<Trophy>();
         _visible = false;
         
         #region Test - all comments atm

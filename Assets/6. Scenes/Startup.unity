@@ -82,8 +82,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 129041036}
-  - 114: {fileID: 129041035}
   - 114: {fileID: 129041034}
+  - 114: {fileID: 129041035}
   m_Layer: 0
   m_Name: _STATICGLOBAL
   m_TagString: Untagged
@@ -110,13 +110,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 129041033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76015ccd6e0aab24e8e646a6bededfa4, type: 3}
+  m_Script: {fileID: 11500000, guid: 913383990c7b2c44d9d3f801f19b1857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreboardskin: {fileID: 11400000, guid: 84462713a5d063c44b5d32d934d77ca3, type: 2}
-  horizontalOffset: 10
-  verticalOffset: 5
-  fontScale: .828125
 --- !u!4 &129041036
 Transform:
   m_ObjectHideFlags: 0

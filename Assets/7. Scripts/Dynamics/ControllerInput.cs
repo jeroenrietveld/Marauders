@@ -15,6 +15,11 @@ public class ControllerInput : MonoBehaviour {
 	private static GamePad[] controllers;
 	private static float lastUpdateTime;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
 	static ControllerInput()
 	{
 		controllers = new GamePad[4];
