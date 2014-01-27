@@ -13,7 +13,7 @@ public static class PowerUpFactory
 	{
 		var node = ResourceCache.json(dataPath + weaponName);
 		
-		GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefab"].Value)) as GameObject;
+		GameObject prefab = ResourceCache.GameObject(prefabPath + node["prefab"].Value);
 		//prefab.transform.parent = grip.transform;
 
 		PowerUp powerUp = prefab.AddComponent<PowerUp>();

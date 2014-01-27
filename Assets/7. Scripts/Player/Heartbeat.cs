@@ -57,7 +57,9 @@ public class Heartbeat : Attackable
         heartbeatSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         _damage = transform.GetChild(0).gameObject;
         _avatar = transform.root.GetComponent<Avatar>();
-		_hitEmitter = _avatar.GetComponentInChildren<ParticleSystem> ();
+
+		_hitEmitter = ResourceCache.GameObject("Prefabs/ParticleEmitters/HitEmitter").GetComponent<ParticleSystem>();
+		_hitEmitter.transform.SetParentKeepLocal (_avatar.transform);
 
         renderer.material.SetColor("_color", _avatar.player.color);
         _damage.renderer.material.SetColor("playerColor", _avatar.player.color);
@@ -103,25 +105,7 @@ public class Heartbeat : Attackable
 		lastAttackerTimer.Update ();
     }
 
-	protected override void ApplyAttack(Attack attacker)
-    {
-		var direction = attacker.transform.position - transform.position;
-		direction.y = 0;
-		direction.Normalize();
-
-		var source = new DamageSource (
-			attacker.GetComponent<Avatar>().player,
-			direction,
-			-direction * (attacker.isCombo ? attacker.comboKnockBackForce : attacker.standardKnockBackForce),
-			attacker.weapon.damage,
-			attacker.GetStunTime(),
-			false
-		);
-
-		ApplyDamage (source);
-    }
-
-	public void ApplyDamage(DamageSource source)
+	protected override void ApplyAttack(DamageSource source)
 	{
 		this.lastAttacker = source.inflicter;
 		this.lastAttackerTimer.Start ();

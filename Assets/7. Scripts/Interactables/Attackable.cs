@@ -5,13 +5,13 @@ public abstract class Attackable : MonoBehaviour
 {
 	public bool isAttackable = true;
 
-	protected abstract void ApplyAttack(Attack attacker);
+	protected abstract void ApplyAttack(DamageSource source);
 
-	public void DoAttack(Attack attacker)
+	public void DoAttack(DamageSource source)
 	{
 		if(isAttackable)
 		{
-			ApplyAttack(attacker);
+			ApplyAttack(source);
 		}
 	}
 }

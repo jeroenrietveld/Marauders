@@ -73,14 +73,11 @@ public class Player
 		var node = ResourceCache.json (_marauderDataPath + marauder);
         footsole = node["footsole"].Value;
 
-		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
+		avatar = ResourceCache.GameObject(_marauderPrefabPath + node["prefab"].Value);
 		avatar.transform.position = initialPosition;
 
-		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat")) as GameObject;
+		var heartbeatIndicator = ResourceCache.GameObject("Prefabs/Heartbeat");
 		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
-
-		var hitEmitter = GameObject.Instantiate(Resources.Load("Prefabs/HitEmitter")) as GameObject;
-		hitEmitter.transform.SetParentKeepLocal (avatar.transform);
 
 		avatar.AddComponent<CameraTracking> ();
 		avatar.AddComponent<Avatar> ();

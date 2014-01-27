@@ -19,7 +19,6 @@ public class Attack : ActionBase {
 	private int _comboCount;
 	public int comboCount { get { return _comboCount; }}
 	public int nextComboCount { get { return (_comboCount + 1) % _weapon.attacks.Count; } }
-
 	public bool isCombo { get { return _comboCount == _weapon.attacks.Count - 1; } }
 
 	// Maximum time between successful attacks until combo counter resets
@@ -32,9 +31,13 @@ public class Attack : ActionBase {
 	private Timer _trailTimer;
 
 	private AudioSource swingSource;
+
+	public DamageSource damageSource;
 	
 	public Attack()
 	{
+		damageSource = new DamageSource(null);
+
 		//TODO: Combo reset weapon / player dependent?
 		_comboReset = new Timer (1);
 		_comboReset.AddCallback (delegate {
@@ -63,6 +66,8 @@ public class Attack : ActionBase {
 	}
 
 	void Start () {
+		damageSource.inflicter = GetComponent<Avatar> ().player;
+
 		ControllerMapping controllerMapping = GetComponent<ControllerMapping> ();
 		controllerMapping.AddAction(Button.B, this);
 
@@ -134,6 +139,9 @@ public class Attack : ActionBase {
 				WrapMode.Once
 			));
 		}
+
+		damageSource.amount = _weapon.damage;
+		damageSource.totalAttacks = _weapon.attacks.Count;
 	}
 
 	void Update()
@@ -168,6 +176,12 @@ public class Attack : ActionBase {
 
 						if(attackables.Length > 0)
 						{
+							var damageSource = this.damageSource;
+							damageSource.comboCount = _comboCount;
+							damageSource.direction = (transform.position - hit.transform.position).normalized;
+							damageSource.force = -damageSource.direction * (isCombo ? comboKnockBackForce : standardKnockBackForce);
+							damageSource.stunTime = GetStunTime();
+
 							foreach(var attackable in attackables)
 							{
 								String path = "Prefabs/GUI/Combo" + (_comboCount + 1).ToString();
@@ -176,7 +190,7 @@ public class Attack : ActionBase {
 
 								notification.transform.position = CameraSettings.cameraSettings.PointToWorldPoint(transform.position + Vector3.up * 2);
 
-								attackable.DoAttack(this);
+								attackable.DoAttack(damageSource);
 							}
 							hasHit = true;
 						}

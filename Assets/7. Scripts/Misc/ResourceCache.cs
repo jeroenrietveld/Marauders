@@ -23,4 +23,17 @@ public static class ResourceCache {
 			return node;
 		}
 	}
+
+
+	private static Dictionary<string, GameObject> _gameObjectCache = new Dictionary<string, GameObject>();
+
+	public static GameObject GameObject(string name)
+	{
+		if(!_gameObjectCache.ContainsKey(name))
+		{
+			_gameObjectCache.Add(name, Resources.Load(name) as GameObject);
+		}
+
+		return UnityEngine.GameObject.Instantiate (_gameObjectCache [name]) as GameObject;
+	}
 }

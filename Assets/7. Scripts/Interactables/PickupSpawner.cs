@@ -11,7 +11,7 @@ public static class PickupSpawner
 			throw new ArgumentException("Invalid weapon");
 		}
 
-		GameObject pickup = GameObject.Instantiate (Resources.Load ("Prefabs/Interactables/Pickup")) as GameObject;
+		GameObject pickup = ResourceCache.GameObject("Prefabs/Interactables/Pickup");
 
 		Vector3 rotation = weapon.transform.rotation.eulerAngles;
 		rotation.Scale(new Vector3(0, 1, 0));
@@ -26,8 +26,8 @@ public static class PickupSpawner
 
 	public static void SpawnPowerUp(Vector3 position)
 	{	
-		GameObject powerUp = GameObject.Instantiate(Resources.Load("Prefabs/Interactables/PowerUps/PowerUp")) as GameObject;
-		GameObject pickup = GameObject.Instantiate (Resources.Load ("Prefabs/Interactables/PowerUpPickup")) as GameObject;
+		GameObject powerUp = ResourceCache.GameObject("Prefabs/Interactables/PowerUps/PowerUp");
+		GameObject pickup = ResourceCache.GameObject("Prefabs/Interactables/PowerUpPickup");
 
 		Vector3 rotation = powerUp.transform.rotation.eulerAngles;
 		rotation.Scale(new Vector3(0, 1, 0));

@@ -19,7 +19,7 @@ public static class WeaponFactory
 			GameObject grip = new GameObject("Grip_"+i);
 			grip.transform.parent = weaponHolder.transform;
 
-			GameObject prefab = GameObject.Instantiate(Resources.Load(prefabPath + node["prefabs"].AsArray[i].Value)) as GameObject;
+			GameObject prefab = ResourceCache.GameObject(prefabPath + node["prefabs"].AsArray[i].Value);
 			prefab.transform.parent = grip.transform;
 		}
 

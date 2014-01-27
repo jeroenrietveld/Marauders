@@ -88,14 +88,14 @@ public class Shrine : Attackable {
 		_lightTimer.Update ();
 	}
 
-	protected override void ApplyAttack(Attack attacker)
+	protected override void ApplyAttack(DamageSource source)
 	{
         if(capturable)
         {
-			GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", attacker.comboCount, false);
-            if (attacker.isCombo)
+			GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", source.comboCount, false);
+            if (source.isCombo)
             {
-                var player = attacker.GetComponent<Avatar>().player;
+                var player = source.inflicter;
 
                 if (player != _owner)
                 {

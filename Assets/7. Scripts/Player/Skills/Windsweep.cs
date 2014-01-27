@@ -52,7 +52,7 @@ public class Windsweep : SkillBase
 					false
 					);
 
-				heartbeat.ApplyDamage(source);
+				heartbeat.DoAttack(source);
 			}
 		}
 	}
