@@ -210,10 +210,11 @@ public class Scoreboard : MonoBehaviour
 
    void OnGUI()
     {
-        if (_cells.Count > 0)
+        if (_visible)
         {
-            if (_visible)
+            if (_cells.Count > 0)
             {
+
                 if (UnityEngine.Event.current.type != EventType.Repaint)
                 {
                     //This prevents the drawing in the 3D scape.
@@ -486,18 +487,6 @@ public class Scoreboard : MonoBehaviour
     public bool IsVisible()
     {
         return _visible;
-    }
-
-    void Update()
-    {
-        if(GameManager.Instance.gameEnded)
-        {
-            if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A))
-            {
-                Destroy(this.gameObject);
-                Application.LoadLevel("Menu");
-            }
-        }
-    }
+    }  
 }
 

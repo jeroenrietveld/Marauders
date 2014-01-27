@@ -52,7 +52,7 @@ public class GameManager {
 		soundInGame = new SoundIngame();
         if (scoreboard == null)
         {
-            scoreboard = GameObject.Find("_MENUGLOBAL").GetComponent<Scoreboard>();
+            scoreboard = GameObject.Find("_STATICGLOBAL").GetComponent<Scoreboard>();
         }
         gameEnded = false;
 	}

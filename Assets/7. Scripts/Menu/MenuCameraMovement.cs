@@ -7,38 +7,36 @@ public class MenuCameraMovement : MonoBehaviour {
 	private Vector3 _startPosition;
 	private Vector3 _targetPosition;
 
-	// Absolute time at the start of the animation
-	private float _startTime;
-	// Time it takes to move from start position to target position
-	private float _moveTime = 1f;
+    private Timer _timer = new Timer(0);
 
 	public void SetTarget(Vector3 position, float time)
 	{
+        _timer.endTime = time;
+        _timer.Start();
+
 		_startPosition = transform.position;
 		_targetPosition = position;
-		_moveTime = time;
-		_startTime = Time.time;
 	}
 
 	public bool isMoving 
 	{
 		get 
 		{
-			return (_targetPosition != transform.position);
+			return (_timer.running);
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		float phase = (Time.time - _startTime) / _moveTime;
+        _timer.Update();
 
-		if(phase >= 1f) // Ensure no floating point roundoff errors happen
+		if(_timer.Phase() >= 1f) // Ensure no floating point roundoff errors happen
 		{
 			transform.position = _targetPosition;
 		}
 		else
 		{
-			float lerpFactor = Mathf.Cos(phase * Mathf.PI) * .5f + .5f;
+			float lerpFactor = Mathf.Cos(_timer.Phase() * Mathf.PI) * .5f + .5f;
 			transform.position = Vector3.Lerp(_targetPosition, _startPosition, lerpFactor);
 		}
 	}

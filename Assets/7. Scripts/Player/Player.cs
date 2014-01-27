@@ -71,6 +71,7 @@ public class Player
 	private GameObject CreateAvatar(Vector3 initialPosition)
 	{
 		var node = ResourceCache.json (_marauderDataPath + marauder);
+<<<<<<< HEAD
         footsole = node["footsole"].Value;
 
 		avatar = ResourceCache.GameObject(_marauderPrefabPath + node["prefab"].Value);
@@ -126,6 +127,66 @@ public class Player
 	public void AddTimeSync(int timeSync, Vector3 position)
 	{
 		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
+=======
+        footsole = node["footsole"].Value;
+
+		avatar = GameObject.Instantiate(Resources.Load(_marauderPrefabPath + node["prefab"].Value)) as GameObject;
+		avatar.transform.position = initialPosition;
+
+		var heartbeatIndicator = GameObject.Instantiate(Resources.Load("Prefabs/Heartbeat")) as GameObject;
+		heartbeatIndicator.transform.SetParentKeepLocal(avatar.transform);
+
+		var hitEmitter = GameObject.Instantiate(Resources.Load("Prefabs/HitEmitter")) as GameObject;
+		hitEmitter.transform.SetParentKeepLocal (avatar.transform);
+
+		avatar.AddComponent<CameraTracking> ();
+		avatar.AddComponent<Avatar> ();
+		avatar.AddComponent<ControllerMapping> ();
+		avatar.AddComponent<AnimationHandler> ();
+		avatar.AddComponent<Movement> ();
+		avatar.AddComponent<Attack> ();
+		avatar.AddComponent<Jump> ();
+		avatar.AddComponent<Interactor> ();
+		avatar.AddComponent<AvatarGraphics> ();
+		avatar.AddComponent<Slide> ();
+		avatar.AddComponent<Dash> ();
+		avatar.AddComponent<Stun> ();
+		avatar.AddComponent<PlayerNotification> ();
+		
+		for(int i = 0; i < skills.Length; ++i)
+		{
+			var skillName = skills[i];
+
+			if(skillName != null)
+			{
+				var skill = ((SkillBase)avatar.AddComponent(skillName));
+				if(skill) skill.skillType = (SkillType)i;
+			}
+		}
+
+		Avatar avatarComponent = avatar.GetComponent<Avatar> ();
+		avatarComponent.Initialize (this);
+
+		var weapon = WeaponFactory.create(node["weapon"].Value);
+		avatar.GetComponent<Attack>().SetWeapon(weapon.GetComponent<Weapon>());
+
+		return avatar;
+	}
+
+	public void DestroyAvatar()
+	{
+		GameObject.Destroy (avatar);
+	}
+
+	public void AddTimeSync(int timeSync)
+	{
+		AddTimeSync (timeSync, new Vector3 (float.NaN, float.NaN, float.NaN));
+	}
+
+	public void AddTimeSync(int timeSync, Vector3 position)
+	{
+		int timeSyncLimit = GameManager.Instance.matchSettings.timeSync;
+>>>>>>> Restart now works fine.
 		this.timeSync = Mathf.Clamp(this.timeSync + timeSync, 0, timeSyncLimit);
 
 		Event.dispatch(new PlayerTimeSyncEvent(this, timeSync, position));

@@ -20,7 +20,6 @@ public class LoadingScreen : MonoBehaviour
             if (Application.isLoadingLevel)
             {
                 loading = true;
-                Debug.Log("AM LOADING");
             }
             else
             {
