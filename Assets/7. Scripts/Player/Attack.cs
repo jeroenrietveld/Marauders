@@ -87,7 +87,17 @@ public class Attack : ActionBase {
 
 			_trailTimer.endTime = _attackCooldown.endTime - _attackDelay.endTime;
 
-			animation.CrossFade(_weapon.attacks[_comboCount].animationName, 0.1f, PlayMode.StopSameLayer);
+			//Switching between normal attacks and a combo finish
+            if (_comboCount == _weapon.attacks.Count - 1)
+            {
+                animation[_weapon.attacks[_comboCount].animationName].weight = 0.6f;
+                animation.Blend(_weapon.attacks[_comboCount].animationName, 0.6f);
+                //Debug.Log("Combo!");
+            }
+            else
+            {
+                animation.CrossFade(_weapon.attacks[_comboCount].animationName, 0.1f, PlayMode.StopSameLayer);
+            }
 		}
 	}
 
@@ -129,16 +139,16 @@ public class Attack : ActionBase {
 
 		AnimationHandler animationHandler = GetComponent<AnimationHandler> ();
 		
-		foreach(AttackInfo attackInfo in _weapon.attacks)
-		{	
-			animationHandler.AddAnimation(
-				new AnimationHandler.AnimationSettings(
-				attackInfo,
-				AnimationHandler.MixTransforms.Upperbody,
-				3,
-				WrapMode.Once
-			));
-		}
+        for (int i = 0; i < _weapon.attacks.Count; i++ )
+        { 
+                animationHandler.AddAnimation(
+                    new AnimationHandler.AnimationSettings(
+                    _weapon.attacks[i],
+                    (i == (_weapon.attacks.Count - 1)) ? AnimationHandler.MixTransforms.Upperbody | AnimationHandler.MixTransforms.Lowerbody : AnimationHandler.MixTransforms.Upperbody,
+                    3,
+                    WrapMode.Once
+                ));
+            }
 
 		damageSource.rawValue.amount = _weapon.damage;
 		damageSource.rawValue.totalAttacks = _weapon.attacks.Count;

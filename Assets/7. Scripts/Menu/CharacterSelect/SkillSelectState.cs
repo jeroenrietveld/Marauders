@@ -158,9 +158,10 @@ public class SkillSelectState : SelectionBase
         /*
         defensiveSkillsDescription.Add(locale["ability_riposte"]);
         defensiveSkills.Add("Riposte");
+         * */
         defensiveSkillsDescription.Add(locale["ability_bulwark"]);
         defensiveSkills.Add("Bulwark");
-        */
+        
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/xButton"));
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/yButton"));
     }

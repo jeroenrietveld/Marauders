@@ -18,18 +18,21 @@ public abstract class SkillBase : ActionBase
 
 	public SkillType skillType = SkillType.Movement;
 	public Timer cooldown { get; private set; }
-	public AnimationHandler.AnimationSettings animationSettings { get; private set; }
-
+	public AnimationHandler.AnimationSettings animationSettings { get; set; }
+	// Hold all of the animations. In the Start() method add them to the animation handler.
+    public List<AnimationHandler.AnimationSettings> allAnimationSettings { get; set; }
+	
 	protected abstract void OnPerformAction();
 	protected abstract void OnUpdate();
     protected AudioSource skillAudioSource;
 	protected virtual void OnStart() {}
 
-	protected SkillBase(float cooldownTime, AnimationHandler.AnimationSettings animationSettings)
+	protected SkillBase(float cooldownTime, params AnimationHandler.AnimationSettings[] animationSettings)
 	{
 		cooldown = new Timer(cooldownTime);
 		cooldown.Start ();
-		this.animationSettings = animationSettings;
+		this.allAnimationSettings = animationSettings.ToList();
+		this.animationSettings = animationSettings[0];
 	}
 
     public override void PerformAction()
@@ -45,7 +48,11 @@ public abstract class SkillBase : ActionBase
 	void Start()
 	{
 		GetComponent<ControllerMapping>().AddAction(_buttonMapping[(int)skillType], this);
-		GetComponent<AnimationHandler>().AddAnimation(animationSettings);
+		AnimationHandler handler = GetComponent<AnimationHandler>();
+        foreach (AnimationHandler.AnimationSettings item in allAnimationSettings)
+        {
+            handler.AddAnimation(item);
+        }
 		OnStart();
         skillAudioSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 	}

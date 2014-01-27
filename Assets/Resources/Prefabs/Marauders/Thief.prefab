@@ -8118,6 +8118,8 @@ Animation:
   - {fileID: 7400004, guid: 386dfe5adf809914fa2016b879b395b4, type: 3}
   - {fileID: 7400006, guid: 386dfe5adf809914fa2016b879b395b4, type: 3}
   - {fileID: 7400002, guid: 83360eb7f48269849a682d42cb9d8e78, type: 3}
+  - {fileID: 7400002, guid: e7ad94667497b224f934edee27726179, type: 3}
+  - {fileID: 7400000, guid: e7ad94667497b224f934edee27726179, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
