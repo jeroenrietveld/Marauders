@@ -78,7 +78,7 @@ public class Attack : ActionBase {
 	{
 		if (_weapon && !_attackCooldown.running)
 		{
-			_attackDelay.endTime = _weapon.attacks[_comboCount].timing / _weapon.attacks[_comboCount].speed;
+			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
 			_attackDelay.Start();
 			_comboReset.Stop();
 
@@ -222,7 +222,7 @@ public class Attack : ActionBase {
 	
 	public float GetStunTime()
 	{
-		return _trailTimer.endTime + (_weapon.attacks[nextComboCount].timing / _weapon.attacks[nextComboCount].speed);
+		return _trailTimer.endTime + _weapon.attacks[nextComboCount].timing;
 	}
 
 	public void SetCombo()

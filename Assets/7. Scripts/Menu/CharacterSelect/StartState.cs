@@ -26,7 +26,7 @@ public class StartState : SelectionBase
 
             if (check)
             {
-                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
                 GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
             }
         }

@@ -92,13 +92,12 @@ public class SkillSelectState : SelectionBase
                     {
                         block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                         block.isPlayerReady = false;
-                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
                     }
                     else
                     {
                         block.ChangeState(CharacterSelectBlockStates.CharSelectState);
-                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
                     }
+                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
                 }
             }
             else if (currentCategory == 1)
@@ -144,7 +143,7 @@ public class SkillSelectState : SelectionBase
                     this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
                     this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                     this.block.isPlayerReady = false;
-                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
                 }
             }
         }
@@ -157,7 +156,7 @@ public class SkillSelectState : SelectionBase
                 this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
                 this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                 this.block.isPlayerReady = false;
-                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
             }
         }
     }

@@ -19,6 +19,7 @@ public abstract class SelectionBase
     {
         if (direction != 0 && (useTimer && GetTimer()) || !useTimer)
         {
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
             currentIndex += direction;
 
 			//Use modulo so the value will be inside the range of the array (math magic)
