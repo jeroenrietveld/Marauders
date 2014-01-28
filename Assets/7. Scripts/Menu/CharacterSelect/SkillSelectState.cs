@@ -187,11 +187,11 @@ public class SkillSelectState : SelectionBase
 
         if (currentIndex + dir >= count)
         {
-            currentIndex = count - 1;
+            currentIndex = 0;
         }
         else if (currentIndex + dir < 0)
         {
-            currentIndex = 0;
+            currentIndex = count - 1;
         }
         else
         {

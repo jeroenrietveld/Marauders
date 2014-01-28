@@ -24,7 +24,17 @@ public class Avatar : MonoBehaviour
 
 
 	}
-	
+
+    void Update()
+    {
+        if (!controller.connected)
+        {
+            // Show message that a controller is disconnected
+
+            //Debug.Log("Player disconnnected");
+        }
+    }
+
 	public void Initialize(Player player)
 	{
 		this.player = player;
