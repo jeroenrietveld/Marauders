@@ -63,16 +63,6 @@ public class SkillSelectState : SelectionBase
 
         if (!block.isPlayerReady)
         {
-            if (((vertical > 0.7f || vertical < -0.7f) && GetTimer()) || dPadVertical != 0)
-            {
-                int newIndex = cal(vertical, dPadVertical, list.Count, currentCategory, true);
-                currentCategory = newIndex;
-
-                arrow.gameObject.transform.position = bottom.transform.FindChild(list[newIndex].baseCategory).transform.FindChild(list[newIndex].category).transform.position;
-                this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[newIndex].activeDescription;
-                this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[newIndex];
-            }
-
             if (((horizontal > 0.7f || horizontal < -0.7f) && GetTimer()) || dPadHorizontal != 0)
             {
                 int newIndex = cal(horizontal, dPadHorizontal, list[currentCategory].skills.Count, list[currentCategory].skills.IndexOf(list[currentCategory].active), false);
@@ -84,52 +74,82 @@ public class SkillSelectState : SelectionBase
                 this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
             }
 
-           
-        }
-
-        if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
-        {
-            if (!block.isPlayerReady)
+            if (currentCategory == 0)
             {
-                block.isPlayerReady = true;
-                block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
-
-                GameManager.Instance.soundInGame.PlaySoundRandom(block.audioSourceArmory, block.marauderNames[block.marauderIndex] + "-selected", true);
-
-                // Add selected marauder and skills to the gamemanager.
-                Player playerRef = new Player(block.player);
-                playerRef.marauder = block.marauderNames[block.marauderIndex];
-                playerRef.skills[(int)SkillType.Offensive] = list[0].active;
-                playerRef.skills[(int)SkillType.Defensive] = list[1].active;
-                GameManager.Instance.AddPlayerRef(playerRef);
-            }
-           
-            bool canContinue = true;
-            foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
-            {
-                if (!item.isPlayerReady && item.isJoined)
+                if (controller.JustPressed(Button.A))
                 {
-                    canContinue = false;
-                    break;
+                    currentCategory++;
+
+                    arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild(list[currentCategory].category).transform.position;
+                    this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
+                    this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
+                }
+                else if (controller.JustPressed(Button.B))
+                {
+                    if (block.isPlayerReady)
+                    {
+                        block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
+                        block.isPlayerReady = false;
+                    }
+                    else
+                    {
+                        block.ChangeState(CharacterSelectBlockStates.CharSelectState);
+                    }
                 }
             }
+            else if (currentCategory == 1)
+            {
+                if (controller.JustPressed(Button.A))
+                {
+                    if (!block.isPlayerReady)
+                    {
+                        block.isPlayerReady = true;
+                        block.SkillSelect.transform.FindChild("Ready").renderer.enabled = true;
+                        GameManager.Instance.soundInGame.PlaySoundRandom(block.audioSourceArmory, block.marauderNames[block.marauderIndex] + "-selected", true);
 
-            if (canContinue)
-            {
-                GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
+                        // Add selected marauder and skills to the gamemanager.
+                        Player playerRef = new Player(block.player);
+                        playerRef.marauder = block.marauderNames[block.marauderIndex];
+                        playerRef.skills[(int)SkillType.Offensive] = list[0].active;
+                        playerRef.skills[(int)SkillType.Defensive] = list[1].active;
+                        GameManager.Instance.AddPlayerRef(playerRef);
+                    }
+
+                    bool canContinue = true;
+                    foreach (CharacterSelectBlock item in GameObject.FindObjectsOfType<CharacterSelectBlock>())
+                    {
+                        if (!item.isPlayerReady && item.isJoined)
+                        {
+                            canContinue = false;
+                            break;
+                        }
+                    }
+                    if (canContinue)
+                    {
+                        GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
+                    }
+                }
+                else if (controller.JustPressed(Button.B))
+                {
+                    currentCategory--;
+
+                    arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild(list[currentCategory].category).transform.position;
+                    this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
+                    this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
+                    this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
+                    this.block.isPlayerReady = false;
+                }
             }
-            
         }
-        if (controller.JustPressed(Button.B))
+        if(block.isPlayerReady)
         {
-            if (block.isPlayerReady)
+            if (controller.JustPressed(Button.B))
             {
-                block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
-                block.isPlayerReady = false;
-            }
-            else
-            {
-                block.ChangeState(CharacterSelectBlockStates.CharSelectState);
+                arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild(list[currentCategory].category).transform.position;
+                this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
+                this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
+                this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
+                this.block.isPlayerReady = false;
             }
         }
     }
@@ -209,7 +229,7 @@ public class SkillSelectState : SelectionBase
         bottom = block.SkillSelect.transform.FindChild("Bottom").gameObject;
         arrow = bottom.transform.FindChild("SkillArrows").gameObject;
         arrow.transform.position = bottom.transform.FindChild("SkillAttack").transform.FindChild("SkillSelectorAttack").transform.position;
-        
+
         foreach (KeyValuePair<int, SkillSelection> item in list)
         {
             bottom.transform.FindChild(item.Value.baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = item.Value.active;
