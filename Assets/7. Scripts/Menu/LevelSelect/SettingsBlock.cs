@@ -17,8 +17,12 @@ public class SettingsBlock : LevelSelectionBlockBase
     private GameObject _timeSyncArrows;
     private GameObject _levelSelectArrows;
     private GameObject _levelOverlay;
+    private List<string> timesyncTexts = new List<string> { "Shortest", "Shorter", "Short", "Average", "Long", "Longer", "Longest" };
+    private TextMesh _timeSyncText;
     private float _timer = 0f;
     private float _defaultTimeValue = 0.15f;
+    // Start with average timeSync
+    private int currentSync = 3;
 
 	public SettingsBlock()
 	{
@@ -29,17 +33,20 @@ public class SettingsBlock : LevelSelectionBlockBase
         _timeSyncArrows = GameObject.Find("ArrowsTimeSync");
         _levelSelectArrows = GameObject.Find("LevelSelectArrows");
         _levelOverlay = GameObject.Find("LevelOverlay");
+        _timeSyncText = GameObject.Find("TimeSyncText").gameObject.GetComponent<TextMesh>();
 	}
 
 	public override void Update(GamePad controller)
 	{
         if (controller.JustPressed(Button.DPadRight) || (controller.Axis(Axis.LeftHorizontal) > 0.7f && GetTimer()) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
-            _timeSyncBar.Add(0.1f);
+            ChangeTimeSyncText(true);
+            _timeSyncBar.Add(0.17f);
 		}
         else if (controller.JustPressed(Button.DPadLeft) || (controller.Axis(Axis.LeftHorizontal) < -0.7f && GetTimer()) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-            _timeSyncBar.Add(-0.1f);
+            ChangeTimeSyncText(false);
+            _timeSyncBar.Add(-0.17f);
 		}
         /// For BETA version no settings
             if (controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.A))
@@ -60,6 +67,7 @@ public class SettingsBlock : LevelSelectionBlockBase
             _timeSync.renderer.material.color = Color.gray;
             _levelSelectArrows.SetActive(true);
             _levelOverlay.renderer.enabled = false;
+            _timeSyncText.renderer.enabled = false;
 
             MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
             _timeSyncBar.renderer.enabled = false;
@@ -71,6 +79,31 @@ public class SettingsBlock : LevelSelectionBlockBase
             LevelSelectionManager.ChangeState(LevelSelectionState.LevelSelection);
         }
 	}
+
+    void ChangeTimeSyncText(bool forward)
+    {
+        if (forward)
+        {
+            currentSync++;
+
+            if (currentSync >= timesyncTexts.Count - 1)
+            {
+                currentSync = timesyncTexts.Count - 1;
+            }
+
+            _timeSyncText.text = timesyncTexts[currentSync];
+        }
+        else
+        {
+            currentSync--;
+
+            if (currentSync < 0)
+            {
+                currentSync = 0;
+            }
+            _timeSyncText.text = timesyncTexts[currentSync];
+        }
+    }
 
     public bool GetTimer()
     {

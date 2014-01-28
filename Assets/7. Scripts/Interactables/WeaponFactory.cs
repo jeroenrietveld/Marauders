@@ -27,6 +27,7 @@ public static class WeaponFactory
 		weapon.name = node["name"].Value;
 		weapon.range = node["range"].AsFloat;
 		weapon.damage = node["damage"].AsFloat;
+        weapon.weaponType = node["weaponHandling"].Value;
 
 		//Adding all the attacks
 		for(int i = 0; i < node["attacks"].AsArray.Count; i++)
