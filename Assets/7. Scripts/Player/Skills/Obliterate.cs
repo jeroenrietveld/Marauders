@@ -6,7 +6,7 @@ public class Obliterate : SkillBase
 {
     private float _range = 3.5f;
     private float _damage = .1f;
-    private float _force = 200f;
+    private float _force = 500f;
     private float _duration = 1.625f;
     private Timer _obliterate;
 

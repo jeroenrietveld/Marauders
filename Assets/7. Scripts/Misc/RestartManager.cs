@@ -26,10 +26,10 @@ public class RestartManager : MonoBehaviour
     }
 
     public static void Restart()
-    {
-        Debug.Log("Game restarted");
+    {      
         Application.LoadLevel("Menu");
         GameManager.Instance.gameEnded = false;
+        GameManager.Instance.playerRefs.Clear();
         GameManager.Instance.ResumeGame();
         restarted = true;
     }

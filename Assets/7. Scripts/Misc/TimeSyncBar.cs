@@ -8,9 +8,6 @@ public class TimeSyncBar : MonoBehaviour
 {
     private float _percentage;
 
-    void Start() 
-    {
-    }
     void Update() 
     {
         renderer.material.SetFloat("Percentage", _percentage);
@@ -22,7 +19,7 @@ public class TimeSyncBar : MonoBehaviour
     /// <param name="addition"></param>
     public void Add(float addition)
     {
-        _percentage = Mathf.Clamp(_percentage + addition, 0.1f, 1);
+        _percentage = Mathf.Clamp(_percentage + addition, 0.05f, 1f);
     }
 
     public float GetPercentage()
