@@ -3,6 +3,7 @@
 	"prefabs":["Dagger_right", "Dagger_left"],
 	"range": 2.8,
 	"damage": 0.15,
+	"weaponHandling": "1handed",
 	"attacks": [
 		{
 			animation: "Daggers1",

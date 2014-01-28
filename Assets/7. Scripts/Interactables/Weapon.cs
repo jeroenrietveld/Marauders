@@ -10,6 +10,7 @@ using XInputDotNetPure;
 /// </summary>
 public class Weapon : MonoBehaviour
 {
+    public string weaponType { get; set; }
 	public float range;
 
 	public List<AttackInfo> attacks = new List<AttackInfo>();

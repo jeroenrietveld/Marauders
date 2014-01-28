@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4f62ca7fe2f8e55498bda02ceacbaafe
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Character1_Ctrl_ChestEndEffector
     100002: Character1_Ctrl_ChestOriginEffector
@@ -600,8 +600,9 @@ ModelImporter:
     4300000: polySurface8
     4300002: pCylinder2
     4300004: pCylinder1
-    7400000: Obliberate
+    7400000: Obliterate_1handed
     9500000: //RootNode
+    11100000: //RootNode
     13700000: polySurface8
   materials:
     importMaterials: 1
@@ -619,10 +620,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Obliberate
+      name: Obliterate_1handed
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 55
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1297,5 +1298,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
+  additionalBone: 0
   userData: 

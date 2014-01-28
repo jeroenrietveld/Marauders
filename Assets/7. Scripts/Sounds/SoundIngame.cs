@@ -21,7 +21,6 @@ public class SoundIngame
     public SoundIngame()
     {
         _clips = Resources.LoadAll<AudioClip>("Sounds/").ToList();
-        WriteVolume(SoundSettingTypes.volume, 0.5f);
     }
 
     /// <summary>

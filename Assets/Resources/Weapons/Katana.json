@@ -3,6 +3,7 @@
 	"prefabs":["Katana"],
 	"range": 3,
 	"damage": 0.2,
+	"weaponHandling": "2handed",
 	"attacks": [
 		{
 			animation: "Katana1",
