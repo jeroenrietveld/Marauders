@@ -27,7 +27,7 @@ public class Windsweep : SkillBase
 	protected override void OnStart()
     {
 		var particleObject = ResourceCache.GameObject ("Prefabs/ParticleEmitters/WindsweepEmitter");
-		particleObject.transform.SetParentKeepLocal (transform.root);
+		particleObject.transform.SetParentKeepLocal (transform);
 		_particleSystem = particleObject.GetComponent<ParticleSystem> ();
     }
 

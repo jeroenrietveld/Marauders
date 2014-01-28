@@ -9,6 +9,8 @@ public class Destabilize : SkillBase
 
 	private Vector3 _velocity;
 
+	private ParticleSystem _particleSystem;
+
 	private static AnimationHandler.AnimationSettings _animationSettings = new AnimationHandler.AnimationSettings (
 		//TODO: Use correct animation
 		new AttackInfo("Dash", 1.0f, -1f),
@@ -47,6 +49,16 @@ public class Destabilize : SkillBase
 
 			rigidbody.velocity = _velocity;
 		});
+	}
+
+	protected override void OnStart()
+	{
+		var emitterObject = ResourceCache.GameObject("Prefabs/ParticleEmitters/DestabilizeEmitter");
+		emitterObject.transform.SetParentKeepLocal (transform);
+		_particleSystem = emitterObject.GetComponent<ParticleSystem> ();
+
+		_destabilize.AddPhaseCallback (0, _particleSystem.Play);
+		_destabilize.AddPhaseCallback (_particleSystem.Stop);
 	}
 
 	protected override void OnPerformAction()
