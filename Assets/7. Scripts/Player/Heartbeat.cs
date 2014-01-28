@@ -13,7 +13,7 @@ public class Heartbeat : Attackable
     public float damageScale = 1f;
     public float damageAlphaScale = 4;
     private float _currentRotation;
-    private float _armorFactor = 0.5f;
+    private float _armorFactor = 0.30f;
 
     private AudioSource heartbeatSource;
 
