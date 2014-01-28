@@ -6,21 +6,21 @@ public class Obliterate : SkillBase
 {
     private float _range = 3.5f;
     private float _damage = .1f;
-    private float _force = 500f;
-    private float _duration = 1.625f;
+    private float _force = 600f;
+    private float _duration = 0.8125f;
     private Timer _obliterate;
 
     private Dictionary<PlayerIndex, int> hitAmounts = new Dictionary<PlayerIndex, int>();
 
     private static AnimationHandler.AnimationSettings _animationSettingsOneHanded = new AnimationHandler.AnimationSettings(
-        new AttackInfo("Obliterate_1handed", 1.0f, -1f),
+        new AttackInfo("Obliterate_1handed", 1.5f, 1f),
         AnimationHandler.MixTransforms.Upperbody | AnimationHandler.MixTransforms.Lowerbody,
         3,
         WrapMode.Once
         );
 
     private static AnimationHandler.AnimationSettings _animationSettingsTwoHanded = new AnimationHandler.AnimationSettings(
-        new AttackInfo("Obliterate_2handed", 1.0f, -1f),
+        new AttackInfo("Obliterate_2handed", 1.5f, 1f),
         AnimationHandler.MixTransforms.Upperbody | AnimationHandler.MixTransforms.Lowerbody,
         3,
         WrapMode.Once
