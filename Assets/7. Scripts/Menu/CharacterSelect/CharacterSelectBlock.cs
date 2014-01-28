@@ -134,6 +134,7 @@ public class CharacterSelectBlock : MonoBehaviour
         StartScreen.transform.FindChild("ControllerText").gameObject.GetComponent<TextMesh>().text = "Connect \n Controller";
         GameManager manager = GameManager.Instance;
         Player p = manager.playerRefs.FirstOrDefault(x => x.index == player);
+        StartScreen.transform.FindChild("AButton").gameObject.renderer.enabled = false;
         if (p != null)
         {
             manager.playerRefs.Remove(p);

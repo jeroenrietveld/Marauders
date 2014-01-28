@@ -19,7 +19,9 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
 	private GameObject _levelDescription;
     private GameObject _timeSync;
     private GameObject _timeSyncArrows;
+    private GameObject _levelSelectArrows;
     private GameObject _timeSyncBar;
+    private GameObject _levelOverlay;
     private TextMesh _levelName;
 	private TextMesh _levelInfoText;
     private float _time = 0.2f;
@@ -35,6 +37,8 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         _timeSync = GameObject.Find("TimeSyncText");
         _timeSyncArrows = GameObject.Find("ArrowsTimeSync");
         _timeSyncBar = GameObject.Find("TimeSyncBar");
+        _levelSelectArrows = GameObject.Find("LevelSelectArrows");
+        _levelOverlay = GameObject.Find("LevelOverlay");
         _levelName = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Name").gameObject.GetComponent<TextMesh>();
         _levelInfoText = _levelDescription.transform.FindChild("LevelInfo").gameObject.transform.FindChild("LevelInfo_Text").gameObject.GetComponent<TextMesh>();
         SetLevel(_currentIndex);
@@ -58,6 +62,8 @@ public class LevelSelectionBlock : LevelSelectionBlockBase
         if (controller.JustPressed(Button.A))
 		{
             _timeSync.renderer.material.color = Color.black;
+            _levelSelectArrows.SetActive(false);
+            _levelOverlay.renderer.enabled = true;
 
             MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
             _timeSyncBar.renderer.enabled = true;

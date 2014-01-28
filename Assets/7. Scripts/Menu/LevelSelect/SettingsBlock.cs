@@ -15,6 +15,8 @@ public class SettingsBlock : LevelSelectionBlockBase
     private TimeSyncBar _timeSyncBar;
     private GameObject _timeSync;
     private GameObject _timeSyncArrows;
+    private GameObject _levelSelectArrows;
+    private GameObject _levelOverlay;
     private float _timer = 0f;
     private float _defaultTimeValue = 0.15f;
 
@@ -25,6 +27,8 @@ public class SettingsBlock : LevelSelectionBlockBase
         _timeSyncBar.Add(0.5f);
         _timeSync = GameObject.Find("TimeSyncText");
         _timeSyncArrows = GameObject.Find("ArrowsTimeSync");
+        _levelSelectArrows = GameObject.Find("LevelSelectArrows");
+        _levelOverlay = GameObject.Find("LevelOverlay");
 	}
 
 	public override void Update(GamePad controller)
@@ -54,6 +58,8 @@ public class SettingsBlock : LevelSelectionBlockBase
         if (controller.JustPressed(Button.B) || Input.GetKeyDown(KeyCode.B))
         {
             _timeSync.renderer.material.color = Color.gray;
+            _levelSelectArrows.SetActive(true);
+            _levelOverlay.renderer.enabled = false;
 
             MeshRenderer[] mesh = _timeSyncArrows.GetComponentsInChildren<MeshRenderer>();
             _timeSyncBar.renderer.enabled = false;
