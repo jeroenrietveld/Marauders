@@ -9,6 +9,7 @@ public enum SoundSettingTypes
 {
     volume,
     volumemovement,
+    volumemusic,
     minSoundDistance,
     maxSoundDistance
 }
@@ -20,24 +21,20 @@ public class SoundIngame
     public SoundIngame()
     {
         _clips = Resources.LoadAll<AudioClip>("Sounds/").ToList();
-        //WriteVolume(0.333333f);
+        WriteVolume(SoundSettingTypes.volume, 0.5f);
     }
 
     /// <summary>
-    /// Not working yet.
+    /// Writes the volume setting to the json file.
     /// </summary>
     /// <param name="volume"></param>
-    public void WriteVolume(float volume)
+    public void WriteVolume(SoundSettingTypes soundSettingToUpdate, float volume)
     {
         SimpleJSON.JSONNode node = SimpleJSON.JSON.Parse(Resources.Load<TextAsset>("JSON/Settings/settings").text);
-        node["volume"] = "0.1111";
-        
-        using(var filestream = File.Create("Assets/Resources/JSON/Settings/settings.json"))
-        {
-            BinaryWriter bw = new BinaryWriter(filestream);
-            //node.Serialize(bw);
-            node.SaveToStream(filestream);
-        }
+        node[soundSettingToUpdate.ToString()] = volume.ToString();
+
+        // Write that JSON to json file
+        File.WriteAllText(Environment.CurrentDirectory + "/Assets/Resources/JSON/Settings" + @"\settings.json", node.ToString());
     }
 
     /// <summary>
