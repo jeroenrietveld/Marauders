@@ -61,6 +61,7 @@ public class TimeBubble : MonoBehaviour {
 
 		if(avatar)
 		{
+            GameManager.Instance.soundInGame.PlaySoundRandom(avatar.bubbleExitSource, "BubbleOut", false);
 			Event.dispatch(new TimeBubbleAvatarExitEvent(avatar, exitPosition, respawnDelay));
 		}
 		else

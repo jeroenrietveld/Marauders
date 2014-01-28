@@ -14,7 +14,7 @@ public class CharacterSelectState : SelectionBase
 
     public override void OnUpdate(GamePad controller)
     {
-		if (controller.Axis(Axis.LeftHorizontal) != 0 || controller.JustPressed(Button.DPadLeft) || controller.JustPressed(Button.DPadRight))
+		if (controller.Axis(Axis.LeftHorizontal) != 0 && GetTimer() || controller.JustPressed(Button.DPadLeft) || controller.JustPressed(Button.DPadRight))
         {
 			int direction = 0;
             bool timer = false;
@@ -30,14 +30,18 @@ public class CharacterSelectState : SelectionBase
 
 			//Selecting new marauder
 			block.changeMarauder(GetMarauderIndex(block.marauderIndex, direction, block.marauders.Count, timer));
+            GameManager.Instance.soundInGame.StopSound(block.menuSelectSounds);
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
         }
 
         if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
 			block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }
         else if (controller.JustPressed(Button.B))
         {
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
             block._currentState = null;
             block.ChangeState(CharacterSelectBlockStates.StartState);
             OnInActive();

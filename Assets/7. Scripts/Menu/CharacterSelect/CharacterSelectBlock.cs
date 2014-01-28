@@ -32,9 +32,11 @@ public class CharacterSelectBlock : MonoBehaviour
     private bool zoomedIn = true;
     private TextMesh _textCharselect;
     public AudioSource audioSourceArmory;
+    public AudioSource menuSelectSounds;
 
     void Start()
 	{
+        menuSelectSounds = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         audioSourceArmory = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 
         marauderIndex = 0;

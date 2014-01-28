@@ -8,9 +8,11 @@ public class Avatar : MonoBehaviour
 	public GamePad controller;
 
 	public Player player { get; private set; }
-	
-	void Start () {
 
+    public AudioSource bubbleExitSource;
+
+	void Start () {
+        bubbleExitSource = GameManager.Instance.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 		//Will only look at the attack info name
 		AttackInfo info = new AttackInfo("Idle", 1.0f, -1f);
 
@@ -21,8 +23,6 @@ public class Avatar : MonoBehaviour
 				1,
 				WrapMode.Loop
 			));
-
-
 	}
 
     void Update()
