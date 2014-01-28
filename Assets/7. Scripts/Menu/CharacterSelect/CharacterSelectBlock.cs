@@ -143,7 +143,8 @@ public class CharacterSelectBlock : MonoBehaviour
     private void OnControllerConnect()
     {
         isConnected = true;
-        StartScreen.transform.FindChild("ControllerText").gameObject.GetComponent<TextMesh>().text = "Press A \n to Join";
+        StartScreen.transform.FindChild("ControllerText").gameObject.GetComponent<TextMesh>().text = "Press \n to Join";
+        StartScreen.transform.FindChild("AButton").gameObject.renderer.enabled = true;
     }
 
 	public void changeMarauder(int index)
