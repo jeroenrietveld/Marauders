@@ -2008,7 +2008,6 @@ Transform:
   - {fileID: 513117484}
   - {fileID: 1985523034}
   - {fileID: 1991695377}
-  - {fileID: 793103871}
   m_Father: {fileID: 804479913}
 --- !u!1 &390653343
 GameObject:
@@ -2032,10 +2031,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 390653343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -6.75261163e-08, z: -.377633452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 220699448}
+  - {fileID: 793103871}
   - {fileID: 1321909480}
   - {fileID: 2093654096}
   m_Father: {fileID: 804479913}
@@ -4101,7 +4101,7 @@ GameObject:
   - 23: {fileID: 793103873}
   - 102: {fileID: 793103872}
   m_Layer: 0
-  m_Name: LevelObjective_Name
+  m_Name: TimeSyncText
   m_TagString: MenuText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4113,11 +4113,11 @@ Transform:
   m_PrefabParentObject: {fileID: 400020, guid: 8e2693c40eeb51146a0af5d430c41df8, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 793103870}
-  m_LocalRotation: {x: 1.88737893e-15, y: -4.37113918e-08, z: 4.37113918e-08, w: 1}
-  m_LocalPosition: {x: 6.35511923, y: -12.9206858, z: -5.52092479e-06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -3.09086232e-08, y: .707106829, z: -.707106829, w: 3.09086232e-08}
+  m_LocalPosition: {x: .519927979, y: 1.58688641, z: 3.97928333}
+  m_LocalScale: {x: .360000014, y: .24999994, z: .47999987}
   m_Children: []
-  m_Father: {fileID: 373177920}
+  m_Father: {fileID: 390653344}
 --- !u!102 &793103872
 TextMesh:
   serializedVersion: 3
@@ -4126,7 +4126,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 793103870}
-  m_Text: Objective
+  m_Text: Average
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -4147,7 +4147,7 @@ Renderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 793103870}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -9465,7 +9465,7 @@ GameObject:
   - 23: {fileID: 2093654098}
   - 102: {fileID: 2093654097}
   m_Layer: 0
-  m_Name: TimeSyncText
+  m_Name: TimeSyncName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9478,7 +9478,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2093654095}
   m_LocalRotation: {x: -3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: 2.51249743, y: 1.72000766, z: 1.56000805}
+  m_LocalPosition: {x: 2.41069078, y: 1.72000766, z: 1.62802923}
   m_LocalScale: {x: .209999993, y: .25999999, z: 1}
   m_Children: []
   m_Father: {fileID: 390653344}
@@ -9497,13 +9497,13 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 36
+  m_FontSize: 32
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 16e524c5b55301c4982d3bb1b025dfe3, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4288059030
+    rgba: 4281874488
 --- !u!23 &2093654098
 Renderer:
   m_ObjectHideFlags: 0
