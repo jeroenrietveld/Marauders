@@ -41,17 +41,22 @@ public class Scoreboard : MonoBehaviour
 
     public Scoreboard scoreboard;
 
-
-    void Awake()
-    {
-        _cells = new List<List<Cell>>();
-        trophyList = new List<Trophy>();
-
-        Initialize();
-    }
-
     private void Initialize() 
     {
+        //Set all the textures and materials
+        _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
+        _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
+
+        _redTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
+        _blueTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_blue", typeof(Texture)) as Texture;
+        _greenTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_green", typeof(Texture)) as Texture;
+        _purpleTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_purple", typeof(Texture)) as Texture;
+
+        _firstPlaceTexture = Resources.Load("Textures/Scoreboard/place_1st", typeof(Texture)) as Texture;
+        _secondPlaceTexture = Resources.Load("Textures/Scoreboard/place_2nd", typeof(Texture)) as Texture;
+        _thirdPlaceTexture = Resources.Load("Textures/Scoreboard/place_3rd", typeof(Texture)) as Texture;
+        _fourthPlaceTexture = Resources.Load("Textures/Scoreboard/place_4th", typeof(Texture)) as Texture;
+
         //Set the scoreboard
         if(scoreboard == null)
         {
@@ -62,6 +67,7 @@ public class Scoreboard : MonoBehaviour
             scoreboard.Clear();
             Initialize();
         }
+
         //Add the main cells.
         foreach (var player in GameManager.Instance.playerRefs)
         {
@@ -91,6 +97,8 @@ public class Scoreboard : MonoBehaviour
             }
         }
         
+
+        //Set trophys
         var resources = Resources.LoadAll("JSON/Trophy");
 
         foreach (object resource in resources)
@@ -104,10 +112,10 @@ public class Scoreboard : MonoBehaviour
             t.Column = column;
             t.Title = title;
             t.Condition = condition;
-            Debug.Log(t);
             trophyList.Add(t);
         }
 
+        //Done
     }
 
     /// <summary>
@@ -145,22 +153,13 @@ public class Scoreboard : MonoBehaviour
     }
 
     void Start()
-    {      
-        _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
-        _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
-
-        _redTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_red", typeof(Texture)) as Texture;
-        _blueTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_blue", typeof(Texture)) as Texture;
-        _greenTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_green", typeof(Texture)) as Texture;
-        _purpleTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_purple", typeof(Texture)) as Texture;
-
-        _firstPlaceTexture = Resources.Load("Textures/Scoreboard/place_1st", typeof(Texture)) as Texture;
-        _secondPlaceTexture = Resources.Load("Textures/Scoreboard/place_2nd", typeof(Texture)) as Texture;
-        _thirdPlaceTexture = Resources.Load("Textures/Scoreboard/place_3rd", typeof(Texture)) as Texture;
-        _fourthPlaceTexture = Resources.Load("Textures/Scoreboard/place_4th", typeof(Texture)) as Texture;
+    {
+        _cells = new List<List<Cell>>();
+        trophyList = new List<Trophy>();            
 
         _visible = false;
-        
+
+         Initialize();
         #region Test - all comments atm
         /*         
         GameManager.Instance.matchSettings.timeSync = 100;
