@@ -39,6 +39,8 @@ public class Scoreboard : MonoBehaviour
 
     public List<Trophy> trophyList;
 
+    public Scoreboard scoreboard;
+
 
     void Awake()
     {
@@ -51,6 +53,15 @@ public class Scoreboard : MonoBehaviour
     private void Initialize() 
     {
         //Set the scoreboard
+        if(scoreboard == null)
+        {
+            scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
+        }
+        else
+        {
+            scoreboard.Clear();
+            Initialize();
+        }
         //Add the main cells.
         foreach (var player in GameManager.Instance.playerRefs)
         {
@@ -540,11 +551,13 @@ public class Scoreboard : MonoBehaviour
 
     public void Clear()
     {
-        for (int i = 0; i < _cells.Count; i ++ )
-        {
-            _cells[i].Clear();
-        }
-        _cells.Clear();
+        Destroy(this);
+    }
+
+    public void ShowResults()
+    {
+        CalculateTrophys();
+        Show();
     }
 
     public bool IsVisible()

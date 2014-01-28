@@ -28,8 +28,6 @@ public class RestartManager : MonoBehaviour
     public static void Restart()
     {
         Debug.Log("Game restarted");
-        GameManager.scoreboard.Hide();
-        GameManager.scoreboard.Clear();
         Application.LoadLevel("Menu");
         GameManager.Instance.gameEnded = false;
         GameManager.Instance.ResumeGame();

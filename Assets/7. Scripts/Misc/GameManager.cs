@@ -11,8 +11,6 @@ public class GameManager {
 	/// </summary>
 	private static GameManager _instance;
 
-    public static Scoreboard scoreboard;
-
     public static bool isPaused = false;
 
 	//TODO: Remove Player list, rename playerRefs to players.
@@ -95,8 +93,7 @@ public class GameManager {
     {
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 		this.soundInGame.PlaySoundRandom(s, playersByTimeSync()[0].marauder + "-victory" , true);
-        scoreboard.CalculateTrophys();
-        scoreboard.Show();
+        GameObject.Find("_GLOBAL").GetComponent<Scoreboard>().ShowResults();
         PauseGame();
         gameEnded = true;
     }

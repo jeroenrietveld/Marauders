@@ -8,11 +8,15 @@ public class ScoreHandler : MonoBehaviour {
 	public int smackedOutPenalty = -100;
 	public int smackOutReward = 100;
 
+    public Scoreboard scoreboard;
+
 	// Use this for initialization
 	void Start () {
 		Event.register<AvatarDeathEvent>(OnAvatarDeath);
 		Event.register<TimeBubbleAvatarExitEvent>(OnTimeBubbleExit);
         Event.register<PlayerTimeSyncedEvent>(OnTimeSynced);
+
+        scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
 	}
 
 	void OnDisable()
@@ -26,10 +30,10 @@ public class ScoreHandler : MonoBehaviour {
 		if(evt.offender != null) 
 		{
 			evt.offender.AddTimeSync (killReward, evt.victim.avatar.transform.position);
-            GameManager.scoreboard.AddContent(evt.offender.index, Locale.Current["scoreboard_eliminations"], 1);
+            scoreboard.AddContent(evt.offender.index, Locale.Current["scoreboard_eliminations"], 1);
 		}
        
-        GameManager.scoreboard.AddContent(evt.victim.index, Locale.Current["scoreboard_eliminated"], 1);
+        scoreboard.AddContent(evt.victim.index, Locale.Current["scoreboard_eliminated"], 1);
 	}
 
 	void OnTimeBubbleExit(TimeBubbleAvatarExitEvent evt)
@@ -39,14 +43,14 @@ public class ScoreHandler : MonoBehaviour {
 		if(heartbeat.lastAttacker != null)
 		{
 			evt.avatar.player.AddTimeSync (smackedOutPenalty);
-            GameManager.scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_eliminated"], 1);
+            scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_eliminated"], 1);
 
 			heartbeat.lastAttacker.AddTimeSync(smackOutReward, evt.exitPosition);
-            GameManager.scoreboard.AddContent(heartbeat.lastAttacker.index, Locale.Current["scoreboard_eliminations"], 1);
+            scoreboard.AddContent(heartbeat.lastAttacker.index, Locale.Current["scoreboard_eliminations"], 1);
 		}
 		else
 		{
-            GameManager.scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_suicides"], 1);
+            scoreboard.AddContent(evt.avatar.player.index, Locale.Current["scoreboard_suicides"], 1);
 			evt.avatar.player.AddTimeSync (suicidePenalty);
 		}
 	}
@@ -55,7 +59,7 @@ public class ScoreHandler : MonoBehaviour {
     {
         foreach(Player player in GameManager.Instance.playerRefs)
         {
-            GameManager.scoreboard.AddContent(player.index, Locale.Current["scoreboard_timesync"], player.timeSync);
+            scoreboard.AddContent(player.index, Locale.Current["scoreboard_timesync"], player.timeSync);
         }
         if (!GameManager.Instance.gameEnded)
         {

@@ -42,7 +42,7 @@ public class SettingsBlock : LevelSelectionBlockBase
             {              
                 // TODO set the timeSync in GameManager.Instance.matchsettings.timeSync
                 GameManager.Instance.matchSettings.level = LevelSelectionBlock.current.levelName;
-                GameManager.Instance.matchSettings.timeSync = (int)(_timeSyncBar.GetPercentage() * 100);
+                GameManager.Instance.matchSettings.timeSync = (int)(_timeSyncBar.GetPercentage() * 200);
 
                 // Get the selected game mode class by using the Activator
                 // Default Normal until new game modes are implemented.
