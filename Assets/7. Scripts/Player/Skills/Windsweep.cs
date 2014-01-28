@@ -16,6 +16,8 @@ public class Windsweep : SkillBase
 		1,
 		WrapMode.Loop
 	);
+
+	private ParticleSystem _particleSystem;
 	
 	public Windsweep() : base(5, _animationSettings)
 	{
@@ -24,11 +26,15 @@ public class Windsweep : SkillBase
 	
 	protected override void OnStart()
     {
-		
+		var particleObject = ResourceCache.GameObject ("Prefabs/ParticleEmitters/WindsweepEmitter");
+		particleObject.transform.SetParentKeepLocal (transform.root);
+		_particleSystem = particleObject.GetComponent<ParticleSystem> ();
     }
 
 	protected override void OnPerformAction()
 	{
+		_particleSystem.Play ();
+
         GameManager.Instance.soundInGame.PlaySound(skillAudioSource, "Windsweep", true);
 
 		foreach(var player in GameManager.Instance.playerRefs)
