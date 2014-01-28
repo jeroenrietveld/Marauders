@@ -1,0 +1,24 @@
+{
+	"name":"Staff",
+	"prefabs":["Staff"],
+	"range": 3.2,
+	"damage": 0.19,
+	"weaponHandling": "2handed",
+	"attacks": [
+		{
+			animation: "Staff1",
+			speed: 1.51,
+			timing: 0.302
+		},
+		{
+			animation: "Staff2",
+			speed: 1.25,
+			timing: 0.25
+		},		
+		{
+			animation: "Staff3",
+			speed: 1.25,
+			timing: 0.375
+		}
+	]
+}
