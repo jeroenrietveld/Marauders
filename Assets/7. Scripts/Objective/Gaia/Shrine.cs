@@ -60,12 +60,27 @@ public class Shrine : Attackable {
 	private Timer _lightTimer;
 	private Light _light;
 
+	public int shrineGUIIndex;
+	private Vector3 _shrineGUIPosition = new Vector3(0, 0.9f);
+	private Vector3 _shrineGUIPositionOffset = new Vector3 (0.2f, 0);
+	private GameObject _shrineGUI;	
+
 	void Start()
 	{
         shrineActivatedConquered = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
         shrineSourceHit = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
 		_light = GetComponentInChildren<Light> ();
+
+		_shrineGUI = ResourceCache.GameObject ("Prefabs/GUI/ShrineGUI");
+		//_shrineGUIPosition = CameraSettings.cameraSettings.PointToWorldPoint (_shrineGUIPosition);
+
+		if(shrineGUIIndex != 1)
+		{
+			_shrineGUIPosition += (shrineGUIIndex == 0) ? - _shrineGUIPositionOffset : _shrineGUIPositionOffset;
+		}
+
+		_shrineGUI.transform.position = _shrineGUIPosition;
 
 		_lightTimer = new Timer (1);
 		_lightTimer.AddTickCallback(delegate
@@ -78,6 +93,8 @@ public class Shrine : Attackable {
 			{
 				orb.SetColor(color);
 			}
+			
+			_shrineGUI.renderer.material.color = color;
 		});
 
 		Reset ();

@@ -12,12 +12,7 @@ public class CameraSettings : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		if(_cameraSettings != null)
-		{
-			Debug.Log ("There already is a CameraSettings instance");
-		}
-
+	public CameraSettings () {
 		_cameraSettings = this;
 	}
 
@@ -27,7 +22,18 @@ public class CameraSettings : MonoBehaviour {
 		point.z = 0.5f;
 		return GetComponent<Camera> ().ViewportToWorldPoint (point);
 	}
-	
+
+	public GameObject Notify(string path, Vector3 wsPosition, float duration, Vector2 translation)
+	{
+		GameObject gameObject = ResourceCache.GameObject (path);
+
+		gameObject.transform.position = CameraSettings.cameraSettings.PointToWorldPoint(wsPosition);
+		Notification notification = gameObject.AddComponent<Notification> ();
+		notification.Initialize (duration, translation);
+
+		return gameObject;
+	}
+
 	// Update is called once per frame
 	void Update () {
 	}

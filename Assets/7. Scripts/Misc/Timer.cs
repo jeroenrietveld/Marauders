@@ -48,6 +48,8 @@ public class Timer
 		}
 	}
 
+	public Timer () : this(0f) {}
+
 	public Timer(float endTime) : this(endTime, WrapMode.ONCE) {}
 
 	public Timer(float endTime, Timer.WrapMode wrapMode) : this(0f, endTime, wrapMode) {}
