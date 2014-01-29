@@ -119,11 +119,14 @@ public class Shrine : Attackable {
         if(capturable)
         {
 			GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", source.comboCount, false);
-            if (source.isCombo)
-            {
-                var player = source.inflicter;
 
-                if (player != _owner)
+			
+			var player = source.inflicter;
+			if (player != _owner)
+            {
+				_underAttackTimer.Start ();
+				
+				if (source.isCombo)
                 {
                     var oldOwner = owner;
                     owner = player;
@@ -132,8 +135,6 @@ public class Shrine : Attackable {
                     GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-conquered", true);
                 }
             }
-
-			_underAttackTimer.Start();
         }
 	} 
 	
