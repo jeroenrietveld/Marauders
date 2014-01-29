@@ -33,6 +33,7 @@ public class Shrine : Attackable {
 		private set
 		{
 			_capturable = value;
+			_shrineMovement.SetShrineActive(value);
 			UpdateColor();
 		}
 	}
@@ -65,6 +66,8 @@ public class Shrine : Attackable {
 	private Vector3 _shrineGUIPositionOffset = new Vector3 (0.2f, 0);
 	private GameObject _shrineGUI;	
 
+	private ShrineMovement _shrineMovement;
+
 	void Start()
 	{
         shrineActivatedConquered = GameManager.Instance.soundInGame.AddAndSetupAudioSource(gameObject, SoundSettingTypes.volume);
@@ -96,6 +99,8 @@ public class Shrine : Attackable {
 			
 			_shrineGUI.renderer.material.color = color;
 		});
+
+		_shrineMovement = GetComponentInChildren<ShrineMovement> ();
 
 		Reset ();
 	}

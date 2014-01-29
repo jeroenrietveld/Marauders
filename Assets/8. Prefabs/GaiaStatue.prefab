@@ -742,6 +742,7 @@ GameObject:
   - 33: {fileID: 3300078}
   - 23: {fileID: 2300078}
   - 64: {fileID: 6400002}
+  - 114: {fileID: 11400066}
   m_Layer: 0
   m_Name: anvil
   m_TagString: Untagged
@@ -2834,6 +2835,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07b9a96ba9b17d04c97ccab10f199c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a71420badc221c458d153c474401c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000
