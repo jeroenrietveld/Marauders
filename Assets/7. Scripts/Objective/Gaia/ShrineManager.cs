@@ -68,6 +68,15 @@ public class ShrineManager : MonoBehaviour {
 
 	private void ApplyReward()
 	{
+		foreach(var shrine in _shrines)
+		{
+			if(shrine.underAttack)
+			{
+				_rewardDelay.Start();
+				return;
+			}
+		}
+
 		foreach (var shrine in _shrines)
 		{
 			shrine.owner.AddTimeSync(timeSyncPerShrine, shrine.transform.position);

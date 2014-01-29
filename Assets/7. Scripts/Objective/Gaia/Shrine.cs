@@ -61,6 +61,9 @@ public class Shrine : Attackable {
 	private Timer _lightTimer;
 	private Light _light;
 
+	private Timer _underAttackTimer = new Timer (1.5f);
+	public bool underAttack { get { return _underAttackTimer.running; } }
+
 	public int shrineGUIIndex;
 	private Vector3 _shrineGUIPosition = new Vector3(0, 0.9f);
 	private Vector3 _shrineGUIPositionOffset = new Vector3 (0.2f, 0);
@@ -108,6 +111,7 @@ public class Shrine : Attackable {
 	void Update()
 	{
 		_lightTimer.Update ();
+		_underAttackTimer.Update ();
 	}
 
 	protected override void ApplyAttack(DamageSource source)
@@ -128,6 +132,8 @@ public class Shrine : Attackable {
                     GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-conquered", true);
                 }
             }
+
+			_underAttackTimer.Start();
         }
 	} 
 	
