@@ -50,7 +50,7 @@ public class ObjectSpawner : MonoBehaviour {
 		if(objRigidbody)
 		{
 			objRigidbody.velocity = Vector3.zero;
-			objRigidbody.AddForce(exitForce, ForceMode.Impulse);
+			objRigidbody.AddForce(exitForce, ForceMode.VelocityChange);
 		}
 		obj.transform.position = position;
 		

@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473a2f3b55e96c44594382a307869d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitForce: 1500
+  exitForce: 20
   respawnDelay: .75
 --- !u!114 &11400004
 MonoBehaviour:
