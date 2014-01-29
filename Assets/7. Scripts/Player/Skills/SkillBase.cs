@@ -15,6 +15,13 @@ public enum SkillType
 public abstract class SkillBase : ActionBase
 {
 	private static Button[] _buttonMapping = new []{ Button.X, Button.Y, Button.LeftShoulder };
+	private static string[] _notificationPrefabPath = new []{ "Offensive", "Defensive", "Dash"};
+	private static Vector3[] _notificationOffset = new [] 
+	{
+		new Vector3(-1, 0.5f),
+		new Vector3(1, 0.5f),
+		new Vector3(0, 1.5f)
+	};
 
 	public SkillType skillType = SkillType.Movement;
 	public Timer cooldown { get; private set; }
@@ -31,6 +38,8 @@ public abstract class SkillBase : ActionBase
 	{
 		cooldown = new Timer(cooldownTime);
 		cooldown.Start ();
+		cooldown.AddPhaseCallback(DisplayNotification);
+
 		this.allAnimationSettings = animationSettings.ToList();
 		this.animationSettings = animationSettings[0];
 	}
@@ -61,6 +70,16 @@ public abstract class SkillBase : ActionBase
 	{
 		cooldown.Update();
 		OnUpdate ();
+	}
+
+	private void DisplayNotification()
+	{
+		var notification = CameraSettings.cameraSettings.Notify(
+			"Prefabs/GUI/" + _notificationPrefabPath[(int)skillType],
+			transform.position + _notificationOffset[(int)skillType],
+			1.5f,
+			Vector3.up * 0.25f
+		);
 	}
 }
 

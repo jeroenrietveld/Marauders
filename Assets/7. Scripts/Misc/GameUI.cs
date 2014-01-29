@@ -15,7 +15,8 @@ public class GameUI : MonoBehaviour {
 	public Texture timeSyncTexture;
 	public Material lightbulbMat;
 	public Texture lightbulbTex;
-
+	
+	private GUIStyle _style;
 	private List<List<Rect>> _cooldownUIPositions;
 
 	// Use this for initialization
@@ -28,6 +29,13 @@ public class GameUI : MonoBehaviour {
 			timeSyncSliceAlphas.Add(0);
 			shownTimeSync.Add(0);
 		}
+		
+		_style = new GUIStyle();
+		_style.alignment = TextAnchor.MiddleCenter;
+		_style.font = (Font)Resources.Load ("Textures/WorldSelect/BankGothic/BankGothicCMdBT-Medium", typeof(Font)); 
+		_style.fontStyle = FontStyle.Bold;
+		_style.fontSize = 35;
+		_style.richText = true;
 
 		FillPositions ();
 	}
@@ -45,6 +53,9 @@ public class GameUI : MonoBehaviour {
 			timeSyncMaterial.SetFloat("phase", shownTimeSync[player.indexInt] / (float)GameManager.Instance.matchSettings.timeSync);
 			timeSyncMaterial.SetColor("playerColor", player.color);
 			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][0], timeSyncTexture, timeSyncMaterial);
+
+			int timeSync = GameManager.Instance.matchSettings.timeSync;
+			GUI.Label(_cooldownUIPositions[playerIndex][0], (((float)player.timeSync/(float)timeSync) * timeSync).ToString()+"%", _style);
 
 			if(timeSyncSliceAlphas[playerIndex] > 0)
 			{
