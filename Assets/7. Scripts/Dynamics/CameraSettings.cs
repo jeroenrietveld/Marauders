@@ -12,7 +12,12 @@ public class CameraSettings : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	public CameraSettings () {
+	void Start () {
+		if(_cameraSettings != null)
+		{
+			Debug.Log("Camera Settings already exists");
+		}
+
 		_cameraSettings = this;
 	}
 

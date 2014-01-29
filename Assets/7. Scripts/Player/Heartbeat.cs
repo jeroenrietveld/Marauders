@@ -142,9 +142,12 @@ public class Heartbeat : Attackable
 			material.SetFloat("lowerBound", health);
 			_damageTimer.Start();
 
-			_hitEmitter.startColor = source.inflicter.color;
-			_hitEmitter.transform.rotation = Quaternion.LookRotation(-source.direction);
-			_hitEmitter.Play ();
+			if(source.inflicter != null)
+			{
+				_hitEmitter.startColor = source.inflicter.color;
+				_hitEmitter.transform.rotation = Quaternion.LookRotation(-source.direction);
+				_hitEmitter.Play ();
+			}
 
 			if (!alive)
 			{

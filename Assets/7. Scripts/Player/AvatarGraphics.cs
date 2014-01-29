@@ -27,6 +27,7 @@ public class AvatarGraphics : MonoBehaviour {
 
 		_deathTimer = new Timer (.6f);
 		_deathTimer.AddPhaseCallback (_player.StartSpawnProcedure);
+
 		_deathTimer.AddTickCallback(delegate
 		{
 			foreach(var m in _materials.Values)
@@ -87,6 +88,7 @@ public class AvatarGraphics : MonoBehaviour {
 		{
 			foreach(var m in _materials.Values)
 			{
+				Debug.Log("ASD");
 				var q = Quaternion.AngleAxis(Random.value * 360, Vector3.up);
 				m.SetVector("_ShearDirection", q * new Vector3(0, 0, 1));
 			}

@@ -31,6 +31,13 @@ public class Player
 	public int kills { get; set; }
 	public int deaths { get; set; }
 	public int timeSync { get; set; }
+	public bool isTimeSynced
+	{
+		get
+		{
+			return timeSync == GameManager.Instance.matchSettings.timeSync;
+		}
+	}
 	
     public string marauder { get; set; }
 	public GameObject avatar { get; private set; }
@@ -49,6 +56,8 @@ public class Player
 
 	public void StartSpawnProcedure(bool initial = false)
 	{
+		if(GameManager.Instance.gameEnded) { return; }
+
 		Vector3 initialPosition = Vector3.zero; // Used for camera tracking during spawn proc.
 
 		if (avatar)
