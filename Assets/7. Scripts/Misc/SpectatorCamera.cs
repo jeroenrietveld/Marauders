@@ -9,13 +9,20 @@ public class SpectatorCamera : MonoBehaviour
 
     public float turnSpeed = 4.0f;		// Speed of camera turning when mouse moves in along an axis
 	public float panSpeed = 4.0f;		// Speed of the camera when being panned
-	public float zoomSpeed = 4.0f;		// Speed of the camera going back and forth
+	private float zoomSpeed = 0f;		// Current Speed of the camera going back and forth
+	public float zoomMaxSpeed = 0.4f;	// Maximum speed at which the camera should be moving (this is the fixed speed when flying around)
+	public float zoomFactor = 24; // Zoomfactor is the speed at which the camera slows up and down when zooming in.
 	
 	private Vector3 mouseOrigin;	// Position of cursor when mouse dragging starts
 	private bool isPanning;		// Is the camera being panned?
 	private bool isRotating;	// Is the camera being rotated?
 	private bool isZoomingIn;		// Is the camera zooming?
     private bool isZoomingOut;
+
+	void start()
+	{
+
+	}
 
     void Update()
     {   
@@ -33,13 +40,14 @@ public class SpectatorCamera : MonoBehaviour
             isPanning = true;
 		}
 		
-		// Get the middle mouse button
-		if(Input.GetAxis("Mouse ScrollWheel") > 0)
+		// Checks the W key for general forward movement in 3D space. (also checks for camera smooth)
+		if(Input.GetKey(KeyCode.W) || zoomSpeed > 0)
 		{
             ZoomIn();
 		}
         
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+		// Checks the WSkey for general backwards movement in 3D space. (also checks camera smooth)
+		if (Input.GetKey(KeyCode.S) || zoomSpeed < 0)
         {
             ZoomOut();
         }
@@ -47,7 +55,7 @@ public class SpectatorCamera : MonoBehaviour
 		// Disable movements on button release
 		if (!Input.GetMouseButton(1)) isRotating=false;
 		if (!Input.GetMouseButton(0)) isPanning=false;
-        if (Input.GetAxis("Mouse ScrollWheel") == 0) isZoomingIn = false; isZoomingOut = false;
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)) isZoomingIn = false; isZoomingOut = false;
 		
 		// Move the camera on it's XY plane
 		if (isPanning)
@@ -69,18 +77,39 @@ public class SpectatorCamera : MonoBehaviour
 
     void ZoomIn()
     {
+		// checks if smooth speedup or speeddown
+		if(!Input.GetKey(KeyCode.W)){
+			if(zoomSpeed > 0){
+				zoomSpeed -= zoomMaxSpeed / zoomFactor;
+			}
+		}else{
+			if(zoomSpeed < zoomMaxSpeed){
+				zoomSpeed += zoomMaxSpeed / zoomFactor;
+			}
+		}
         Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        Vector3 move = pos.y * zoomSpeed * transform.forward;
+		Vector3 move = pos.y * zoomSpeed * transform.forward;
         transform.Translate(move, Space.World);
     }
 
     void ZoomOut()
     {
+		// checks if smooth speedup or speeddown
+		if(!Input.GetKeyUp(KeyCode.S)){
+			if(zoomSpeed > 0){
+				zoomSpeed -= zoomMaxSpeed / zoomFactor;
+			}
+		}else{
+			if(zoomSpeed < zoomMaxSpeed){
+				zoomSpeed += zoomMaxSpeed / zoomFactor;
+			}
+		}
         Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        Vector3 move = pos.y * -zoomSpeed * transform.forward;
+		Vector3 move = pos.y * -zoomSpeed * transform.forward;
         transform.Translate(move, Space.World);
     }
+	
 }
 
