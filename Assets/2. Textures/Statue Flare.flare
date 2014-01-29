@@ -52,7 +52,7 @@ Flare:
   - m_ImageIndex: 3
     m_Position: 0
     m_Size: 5.5999999
-    m_Color: {r: .447058827, g: 0, b: .00784313772, a: 1}
+    m_Color: {r: .183823526, g: .183823526, b: .183823526, a: 1}
     m_UseLightColor: 1
     m_Rotate: 0
     m_Zoom: 0
