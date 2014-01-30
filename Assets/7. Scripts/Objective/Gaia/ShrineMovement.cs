@@ -7,12 +7,10 @@ public class ShrineMovement : MonoBehaviour {
 	private Vector3 _activatedOffset = new Vector3(0, 1, 0);
 	private bool _activated = false;
 
-	private Timer _movementTimer;
+	private Timer _movementTimer = new Timer (1);
 
 	// Use this for initialization
 	void Start () {
-		_movementTimer = new Timer (1);
-
 		_movementTimer.AddTickCallback (delegate {
 			float from = _activated ? 0 : 1;
 			float to  = _activated ? 1 : 0;
