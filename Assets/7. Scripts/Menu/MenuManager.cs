@@ -23,7 +23,6 @@ public class MenuManager : MonoBehaviour {
 		states.Add(MenuStates.SplashState, new SplashState());
 		states.Add(MenuStates.ArmoryState, new ArmoryState());
         states.Add(MenuStates.LevelState, new LevelState());
-        states.Add(MenuStates.LoadingState, new LoadingState());
 
         ChangeState(MenuStates.SplashState);
         if(RestartManager.restarted)

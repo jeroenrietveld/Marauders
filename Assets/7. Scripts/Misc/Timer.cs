@@ -100,8 +100,9 @@ public class Timer
 		if(_running)
 		{
 			_currentTime += Time.deltaTime;
+			var referenceTime = _currentTime; // Check for Timer restarting from a callback
 
-			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < _currentTime)
+			while(_callbackIndex < _callbacks.Count && _callbacks[_callbackIndex].time < _currentTime && _currentTime == referenceTime)
 			{
 				_callbacks[_callbackIndex].callback();
 
@@ -109,7 +110,7 @@ public class Timer
 			}
 
 			var phase = Phase();
-			while(_phaseCallbackIndex < _phaseCallbacks.Count && _phaseCallbacks[_phaseCallbackIndex].time < phase)
+			while(_phaseCallbackIndex < _phaseCallbacks.Count && _phaseCallbacks[_phaseCallbackIndex].time < phase && _currentTime == referenceTime)
 			{
 				_phaseCallbacks[_phaseCallbackIndex].callback();
 				_phaseCallbackIndex++;
