@@ -72,7 +72,7 @@ public class SkillSelectState : SelectionBase
 
                 bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild("CurrentSkillText").GetComponent<TextMesh>().text = list[currentCategory].active;
                 this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
-                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", false);
             }
 
             if (currentCategory == 0)
@@ -84,7 +84,7 @@ public class SkillSelectState : SelectionBase
                     arrow.gameObject.transform.position = bottom.transform.FindChild(list[currentCategory].baseCategory).transform.FindChild(list[currentCategory].category).transform.position;
                     this.block.gameObject.transform.FindInChildren("SkillDescriptionText").GetComponent<TextMesh>().text = list[currentCategory].activeDescription;
                     this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
-                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", false);
                 }
                 else if (controller.JustPressed(Button.B))
                 {
@@ -97,7 +97,7 @@ public class SkillSelectState : SelectionBase
                     {
                         block.ChangeState(CharacterSelectBlockStates.CharSelectState);
                     }
-                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuback", false);
                 }
             }
             else if (currentCategory == 1)
@@ -116,7 +116,7 @@ public class SkillSelectState : SelectionBase
                         playerRef.skills[(int)SkillType.Offensive] = list[0].active;
                         playerRef.skills[(int)SkillType.Defensive] = list[1].active;
                         GameManager.Instance.AddPlayerRef(playerRef);
-                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", false);
                     }
 
                     bool canContinue = true;
@@ -131,7 +131,7 @@ public class SkillSelectState : SelectionBase
                     if (canContinue)
                     {
                         GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.LevelState);
-                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+                        GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", false);
                     }
                 }
                 else if (controller.JustPressed(Button.B))
@@ -143,7 +143,7 @@ public class SkillSelectState : SelectionBase
                     this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
                     this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                     this.block.isPlayerReady = false;
-                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+                    GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuback", false);
                 }
             }
         }
@@ -156,7 +156,7 @@ public class SkillSelectState : SelectionBase
                 this.block.gameObject.transform.FindInChildren("SkillButton").gameObject.renderer.material = xBoxImages[currentCategory];
                 this.block.SkillSelect.transform.FindChild("Ready").renderer.enabled = false;
                 this.block.isPlayerReady = false;
-                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuback", false);
             }
         }
     }
