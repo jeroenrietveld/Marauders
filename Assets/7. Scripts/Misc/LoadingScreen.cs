@@ -7,9 +7,11 @@ using System.Collections;
 
 public class LoadingScreen : MonoBehaviour
 {
-        private bool loading = true;
+        private bool _loading = true;
         public Texture loadingTexture;
         public GUISkin skin;
+
+        private bool _done = false;
 
         void Awake()
         {         
@@ -20,25 +22,47 @@ public class LoadingScreen : MonoBehaviour
         {
             if (Application.isLoadingLevel)
             {
-                loading = true;
+                _loading = true;
+                _done = true;
             }
             else
             {
-                loading = false;
+                _loading = false;
             }
         }
 
         void OnGUI()
         {
-            if (loading)
+            if (_loading && _done)
             {
                 float fontScale = Screen.width / 768f;               
                 GUI.skin = skin;
                 GUI.skin.label.fontSize = (int)(20 * fontScale);
+                GUI.depth = -10;
+                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
                 GUI.depth = -20;
                 GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
                 GUI.skin.label.alignment = TextAnchor.LowerCenter;
-                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Loading...");
+                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Loading...");               
+            }
+            if(!_loading && _done)
+            {
+
+                GameManager.Instance.PauseGame();
+                float fontScale = Screen.width / 768f;
+                GUI.skin = skin;
+                GUI.skin.label.fontSize = (int)(20 * fontScale);
+                GUI.depth = -10;
+                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+                GUI.depth = -20;
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
+                GUI.skin.label.alignment = TextAnchor.LowerCenter;
+                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Press A to start the game.");
+                if(ControllerInput.GetController(0).JustPressed(XInputDotNetPure.Button.A))
+                {
+                    _done = false;
+                    GameManager.Instance.ResumeGame();
+                }
             }
         }
     }
