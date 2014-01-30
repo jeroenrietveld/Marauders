@@ -30,7 +30,7 @@ public class Obliterate : SkillBase
         );
 
     public Obliterate()
-        : base(3, _animationSettingsOneHanded, _animationSettingsTwoHanded)
+        : base(6, _animationSettingsOneHanded, _animationSettingsTwoHanded)
     {
         foreach (Player player in GameManager.Instance.playerRefs)
         {
