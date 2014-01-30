@@ -3392,7 +3392,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100168}
   m_LocalRotation: {x: 0, y: -3.55271326e-15, z: 0, w: 1}
-  m_LocalPosition: {x: -.425806403, y: 16.0351944, z: -24.7682686}
+  m_LocalPosition: {x: -.303261071, y: 16.0351982, z: -24.7682743}
   m_LocalScale: {x: .100000024, y: .100000001, z: .0999999791}
   m_Children: []
   m_Father: {fileID: 400098}
@@ -7279,7 +7279,7 @@ TextMesh:
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 52
   m_FontStyle: 0
@@ -7405,7 +7405,7 @@ TextMesh:
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 52
   m_FontStyle: 0
@@ -7468,7 +7468,7 @@ TextMesh:
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 52
   m_FontStyle: 0
@@ -7573,7 +7573,7 @@ TextMesh:
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 52
   m_FontStyle: 0
@@ -7725,18 +7725,19 @@ MonoBehaviour:
   _currentEnum: 0
   player: 2
   marauders:
-  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
-  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: aa6ada873c2732d43b7bbcfa732dac32, type: 2}
+  - {fileID: 2100000, guid: e7fa909c63ca57445986436108a94102, type: 2}
+  - {fileID: 2100000, guid: 969f6cddae6f33543aa11c4ff9f857cb, type: 2}
   maraudersSmall:
-  - {fileID: 2100000, guid: b38f16c028074ca4d82fc388c210fe5f, type: 2}
-  - {fileID: 2100000, guid: 75c5c0d8757989e449375f62c59457ff, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: 902f3f156ea4d234192e6cbe1f356254, type: 2}
+  - {fileID: 2100000, guid: adc0808717b2ab344ad8df440efa2020, type: 2}
+  - {fileID: 2100000, guid: 7a9b280a2e6f14343befbef90d4bcfd6, type: 2}
   marauderNames:
   - Thief
   - Samurai
   - Juggernaut
   audioSourceArmory: {fileID: 0}
+  menuSelectSounds: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7754,18 +7755,19 @@ MonoBehaviour:
   _currentEnum: 0
   player: 3
   marauders:
-  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
-  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: aa6ada873c2732d43b7bbcfa732dac32, type: 2}
+  - {fileID: 2100000, guid: e7fa909c63ca57445986436108a94102, type: 2}
+  - {fileID: 2100000, guid: 969f6cddae6f33543aa11c4ff9f857cb, type: 2}
   maraudersSmall:
-  - {fileID: 2100000, guid: b38f16c028074ca4d82fc388c210fe5f, type: 2}
-  - {fileID: 2100000, guid: 75c5c0d8757989e449375f62c59457ff, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: 902f3f156ea4d234192e6cbe1f356254, type: 2}
+  - {fileID: 2100000, guid: adc0808717b2ab344ad8df440efa2020, type: 2}
+  - {fileID: 2100000, guid: 7a9b280a2e6f14343befbef90d4bcfd6, type: 2}
   marauderNames:
   - Thief
   - Samurai
   - Juggernaut
   audioSourceArmory: {fileID: 0}
+  menuSelectSounds: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7783,18 +7785,19 @@ MonoBehaviour:
   _currentEnum: 0
   player: 0
   marauders:
-  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
-  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: aa6ada873c2732d43b7bbcfa732dac32, type: 2}
+  - {fileID: 2100000, guid: e7fa909c63ca57445986436108a94102, type: 2}
+  - {fileID: 2100000, guid: 969f6cddae6f33543aa11c4ff9f857cb, type: 2}
   maraudersSmall:
-  - {fileID: 2100000, guid: b38f16c028074ca4d82fc388c210fe5f, type: 2}
-  - {fileID: 2100000, guid: 75c5c0d8757989e449375f62c59457ff, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: 902f3f156ea4d234192e6cbe1f356254, type: 2}
+  - {fileID: 2100000, guid: adc0808717b2ab344ad8df440efa2020, type: 2}
+  - {fileID: 2100000, guid: 7a9b280a2e6f14343befbef90d4bcfd6, type: 2}
   marauderNames:
   - Thief
   - Samurai
   - Juggernaut
   audioSourceArmory: {fileID: 0}
+  menuSelectSounds: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7812,18 +7815,19 @@ MonoBehaviour:
   _currentEnum: 0
   player: 1
   marauders:
-  - {fileID: 2100000, guid: 333c88a4bc8015e41a5a22dc75970e14, type: 2}
-  - {fileID: 2100000, guid: 43fdf524cfa74624ba23d7e342273479, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: aa6ada873c2732d43b7bbcfa732dac32, type: 2}
+  - {fileID: 2100000, guid: e7fa909c63ca57445986436108a94102, type: 2}
+  - {fileID: 2100000, guid: 969f6cddae6f33543aa11c4ff9f857cb, type: 2}
   maraudersSmall:
-  - {fileID: 2100000, guid: b38f16c028074ca4d82fc388c210fe5f, type: 2}
-  - {fileID: 2100000, guid: 75c5c0d8757989e449375f62c59457ff, type: 2}
-  - {fileID: 2100000, guid: 17369ba2f2781384ebfb47202f8f9110, type: 2}
+  - {fileID: 2100000, guid: 902f3f156ea4d234192e6cbe1f356254, type: 2}
+  - {fileID: 2100000, guid: adc0808717b2ab344ad8df440efa2020, type: 2}
+  - {fileID: 2100000, guid: 7a9b280a2e6f14343befbef90d4bcfd6, type: 2}
   marauderNames:
   - Thief
   - Samurai
   - Juggernaut
   audioSourceArmory: {fileID: 0}
+  menuSelectSounds: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
