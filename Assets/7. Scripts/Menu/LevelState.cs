@@ -30,6 +30,13 @@ public class LevelState : MenuStateBase
                 manager.ChangeState(MenuStates.ArmoryState);
             }
 	    }
+        if(_controller.JustPressed(Button.A))
+        {
+            if(LevelSelectionManager.currentState == LevelSelectionManager.selectionBlocks[LevelSelectionState.Done])
+            {
+                manager.ChangeState(MenuStates.LoadingState);
+            }
+        }
 	}
 
 	public override void OnActive()

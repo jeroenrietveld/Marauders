@@ -11,5 +11,6 @@ public enum LevelSelectionState
 {
     LevelSelection,
     SettingSelection,
-    NotSelecting
+    NotSelecting,
+    Done,
 }

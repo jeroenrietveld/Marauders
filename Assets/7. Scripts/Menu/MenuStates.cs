@@ -5,5 +5,6 @@ public enum MenuStates
 {
 	SplashState,
 	ArmoryState,
-    LevelState
+    LevelState,
+    LoadingState
 }
