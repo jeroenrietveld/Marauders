@@ -53,7 +53,7 @@ public class TimeBubble : MonoBehaviour {
 			collider.gameObject,
 			spawnPoint,
 			respawnDelay,
-			SpawnTarget.GetClosestTargetDirection (spawnPoint) * exitForce
+			SpawnTarget.GetRandomTargetDirection (spawnPoint) * exitForce
 		);
 
 		
