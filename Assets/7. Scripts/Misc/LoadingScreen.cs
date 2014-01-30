@@ -32,7 +32,9 @@ public class LoadingScreen : MonoBehaviour
         {
             if (loading)
             {
+                float fontScale = Screen.width / 768f;               
                 GUI.skin = skin;
+                GUI.skin.label.fontSize = (int)(20 * fontScale);
                 GUI.depth = -20;
                 GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
                 GUI.skin.label.alignment = TextAnchor.LowerCenter;
