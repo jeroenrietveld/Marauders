@@ -2,6 +2,18 @@ using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 
+public struct AvatarSpawnEvent
+{
+	public Player player;
+	public float spawnDelay;
+
+	public AvatarSpawnEvent(Player player, float delay)
+	{
+		this.player = player;
+		this.spawnDelay = delay;
+	}
+}
+
 public class Player
 {
 	private static string _marauderDataPath = "Marauders/";
@@ -74,7 +86,9 @@ public class Player
 		var spawnPoint = timeBubble.GetSpawnPoint(Quaternion.AngleAxis((float)index * 90, Vector3.up) * new Vector3(-1, 10, 0));
 		var spawnTarget = initial ? SpawnTarget.GetPlayerTargetDirection (spawnPoint, index) : SpawnTarget.GetRandomTargetDirection (spawnPoint);
 
-		ObjectSpawner.Create(newAvatar, spawnPoint, 4, spawnTarget * timeBubble.exitForce);
+		float spawnDelay = 4;
+		ObjectSpawner.Create(newAvatar, spawnPoint, spawnDelay, spawnTarget * timeBubble.exitForce);
+		Event.dispatch (new AvatarSpawnEvent (this, spawnDelay));
 	}
 
 	private GameObject CreateAvatar(Vector3 initialPosition)

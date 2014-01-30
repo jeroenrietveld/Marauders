@@ -39,6 +39,14 @@ public class Avatar : MonoBehaviour
 	{
 		this.player = player;
 		this.controller = player.controller;
+
+		Component[] components = GetComponentsInChildren<ClothRenderer>(true);
+
+		foreach (Component component in components)
+		{
+			component.gameObject.SetActive(true);
+			Debug.Log ("Enabled ClothRenderer");
+		}
 	}
 
 	//TODO: remove this schmuck when avatar is moved using forces

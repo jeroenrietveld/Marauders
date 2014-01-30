@@ -19,8 +19,17 @@ public class GameUI : MonoBehaviour {
 	private GUIStyle _style;
 	private List<List<Rect>> _cooldownUIPositions;
 
+	private List<PlayerUI> _playerUIs = new List<PlayerUI> ();
+
 	// Use this for initialization
 	void Start () {
+		foreach(var player in GameManager.Instance.playerRefs)
+		{
+			var ui = new PlayerUI(player);
+			_playerUIs.Add(ui);
+		}
+
+		/*
 		foreach (Player player in GameManager.Instance.playerRefs) 
 		{
 			lightBulbColors.Add(new Color(0.5f, 0.5f, 0.5f, 0.5f));
@@ -38,10 +47,12 @@ public class GameUI : MonoBehaviour {
 		_style.richText = true;
 
 		FillPositions ();
+		*/
 	}
 
 	void OnGUI ()
 	{
+		/*
 		var playerRefs = GameManager.Instance.playerRefs;
 
 		for(int playerIndex = 0; playerIndex < playerRefs.Count; playerIndex++)
@@ -77,6 +88,15 @@ public class GameUI : MonoBehaviour {
 
 			GUI.Label (_cooldownUIPositions[playerIndex][0], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 		}
+		*/
+	}
+
+	void Update()
+	{
+		foreach(var ui in _playerUIs)
+		{
+			ui.Update();
+		}
 	}
 
 	private void FillPositions()
@@ -106,5 +126,127 @@ public class GameUI : MonoBehaviour {
 	public Vector2 ToPlayerLocalScreenSpace(Vector2 v, Player p)
 	{
 		return v - _cooldownUIPositions[p.indexInt][0].center;
+	}
+}
+
+public class PlayerUI
+{
+	private static Vector3[] GUI_POSITIONS = new []{ new Vector3(-1.3f, .75f), new Vector3(1.3f, .75f), new Vector3(-1.3f, -.75f), new Vector3(1.3f, -.75f) };
+
+	public Vector3 position { get { return GUI_POSITIONS[_player.indexInt]; } }
+
+	private Player _player;
+	private GameObject _uiRoot;
+
+	private GameObject _timeSyncIndicator;
+	private Timer _timeSyncIndicatorUpdater = new Timer(1);
+	private Timer _respawnTimer = new Timer ();
+
+	public PlayerUI(Player player)
+	{
+		_player = player;
+		_uiRoot = new GameObject ();
+		_uiRoot.transform.position = position;
+
+		InitGUI ();
+
+		_timeSyncIndicatorUpdater.AddPhaseCallback(delegate {
+			_timeSyncIndicator.renderer.material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
+		});
+
+		Event.register<PlayerTimeSyncEvent> (CreateTimeSyncSlice);
+		Event.register<TimeBubbleAvatarExitEvent> (OnAvatarExit);
+		Event.register<AvatarSpawnEvent> (OnAvatarSpawn);
+	}
+
+	~PlayerUI()
+	{
+		Event.unregister<PlayerTimeSyncEvent> (CreateTimeSyncSlice);
+		Event.unregister<TimeBubbleAvatarExitEvent> (OnAvatarExit);
+		Event.unregister<AvatarSpawnEvent> (OnAvatarSpawn);
+	}
+
+	private void InitGUI()
+	{
+		var color = _player.color;
+
+		_timeSyncIndicator = ResourceCache.GameObject ("Prefabs/GUI/TimeSyncIndicator");
+		_timeSyncIndicator.renderer.material.SetColor ("playerColor", color);
+		_timeSyncIndicator.transform.SetParentKeepLocal (_uiRoot.transform);
+		
+		var timeSyncIndicatorEdge = ResourceCache.GameObject ("Prefabs/GUI/TimeSyncIndicatorEdge");
+		timeSyncIndicatorEdge.renderer.material.color = color;
+		timeSyncIndicatorEdge.transform.SetParentKeepLocal (_uiRoot.transform);
+
+		var respawnIndicator = ResourceCache.GameObject ("Prefabs/GUI/TimeSyncIndicatorEdge");
+		respawnIndicator.renderer.material.color = color;
+		respawnIndicator.transform.SetParentKeepLocal (_uiRoot.transform);
+
+		_respawnTimer.AddTickCallback (
+		delegate {
+						respawnIndicator.transform.localScale = Vector3.Lerp (Vector3.one, timeSyncIndicatorEdge.transform.localScale, _respawnTimer.Phase ());
+				});
+	}
+
+	public void Update()
+	{
+		_timeSyncIndicatorUpdater.Update ();
+		_respawnTimer.Update ();
+	}
+
+	private void CreateTimeSyncSlice(PlayerTimeSyncEvent evt)
+	{
+		if(evt.player != _player) return;
+
+		var slice = ResourceCache.GameObject ("Prefabs/GUI/TimeSyncSlice");
+		slice.renderer.material.SetColor ("playerColor", _player.color);
+
+		float 
+			curr = (_player.timeSync) / (float)GameManager.Instance.matchSettings.timeSync,
+			prev = (_player.timeSync + evt.amount) / (float)GameManager.Instance.matchSettings.timeSync;
+
+		slice.renderer.material.SetFloat("upperBound", Mathf.Max(curr, prev));
+		slice.renderer.material.SetFloat("lowerBound", Mathf.Min(curr, prev));
+		slice.renderer.material.SetFloat("alpha", 1);
+		
+		if(evt.amount < 0)
+		{
+			slice.transform.position = _uiRoot.transform.position;
+			ObjectMovement.Create(slice, Vector3.Lerp(slice.transform.position, Vector3.zero, .5f), Vector3.one, _timeSyncIndicatorUpdater.endTime);
+			_timeSyncIndicator.renderer.material.SetFloat("phase", _player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
+		}
+		else
+		{
+			if(evt.hasPosition)
+			{
+				slice.transform.position = CameraSettings.cameraSettings.PointToWorldPoint(evt.worldSpacePosition);
+				ObjectMovement.Create(slice, _uiRoot.transform.position, slice.transform.localScale, _timeSyncIndicatorUpdater.endTime);
+				slice.transform.localScale = Vector3.one;
+			}
+			else
+			{
+				slice.transform.position = Vector3.Lerp(slice.transform.position, Vector3.zero, .5f);
+				ObjectMovement.Create(slice, _uiRoot.transform.position, slice.transform.localScale, _timeSyncIndicatorUpdater.endTime);
+				slice.transform.localScale = Vector3.one;
+			}
+		}
+
+		_timeSyncIndicatorUpdater.Start ();
+	}
+
+	private void OnAvatarSpawn(AvatarSpawnEvent evt)
+	{
+		if(evt.player != _player) return;
+		
+		_respawnTimer.endTime = evt.spawnDelay;
+		_respawnTimer.Start ();
+	}
+
+	private void OnAvatarExit(TimeBubbleAvatarExitEvent evt)
+	{
+		if(evt.avatar.player != _player) return;
+
+		_respawnTimer.endTime = evt.respawnDelay;
+		_respawnTimer.Start ();
 	}
 }
