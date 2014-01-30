@@ -6,17 +6,24 @@ using XInputDotNetPure;
 public class LevelState : MenuStateBase
 {
     private GamePad _controller;
+    private Timer _timer;
 
 	public LevelState()
 	{
         center = GameObject.Find("LevelScreen").transform.position;
 
+        _timer = new Timer(1f);
+        _timer.AddCallback(delegate()
+        {
+            GameManager.Instance.Start();
+        });
         _controller = ControllerInput.GetController(PlayerIndex.One);
         _controller.deadZone = GamePadDeadZone.IndependentAxes;
 	}
 
 	public override void Update(MenuManager manager)
 	{
+        _timer.Update();
         if (LevelSelectionManager.currentState != null)
         {
             _controller = GameManager.Instance.playerRefs.OrderBy(x => x.indexInt).First().controller;
@@ -33,8 +40,9 @@ public class LevelState : MenuStateBase
         if(_controller.JustPressed(Button.A))
         {
             if(LevelSelectionManager.currentState == LevelSelectionManager.selectionBlocks[LevelSelectionState.Done])
-            {
-                manager.ChangeState(MenuStates.LoadingState);
+            {              
+                GameObject.Find("CameraFade").GetComponent<CameraFade>().StartFade(new Color(0, 0, 0, 1), 2f);                
+                _timer.Start();               
             }
         }
 	}

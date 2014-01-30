@@ -31,7 +31,10 @@ public class LoadingScreen : MonoBehaviour
         {
             if (loading)
             {
-                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.StretchToFill);
+                GUI.depth = -2;
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
+                GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Loading...");
             }
         }
     }
