@@ -21,28 +21,31 @@ public class ShrineMessage : Interactable
 		{
 			if (shrine.capturable)
 			{
-				//if (shrine.owner == me?)
-				///{
+
+			
 					message = Locale.Current["shrine_capturable"];
+					GUI.DrawTexture(new Rect(screenPoint.x, Screen.height - screenPoint.y, 32, 32), Images.Get(Button.B) );
+
 				//}
 			} else
 			{
 				message = Locale.Current["shrine_locked"];
 			}
 
-			//Drawing the msg
-			GUI.Label (
-						new Rect (screenPoint.x, (Screen.height - screenPoint.y), 250, 50), 
-			           "<color='#ffffffff'><size='" + (int)(20f * ( (float)Screen.height / 700f )) + "'>" + message + "</size></color>",
-			           style);
+
+			//Displaying message
+			GUI.Label (new Rect (screenPoint.x + 32, (Screen.height - screenPoint.y) + 5 , 500, 50), "<color='#ffffffff'><size='" + (int)(20f * ( (float)Screen.height / 700f )) + "'>" + message +"</size></color>", this.style);
+
 
 		}
 	}
 
+
+
 	public void Start()
 	{
 		this.style = new GUIStyle();
-		this.style.alignment = TextAnchor.MiddleCenter;
+		this.style.alignment = TextAnchor.UpperLeft;
 		this.style.font = (Font)Resources.Load ("Textures/WorldSelect/BankGothic/BankGothicCMdBT-Medium", typeof(Font)); 
 		this.style.fontStyle = FontStyle.Bold;
 		this.style.richText = true;
