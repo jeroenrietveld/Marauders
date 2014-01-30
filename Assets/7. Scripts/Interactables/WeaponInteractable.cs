@@ -34,7 +34,7 @@ public class WeaponInteractable : Interactable {
 		}
 	}
 	
-	public override void ShowMessage()
+	public override void ShowMessage ()
 	{
 		//Getting the cube's location on screen and storing it		 
 		Vector3 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);

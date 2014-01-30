@@ -78,24 +78,61 @@ public class MenuItemTrackbar : MenuItem
 	
 	public override void Draw(int yLocation)
 	{
-		//Drawing the About
-		//Getting the label skin
 		GUIStyle style = parent.skin.GetStyle("label");
-
+		
 		//Setting the default ocolor
-		string colorStr = "";
-		Color color;
+		string color = "";
+		Color c;
 		
 		//Getting the color
 		if (this.hasFocus)
 		{ 
-			colorStr = ToHex(style.focused.textColor);
-			color = style.focused.textColor;
+			color = ToHex(style.focused.textColor);
+			c = style.focused.textColor;
 		}
 		else
 		{
-			colorStr = ToHex(style.normal.textColor);
-			color = style.normal.textColor;
+			color = ToHex(style.normal.textColor);
+			c = style.normal.textColor;
+		}
+		
+		//Debug.Log(this.parent.scale);
+		//Draws a label, style is handled by the skin
+		string txt = "<size='"+ (int)( 40f * this.parent.scale ) + "'><color='" + color + "'>" + this.text + "</color></size>";
+		GUI.Label(
+			new Rect(
+				0,
+				yLocation + 10,
+				parent.region.width,
+				(int)Math.Round(this.height * parent.scale * 0.5f)
+			),
+			txt,
+			color);	
+
+
+		Texture2D texture = new Texture2D(1, 1);
+		texture.SetPixel(0,0, c);
+		texture.Apply();
+
+		Rect r = new Rect(
+			parent.region.width * 0.05f,
+			yLocation + ((this.height * parent.scale) * 0.5f),
+			(parent.region.width * 0.9f) * (this.currentValue - this.min) / (this.max - this.min),
+			((this.height * parent.scale) * 0.5f));
+
+		//The background
+		GUI.DrawTexture(r, texture, ScaleMode.StretchToFill);	
+
+		//Getting the color
+		/*if (this.hasFocus)
+		{ 
+			colorStr = ToHex(styleLabel.focused.textColor);
+			color = styleLabel.focused.textColor;
+		}
+		else
+		{
+			colorStr = ToHex(styleLabel.normal.textColor);
+			color = styleLabel.normal.textColor;
 		}
 
 		//Draws a label, style is handled by the skin
@@ -108,14 +145,17 @@ public class MenuItemTrackbar : MenuItem
 			parent.region.width * 0.6f,
 			(this.height * parent.scale) * 0.5f),
 			txt,
-			style);	
+			style);	*/
+
+		/*Debug.Log (this.hasFocus + ": " + colorStr);
 
 		Texture2D texture = new Texture2D(1, 1);
 		texture.SetPixel(0,0, color);
 		texture.Apply();
+		style.normal.background = texture;*/
 
 
-		GUI.Box(new Rect(0, yLocation + ((this.height * parent.scale) * 0.5f), this.parent.region.width, (this.height * parent.scale) * 0.5f), texture);
+		//GUI.Box(new Rect(0, yLocation + ((this.height * parent.scale) * 0.5f), this.parent.region.width, (this.height * parent.scale) * 0.5f), texture);
 		
 		//Left right indicatorrs
 		/*if (this.hasFocus)
