@@ -26,7 +26,7 @@ public class StartState : SelectionBase
 
             if (check)
             {
-                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+                GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuback", false);
                 GameObject.Find("MenuManager").GetComponent<MenuManager>().ChangeState(MenuStates.SplashState);
             }
         }
@@ -36,7 +36,7 @@ public class StartState : SelectionBase
             block.isJoined = true;
             block.isInSelection = true;
             block.ChangeState(CharacterSelectBlockStates.CharSelectState);
-            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", false);
         }
     }
 

@@ -34,12 +34,12 @@ public class CharacterSelectState : SelectionBase
 
         if(controller.JustPressed(Button.A) || Input.GetKeyDown(KeyCode.W))
         {
-            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", true);
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuselect", false);
 			block.ChangeState(CharacterSelectBlockStates.SkillSelectState);
         }
         else if (controller.JustPressed(Button.B))
         {
-            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuswitch", true);
+            GameManager.Instance.soundInGame.PlaySound(block.menuSelectSounds, "menuback", false);
             block._currentState = null;
             block.ChangeState(CharacterSelectBlockStates.StartState);
             OnInActive();

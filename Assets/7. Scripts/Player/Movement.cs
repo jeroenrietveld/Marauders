@@ -94,33 +94,46 @@ public class Movement : MonoBehaviour {
 	{
 		Avatar myAvatar = GetComponent<Avatar> ();
 
+        Shrine[] shrines = GameObject.FindObjectsOfType<Shrine>();
+        if(shrines.Length > 0)
+        {
+            foreach (Shrine item in shrines)
+            {
+                ApplyMagnetAim(item.transform.position, myAvatar.transform.position);
+            }
+        }
+
 		foreach(Player player in GameManager.Instance.playerRefs)
 		{
 			if(player != myAvatar.player)
 			{
 				GameObject avatar = player.avatar;
-
-				Vector3 difference = avatar.transform.position - myAvatar.transform.position;
-				difference.y = 0;
-				float distance = difference.magnitude;
-
-				if(distance < maxMagnetDistance)
-				{
-					difference = difference.normalized;
-
-					float factor = 1-(distance / maxMagnetDistance);
-
-					if(Mathf.Acos(Vector3.Dot(_targetVelocity.normalized, difference)) < (factor * magnetAngle) * Mathf.Deg2Rad)
-					{
-						_targetVelocity = difference * _targetVelocity.magnitude;
-						
-						Quaternion targetRotation = Quaternion.LookRotation(_targetVelocity, Vector3.up);
-						rigidbody.MoveRotation(targetRotation);
-					}
-				}
+                ApplyMagnetAim(avatar.transform.position, myAvatar.transform.position);
 			}
 		}
 	}
+
+    private void ApplyMagnetAim(Vector3 firstPosition, Vector3 secondPosition)
+    {
+        Vector3 difference = firstPosition - secondPosition;
+        difference.y = 0;
+        float distance = difference.magnitude;
+
+        if (distance < maxMagnetDistance)
+        {
+            difference = difference.normalized;
+
+            float factor = 1 - (distance / maxMagnetDistance);
+
+            if (Mathf.Acos(Vector3.Dot(_targetVelocity.normalized, difference)) < (factor * magnetAngle) * Mathf.Deg2Rad)
+            {
+                _targetVelocity = difference * _targetVelocity.magnitude;
+
+                Quaternion targetRotation = Quaternion.LookRotation(_targetVelocity, Vector3.up);
+                rigidbody.MoveRotation(targetRotation);
+            }
+        }
+    }
 
 	void Update()
 	{

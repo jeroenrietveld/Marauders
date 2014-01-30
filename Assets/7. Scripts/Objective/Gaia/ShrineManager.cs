@@ -59,8 +59,8 @@ public class ShrineManager : MonoBehaviour {
 			_rewardDelay.Start();
 		} else
 		{
-			//Player X has captured a shrine
-			_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_captured"].Replace("{0}", (evt.newOwner.indexInt + 1).ToString()), Locale.Current["shrine_subannouncement_captured"]);
+			//Player X has captured a shrine (Disabled)
+			//_announcer.Announce(AnnouncementType.ShrineCapture, Locale.Current["shrine_announcement_captured"].Replace("{0}", (evt.newOwner.indexInt + 1).ToString()), Locale.Current["shrine_subannouncement_captured"]);
 		}
 
 
