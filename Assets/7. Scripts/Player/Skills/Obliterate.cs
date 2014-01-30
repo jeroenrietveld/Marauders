@@ -125,7 +125,7 @@ public class Obliterate : SkillBase
                             direction,
                             -direction * _force,
                             _damage,
-                            0,
+                            0.2f,
                             false
                             );
                         heartbeat.DoAttack(source);
