@@ -20,7 +20,7 @@ public class LoadingScreen : MonoBehaviour
 
         void Update()
         {
-            if (Application.isLoadingLevel)
+            if (Application.isLoadingLevel && Application.loadedLevelName.Equals("Menu"))
             {
                 _loading = true;
                 _done = true;
