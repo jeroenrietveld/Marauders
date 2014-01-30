@@ -12,7 +12,7 @@ public class LevelState : MenuStateBase
 	{
         center = GameObject.Find("LevelScreen").transform.position;
 
-        _timer = new Timer(1f);
+        _timer = new Timer(1.1f);
         _timer.AddCallback(delegate()
         {
             GameManager.Instance.Start();
@@ -41,7 +41,7 @@ public class LevelState : MenuStateBase
         {
             if(LevelSelectionManager.currentState == LevelSelectionManager.selectionBlocks[LevelSelectionState.Done])
             {              
-                GameObject.Find("CameraFade").GetComponent<CameraFade>().StartFade(new Color(0, 0, 0, 1), 2f);                
+                GameObject.Find("CameraFade").GetComponent<CameraFade>().StartFade(new Color(0, 0, 0, 1), 1f);                
                 _timer.Start();               
             }
         }

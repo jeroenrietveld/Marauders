@@ -9,9 +9,10 @@ public class LoadingScreen : MonoBehaviour
 {
         private bool loading = true;
         public Texture loadingTexture;
+        public GUISkin skin;
 
         void Awake()
-        {
+        {         
             DontDestroyOnLoad(gameObject);
         }
 
@@ -31,9 +32,10 @@ public class LoadingScreen : MonoBehaviour
         {
             if (loading)
             {
-                GUI.depth = -2;
+                GUI.skin = skin;
+                GUI.depth = -20;
                 GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
-                GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                GUI.skin.label.alignment = TextAnchor.LowerCenter;
                 GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Loading...");
             }
         }
