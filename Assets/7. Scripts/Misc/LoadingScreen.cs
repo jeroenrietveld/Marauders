@@ -47,7 +47,6 @@ public class LoadingScreen : MonoBehaviour
             }
             if(!_loading && _done)
             {
-
                 GameManager.Instance.PauseGame();
                 float fontScale = Screen.width / 768f;
                 GUI.skin = skin;
@@ -58,7 +57,7 @@ public class LoadingScreen : MonoBehaviour
                 GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), loadingTexture, ScaleMode.ScaleToFit);
                 GUI.skin.label.alignment = TextAnchor.LowerCenter;
                 GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "Press A to start the game.");
-                if(ControllerInput.GetController(0).JustPressed(XInputDotNetPure.Button.A))
+                if( GameManager.Instance.playerRefs.OrderBy(x => x.indexInt).First().controller.JustPressed(XInputDotNetPure.Button.A))
                 {
                     _done = false;
                     GameManager.Instance.ResumeGame();
