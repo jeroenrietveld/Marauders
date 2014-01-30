@@ -28,12 +28,18 @@ public class Bulwark : SkillBase
     private DecoratableFloat _movementSpeedReduction;
     private DecoratableFloat _damageDone;
 
+	private Avatar _avatar;
+
     public Bulwark()
-        : base(10, _animationSettingsStart, _animationSettingsEnd)
-    {
+        : base(5, _animationSettingsStart, _animationSettingsEnd)
+	{
+		Material mat = (Material)Resources.Load ("Materials/Grayscale");
+
         _bulwark = new Timer(_duration);
         _bulwark.AddCallback(0f, delegate
         {
+			GetComponent<AvatarGraphics>().AddMaterial(mat);
+
             stunObject = GetComponent<Stun>();
             stunObject.DisableStunTime(_duration);
 
@@ -55,6 +61,7 @@ public class Bulwark : SkillBase
         // Remove and reset the filters and animation.
         _bulwark.AddCallback(delegate
         {
+			GetComponent<AvatarGraphics>().RemoveMaterial(mat);
             _movementSpeedReduction.RemoveFilter(ModulateDRMovement);
             _damageDone.RemoveFilter(ModulateDRDamage);
             // Reset the animation to the start animation.
