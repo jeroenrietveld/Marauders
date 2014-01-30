@@ -195,18 +195,8 @@ public class Attack : ActionBase {
 
 							foreach(var attackable in attackables)
 							{
-								var notification = CameraSettings.cameraSettings.Notify(
-									"Prefabs/GUI/Combo" + (_comboCount + 1).ToString(),
-									transform.position + Vector3.up * 2,
-									1.5f,
-									Vector3.up * 0.5f
-								);
-
-								notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
-
-								attackable.DoAttack(dmgSource);
+								hasHit = (hasHit) ? hasHit : attackable.DoAttack(dmgSource);
 							}
-							hasHit = true;
 						}
 					}
 				}
@@ -215,6 +205,16 @@ public class Attack : ActionBase {
 
 		if (hasHit)
 		{
+			
+			var notification = CameraSettings.cameraSettings.Notify(
+				"Prefabs/GUI/Combo" + (_comboCount + 1).ToString(),
+				transform.position + Vector3.up * 2,
+				1.5f,
+				Vector3.up * 0.5f
+				);
+			
+			notification.renderer.material.SetColor("_Color", GetComponent<Avatar>().player.color);
+
 			_comboCount = nextComboCount;
 		}
 		else

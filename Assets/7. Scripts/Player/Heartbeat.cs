@@ -107,7 +107,7 @@ public class Heartbeat : Attackable
 		lastAttackerTimer.Update ();
     }
 
-	protected override void ApplyAttack(DamageSource source)
+	protected override bool ApplyAttack(DamageSource source)
 	{
 		this.lastAttacker = source.inflicter;
 		this.lastAttackerTimer.Start ();
@@ -163,5 +163,7 @@ public class Heartbeat : Attackable
 		{
 			_avatar.gameObject.GetComponent<Stun>().SetStunTime(source.stunTime);
 		}
+
+		return true;
 	}
 }

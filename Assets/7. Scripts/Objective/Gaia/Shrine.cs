@@ -114,13 +114,12 @@ public class Shrine : Attackable {
 		_underAttackTimer.Update ();
 	}
 
-	protected override void ApplyAttack(DamageSource source)
+	protected override bool ApplyAttack(DamageSource source)
 	{
         if(capturable)
         {
 			GameManager.Instance.soundInGame.PlaySoundIndex(shrineSourceHit, "ShrineHit", source.comboCount, false);
 
-			
 			var player = source.inflicter;
 			if (player != _owner)
             {
@@ -134,8 +133,12 @@ public class Shrine : Attackable {
                     Event.dispatch(new ShrineCapturedEvent(this, player, oldOwner));
                     GameManager.Instance.soundInGame.PlaySound(shrineActivatedConquered, "Shrine-conquered", true);
                 }
+
+				return true;
             }
         }
+
+		return false;
 	} 
 	
 	public void Reset()
