@@ -33,6 +33,8 @@ public class Attack : ActionBase {
 	private AudioSource swingSource;
 
 	public DecoratableDamagesource damageSource;
+
+    private bool _customAttackDelay = false;
 	
 	public Attack()
 	{
@@ -78,7 +80,16 @@ public class Attack : ActionBase {
 	{
 		if (_weapon && !_attackCooldown.running)
 		{
-			_attackDelay.endTime = _weapon.attacks[_comboCount].timing;
+            // Used by sunderstrike to attack almost immediately. Is set in SetCombo() method.
+            if (_customAttackDelay)
+            {
+                _attackDelay.endTime = 0.07f;
+                _customAttackDelay = false;
+            }else
+            {
+                _attackDelay.endTime = _weapon.attacks[_comboCount].timing;
+            }
+			
 			_attackDelay.Start();
 			_comboReset.Stop();
 
@@ -92,7 +103,6 @@ public class Attack : ActionBase {
             {
                 animation[_weapon.attacks[_comboCount].animationName].weight = 0.6f;
                 animation.Blend(_weapon.attacks[_comboCount].animationName, 0.6f);
-                //Debug.Log("Combo!");
             }
             else
             {
@@ -232,6 +242,7 @@ public class Attack : ActionBase {
 	{
 		_comboCount = _weapon.attacks.Count - 1;
 
-		_attackCooldown.Stop ();
+        _attackCooldown.Stop();
+        _customAttackDelay = true;
 	}
 }
