@@ -2,6 +2,9 @@
 	Properties {
 		_MainTex ("Base (RGB) Alpha (A)", 2D) = "white" {}
 		playerColor ("Player Color", Color) = (1, 1, 1, 1)
+		lowerBound ("Lower Bound", Float) = 0
+		upperBound ("Upper Bound", Float) = 1
+		alpha ("Alpha", Float) = 1
 	}
 	SubShader {
 		Tags { "Queue"="AlphaTest" "RenderType"="Opaque" }
