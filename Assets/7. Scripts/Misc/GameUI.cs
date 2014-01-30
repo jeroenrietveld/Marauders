@@ -75,7 +75,7 @@ public class GameUI : MonoBehaviour {
 				Graphics.DrawTexture(rect, timeSyncTexture, timeSyncSliceMaterial);
 			}
 
-			GUI.Label (_cooldownUIPositions[playerIndex][0], (GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
+			GUI.Label (_cooldownUIPositions[playerIndex][0], (int)(GameManager.Instance.playersByTimeSync().IndexOf(player) + 1).ToString());
 		}
 	}
 
