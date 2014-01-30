@@ -31,7 +31,7 @@ public class Bulwark : SkillBase
 	private Avatar _avatar;
 
     public Bulwark()
-        : base(5, _animationSettingsStart, _animationSettingsEnd)
+        : base(10, _animationSettingsStart, _animationSettingsEnd)
 	{
 		Material mat = (Material)Resources.Load ("Materials/Grayscale");
 

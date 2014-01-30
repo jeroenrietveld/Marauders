@@ -55,7 +55,7 @@ public class GameUI : MonoBehaviour {
 			Graphics.DrawTexture(_cooldownUIPositions[playerIndex][0], timeSyncTexture, timeSyncMaterial);
 
 			int timeSync = GameManager.Instance.matchSettings.timeSync;
-			GUI.Label(_cooldownUIPositions[playerIndex][0], (((float)player.timeSync/(float)timeSync) * 100).ToString()+"%", _style);
+			GUI.Label(_cooldownUIPositions[playerIndex][0], ((int)(((float)player.timeSync/(float)timeSync) * 100)).ToString()+"%", _style);
 
 			if(timeSyncSliceAlphas[playerIndex] > 0)
 			{

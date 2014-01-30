@@ -12,7 +12,7 @@ public class PlayerCell : Cell
     {
         this.player = player;
         this.title = Locale.Current["scoreboard_player_" + player.index.ToString()];
-        this.content = "";
+        this.content = player.marauder;
         this.trophysEnabled = false;
         this.cellType = CellType.Static;
     }

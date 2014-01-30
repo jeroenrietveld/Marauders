@@ -17,7 +17,7 @@ public class Dash : SkillBase
 
 	private Timer _dashing;
 
-	public Dash() : base(5, _animationSettings)
+	public Dash() : base(4, _animationSettings)
 	{
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (delegate {

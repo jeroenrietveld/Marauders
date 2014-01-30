@@ -31,11 +31,10 @@ public class Scoreboard : MonoBehaviour
     private Texture _currentTrophyTexture;
 
     //Placetextures
-    private Texture _firstPlaceTexture;
-    private Texture _secondPlaceTexture;
-    private Texture _thirdPlaceTexture;
-    private Texture _fourthPlaceTexture;
-    private Texture _currentPlaceTexture;
+    private Texture _samuraiTexture;
+    private Texture _thiefTexture;
+    private Texture _juggernautTexture;
+    private Texture _currentTexture;
 
     public List<Trophy> trophyList;
 
@@ -52,10 +51,9 @@ public class Scoreboard : MonoBehaviour
         _greenTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_green", typeof(Texture)) as Texture;
         _purpleTrophyTexture = Resources.Load("Textures/Scoreboard/trophy_purple", typeof(Texture)) as Texture;
 
-        _firstPlaceTexture = Resources.Load("Textures/Scoreboard/place_1st", typeof(Texture)) as Texture;
-        _secondPlaceTexture = Resources.Load("Textures/Scoreboard/place_2nd", typeof(Texture)) as Texture;
-        _thirdPlaceTexture = Resources.Load("Textures/Scoreboard/place_3rd", typeof(Texture)) as Texture;
-        _fourthPlaceTexture = Resources.Load("Textures/Scoreboard/place_4th", typeof(Texture)) as Texture;
+        _samuraiTexture = Resources.Load("Textures/Scoreboard/samurai", typeof(Texture)) as Texture;
+        _thiefTexture = Resources.Load("Textures/Scoreboard/thief", typeof(Texture)) as Texture;
+        _juggernautTexture = Resources.Load("Textures/Scoreboard/juggernaut", typeof(Texture)) as Texture;
 
         //Set the scoreboard
         if(scoreboard == null)
@@ -340,16 +338,13 @@ public class Scoreboard : MonoBehaviour
                    float textureSize = Math.Min(cellWidth, cellHeight) * 0.8f;
                    float horizontalTextureOffset = (cellWidth - textureSize) / 2;
                    float verticalTextureOffset = cellHeight * 0.15f;
-                   int index = playersByTimeSync.IndexOf(((PlayerCell)_cells[i][j]).player);
-                   switch(index)
+                   switch((string)((PlayerCell)_cells[i][j]).content)
                    {
-                       case 0: _currentPlaceTexture = _firstPlaceTexture; break;
-                       case 1: _currentPlaceTexture = _secondPlaceTexture; break;
-                       case 2: _currentPlaceTexture = _thirdPlaceTexture; break;
-                       case 3: _currentPlaceTexture = _fourthPlaceTexture; break;
-                       default: _currentPlaceTexture = _firstPlaceTexture; break;
+                       case "Samurai": _currentTexture = _samuraiTexture; break;
+                       case "Thief": _currentTexture = _thiefTexture; break;
+                       case "Juggernaut": _currentTexture = _juggernautTexture; break;
                    }
-                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _currentPlaceTexture);
+                   Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalTextureOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalTextureOffset, textureSize, textureSize), _currentTexture);
                    _currentColor = ((PlayerCell)_cells[i][j]).player.color;
                } 
                else if(_cells[i][j] is TimeSyncCell)

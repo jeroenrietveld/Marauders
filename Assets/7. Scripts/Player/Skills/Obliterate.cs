@@ -4,12 +4,15 @@ using System.Linq;
 
 public class Obliterate : SkillBase
 {
+
+    private TrailRenderer[] _trailRenderers;
+
     private float _range = 3.5f;
     private float _damage = .1f;
-    private float _force = 600f;
+    private float _force = 400f;
     private float _duration = 0.8125f;
     private Timer _obliterate;
-
+    private bool _canAttack = false;
     private Dictionary<PlayerIndex, int> hitAmounts = new Dictionary<PlayerIndex, int>();
 
     private static AnimationHandler.AnimationSettings _animationSettingsOneHanded = new AnimationHandler.AnimationSettings(
@@ -27,7 +30,7 @@ public class Obliterate : SkillBase
         );
 
     public Obliterate()
-        : base(3, _animationSettingsOneHanded, _animationSettingsTwoHanded)
+        : base(6, _animationSettingsOneHanded, _animationSettingsTwoHanded)
     {
         foreach (Player player in GameManager.Instance.playerRefs)
         {
@@ -38,8 +41,29 @@ public class Obliterate : SkillBase
 
         _obliterate.AddCallback(0f, delegate {
             // Set the correct animation to use via the animation name and the current weapong prototype.
-            string name = "Obliterate_" + this.gameObject.GetComponent<Attack>().weapon.weaponType;
+            Attack att = this.gameObject.GetComponent<Attack>();
+            string name = "Obliterate_" + att.weapon.weaponType;
             animationSettings = allAnimationSettings.First(x => x.attackInfo.animationName == name);
+
+            _canAttack = true;
+        });
+
+        _obliterate.AddTickCallback(delegate()
+        {
+            _trailRenderers = this.gameObject.GetComponentsInChildren<TrailRenderer>();
+
+            if (_trailRenderers != null)
+            {
+                var trailTime = (1 - Mathf.Pow(_obliterate.Phase(), 3)) * .2f;
+                foreach (var renderer in _trailRenderers)
+                {
+                    renderer.time = trailTime;
+                }
+            }
+        });
+
+        _obliterate.AddCallback(_duration / 2, delegate {
+            _canAttack = true;
         });
 
         _obliterate.AddCallback(delegate
@@ -49,9 +73,9 @@ public class Obliterate : SkillBase
             {
                 hitAmounts[pl.index] = 0;
             }
+            _canAttack = false;
         });
     }
-
     
     public override void PerformAction()
     {
@@ -73,7 +97,7 @@ public class Obliterate : SkillBase
     protected override void OnUpdate()
     {
         _obliterate.Update();
-        if(_obliterate.running)
+        if(_obliterate.running && _canAttack)
         {
             Avatar attacker = this.gameObject.GetComponent<Avatar>();
 
@@ -105,6 +129,7 @@ public class Obliterate : SkillBase
                             false
                             );
                         heartbeat.DoAttack(source);
+                        _canAttack = false;
                     }
                 }
             }
