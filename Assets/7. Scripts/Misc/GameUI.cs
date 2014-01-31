@@ -38,7 +38,7 @@ public class GameUI : MonoBehaviour {
 			timeSyncSliceAlphas.Add(0);
 			shownTimeSync.Add(0);
 		}
-		
+
 		_style = new GUIStyle();
 		_style.alignment = TextAnchor.MiddleCenter;
 		_style.font = (Font)Resources.Load ("Textures/WorldSelect/BankGothic/BankGothicCMdBT-Medium", typeof(Font)); 
@@ -141,6 +141,7 @@ public class PlayerUI
 	private GameObject _timeSyncIndicator;
 	private Timer _timeSyncIndicatorUpdater = new Timer(1);
 	private Timer _respawnTimer = new Timer ();
+	private TextMesh _timeSyncPercentage;
 
 	public PlayerUI(Player player)
 	{
@@ -148,10 +149,12 @@ public class PlayerUI
 		_uiRoot = new GameObject ();
 		_uiRoot.transform.position = position;
 
-		InitGUI ();
+		Init ();
 
 		_timeSyncIndicatorUpdater.AddPhaseCallback(delegate {
-			_timeSyncIndicator.renderer.material.SetFloat("phase", player.timeSync / (float)GameManager.Instance.matchSettings.timeSync);
+			float timeSync = GameManager.Instance.matchSettings.timeSync;
+			_timeSyncIndicator.renderer.material.SetFloat("phase", player.timeSync / timeSync);
+			_timeSyncPercentage.text = ((int)((player.timeSync/timeSync) * 100)).ToString()+"%";
 		});
 
 		Event.register<PlayerTimeSyncEvent> (CreateTimeSyncSlice);
@@ -166,7 +169,7 @@ public class PlayerUI
 		Event.unregister<AvatarSpawnEvent> (OnAvatarSpawn);
 	}
 
-	private void InitGUI()
+	private void Init()
 	{
 		var color = _player.color;
 
@@ -182,10 +185,21 @@ public class PlayerUI
 		respawnIndicator.renderer.material.color = color;
 		respawnIndicator.transform.SetParentKeepLocal (_uiRoot.transform);
 
-		_respawnTimer.AddTickCallback (
-		delegate {
-						respawnIndicator.transform.localScale = Vector3.Lerp (Vector3.one, timeSyncIndicatorEdge.transform.localScale, _respawnTimer.Phase ());
-				});
+		_respawnTimer.AddTickCallback (delegate
+		{
+			respawnIndicator.transform.localScale = Vector3.Lerp (Vector3.one, timeSyncIndicatorEdge.transform.localScale, _respawnTimer.Phase ());
+		});
+
+		_timeSyncPercentage = new GameObject ().AddComponent<TextMesh> ();
+		_timeSyncPercentage.gameObject.layer = LayerMask.NameToLayer ("GUI");
+		_timeSyncPercentage.transform.SetParentKeepLocal (_uiRoot.transform);
+		_timeSyncPercentage.alignment = TextAlignment.Center;
+		_timeSyncPercentage.font = (Font)Resources.Load ("Textures/WorldSelect/BankGothic/BankGothicCMdBT-Medium", typeof(Font));
+		_timeSyncPercentage.renderer.material = _timeSyncPercentage.font.material;
+		_timeSyncPercentage.anchor = TextAnchor.MiddleCenter;
+		_timeSyncPercentage.characterSize = .025f;
+
+		_timeSyncPercentage.text = "0%";
 	}
 
 	public void Update()
