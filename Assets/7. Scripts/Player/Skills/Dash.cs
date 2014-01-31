@@ -21,7 +21,11 @@ public class Dash : SkillBase
 	{
 		_dashing = new Timer (0.3f);
 		_dashing.AddCallback (delegate {
-			rigidbody.velocity = Vector3.zero;
+            if(!gameObject.rigidbody.isKinematic)
+            {
+                rigidbody.velocity = Vector3.zero;
+            }
+			
 		});
 	}
 	
@@ -32,7 +36,6 @@ public class Dash : SkillBase
 
 	protected override void OnPerformAction()
 	{
-		GameManager.Instance.soundInGame.PlaySound(skillAudioSource, "Dash", true);
 		_dashing.Start ();
     }
 
@@ -40,8 +43,9 @@ public class Dash : SkillBase
 	{
 		_dashing.Update ();
 
-		if(_dashing.running)
+		if(_dashing.running && !gameObject.rigidbody.isKinematic)
 		{
+            GameManager.Instance.soundInGame.PlaySound(skillAudioSource, "Dash", true);
 			rigidbody.velocity = transform.forward * 10;
 		}
 	}
