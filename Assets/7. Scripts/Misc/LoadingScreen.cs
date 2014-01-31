@@ -88,6 +88,6 @@ public class Tip
     public static string GetRandom()
     {
         System.Random r = new System.Random();
-        return Locale.Current["tip_" + r.Next()%11];
+        return Locale.Current["tip_" + r.Next()%13];
     }
 }

@@ -95,14 +95,15 @@ public class en : Locale {
         Translations["tip_8"] = "Knowing your opponents skills will give you an advantage in battle.";
         Translations["tip_9"] = "Who said killstealing is not allowed?";
         Translations["tip_10"] = "Dashing will also push opponents back if you collide.";
+        Translations["tip_11"] = "Hitting three consecutive hits will result in a combo, adding knockback.";
+        Translations["tip_12"] = "Keep an eye out for the level objectives, it just might win you the game";
 
         Translations["loading_text"] = "Marauders,\n\n"
                                         + "Kill your enemies, push them out of\n"
                                         + "the time bubble or capture objectives\n"
                                         + "to gain Time Sync.\n\n"
                                         + "The first marauder who is fully\n"
-                                        + "synced, will this piece of the\n"
-                                        + "world to his timezone.\n\n"
+                                        + "synced, will claim this world.\n\n"
                                         + "Good luck.";
 
 
