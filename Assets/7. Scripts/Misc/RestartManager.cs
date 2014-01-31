@@ -8,17 +8,21 @@ using XInputDotNetPure;
 public class RestartManager : MonoBehaviour
 {
     public static bool restarted = false;
+    private Timer _timer;
 
     void Awake()
     {
         DontDestroyOnLoad(this);
+        _timer = new Timer(5f);
     }
 
     void Update()
     {
+        _timer.Update();
         if(GameManager.Instance.gameEnded)
         {
-            if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A))
+            _timer.Start();
+            if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A) && !_timer.running)
             {
                 Restart();
             }

@@ -83,6 +83,29 @@ public class en : Locale {
 		Translations ["level_intro_announcement"] = "Capture this Timezone";
 		Translations ["level_intro_subannouncement"] = "Fill your Time Sync bar to capture this zone";
 
+        //Tips
+        Translations["tip_0"] = "With Bulwark activated, you cannot be stunned.";
+        Translations["tip_1"] = "Every attack you land will stun the opponent for a brief time.";
+        Translations["tip_2"] = "Windsweep will deal damage and knock enemies back!";
+        Translations["tip_3"] = "Destabilize will remove all forces, so make good use of it!";
+        Translations["tip_4"] = "Obliterate can hit every opponent up to two times.";
+        Translations["tip_5"] = "Xero, the thief, has the highest attack speed.";
+        Translations["tip_6"] = "You will deal more damage if you hit an opponent on his remaining heartbeat.";
+        Translations["tip_7"] = "A suicide will decrease your Time Sync.";
+        Translations["tip_8"] = "Knowing your opponents skills will give you an advantage in battle.";
+        Translations["tip_9"] = "Who said killstealing is not allowed?";
+        Translations["tip_10"] = "Dashing will also push opponents back if you collide.";
+
+        Translations["loading_text"] = "Marauders,\n\n"
+                                        + "Kill your enemies, push them out of\n"
+                                        + "the time bubble or capture objectives\n"
+                                        + "to gain Time Sync.\n\n"
+                                        + "The first marauder who is fully\n"
+                                        + "synced, will this piece of the\n"
+                                        + "world to his timezone.\n\n"
+                                        + "Good luck.";
+
+
 	}
 
 	public override string GetLanguageCode ()
