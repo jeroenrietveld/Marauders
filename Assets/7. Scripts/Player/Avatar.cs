@@ -45,7 +45,6 @@ public class Avatar : MonoBehaviour
 		foreach (Component component in components)
 		{
 			component.gameObject.SetActive(true);
-			Debug.Log ("Enabled ClothRenderer");
 		}
 	}
 

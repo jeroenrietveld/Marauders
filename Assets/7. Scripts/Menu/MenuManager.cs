@@ -55,7 +55,6 @@ public class MenuManager : MonoBehaviour {
 		}
 
     	currentState = states[state];
-        Debug.Log("" + currentState.center.x + " " + currentState.center.y + " " + currentState.center.z);
         cameraMovement.SetTarget(currentState.center + new Vector3(0, 0, distanceFromMenu),
                                     previousState != null ? previousState.cameraMoveTime : float.Epsilon);     
   

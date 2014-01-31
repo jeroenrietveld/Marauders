@@ -3,7 +3,7 @@
         _MainTex ("Base (RGB)", 2D) = "white" {}
     }
     SubShader {
-		Tags { "Queue"="AlphaTest" "RenderType"="Opaque" }
+		Tags { "Queue"="AlphaTest+2" "RenderType"="Opaque" }
 		
 		Blend SrcAlpha OneMinusSrcAlpha
  

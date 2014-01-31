@@ -92,8 +92,7 @@ public class GameManager {
     public void StopGame()
     {
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
-		this.soundInGame.PlaySoundRandom(s, playersByTimeSync()[0].marauder + "-victory" , true);
-        this.playerRefs.Clear();
+		this.soundInGame.PlaySound(s, playersByTimeSync()[0].marauder + "-victory" , true);
         GameObject.Find("_GLOBAL").GetComponent<Scoreboard>().ShowResults();
         PauseGame();
         gameEnded = true;
