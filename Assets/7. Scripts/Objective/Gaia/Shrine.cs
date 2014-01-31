@@ -66,8 +66,13 @@ public class Shrine : Attackable {
 
 	public int shrineGUIIndex;
 	private Vector3 _shrineGUIPosition = new Vector3(0, 0.9f);
-	private Vector3 _shrineGUIPositionOffset = new Vector3 (0.2f, 0);
+	private Vector3 _shrineGUIPositionOffset = new Vector3 (1.5f, -1f);
 	private GameObject _shrineGUI;	
+	private int[] _shrineGUIRotations = new int[]{
+		90,
+		0,
+		-90
+	};
 
 	private ShrineMovement _shrineMovement;
 
@@ -78,15 +83,20 @@ public class Shrine : Attackable {
 		_orbs = GetComponentsInChildren<ShrineOrb> ();
 		_light = GetComponentInChildren<Light> ();
 
-		_shrineGUI = ResourceCache.GameObject ("Prefabs/GUI/ShrineGUI");
+		//_shrineGUI = ResourceCache.GameObject ("Prefabs/GUI/ShrineGUI");
 		//_shrineGUIPosition = CameraSettings.cameraSettings.PointToWorldPoint (_shrineGUIPosition);
 
-		if(shrineGUIIndex != 1)
-		{
-			_shrineGUIPosition += (shrineGUIIndex == 0) ? - _shrineGUIPositionOffset : _shrineGUIPositionOffset;
-		}
+		//if(shrineGUIIndex != 1)
+		//{
+		//	_shrineGUIPosition += (shrineGUIIndex == 0) 
+		//			? new Vector3(-_shrineGUIPositionOffset.x, _shrineGUIPositionOffset.y) 
+		//			: new Vector3(_shrineGUIPositionOffset.x, _shrineGUIPositionOffset.y);
+		//}
 
-		_shrineGUI.transform.position = _shrineGUIPosition;
+		//Vector3 rotation = _shrineGUI.transform.rotation;
+		//rotation.x = _shrineGUIRotations [shrineGUIIndex];
+		//_shrineGUI.transform.rotation = rotation;
+		//_shrineGUI.transform.position = _shrineGUIPosition;
 
 		_lightTimer = new Timer (1);
 		_lightTimer.AddTickCallback(delegate
@@ -100,7 +110,7 @@ public class Shrine : Attackable {
 				orb.SetColor(color);
 			}
 			
-			_shrineGUI.renderer.material.color = color;
+			//_shrineGUI.renderer.material.color = color;
 		});
 
 		_shrineMovement = GetComponentInChildren<ShrineMovement> ();
