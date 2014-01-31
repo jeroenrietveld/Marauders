@@ -239,7 +239,7 @@ public class PlayerUI
 			}
 			else
 			{
-				slice.transform.position = Vector3.Lerp(slice.transform.position, Vector3.zero, .5f);
+				slice.transform.position = Vector3.Lerp(_uiRoot.transform.position, Vector3.zero, .5f);
 				ObjectMovement.Create(slice, _uiRoot.transform.position, slice.transform.localScale, _timeSyncIndicatorUpdater.endTime);
 				slice.transform.localScale = Vector3.one;
 			}

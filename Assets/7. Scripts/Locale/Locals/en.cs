@@ -80,6 +80,9 @@ public class en : Locale {
         Translations["scoreboard_suicides"] = "Suicides";
         Translations["scoreboard_ownedshrines"] = "Owned Shrines";
 
+		Translations ["level_intro_announcement"] = "Capture this Timezone";
+		Translations ["level_intro_subannouncement"] = "Fill your Time Sync bar to capture this zone";
+
 	}
 
 	public override string GetLanguageCode ()
