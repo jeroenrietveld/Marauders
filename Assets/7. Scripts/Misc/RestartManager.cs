@@ -17,11 +17,9 @@ public class RestartManager : MonoBehaviour
     }
 
     void Update()
-    {
-        _timer.Update();
+    {      
         if(GameManager.Instance.gameEnded)
-        {
-            _timer.Start();
+        {      
             if (ControllerInput.GetController(GameManager.Instance.playerRefs[0].index).JustPressed(Button.A) && !_timer.running)
             {
                 Restart();
