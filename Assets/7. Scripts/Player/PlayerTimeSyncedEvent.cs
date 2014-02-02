@@ -16,6 +16,9 @@ public struct PlayerTimeSyncEvent
 		this.amount = amount;
 		this.worldSpacePosition = worldSpacePosition;
 	}
+
+	public int newTimeSync { get { return player.timeSync; } }
+	public int oldTimeSync { get { return Mathf.Clamp(player.timeSync - amount, 0, GameManager.Instance.matchSettings.timeSync); } }
 }
 
 // When fully synced
