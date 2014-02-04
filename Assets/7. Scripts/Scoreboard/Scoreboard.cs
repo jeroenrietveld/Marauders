@@ -359,7 +359,7 @@ public class Scoreboard : MonoBehaviour
                    Graphics.DrawTexture(new Rect(j * cellWidth + horizontalOffset + horizontalMatOffset, i * (boxHeight + verticalOffset * 2) + titleOffset + verticalMatOffset, matSize, matSize), _texture, _material);
                    
                    scoreboardskin.label.alignment = TextAnchor.MiddleCenter;
-                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.20f*(cellTop) + titleOffset, cellWidth, cellHeight), _cells[i][j].GetContent() + "%");
+                   GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset * 2) + 0.20f*(cellTop) + titleOffset, cellWidth, cellHeight), (int)(percentage*100f) + "%");
                    scoreboardskin.label.alignment = TextAnchor.UpperCenter;
                }
                else 
