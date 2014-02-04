@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQIEAAgAACAAAAAAAAQAEAAACABAAgAAQAAAQAAAIAA=</HashCode>
+      <FileName>Assets\7. Scripts\Misc\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerInput" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAGAAAAAAEAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\7. Scripts\Dynamics\ControllerInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadingScreen" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAACAAIAAAAAEAAAAEAAAAAAAABACAAAAgAEA=</HashCode>
+      <FileName>Assets\7. Scripts\Misc\LoadingScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SplashState" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Menu\SplashState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelState" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAAAAAAAAAAAACAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Menu\LevelState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArmoryState" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAABACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Menu\ArmoryState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameUI" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Misc\GameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RestartManager" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAwAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\7. Scripts\Misc\RestartManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="5.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAABAAAAAIAAFAAAEAACAEAAAAZACAwAQAIAABAAE=</HashCode>
+      <FileName>Assets\7. Scripts\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillBase" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAACIAAAAAEAAAAAAAACAAAAAAAAADAAUQCAA=</HashCode>
+      <FileName>Assets\7. Scripts\Player\Skills\SkillBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scoreboard" Collapsed="true">
+    <Position X="5.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQBAAAAaAIEQABFgCAAYABRB4FAEAECBCACARAAJA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Scoreboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

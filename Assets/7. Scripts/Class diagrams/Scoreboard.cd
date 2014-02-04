@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Cell" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAAAAAAAAAAAAAAAEAAAAAAACAAgACAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomCell" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAACAAgAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\CustomCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scoreboard">
+    <Position X="9.25" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAQBAAAAaAIEQABFgCAAYABRB4FAEAECBCACARAAJA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Scoreboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCell" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\PlayerCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSyncCell" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\TimeSyncCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitlesCell" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\TitlesCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="GameManager.MatchSettings">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\7. Scripts\Misc\GameManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQIEAAgAACAAAAAAAAQAEAAACABAAgAAQAAAQAAAIAA=</HashCode>
+      <FileName>Assets\7. Scripts\Misc\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CellType">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAgAAgAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\7. Scripts\Scoreboard\Cells\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

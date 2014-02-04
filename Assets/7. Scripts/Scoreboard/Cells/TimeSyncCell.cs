@@ -19,10 +19,15 @@ public class TimeSyncCell : Cell
 
     public override string GetContent()
     {
+        /*
+         * Not used anymore
+         * 
         if ((int)content < 0 || (int)content > (float)GameManager.Instance.matchSettings.timeSync)
         {
             content = (int)Mathf.Clamp((int)content, 0, (float)GameManager.Instance.matchSettings.timeSync);
         }
         return ((int)(((int)content / (float)GameManager.Instance.matchSettings.timeSync)*100f)).ToString(); 
+         */
+        return null;
     }
 }

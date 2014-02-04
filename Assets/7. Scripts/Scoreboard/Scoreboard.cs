@@ -41,7 +41,18 @@ public class Scoreboard : MonoBehaviour
     public Scoreboard scoreboard;
 
     private void Initialize() 
-    {
+    {      
+        //Set the scoreboard
+        if(scoreboard == null)
+        {
+            scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
+        }
+        else
+        {
+            scoreboard.Clear();
+            Initialize();
+        }
+
         //Set all the textures and materials
         _material = Resources.Load("Materials/Cooldown", typeof(Material)) as Material;
         _texture = Resources.Load("Textures/Cooldown", typeof(Texture)) as Texture;
@@ -54,17 +65,6 @@ public class Scoreboard : MonoBehaviour
         _samuraiTexture = Resources.Load("Textures/Scoreboard/samurai", typeof(Texture)) as Texture;
         _thiefTexture = Resources.Load("Textures/Scoreboard/thief", typeof(Texture)) as Texture;
         _juggernautTexture = Resources.Load("Textures/Scoreboard/juggernaut", typeof(Texture)) as Texture;
-
-        //Set the scoreboard
-        if(scoreboard == null)
-        {
-            scoreboard = GameObject.Find("_GLOBAL").GetComponent<Scoreboard>();
-        }
-        else
-        {
-            scoreboard.Clear();
-            Initialize();
-        }
 
         //Add the main cells.
         foreach (var player in GameManager.Instance.playerRefs)
@@ -350,7 +350,7 @@ public class Scoreboard : MonoBehaviour
                else if(_cells[i][j] is TimeSyncCell)
                {
                    //TimeSync texture here
-                   float percentage = (int)_cells[i][j].content / (float)GameManager.Instance.matchSettings.timeSync;
+                   float percentage = (int)((TimeSyncCell)_cells[i][j]).player.timeSync / (float)GameManager.Instance.matchSettings.timeSync;
                    _material.SetFloat("phase", percentage);
                    _material.SetColor("playerColor", _currentColor);
                    float matSize = Math.Min(cellWidth, cellHeight) * 0.75f;
