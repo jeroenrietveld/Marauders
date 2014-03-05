@@ -3,106 +3,71 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using SimpleJSON;
 
-public abstract class Locale {
-	public static void Initialize()
-	{
-		//Initialized the available locals
-		_AvailableLocals = new Dictionary<string, Locale>();
-
-		//Getting all the types
-		Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-		//List<Type> localeTypes = new List<Type>();
-		
-		//Looping each type we can find
-		foreach (Type type in allTypes)
-		{
-			//Is it a subclass?
-			if (type.IsSubclassOf(typeof(Locale)))
-			{
-				//Yes; adding it to the list
-				Locale locale = (Locale)type.GetConstructor(Type.EmptyTypes).Invoke(null);
-				_AvailableLocals.Add (locale.GetLanguageCode(), locale);
-
-			}
-		}
-
-		//Nasty way of loading default languages, but w/e
-		_Current = _AvailableLocals["en"];
-		_Default = _AvailableLocals["en"];
-
-	}
-
-	/// <summary>
-	/// Gets the current locale
-	/// </summary>
-	/// <value>The current.</value>
+public class Locale {
+	
 	public static Locale Current
 	{
-		get { 
-			if (_AvailableLocals == null)
-			{
-				Locale.Initialize();
-			}
+		get;
+		set;
+	}
 
-			return _Current; 
+	public static List<Locale> AvailableLocales
+	{
+		get;
+		private set;
+	}
+
+	private static string localePath = "Locale/Locales";
+	static Locale()
+	{
+		var jsonTexts = Resources.LoadAll<TextAsset>(localePath);
+
+		var locales = new List<Locale>();
+		foreach(var text in jsonTexts)
+		{
+			locales.Add(new Locale(JSON.Parse(text.text)));
+		}
+
+		AvailableLocales = locales;
+
+		foreach(var locale in locales)
+		{
+			if(locale["locale_code"].Equals("en"))
+			{
+				Current = locale;
+			}
+		}
+
+		if(Current == null)
+		{
+			Current = locales[0];
 		}
 	}
-	private static Locale _Current;
 
-	/// <summary>
-	/// Gets the default locale
-	/// </summary>
-	/// <value>The default.</value>
-	public static Locale Default
+	private Locale(JSONNode json)
 	{
-		get { return _Default; }
+		foreach(KeyValuePair<string, JSONNode> kv in json.AsObject)
+		{
+			Translations[kv.Key] = kv.Value.Value;
+		}
 	}
-	private static Locale _Default;
-	
-	/// <summary>
-	/// Available locals
-	/// </summary>
-	/// <returns>The locals.</returns>
-	public static Dictionary<string,Locale> AvailableLocals
-	{
-		get { return _AvailableLocals; }
-	}
-	private static Dictionary<string,Locale> _AvailableLocals;
 
-	/// <summary>
-	/// The language code.
-	/// </summary>
-	public abstract string GetLanguageCode();
-
-	public static void SwitchLocale(string Language)
-	{
-		_Current = _AvailableLocals[Language];
-	}
-	
-	/// <summary>
-	/// Gets the <see cref="Locale"/> with the specified key.
-	/// </summary>
-	/// <param name="key">Key.</param>
 	public string this[string key]
 	{
 		get
 		{
-			//Checking if we have the translations
 			if (Translations.ContainsKey(key))
 			{
 				return Translations[key];
 			}
 
-			return "Locale '" + this.GetLanguageCode() + "' does not contain key '" + key + "'";
+			return "Missing String: '" + key + "'";
 		}
 	}
 
-	/// <summary>
-	/// The translations.
-	/// </summary>
-	protected Dictionary<string, string>Translations = new Dictionary<string, string>();
+	private Dictionary<string, string> Translations = new Dictionary<string, string>();
 	
 }
-
 

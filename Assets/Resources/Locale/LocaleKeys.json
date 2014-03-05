@@ -1,0 +1,84 @@
+[
+	"locale_code",
+	"language",
+
+	"weapon_pickup",
+
+	"press_join",
+	"connect_controller",
+	"press_select",
+	"press_reselect",
+	"text_defense",
+	"text_offense",
+	"text_utility",
+	"text_select",
+	"text_back",
+	"select_your_marauder",
+
+	"flag",
+
+	"speedboost_pickup",
+
+	"shrine_capturable",
+	"shrine_captured",
+	"shrine_locked",
+	"shrine_pointsgiven",
+
+	"shrine_announcement_capturable",
+	"shrine_subannouncement_capturable",
+	"shrine_announcement_captured",
+	"shrine_subannouncement_captured",
+	"shrine_announcement_capturable_last",
+	"shrine_subannouncement_capturable_last",
+	"shrine_announcement_rewards",
+	"shrine_subannouncement_rewards",
+
+	"ability_windsweep",
+	"ability_obliterate",
+	"ability_sunderstrike",
+
+	"ability_destabilize",
+	"ability_riposte",
+	"ability_bulwark",
+
+	"ability_dash",
+
+	"world_gaia",
+	"world_synchronization",
+
+	"character_samurai",
+	"character_thief",
+	"character_juggernaut",
+	"character_shaman",
+
+	"scoreboard_player_One",
+	"scoreboard_player_Two",
+	"scoreboard_player_Three",
+	"scoreboard_player_Four",
+
+	"scoreboard_timesync",
+	"scoreboard_titles",
+	"scoreboard_eliminations",
+	"scoreboard_eliminated",
+	"scoreboard_suicides",
+	"scoreboard_ownedshrines",
+
+	"level_intro_announcement",
+	"level_intro_subannouncement",
+
+	"tip_0",
+	"tip_1",
+	"tip_2",
+	"tip_3",
+	"tip_4",
+	"tip_5",
+	"tip_6",
+	"tip_7",
+	"tip_8",
+	"tip_9",
+	"tip_10",
+	"tip_11",
+	"tip_12",
+
+	"loading_text"
+]

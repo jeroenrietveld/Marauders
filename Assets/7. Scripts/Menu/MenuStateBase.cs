@@ -5,8 +5,6 @@ public abstract class MenuStateBase
 {
 	public Vector3 center { protected set; get; }
 
-    public Locale locale = new en();
-
 	public float cameraMoveTime = .5f;
 
 	public abstract void Update(MenuManager manager);

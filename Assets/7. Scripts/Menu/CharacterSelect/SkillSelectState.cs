@@ -168,23 +168,22 @@ public class SkillSelectState : SelectionBase
         offensiveSkillsDescription = new List<string>();
         defensiveSkillsDescription = new List<string>();
 
-        Locale locale = new en();
-        offensiveSkillsDescription.Add(locale["ability_windsweep"]);
+        offensiveSkillsDescription.Add(Locale.Current["ability_windsweep"]);
 		offensiveSkills.Add("Windsweep");
 		
-        offensiveSkillsDescription.Add(locale["ability_sunderstrike"]);
+		offensiveSkillsDescription.Add(Locale.Current["ability_sunderstrike"]);
 		offensiveSkills.Add("Sunderstrike");
         
-        offensiveSkillsDescription.Add(locale["ability_obliterate"]);
+		offensiveSkillsDescription.Add(Locale.Current["ability_obliterate"]);
         offensiveSkills.Add("Obliterate");
         
-        defensiveSkillsDescription.Add(locale["ability_destabilize"]);
+		defensiveSkillsDescription.Add(Locale.Current["ability_destabilize"]);
         defensiveSkills.Add("Destabilize");
         /*
         defensiveSkillsDescription.Add(locale["ability_riposte"]);
         defensiveSkills.Add("Riposte");
          * */
-        defensiveSkillsDescription.Add(locale["ability_bulwark"]);
+		defensiveSkillsDescription.Add(Locale.Current["ability_bulwark"]);
         defensiveSkills.Add("Bulwark");
         
         xBoxImages.Add(Resources.Load<Material>("UI/Buttons/Materials/xButton"));
