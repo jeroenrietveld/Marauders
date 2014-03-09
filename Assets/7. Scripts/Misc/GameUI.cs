@@ -92,6 +92,7 @@ public class PlayerUI
 		_timeSyncPercentage.renderer.material = _timeSyncPercentage.font.material;
 		_timeSyncPercentage.anchor = TextAnchor.MiddleCenter;
 		_timeSyncPercentage.characterSize = .025f;
+        _timeSyncPercentage.renderer.material.shader = Shader.Find("Difffuse");
 
 		_timeSyncPercentage.text = "0%";
 	}

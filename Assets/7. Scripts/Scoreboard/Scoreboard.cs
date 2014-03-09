@@ -16,8 +16,6 @@ public class Scoreboard : MonoBehaviour
     public float horizontalOffset = 10f;
     public float verticalOffset = 5f;
 
-    public float fontScale = (float)Screen.height / 768f;
-
     private Rect _scoreboardRect;
 
     private Material _material;
@@ -30,7 +28,7 @@ public class Scoreboard : MonoBehaviour
     private Texture _greenTrophyTexture;
     private Texture _currentTrophyTexture;
 
-    //Placetextures
+    //Maraudertextures
     private Texture _samuraiTexture;
     private Texture _thiefTexture;
     private Texture _juggernautTexture;
@@ -157,123 +155,7 @@ public class Scoreboard : MonoBehaviour
 
         _visible = false;
 
-         Initialize();
-        #region Test - all comments atm
-        /*         
-        GameManager.Instance.matchSettings.timeSync = 100;
-        
-        Scoreboard scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
-
-        #region Player 1
-        var player = new Player(PlayerIndex.One);
-        List<Cell> addition = new List<Cell>();
-        player.timeSync = 23;
-        scoreboard.AddCellList(addition);
-
-        addition.Add(new PlayerCell(player));
-
-        //Declare all cells
-        TimeSyncCell timeSync = new TimeSyncCell(player);
-        TitlesCell titleCell = new TitlesCell();
-        CustomCell eliminations = new CustomCell("Eliminations", CellType.Integer, 10, true);
-        CustomCell eliminated = new CustomCell("Eliminated", CellType.Integer, 9, true);
-        CustomCell suicides = new CustomCell("Suicides", CellType.Integer, 1, true);
-
-        //Testing timeSync
-        timeSync.content = 0;
-
-        //Add all cells to the list of cells
-        addition.Add(timeSync);
-        addition.Add(titleCell);
-        addition.Add(eliminations);
-        addition.Add(eliminated);
-        addition.Add(suicides);
-
-        #endregion
-    
-        #region Player 2
-        var player2 = new Player(PlayerIndex.Two);
-        player2.timeSync = 26;
-        List<Cell> addition2 = new List<Cell>();
-        scoreboard.AddCellList(addition2);
-
-        addition2.Add(new PlayerCell(player2));
-
-        //Declare all cells
-        TimeSyncCell timeSync2 = new TimeSyncCell(player2);
-        TitlesCell titleCell2 = new TitlesCell();
-        CustomCell eliminations2 = new CustomCell("Eliminations", CellType.Integer, 7, true);
-        CustomCell eliminated2 = new CustomCell("Eliminated", CellType.Integer, 5, true);
-        CustomCell suicides2 = new CustomCell("Suicides", CellType.Integer, 7, true);
-
-        //Add all cells to the list of cells
-        addition2.Add(timeSync2);
-        addition2.Add(titleCell2);
-        addition2.Add(eliminations2);
-        addition2.Add(eliminated2);
-        addition2.Add(suicides2);
-
-        #endregion
-
-        #region Player 3
-        var player3 = new Player(PlayerIndex.Three);
-        player3.timeSync = 50;
-        List<Cell> addition3 = new List<Cell>();
-        scoreboard.AddCellList(addition3);
-
-        addition3.Add(new PlayerCell(player3));
-
-        //Declare all cells
-        TimeSyncCell timeSync3 = new TimeSyncCell(player3);
-        TitlesCell titleCell3 = new TitlesCell();
-        CustomCell eliminations3 = new CustomCell("Eliminations", CellType.Integer, 7, true);
-        CustomCell eliminated3 = new CustomCell("Eliminated", CellType.Integer, 5, true);
-        CustomCell suicides3 = new CustomCell("Suicides", CellType.Integer, 7, true);
-
-        //Add all cells to the list of cells
-        addition3.Add(timeSync3);
-        addition3.Add(titleCell3);
-        addition3.Add(eliminations3);
-        addition3.Add(eliminated3);
-        addition3.Add(suicides3);
-
-        #endregion
-
-        for (int i = 0; i < 3; i++)
-        {
-            scoreboard.AddGameSpecificCell(i, new CustomCell("Owned Shrines", CellType.Integer, 0, true));
-        }
-
-        var resources = Resources.LoadAll("JSON/Trophy");
-
-        foreach (object resource in resources)
-        {
-            var node = SimpleJSON.JSON.Parse(((TextAsset)resource).text);
-            string column = node["column"].Value;
-            string title = node["title"].Value;
-            string condition = node["condition"].Value;
-
-            Trophy t = new Trophy();
-            t.Column = column;
-            t.Title = title;
-            t.Condition = condition;
-
-            trophyList.Add(t);
-        }
-        GameManager.Instance.AddPlayerRef(player);
-        GameManager.Instance.AddPlayerRef(player2);
-        GameManager.Instance.AddPlayerRef(player3);
-
-        scoreboard.AddContent(PlayerIndex.Three, Locale.Current["scoreboard_ownedshrines"], 3);
-        scoreboard.AddContent(PlayerIndex.One, Locale.Current["scoreboard_timesync"], player.timeSync);
-        scoreboard.AddContent(PlayerIndex.Two, Locale.Current["scoreboard_timesync"], player2.timeSync);
-        scoreboard.AddContent(PlayerIndex.Three, Locale.Current["scoreboard_timesync"], player3.timeSync);
-
-        scoreboard.Show();
-        scoreboard.CalculateTrophys();
-         */
-        #endregion
-       
+         Initialize();             
     }
 
    void OnGUI()
@@ -289,8 +171,14 @@ public class Scoreboard : MonoBehaviour
                     //Graphics.DrawTexture does this.
                     return;
                 }
+
+                //Set the scoreboard rectangle
                 _scoreboardRect = new Rect(20, 20, Screen.width - 40, Screen.height - 40);
+
+                //Set the skin
                 GUI.skin = scoreboardskin;
+
+                //Actually paint the scoreboard
                 _scoreboardRect = GUI.Window(0, _scoreboardRect, DrawScoreboard, "");
             }
         }
@@ -298,6 +186,7 @@ public class Scoreboard : MonoBehaviour
 
    void DrawScoreboard(int windowID)
    {
+       #region Scaling variables
        float boxWidth = _scoreboardRect.width - horizontalOffset*2;
        float boxHeight = _scoreboardRect.height / 4f - verticalOffset*2;
 
@@ -311,19 +200,25 @@ public class Scoreboard : MonoBehaviour
        float titleOffset = cellHeight * 0.25f;
 
        float fontScale = Screen.width / 768f;
+       #endregion
 
        GUI.contentColor = Color.black;
 
        GUI.skin.label.fontSize = (int) (10 * fontScale);
 
        List<Player> playersByTimeSync = GameManager.Instance.playersByTimeSync();
+
        for (int i = 0; i < rows; i++)
        {
+           //Draw a transparent background
            GUI.Box(new Rect(horizontalOffset, verticalOffset + i * (boxHeight + verticalOffset * 2), boxWidth, boxHeight), "");
+           
+           //Loop through each cell
            for (int j = 0; j < columns; j++)
            {            
                //Draw the title
                GUI.Label(new Rect(j * cellWidth + horizontalOffset, i * (boxHeight + verticalOffset*2) + cellTop, cellWidth, cellHeight), _cells[i][j].title);
+               
                //Draw the content
                if (_cells[i][j] is TitlesCell)
                {
@@ -446,54 +341,6 @@ public class Scoreboard : MonoBehaviour
        }
     }
 
-    [Obsolete("Use CalculateTrophys() instead.")]
-    public void SetTrophy(PlayerIndex playerIndex, string cellName, string title)
-    {
-        //Find the cell to set the trophy
-        for(int i = 0; i < _cells.Count; i++)
-        {
-            //First, find the player
-            if(((PlayerCell)_cells[i][0]).player.index == playerIndex)
-            {
-                //We found the player, now find the cellname
-                for(int j = 0; j < _cells[i].Count; j++)
-                {
-                    if(_cells[i][j].title.Equals(cellName))
-                    {
-                        //This is the cell we want to add the trophy to
-                        ((CustomCell)_cells[i][j]).hasTrophy = true;
-                        _cells[i][2].content += title;
-                        break;
-                    }
-                }
-            }
-        }
-   }
-
-    [Obsolete("Use CalculateTrophy() instead.")]
-    public void SetTrophy(PlayerIndex index, Trophy trophy)
-    {
-        //Find the cell to set the trophy
-        for (int i = 0; i < _cells.Count; i++)
-        {
-            //First, find the player
-            if (((PlayerCell)_cells[i][0]).player.index == index)
-            {
-                //We found the player, now find the cellname
-                for (int j = 0; j < _cells[i].Count; j++)
-                {
-                    if (_cells[i][j].title.Equals(trophy.Column))
-                    {
-                        //This is the cell we want to add the trophy to
-                        ((CustomCell)_cells[i][j]).hasTrophy = true;
-                        _cells[i][2].content += trophy.Title;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     public void AddContent(PlayerIndex index, string cellname, object content)
     {
         Cell cell = FindCell(index, cellname);
@@ -545,18 +392,9 @@ public class Scoreboard : MonoBehaviour
 
     public void Clear()
     {
-        Destroy(this);
+        //If there might be any leftovers of the scoreboard, destroy them
+        scoreboard = null;
+        Destroy(this);      
     }
-
-    public void ShowResults()
-    {
-        CalculateTrophys();
-        Show();
-    }
-
-    public bool IsVisible()
-    {
-        return _visible;
-    }  
 }
 

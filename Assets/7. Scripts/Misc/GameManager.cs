@@ -93,7 +93,8 @@ public class GameManager {
     {
         AudioSource s = this.soundInGame.AddAndSetupAudioSource(Camera.main.gameObject, SoundSettingTypes.volume);
 		this.soundInGame.PlaySound(s, playersByTimeSync()[0].marauder + "-victory" , true);
-        GameObject.Find("_GLOBAL").GetComponent<Scoreboard>().ShowResults();
+        GameObject.Find("_GLOBAL").GetComponent<Scoreboard>().CalculateTrophys();
+        GameObject.Find("_GLOBAL").GetComponent<Scoreboard>().Show();
         PauseGame();
         gameEnded = true;
     }
